@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include Socker.IO for the frontend: -->
+    <script src="/socket.io/socket.io.js"></script>
+    <title>Example Site</title>
+</head>
+<body>
+    <p>Hello, frontend!</p>
+    <div id="connected"></div>
+
+    <input type="text" id="message" placeholder="Message to send to the server..." />
+    <button id="send">Send message to backend</button>
+
+    <script>
+        var socket = io();
+
+        socket.on('connect', function() {
+            // On connection, make the connected div visible:
+            document.getElementById("connected").innerHTML = 'Connected to server';
+        });
+        
+        // This code is unnecessary, but it's a good example of how to use the socket.io library:
+        // --------------------------------------------------------------
+        document.getElementById("send").addEventListener("click", function() {
+            // Send the message with socket.emit()
+            socket.emit('message', document.getElementById("message").value);
+
+            document.getElementById("message").value = ""; // Clear the input
+            document.getElementById("message").focus(); // Refocus on the input
+        });
+
+        document.getElementById("message").onkeydown = (e) => {
+            // On enter, automatically send the message:
+            if (e.key == "Enter") document.getElementById("send").click();
+        }
+        // --------------------------------------------------------------
+    </script>
+</body>
+</html>
