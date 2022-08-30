@@ -24,9 +24,11 @@ namespace NSH.Shell {
         public void Init() {
             Console.Clear();
             ClearCharacters();
-            for (int i = 0; i <= 20; i++) {
-                this.Print.PrintLine(i.ToString() + " - " + Math.Pow(2, i).ToString());
-                System.Threading.Thread.Sleep(10);
+            
+            while (true) {
+                Input input = new Input(Print, this);
+                string line = input.FetchInput();
+                Print.PrintLine(line);
             }
         }
 
