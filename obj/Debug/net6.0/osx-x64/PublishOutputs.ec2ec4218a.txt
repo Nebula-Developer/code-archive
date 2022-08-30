@@ -1,0 +1,2 @@
+/Users/nicocook/Documents/nsh/bin/Debug/net6.0/osx-x64/publish/nsh.pdb
+/Users/nicocook/Documents/nsh/bin/Debug/net6.0/osx-x64/publish/nsh

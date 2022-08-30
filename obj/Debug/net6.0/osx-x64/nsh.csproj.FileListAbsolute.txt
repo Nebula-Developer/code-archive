@@ -1,0 +1,15 @@
+/Users/nicocook/Documents/nsh/bin/Debug/net6.0/osx-x64/nsh
+/Users/nicocook/Documents/nsh/bin/Debug/net6.0/osx-x64/nsh.deps.json
+/Users/nicocook/Documents/nsh/bin/Debug/net6.0/osx-x64/nsh.runtimeconfig.json
+/Users/nicocook/Documents/nsh/bin/Debug/net6.0/osx-x64/nsh.dll
+/Users/nicocook/Documents/nsh/bin/Debug/net6.0/osx-x64/nsh.pdb
+/Users/nicocook/Documents/nsh/obj/Debug/net6.0/osx-x64/nsh.csproj.AssemblyReference.cache
+/Users/nicocook/Documents/nsh/obj/Debug/net6.0/osx-x64/nsh.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nicocook/Documents/nsh/obj/Debug/net6.0/osx-x64/nsh.AssemblyInfoInputs.cache
+/Users/nicocook/Documents/nsh/obj/Debug/net6.0/osx-x64/nsh.AssemblyInfo.cs
+/Users/nicocook/Documents/nsh/obj/Debug/net6.0/osx-x64/nsh.csproj.CoreCompileInputs.cache
+/Users/nicocook/Documents/nsh/obj/Debug/net6.0/osx-x64/nsh.dll
+/Users/nicocook/Documents/nsh/obj/Debug/net6.0/osx-x64/refint/nsh.dll
+/Users/nicocook/Documents/nsh/obj/Debug/net6.0/osx-x64/nsh.pdb
+/Users/nicocook/Documents/nsh/obj/Debug/net6.0/osx-x64/nsh.genruntimeconfig.cache
+/Users/nicocook/Documents/nsh/obj/Debug/net6.0/osx-x64/ref/nsh.dll
