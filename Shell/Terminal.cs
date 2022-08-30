@@ -28,6 +28,8 @@ namespace NSH.Shell {
                 Input input = new Input(Print, this);
                 string line = input.FetchInput();
 
+                if (line.Split(" ")[0] == "exit") break;
+
                 // Execute while capturing output and error
                 Process process = new Process();
                 process.StartInfo.FileName = "/bin/bash";
@@ -49,10 +51,16 @@ namespace NSH.Shell {
                 void PrintError(string error) {
                     Console.ForegroundColor = ConsoleColor.Red;
                     foreach (string line in error.Split('\n')) {
-                        Print.PrintLine(line + "**");
+                        Print.PrintLine(line + " **");
                     }
                     Console.ForegroundColor = ConsoleColor.White;
                 }
+                
+                Console.CancelKeyPress += (sender, e) => {
+                    e.Cancel = true;
+                    process.Kill();
+                    process.Close();
+                };
 
                 process.OutputDataReceived += (sender, e) => PrintOutput(e.Data ?? "");
                 process.ErrorDataReceived += (sender, e) => PrintError(e.Data ?? "");

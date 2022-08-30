@@ -21,7 +21,15 @@
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.822.36306"
           },
+          "System.Collections.Concurrent.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.822.36306"
+          },
           "System.Collections.Immutable.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.822.36306"
+          },
+          "System.Collections.NonGeneric.dll": {
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.822.36306"
           },
@@ -29,7 +37,19 @@
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.822.36306"
           },
+          "System.ComponentModel.Primitives.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.822.36306"
+          },
+          "System.ComponentModel.TypeConverter.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.822.36306"
+          },
           "System.Console.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.822.36306"
+          },
+          "System.Diagnostics.Process.dll": {
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.822.36306"
           },
@@ -45,7 +65,27 @@
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.822.36306"
           },
+          "System.IO.Pipes.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.822.36306"
+          },
+          "System.Net.Primitives.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.822.36306"
+          },
+          "System.Net.Sockets.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.822.36306"
+          },
+          "System.ObjectModel.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.822.36306"
+          },
           "System.Private.CoreLib.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.822.36306"
+          },
+          "System.Private.Uri.dll": {
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.822.36306"
           },
@@ -53,8 +93,20 @@
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.822.36306"
           },
+          "System.Runtime.CompilerServices.Unsafe.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.822.36306"
+          },
+          "System.Runtime.InteropServices.RuntimeInformation.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.822.36306"
+          },
           "System.Runtime.dll": {
             "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.822.36306"
+          },
+          "System.dll": {
+            "assemblyVersion": "4.0.0.0",
             "fileVersion": "6.0.822.36306"
           }
         }
