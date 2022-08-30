@@ -22,7 +22,6 @@ namespace NSH.Shell {
         }
 
         public void Init() {
-            Console.Clear();
             ClearCharacters();
             
             while (true) {
@@ -39,8 +38,6 @@ namespace NSH.Shell {
                 process.Start();
 
                 Print.AppendLine();
-
-                bool firstLock = false;
                 Console.WriteLine();
 
                 void PrintOutput(string output) {
@@ -50,15 +47,16 @@ namespace NSH.Shell {
                 }
 
                 void PrintError(string error) {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     foreach (string line in error.Split('\n')) {
-                        Print.PrintLine(line);
+                        Print.PrintLine(line + "**");
                     }
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
 
                 process.OutputDataReceived += (sender, e) => PrintOutput(e.Data ?? "");
                 process.ErrorDataReceived += (sender, e) => PrintError(e.Data ?? "");
                 process.WaitForExit();
-                Console.WriteLine();
             }
         }
 
