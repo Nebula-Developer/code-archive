@@ -20,7 +20,9 @@ namespace NSH.Shell {
             int y = Console.CursorTop;
             int x = 0;
 
-            printer.Print("$ ", 0, y);
+            String prefix = Directory.GetCurrentDirectory() + "$ ";
+
+            printer.Print(prefix, 0, y);
             String oldStr = "";
 
             while (true) {
@@ -42,9 +44,19 @@ namespace NSH.Shell {
                         break;
 
                     case ConsoleKey.Backspace:
-                        if (x > 0) {
-                            input = input.Remove(x - 1, 1);
-                            x--;
+                        if ((key.Modifiers & ConsoleModifiers.Control) != 0) {
+                            if (x > 0) {
+                                input = input.Remove(x - 1, 1);
+                                x--;
+                                Console.SetCursorPosition(x, y);
+                                Console.Write(" ");
+                                Console.SetCursorPosition(x, y);
+                            }
+                        } else {
+                            if (x > 0) {    
+                                input = input.Remove(x - 1, 1);
+                                x--;
+                            }
                         }
                         break;
                 }
@@ -56,13 +68,14 @@ namespace NSH.Shell {
                     x++;
                 }
 
-                String prefixStr = "$ " + input;
+                String prefixStr = prefix + input;
                 int diff = oldStr.Length - prefixStr.Length;
                 String spaces = new String(' ', diff < 0 ? 0 : diff);
 
                 printer.Print(prefixStr + spaces, 0, y);
                 oldStr = prefixStr;
-                Console.SetCursorPosition(x + "$ ".Length, y);
+                Console.SetCursorPosition(x + prefix.Length, y);
+                prefix = Directory.GetCurrentDirectory() + "$ ";
             }
             printer.AppendLine();
             return input;

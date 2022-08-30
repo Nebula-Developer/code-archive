@@ -30,6 +30,17 @@ namespace NSH.Shell {
 
                 if (line.Split(" ")[0] == "exit") break;
 
+                if (line.Split(" ")[0] == "cd" && line.Split(" ").Length > 1) {
+                    string subStr = line.Substring(3);
+                    if (subStr.StartsWith("~")) {
+                        subStr = subStr.Substring(1);
+                        subStr = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + subStr;
+                    }
+                    if (Directory.Exists(subStr)) {
+                        Directory.SetCurrentDirectory(subStr);
+                    }
+                }
+
                 // Execute while capturing output and error
                 Process process = new Process();
                 process.StartInfo.FileName = "/bin/bash";
@@ -66,6 +77,8 @@ namespace NSH.Shell {
                 process.ErrorDataReceived += (sender, e) => PrintError(e.Data ?? "");
                 process.WaitForExit();
             }
+
+            Console.Write("\n");
         }
 
         public NShell() {
