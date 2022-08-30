@@ -7,19 +7,12 @@ namespace NSH.Shell {
         public NShell shell;
 
         public void AppendLine() {
-            shell.CursorY++;
-            if (shell.CursorY >= Console.BufferHeight) {
-                shell.CursorY = Console.BufferHeight;
-            }
+
         }
 
         public void FixNewLine() {
-            if (shell.CursorY >= Console.BufferHeight) {
-                int oldX = Console.CursorLeft;
-                int oldY = Console.CursorTop;
-                Console.SetCursorPosition(0, shell.CursorY);
+            if (Console.CursorTop >= Console.BufferHeight) {
                 Console.Write('\n');
-                Console.SetCursorPosition(oldX, oldY - 1);
             }
         }
 
@@ -29,7 +22,7 @@ namespace NSH.Shell {
             }
 
             if (y == -1) {
-                y = shell.CursorY;
+                y = Console.CursorTop;
             }
 
             FixNewLine();

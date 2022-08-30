@@ -17,7 +17,7 @@ namespace NSH.Shell {
 
         private string InputLoop() {
             string input = "";
-            int y = hostShell.CursorY;
+            int y = Console.CursorTop;
             int x = 0;
 
             printer.Print("$ ", 0, y);
