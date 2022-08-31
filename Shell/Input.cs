@@ -66,27 +66,6 @@ namespace NSH.Shell {
                         break;
                 }
 
-                if ((int)key.KeyChar == 23) {
-                    if (x > 0) {
-                        if (input[x - 1] == ' ') {
-                            input = input.Remove(x - 1, 1);
-                            x--;
-                        } else {
-                            // Keep deleting until we hit a space
-                            while (x > 0 && input[x - 1] != ' ') {
-                                input = input.Remove(x - 1, 1);
-                                x--;
-                            }
-                        }
-                    }
-                } else if ((int)key.KeyChar == 21) {
-                    if (x > 0) {
-                        while (x > 0) {
-                            input = input.Remove(x-- - 1, 1);
-                        }
-                    }
-                }
-
                 List<Tuple<String, String>> CharPairs = new List<Tuple<String, String>>() {
                     new Tuple<String, String>("(", ")"),
                     new Tuple<String, String>("[", "]"),
@@ -96,6 +75,41 @@ namespace NSH.Shell {
                     new Tuple<String, String>("`", "`"),
                     new Tuple<String, String>("<", ">")
                 };
+
+                List<Tuple<int, Func<bool>>> OSXBindings = new List<Tuple<int, Func<bool>>>() {
+                    new Tuple<int, Func<bool>>(23, () => { // Alt + Backspace
+                        if (x > 0) {
+                            if (input[x - 1] == ' ') {
+                                input = input.Remove(x - 1, 1);
+                                x--;
+                            } else {
+                                // Keep deleting until we hit a space
+                                while (x > 0 && input[x - 1] != ' ') {
+                                    input = input.Remove(x - 1, 1);
+                                    x--;
+                                }
+                            }
+                        }
+                        return true;
+                    }),
+                    new Tuple<int, Func<bool>>(21, () => { // Command + Backspace
+                        if (x > 0) {
+                            while (x > 0) {
+                                input = input.Remove(x-- - 1, 1);
+                            }
+                        }
+                        return true;
+                    })
+                };
+
+                if (hostShell.__Platform == NShell.Platform.osx) {
+                    foreach (Tuple<int, Func<bool>> binding in OSXBindings) {
+                        if ((int)key.KeyChar == binding.Item1) {
+                            binding.Item2();
+                            break;
+                        }
+                    }
+                }
 
                 if (key.Key == ConsoleKey.Enter) {
                     break;

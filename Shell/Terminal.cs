@@ -2,12 +2,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace NSH.Shell {
     public class NShell {
         public List<Tuple<int, int, char>> TermChars = new List<Tuple<int, int, char>>();
         public Printer Print;
-        public static String PLATFORM = "";
+
+        public enum Platform {
+            osx,
+            windows,
+            linux,
+            unknown
+        }
+
+        public Platform __Platform = Platform.unknown;
 
         public void SetChar(int x, int y, char c) {
             TermChars.RemoveAll(t => t.Item1 == x && t.Item2 == y);
@@ -23,15 +32,26 @@ namespace NSH.Shell {
         }
 
         public void SetPlatform() {
-            // OSX / LINUX / WINDOWS / UNKNOWN
-            if (Environment.OSVersion.Platform == PlatformID.Unix) {
-                PLATFORM = "UNIX";
-            } else if (Environment.OSVersion.Platform == PlatformID.MacOSX) {
-                PLATFORM = "OSX";
-            } else if (Environment.OSVersion.Platform == PlatformID.Win32NT) {
-                PLATFORM = "WINDOWS";
-            } else {
-                PLATFORM = "UNKNOWN";
+            // Linux / windows / osx
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
+                __Platform = Platform.linux;
+            } else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
+                __Platform = Platform.windows;
+            } else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) {
+                __Platform = Platform.osx;
+            }
+        }
+
+        public string GetPlatformStr() {
+            switch (__Platform) {
+                case Platform.osx:
+                    return "OSX";
+                case Platform.linux:
+                    return "LINUX";
+                case Platform.windows:
+                    return "WINDOWS";
+                default:
+                    return "UNKNOWN";
             }
         }
 
