@@ -7,6 +7,7 @@ namespace NSH.Shell {
     public class NShell {
         public List<Tuple<int, int, char>> TermChars = new List<Tuple<int, int, char>>();
         public Printer Print;
+        public static String PLATFORM = "";
 
         public void SetChar(int x, int y, char c) {
             TermChars.RemoveAll(t => t.Item1 == x && t.Item2 == y);
@@ -21,7 +22,21 @@ namespace NSH.Shell {
             return TermChars.Find(t => t.Item1 == x && t.Item2 == y)?.Item3 ?? ' ';
         }
 
+        public void SetPlatform() {
+            // OSX / LINUX / WINDOWS / UNKNOWN
+            if (Environment.OSVersion.Platform == PlatformID.Unix) {
+                PLATFORM = "UNIX";
+            } else if (Environment.OSVersion.Platform == PlatformID.MacOSX) {
+                PLATFORM = "OSX";
+            } else if (Environment.OSVersion.Platform == PlatformID.Win32NT) {
+                PLATFORM = "WINDOWS";
+            } else {
+                PLATFORM = "UNKNOWN";
+            }
+        }
+
         public void Init() {
+            SetPlatform();
             ClearCharacters();
             
             while (true) {
@@ -48,11 +63,14 @@ namespace NSH.Shell {
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardOutput = false;
                 process.StartInfo.RedirectStandardError = false;
+                process.StartInfo.RedirectStandardInput = true;
                 process.Start();
 
-                Print.AppendLine();
-                Console.WriteLine();
+                ConsoleCancelEventHandler procKill = (object? sender, ConsoleCancelEventArgs e) => {
+                    process.Kill();
+                };
 
+                Console.CancelKeyPress += procKill;
                 void PrintOutput(string output) {
                     foreach (string line in output.Split('\n')) {
                         Print.PrintLine(line);
@@ -67,15 +85,46 @@ namespace NSH.Shell {
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 
-                Console.CancelKeyPress += (sender, e) => {
-                    e.Cancel = true;
-                    process.Kill();
-                    process.Close();
-                };
 
                 process.OutputDataReceived += (sender, e) => PrintOutput(e.Data ?? "");
                 process.ErrorDataReceived += (sender, e) => PrintError(e.Data ?? "");
-                process.WaitForExit();
+
+                while (!process.HasExited) {
+                    if (Console.KeyAvailable) {
+                        ConsoleKeyInfo key = Console.ReadKey(true);
+                        Char c = key.KeyChar;
+
+                        try {
+                            if (c == '\x03' || c == '\x1a') {
+                                process.Kill();
+                                process.WaitForExit();
+                                process.Close();
+                                process.Dispose();
+                                break;
+                            }
+
+                            else if (key.Key == ConsoleKey.Enter) {
+                                process.StandardInput.WriteLineAsync();
+                            }
+
+                            else if (key.Key == ConsoleKey.Backspace) {
+                                process.StandardInput.WriteAsync('\b');
+                            }
+                            
+                            else {
+                                process.StandardInput.WriteAsync(c);
+                            }
+                        } catch {
+                            process.Kill();
+                            process.Dispose();
+                            break;
+                        }
+                    }
+
+                    System.Threading.Thread.Sleep(1);
+                }
+
+                Console.CancelKeyPress -= procKill;
             }
 
             Console.Write("\n");

@@ -44,28 +44,49 @@ namespace NSH.Shell {
                         break;
 
                     case ConsoleKey.Backspace:
-                        if ((key.Modifiers & ConsoleModifiers.Control) != 0) {
-                            if (x > 0) {
-                                input = input.Remove(x - 1, 1);
-                                x--;
-                                Console.SetCursorPosition(x, y);
-                                Console.Write(" ");
-                                Console.SetCursorPosition(x, y);
-                            }
+                        if (x > 0) {    
+                            input = input.Remove(x - 1, 1);
+                            x--;
+                        }
+                        break;
+
+                    case ConsoleKey.Home:
+                        x = 0;
+                        break;
+                    
+                    case ConsoleKey.End:
+                        x = input.Length;
+                        break;
+                }
+
+                if ((int)key.KeyChar == 23) {
+                    if (x > 0) {
+                        if (input[x - 1] == ' ') {
+                            input = input.Remove(x - 1, 1);
+                            x--;
                         } else {
-                            if (x > 0) {    
+                            // Keep deleting until we hit a space
+                            while (x > 0 && input[x - 1] != ' ') {
                                 input = input.Remove(x - 1, 1);
                                 x--;
                             }
                         }
-                        break;
+                    }
+                } else if ((int)key.KeyChar == 21) {
+                    if (x > 0) {
+                        while (x > 0) {
+                            input = input.Remove(x-- - 1, 1);
+                        }
+                    }
                 }
+
+
+
 
                 if (key.Key == ConsoleKey.Enter) {
                     break;
                 } else if (IsChar(key.KeyChar)) {
-                    input = input.Insert(x, key.KeyChar.ToString());
-                    x++;
+                    input = input.Insert(x++, key.KeyChar.ToString());
                 }
 
                 String prefixStr = prefix + input;
@@ -77,7 +98,8 @@ namespace NSH.Shell {
                 Console.SetCursorPosition(x + prefix.Length, y);
                 prefix = Directory.GetCurrentDirectory() + "$ ";
             }
-            printer.AppendLine();
+
+            Console.Write("\n");
             return input;
         }
 
