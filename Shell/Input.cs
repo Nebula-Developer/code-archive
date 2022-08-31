@@ -80,13 +80,29 @@ namespace NSH.Shell {
                     }
                 }
 
-
-
+                List<Tuple<String, String>> CharPairs = new List<Tuple<String, String>>() {
+                    new Tuple<String, String>("(", ")"),
+                    new Tuple<String, String>("[", "]"),
+                    new Tuple<String, String>("{", "}"),
+                    new Tuple<String, String>("\"", "\""),
+                    new Tuple<String, String>("'", "'"),
+                };
 
                 if (key.Key == ConsoleKey.Enter) {
                     break;
                 } else if (IsChar(key.KeyChar)) {
-                    input = input.Insert(x++, key.KeyChar.ToString());
+                    bool IsPair = false;
+
+                    foreach(Tuple<String, String> Pair in CharPairs) {
+                        if (key.KeyChar.ToString() == Pair.Item1) {
+                            IsPair = true;
+                            input = input.Insert(x++, Pair.Item1 + Pair.Item2);
+                            break;
+                        }
+                    }
+
+                    if (!IsPair)
+                        input = input.Insert(x++, key.KeyChar.ToString());
                 }
 
                 String prefixStr = prefix + input;
