@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System;
-
+using System.Net;
 namespace NSH.Shell {
     public class Input {
         public Printer printer;
@@ -15,18 +15,25 @@ namespace NSH.Shell {
             return c >= ' ' && c <= '~';
         }
 
+        public virtual string Prefix() {
+            String user = Environment.UserName;
+            String host = Environment.MachineName;
+            return user + "@" + host + " " + Directory.GetCurrentDirectory() + " $ ";
+        }
+
         private string InputLoop() {
             string input = "";
             int y = Console.CursorTop;
             int x = 0;
 
-            String prefix = Directory.GetCurrentDirectory() + "$ ";
+            String prefix = Prefix();
 
             printer.Print(prefix, 0, y);
             String oldStr = "";
 
             while (true) {
                 ConsoleKeyInfo key = Console.ReadKey(true);
+                prefix = Prefix();
 
                 switch (key.Key) {
                     case ConsoleKey.LeftArrow:
@@ -86,6 +93,8 @@ namespace NSH.Shell {
                     new Tuple<String, String>("{", "}"),
                     new Tuple<String, String>("\"", "\""),
                     new Tuple<String, String>("'", "'"),
+                    new Tuple<String, String>("`", "`"),
+                    new Tuple<String, String>("<", ">")
                 };
 
                 if (key.Key == ConsoleKey.Enter) {
