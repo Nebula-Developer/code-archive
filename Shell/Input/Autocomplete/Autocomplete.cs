@@ -30,7 +30,19 @@ namespace NSH.Shell {
             FunctionList.AddRange(new List<String>() {
                 "help",
                 "exit",
-                "clear"
+                "clear",
+
+                // Bash functions:
+                "for", "while", "if",
+                "then", "else", "elif",
+                "fi", "do", "done",
+                "in", "case", "esac",
+                "function", "return",
+                "export", "unset",
+                "pushd", "popd",
+                "dirs", "cd", "pwd",
+                "source", "type", "alias",
+                "unalias", "set", "shopt"
             });
         }
 
