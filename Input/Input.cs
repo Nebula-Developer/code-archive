@@ -136,7 +136,8 @@ namespace NSH.Shell {
             int x = 0;
 
             String oldStr = "";
-            printer.Print(ColorPrefix(), 0, y);
+            Console.SetCursorPosition(0, y);
+            Console.Write(ColorPrefix());
 
             while (true) {
                 ConsoleKeyInfo key = Console.ReadKey(true);
@@ -211,18 +212,21 @@ namespace NSH.Shell {
                 int diff = oldStr.Length - mainStr.Length;
                 String spaces = new String(' ', diff < 0 ? 0 : diff);
 
-                printer.Print(ColorPrefix() + FormatInput(input) + GREY + autocomplete + RESET + spaces, 0, y);
+                Console.SetCursorPosition(0, y);
+                Console.Write(ColorPrefix() + FormatInput(input) + GREY + autocomplete + RESET + spaces);
 
                 oldStr = mainStr;
                 int xPos = x + Prefix().Length;
-                SetCursorPosEsc(xPos, y);
+
+                Console.SetCursorPosition(xPos, y);
             }
 
-            int diffEnd = oldStr.Length - input.Length;
+            int diffEnd = oldStr.Length - input.Length + Prefix().Length + input.Length;
             String spacesEnd = new String(' ', diffEnd < 0 ? 0 : diffEnd);
 
-            printer.Print(ColorPrefix() + FormatInput(input) + spacesEnd, 0, y);
-            Console.SetCursorPosition(x + Prefix().Length, y);
+            printer.Print(spacesEnd, 0, y);
+            printer.Print(ColorPrefix() + FormatInput(input), 0, y);
+            
             Console.WriteLine();
             history.Add(input);
             return input;
