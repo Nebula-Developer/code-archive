@@ -209,11 +209,13 @@ namespace NSH.Shell {
                 } else autocomplete = "";
 
                 String mainStr = input + GREY + autocomplete + RESET;
+
+                if (oldStr == mainStr) continue;
                 int diff = oldStr.Length - mainStr.Length;
                 String spaces = new String(' ', diff < 0 ? 0 : diff);
 
-                Console.SetCursorPosition(0, y);
-                Console.Write(ColorPrefix() + FormatInput(input) + GREY + autocomplete + RESET + spaces);
+                Console.SetCursorPosition(Prefix().Length, y);
+                Console.Write(FormatInput(input) + GREY + autocomplete + RESET + spaces);
 
                 oldStr = mainStr;
                 int xPos = x + Prefix().Length;
