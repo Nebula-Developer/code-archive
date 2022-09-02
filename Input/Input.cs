@@ -22,7 +22,7 @@ namespace NSH.Shell {
             // Convert a directory like: /this/is/my/folder
             // To: /t/i/m/folder
 
-            String homePath = Environment.GetEnvironmentVariable("HOME") ?? "";
+            String homePath = Environment.GetEnvironmentVariable("HOME") ?? "/home";
 
             string[] parts = dir.Replace(homePath, "~").Split('/');
             string result = "";
@@ -59,11 +59,17 @@ namespace NSH.Shell {
         }
 
         public virtual string Prefix() {
-            return ShortenDirectory(Directory.GetCurrentDirectory()) + "> ";
+            String user = Environment.UserName;
+            String pc = Environment.MachineName;
+            String localStr = user + "@" + pc;
+            return localStr + " " + ShortenDirectory(Directory.GetCurrentDirectory()) + "> ";
         }
 
         public virtual string ColorPrefix() {
-            return GREENALT + ColorDirectory(ShortenDirectory(Directory.GetCurrentDirectory())) + RESET + "> ";
+            String user = Environment.UserName;
+            String pc = Environment.MachineName;
+            String localStr = GREEN + user + RESET + "@" + YELLOW + pc + RESET;
+            return  localStr + " " + GREENALT + ColorDirectory(ShortenDirectory(Directory.GetCurrentDirectory())) + RESET + "> ";
         }
 
         public static string GREY = "\x1b[38;5;242m";
