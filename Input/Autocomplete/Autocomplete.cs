@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -7,6 +8,24 @@ namespace NSH.Shell {
         public static List<string> FunctionList = new List<string>();
 
         public static List<string> PathFunctions = new List<string>();
+
+        public static List<Tuple<String, List<String>>> AutocompleteFunctions = new List<Tuple<String, List<String>>>() {
+            new Tuple<String, List<String>>("apt", new List<String>() {
+                "install",
+                "remove",
+                "update",
+                "upgrade",
+                "autoremove",
+                "clean",
+                "search",
+                "show",
+                "list",
+                "edit-sources",
+                "source",
+                "build-dep",
+                "dist-upgrade"
+            })
+        };
 
         public static void GetEnvPath() {
             FunctionList = new List<string>();

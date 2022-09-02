@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using System.IO;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -64,6 +65,7 @@ namespace NSH.Shell {
             while (true) {
                 Input input = new Input(Print, this);
                 string line = input.FetchInput();
+                line = line.Replace("$PWD", Environment.CurrentDirectory);
                 string[] lineSplit = line.Split(" ");
 
                 if (lineSplit[0] == "exit") break;
@@ -90,9 +92,7 @@ namespace NSH.Shell {
 
                 if (lineSplit[0] == "cd" && lineSplit.Length > 1) {
                     string subStr = line.Substring(3);
-
                     int count = Regex.Matches(subStr, "\\ ").Count;
-                    Console.WriteLine(count);
 
                     for (int i = 0; i < count; i++) subStr = subStr.Replace("\\ ", " ");
                     subStr.Replace(" ", "\\ ");
@@ -104,7 +104,7 @@ namespace NSH.Shell {
 
                     if (subStr.StartsWith("$")) {
                         String? env = Environment.GetEnvironmentVariable(subStr.Substring(1));
-                        Console.WriteLine(env);
+
                         if (env != null) {
                             subStr = env;
                         }
