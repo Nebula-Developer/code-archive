@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Text.RegularExpressions;
 using NSH.Shell;
+using System.Diagnostics;
 
 namespace NSH.Shell {
     public class Input {
@@ -125,6 +126,10 @@ namespace NSH.Shell {
             return output;
         }
 
+        public static void SetCursorPosEsc(int x, int y) {
+            Console.Write("\x1b[" + (y + 1) + ";" + (x + 1) + "H");
+        }
+
         private string InputLoop() {
             string input = "";
             int y = Console.CursorTop;
@@ -194,25 +199,13 @@ namespace NSH.Shell {
                     x++;
                 }
 
-                foreach (String segment in endCheckSegments) {
-                    
-                }
-                String autocomplete = Autocomplete.SearchAutocomplete(input, x) ?? "";
-                int splitVal = autocomplete.Split(" ").Length;
 
+                String autocomplete = Autocomplete.SearchAutocomplete(input, x) ?? "";
                 String inputEndSplit = input.Split(" ")[input.Split(" ").Length - 1];
-                if (inputEndSplit.Length < autocomplete.Length) {
-                    if (autocomplete.Split(" ").Length > 1) {
-                        // hello w|hello world
-                        // =>
-                        // hello w|orld
-                        autocomplete = autocomplete.Substring(input.Length - autocomplete.Count(c => c == ' '));
-                    } else {
-                        autocomplete = autocomplete.Substring(inputEndSplit.Length);
-                    }
-                } else {
-                    autocomplete = "";
-                }
+
+                if (input.Length < autocomplete.Length) {
+                    autocomplete = autocomplete.Substring(input.Length);
+                } else autocomplete = "";
 
                 String mainStr = input + GREY + autocomplete + RESET;
                 int diff = oldStr.Length - mainStr.Length;
@@ -222,12 +215,7 @@ namespace NSH.Shell {
 
                 oldStr = mainStr;
                 int xPos = x + Prefix().Length;
-                // handle wrapping
-                if (xPos > Console.WindowWidth) {
-                    xPos = xPos-(Console.WindowWidth);
-                    y = Console.CursorTop + 1;
-                }
-                Console.SetCursorPosition(xPos, y);
+                SetCursorPosEsc(xPos, y);
             }
 
             int diffEnd = oldStr.Length - input.Length;

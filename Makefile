@@ -1,4 +1,4 @@
-.PHONY: run build quick-build clean
+.PHONY: run build quick-build clean cp
 
 run:
 	@echo "Caution - SIGSTP and SIGQUIT will not be handled while running from makefile."
@@ -18,3 +18,6 @@ clean:
 	@rm -rf bin
 	@rm -rf obj
 	mkdir Build
+
+cp:
+	@sudo cp Build/nsh /usr/local/bin/nsh

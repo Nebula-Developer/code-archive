@@ -66,7 +66,50 @@ namespace NSH.Shell {
         }
 
         public static string? SearchAutocomplete(String key, int pos) {
-            String result = "test";
+            String result = key;
+
+            String[] parts = key.Replace("\\ ", "{SPACE}").Split(' ');
+            String endPart = parts[parts.Length - 1].Replace("{SPACE}", "\\ ");
+
+            bool isAtEnd = pos == key.Length;
+            if (!isAtEnd) return null;
+
+            bool isCheckingFunction = parts.Length == 1;
+            bool isCheckingFile = endPart.StartsWith("./") ||
+                                  endPart.StartsWith("../") ||
+                                  endPart.StartsWith("/") ||
+                                  endPart.StartsWith("~");
+
+            foreach (string func in FunctionList) {
+                if (func.StartsWith(endPart)) {
+                    String newRes = key.Substring(0, key.Length - endPart.Length) + func;
+                    if ((newRes.Length < result.Length) || result == key) result = newRes;
+                }
+            }
+
+            if (isCheckingFile) {
+                String file = endPart;
+                file = file.Replace("~", Environment.GetEnvironmentVariable("HOME") ?? "/home");
+                String dir = file.Substring(0, file.LastIndexOf('/') + 1);
+                String fileName = endPart.Contains('/') ? endPart.Substring(endPart.LastIndexOf('/') + 1) : endPart;
+
+                if (Directory.Exists(dir)) {
+                    List<String> files = new List<String>();
+                    files.AddRange(Directory.GetFiles(dir));
+                    files.AddRange(Directory.GetDirectories(dir));
+
+                    foreach (string f in files) {
+                        String newF = f.Replace(Environment.GetEnvironmentVariable("HOME") ?? "/home", "~").Replace(" ", "\\ ");
+
+                        if (newF.StartsWith(endPart)) {
+                            String newFileName = newF.Substring(newF.LastIndexOf('/') + 1);
+                            String newRes = key.Substring(0, key.Length - fileName.Length) + newFileName;
+                            if ((newRes.Length < result.Length) || result == key) result = newRes;
+                        }
+                    }
+                }
+            }
+
             return result;
         }
 
@@ -75,24 +118,7 @@ namespace NSH.Shell {
         }
 
         public static bool IsValid(String key) {
-            if (FunctionList.Contains(key)) return true;
-            String[] fileArgs = key.Replace("\\ ", "{SPACE}").Replace("~", Environment.GetEnvironmentVariable("HOME") ?? "").Split(" ");
-            String endFileArg = fileArgs[fileArgs.Length - 1].Replace("{SPACE}", "\\ ");
-            if (endFileArg.Length == 0) endFileArg = " ";
-
-            bool searchForFiles = (endFileArg[0] == '.' || endFileArg[0] == '/');
-            String dirPath = endFileArg.Substring(0, endFileArg.LastIndexOf('/') + 1);
-            String fileName = endFileArg.Substring(endFileArg.LastIndexOf('/') + 1);
-            List<String> fileNames = new List<String>();
-
-            if (Directory.Exists(dirPath)) {
-                fileNames.AddRange(Directory.GetFiles(dirPath));
-                fileNames.AddRange(Directory.GetDirectories(dirPath));
-            }
-
-            if (fileNames.Contains(key)) return true;
-            if (Directory.Exists(key)) return true;
-            return false;
+            return true;
         }
     }
 }
