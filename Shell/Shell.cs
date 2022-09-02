@@ -151,44 +151,8 @@ namespace NSH.Shell {
                     Console.ForegroundColor = ConsoleColor.White;
                 }
                 
-
                 process.OutputDataReceived += (sender, e) => PrintOutput(e.Data ?? "");
                 process.ErrorDataReceived += (sender, e) => PrintError(e.Data ?? "");
-
-                /*while (!process.HasExited) {
-                    if (Console.KeyAvailable) {
-                        ConsoleKeyInfo key = Console.ReadKey(true);
-                        Char c = key.KeyChar;
-
-                        try {
-                            if (c == '\x03' || c == '\x1a') {
-                                process.Kill();
-                                process.WaitForExit();
-                                process.Close();
-                                process.Dispose();
-                                break;
-                            }
-
-                            else if (key.Key == ConsoleKey.Enter) {
-                                process.StandardInput.WriteLineAsync();
-                            }
-
-                            else if (key.Key == ConsoleKey.Backspace) {
-                                process.StandardInput.WriteAsync('\b');
-                            }
-                            
-                            else {
-                                process.StandardInput.WriteAsync(c);
-                            }
-                        } catch {
-                            process.Kill();
-                            process.Dispose();
-                            break;
-                        }
-                    }
-
-                    System.Threading.Thread.Sleep(1);
-                }*/
 
                 process.WaitForExit();
                 process.Close();

@@ -135,6 +135,7 @@ namespace NSH.Shell {
 
             while (true) {
                 ConsoleKeyInfo key = Console.ReadKey(true);
+                y = Console.CursorTop;
 
                 switch (key.Key) {
                     case ConsoleKey.LeftArrow:
@@ -149,12 +150,16 @@ namespace NSH.Shell {
                             x++;
                             Console.SetCursorPosition(x, y);
                         } else {
-                            String? complete = Autocomplete.SearchAutocomplete(input, x);
-                            if (complete == null) break;
-                            String[] split = input.Split(" ");
-                            String end = split[split.Length - 1];
-                            input = input.Substring(0, input.Length - end.Length);
-                            input += complete;
+                            String correct = Autocomplete.SearchAutocomplete(input, x) ?? "";
+                            if (correct.Split(" ").Length > 1) {
+                                // hello w|hello world
+                                // =>
+                                // hello w|orld
+                                correct = correct.Substring(input.Length);
+                            } else {
+                                correct = correct.Substring(input.Split(" ")[input.Split(" ").Length - 1].Length);
+                            }
+                            input += correct;
                             x = input.Length;
                         }
                         break;
@@ -174,6 +179,7 @@ namespace NSH.Shell {
                                 x--;
                             }
                         }
+                        y = Console.CursorTop;
                         break;
 
                     case ConsoleKey.Tab:
@@ -200,7 +206,7 @@ namespace NSH.Shell {
                         // hello w|hello world
                         // =>
                         // hello w|orld
-                        autocomplete = autocomplete.Substring(input.Length);
+                        autocomplete = autocomplete.Substring(input.Length - autocomplete.Count(c => c == ' '));
                     } else {
                         autocomplete = autocomplete.Substring(inputEndSplit.Length);
                     }
@@ -215,7 +221,13 @@ namespace NSH.Shell {
                 printer.Print(ColorPrefix() + FormatInput(input) + GREY + autocomplete + RESET + spaces, 0, y);
 
                 oldStr = mainStr;
-                Console.SetCursorPosition(x + Prefix().Length, y);
+                int xPos = x + Prefix().Length;
+                // handle wrapping
+                if (xPos > Console.WindowWidth) {
+                    xPos = xPos-(Console.WindowWidth);
+                    y = Console.CursorTop + 1;
+                }
+                Console.SetCursorPosition(xPos, y);
             }
 
             int diffEnd = oldStr.Length - input.Length;
