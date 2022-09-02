@@ -4,6 +4,8 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+using NSH.Shell;
+
 namespace NSH.Shell {
     public class NShell {
         public List<Tuple<int, int, char>> TermChars = new List<Tuple<int, int, char>>();

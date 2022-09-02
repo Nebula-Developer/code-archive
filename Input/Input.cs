@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using System.Text.RegularExpressions;
+using NSH.Shell;
 
 namespace NSH.Shell {
     public class Input {
