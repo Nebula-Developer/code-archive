@@ -6,6 +6,7 @@ namespace NSH.Shell {
     public class Input {
         public Printer printer;
         public NShell hostShell;
+        public static List<String> history = new List<String>();
 
         public Input(Printer printer, NShell hostShell) {
             this.printer = printer;
@@ -142,9 +143,18 @@ namespace NSH.Shell {
                 }
 
                 String autocomplete = Autocomplete.SearchAutocomplete(input, x) ?? "";
+                int splitVal = autocomplete.Split(" ").Length;
+                Console.WriteLine("\n" + splitVal);
                 String inputEndSplit = input.Split(" ")[input.Split(" ").Length - 1];
                 if (inputEndSplit.Length < autocomplete.Length) {
-                    autocomplete = autocomplete.Substring(inputEndSplit.Length);
+                    if (autocomplete.Split(" ").Length > 1) {
+                        // hello w|hello world
+                        // =>
+                        // hello w|orld
+                        autocomplete = autocomplete.Substring(input.Length);
+                    } else {
+                        autocomplete = autocomplete.Substring(inputEndSplit.Length);
+                    }
                 } else {
                     autocomplete = "";
                 }
@@ -164,6 +174,7 @@ namespace NSH.Shell {
             printer.Print(ColorPrefix() + input + spacesEnd, 0, y);
             Console.SetCursorPosition(x + Prefix().Length, y);
             Console.WriteLine();
+            history.Add(input);
             return input;
         }
 
