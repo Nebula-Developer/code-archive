@@ -46,10 +46,6 @@ namespace NSH.Shell {
             });
         }
 
-        public static void GetCWDFiles() {
-
-        }
-
         public static string? SearchAutocomplete(String key, int pos) {
             Tuple<String?, int> Result = new Tuple<String?, int>(null, int.MaxValue);
 

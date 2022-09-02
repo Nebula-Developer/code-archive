@@ -8,9 +8,8 @@ namespace NSH {
             ShellSignals.HandleIgnoredSignals();
 
             Autocomplete.GetEnvPath();
-            Autocomplete.GetCWDFiles();
             Autocomplete.SortAutocomplete();
-            
+
             NShell shell = new NShell();
             shell.Init();
         }
