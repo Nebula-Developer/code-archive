@@ -3,7 +3,7 @@ using System.Linq;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-
+using System.Text.RegularExpressions;
 namespace NSH.Shell {
     public class NShell {
         public List<Tuple<int, int, char>> TermChars = new List<Tuple<int, int, char>>();
@@ -62,18 +62,62 @@ namespace NSH.Shell {
             while (true) {
                 Input input = new Input(Print, this);
                 string line = input.FetchInput();
+                string[] lineSplit = line.Split(" ");
 
-                if (line.Split(" ")[0] == "exit") break;
+                if (lineSplit[0] == "exit") break;
+                if ((lineSplit[0] == "sudo" && lineSplit.Contains("-i")) || lineSplit[0] == "su") {
+                    // Restart shell with sudo
+                    Console.WriteLine("Restarting shell with sudo...");
+                    Process rootProcess = new Process();
+                    rootProcess.StartInfo.FileName = "/bin/bash";
+                    // Run sudo + (path to nsh)
+                    String? appPath = System.Diagnostics.Process.GetCurrentProcess().MainModule?.FileName;
+                    if (appPath == null) {
+                        // Instead use general name
+                        appPath = Path.Combine(AppContext.BaseDirectory, System.Reflection.Assembly.GetEntryAssembly()?.GetName().Name ?? "nsh");
+                    }
 
-                if (line.Split(" ")[0] == "cd" && line.Split(" ").Length > 1) {
+                    rootProcess.StartInfo.Arguments = "-c \"sudo " + appPath + "\"";
+                    rootProcess.StartInfo.UseShellExecute = true;
+                    rootProcess.StartInfo.RedirectStandardInput = false;
+
+                    rootProcess.Start();
+                    rootProcess.WaitForExit();
+                    break;
+                }
+
+                if (lineSplit[0] == "cd" && lineSplit.Length > 1) {
                     string subStr = line.Substring(3);
+
+                    int count = Regex.Matches(subStr, "\\ ").Count;
+                    Console.WriteLine(count);
+
+                    for (int i = 0; i < count; i++) subStr = subStr.Replace("\\ ", " ");
+                    subStr.Replace(" ", "\\ ");
+
                     if (subStr.StartsWith("~")) {
                         subStr = subStr.Substring(1);
                         subStr = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + subStr;
                     }
+
+                    if (subStr.StartsWith("$")) {
+                        String? env = Environment.GetEnvironmentVariable(subStr.Substring(1));
+                        Console.WriteLine(env);
+                        if (env != null) {
+                            subStr = env;
+                        }
+                    }
+
                     if (Directory.Exists(subStr)) {
                         Directory.SetCurrentDirectory(subStr);
                     }
+                    continue;
+                } else if (lineSplit[0] == "path") {
+                    foreach(String f in Autocomplete.FunctionList) {
+                        Console.WriteLine(f);
+                        System.Threading.Thread.Sleep(1);
+                    }
+                    continue;
                 }
 
                 // Execute while capturing output and error
@@ -83,7 +127,7 @@ namespace NSH.Shell {
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardOutput = false;
                 process.StartInfo.RedirectStandardError = false;
-                process.StartInfo.RedirectStandardInput = true;
+                process.StartInfo.RedirectStandardInput = false;
                 process.Start();
 
                 ConsoleCancelEventHandler procKill = (object? sender, ConsoleCancelEventArgs e) => {
@@ -109,7 +153,7 @@ namespace NSH.Shell {
                 process.OutputDataReceived += (sender, e) => PrintOutput(e.Data ?? "");
                 process.ErrorDataReceived += (sender, e) => PrintError(e.Data ?? "");
 
-                while (!process.HasExited) {
+                /*while (!process.HasExited) {
                     if (Console.KeyAvailable) {
                         ConsoleKeyInfo key = Console.ReadKey(true);
                         Char c = key.KeyChar;
@@ -142,8 +186,11 @@ namespace NSH.Shell {
                     }
 
                     System.Threading.Thread.Sleep(1);
-                }
+                }*/
 
+                process.WaitForExit();
+                process.Close();
+                process.Dispose();
                 Console.CancelKeyPress -= procKill;
             }
 
