@@ -79,6 +79,44 @@ namespace NSH.Shell {
         public static string BLINK = "\x1b[5m";
         public static string GREENALT = "\x1b[38;5;46m";
 
+        public static List<String> endCheckSegments = new List<String>() {
+            "|", ">", "<", ">>", "2>", "2>>", "1>", "1>>",
+            "&&", "||", "&", ";", "(", ")", "{", "}"
+        };
+
+        public static string FormatInput(string input) {
+            String output = "";
+            String[] inputSplit = input.Split(" ");
+
+            for (int i = 0; i < inputSplit.Length; i++) {
+                String s = inputSplit[i];
+                bool check = false;
+                String checkChunk = s;
+
+                if (i == 0) check = true;
+                if (i != 0) {
+                    String beforeStr = inputSplit[i - 1];
+
+                    foreach (String segment in endCheckSegments) {
+                        if (beforeStr.EndsWith(segment)) {
+                            check = true;
+                            break;
+                        } else if (s.Contains(segment)) {
+                            check = true;
+                            checkChunk = s.Substring(segment.Length + s.LastIndexOf(segment));
+                            break;
+                        }
+                    }
+                }
+
+                if (endCheckSegments.Contains(s)) output += BLUE + s + RESET;
+                else if (check) output += (Autocomplete.IsValid(checkChunk) ? GREEN : RED) + s + RESET;
+                else output += s;
+                if (i < inputSplit.Length - 1) output += " ";
+            }
+            return output;
+        }
+
         private string InputLoop() {
             string input = "";
             int y = Console.CursorTop;
@@ -142,9 +180,12 @@ namespace NSH.Shell {
                     x++;
                 }
 
+                foreach (String segment in endCheckSegments) {
+                    
+                }
                 String autocomplete = Autocomplete.SearchAutocomplete(input, x) ?? "";
                 int splitVal = autocomplete.Split(" ").Length;
-                Console.WriteLine("\n" + splitVal);
+
                 String inputEndSplit = input.Split(" ")[input.Split(" ").Length - 1];
                 if (inputEndSplit.Length < autocomplete.Length) {
                     if (autocomplete.Split(" ").Length > 1) {
@@ -163,7 +204,8 @@ namespace NSH.Shell {
                 int diff = oldStr.Length - mainStr.Length;
                 String spaces = new String(' ', diff < 0 ? 0 : diff);
 
-                printer.Print(ColorPrefix() + mainStr + spaces, 0, y);
+                printer.Print(ColorPrefix() + FormatInput(input) + GREY + autocomplete + RESET + spaces, 0, y);
+
                 oldStr = mainStr;
                 Console.SetCursorPosition(x + Prefix().Length, y);
             }
@@ -171,7 +213,7 @@ namespace NSH.Shell {
             int diffEnd = oldStr.Length - input.Length;
             String spacesEnd = new String(' ', diffEnd < 0 ? 0 : diffEnd);
 
-            printer.Print(ColorPrefix() + input + spacesEnd, 0, y);
+            printer.Print(ColorPrefix() + FormatInput(input) + spacesEnd, 0, y);
             Console.SetCursorPosition(x + Prefix().Length, y);
             Console.WriteLine();
             history.Add(input);

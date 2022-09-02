@@ -27,6 +27,11 @@ namespace NSH.Shell {
 
             FunctionList.Clear();
             FunctionList.AddRange(PathFunctions);
+            FunctionList.AddRange(new List<String>() {
+                "help",
+                "exit",
+                "clear"
+            });
         }
 
         public static void GetCWDFiles() {
@@ -85,7 +90,7 @@ namespace NSH.Shell {
                 tempFunctions.AddRange(fileNames);
 
                 foreach (string s in tempFunctions) {
-                    if (s.StartsWith(split[split.Length - 1])) {
+                    if (s.StartsWith(split[split.Length - 1]) && s.Length > 0) {
                         if (s == split[split.Length - 1]) {
                             Result = new Tuple<String?, int>(s, 0);
                             break;
@@ -138,7 +143,9 @@ namespace NSH.Shell {
                 fileNames.AddRange(Directory.GetFiles(dirPath));
                 fileNames.AddRange(Directory.GetDirectories(dirPath));
             }
+
             if (fileNames.Contains(key)) return true;
+            if (Directory.Exists(key)) return true;
             return false;
         }
     }
