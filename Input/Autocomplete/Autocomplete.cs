@@ -107,7 +107,7 @@ namespace NSH.Shell {
                         }
                     }
                 }
-            } else {
+            } else if (split[split.Length - 1].Length > 0) {
                 foreach (string s in fileNames) {
                     if (s.StartsWith(split[split.Length - 1])) {
                         if (s == split[split.Length - 1]) {
