@@ -75,10 +75,6 @@ namespace NSH.Shell {
             if (!isAtEnd) return null;
 
             bool isCheckingFunction = parts.Length == 1;
-            bool isCheckingFile = endPart.StartsWith("./") ||
-                                  endPart.StartsWith("../") ||
-                                  endPart.StartsWith("/") ||
-                                  endPart.StartsWith("~");
 
             foreach (string func in FunctionList) {
                 if (func.StartsWith(endPart)) {
@@ -87,10 +83,10 @@ namespace NSH.Shell {
                 }
             }
 
-            if (isCheckingFile) {
+            if (endPart.Length > 1) {
                 String file = endPart;
                 file = file.Replace("~", Environment.GetEnvironmentVariable("HOME") ?? "/home");
-                String dir = file.Substring(0, file.LastIndexOf('/') + 1);
+                String dir = file.Contains('/') ? file.Substring(0, file.LastIndexOf('/') + 1) : "./";
                 String fileName = endPart.Contains('/') ? endPart.Substring(endPart.LastIndexOf('/') + 1) : endPart;
 
                 if (Directory.Exists(dir)) {
