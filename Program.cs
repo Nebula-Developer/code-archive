@@ -6,7 +6,6 @@ namespace NSH {
     public static class Root {
         public static void Main(string[] args) {
             ShellSignals.HandleIgnoredSignals();
-
             Autocomplete.GetEnvPath();
             Autocomplete.SortAutocomplete();
 

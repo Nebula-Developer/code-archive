@@ -219,7 +219,6 @@ namespace NSH.Shell {
 
                 oldStr = mainStr;
                 int xPos = x + Prefix().Length;
-
                 Console.SetCursorPosition(xPos, y);
             }
 
