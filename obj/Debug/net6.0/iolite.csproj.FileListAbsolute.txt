@@ -1,0 +1,15 @@
+/Users/nebuladev/Documents/iolite/bin/iolite
+/Users/nebuladev/Documents/iolite/bin/iolite.deps.json
+/Users/nebuladev/Documents/iolite/bin/iolite.runtimeconfig.json
+/Users/nebuladev/Documents/iolite/bin/iolite.dll
+/Users/nebuladev/Documents/iolite/bin/iolite.pdb
+/Users/nebuladev/Documents/iolite/obj/Debug/net6.0/iolite.csproj.AssemblyReference.cache
+/Users/nebuladev/Documents/iolite/obj/Debug/net6.0/iolite.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nebuladev/Documents/iolite/obj/Debug/net6.0/iolite.AssemblyInfoInputs.cache
+/Users/nebuladev/Documents/iolite/obj/Debug/net6.0/iolite.AssemblyInfo.cs
+/Users/nebuladev/Documents/iolite/obj/Debug/net6.0/iolite.csproj.CoreCompileInputs.cache
+/Users/nebuladev/Documents/iolite/obj/Debug/net6.0/iolite.dll
+/Users/nebuladev/Documents/iolite/obj/Debug/net6.0/refint/iolite.dll
+/Users/nebuladev/Documents/iolite/obj/Debug/net6.0/iolite.pdb
+/Users/nebuladev/Documents/iolite/obj/Debug/net6.0/iolite.genruntimeconfig.cache
+/Users/nebuladev/Documents/iolite/obj/Debug/net6.0/ref/iolite.dll
