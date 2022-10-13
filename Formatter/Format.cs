@@ -10,7 +10,12 @@ public class IoliteFormatter {
     public string Data = "";
     public static string[] StringData = new string[1024];
 
-    public void Regex(string pattern, string replacement) {
+    public void Regex(string pattern, string replacement, bool modPattern = true) {
+        if (modPattern) {
+            pattern = pattern.Replace(" ", "\\s*");
+            pattern = pattern.Replace("__", "\\s+");
+        }
+
         Data = IoliteRegex.Replace(Data, pattern, replacement);
     }
 
@@ -49,9 +54,57 @@ public class IoliteFormatter {
         Replace(Strings.Speech, "\\\"");
     }
 
-    private void InitSequence() {
-        SubstituteStrings();
+    private void PrestringActions() {
+        // Replace:
+        // cimport "<file>"
+        // With:
+        // #include <<file>>
+        Regex("cimport__\"(.*?)\"", "#include <$1>");
+        // Local import:
+        Regex("climport__\"(.*?)\"", "#include \"<$1>\"");
+    }
 
+    private void MainActions() {
+        // This is the main C translation function. It will handle things like functions.
+
+        // Replace:
+        // func <name>(<args>) -> <return type> { ... }
+        // With:
+        // <return type> <name>(<args>) { ... }
+        Regex("func__(.*?)\\((.*?)\\) -> (.*?) \\{", "$3 $1($2) {");
+        // Void shorthand:
+        Regex("func__(.*?)\\((.*?)\\) \\{", "void $1($2) {");
+        // Classed declaration:
+        Regex("func__(.*?)\\.(.*?)\\((.*?)\\) -> (.*?) \\{", "$4 $1_$2($3) {");
+
+    }
+
+    private void InitSequence() {
+        PrestringActions();
+        SubstituteStrings();
+        MainActions();
         RepopulateStrings();
     }
 }
+
+/*
+
+In gcc, when you do this:
+gcc -o ./example -x - <your stuff here>
+It will compile your stuff and output it to ./example, all from the commandline without
+a C file.
+
+If you wanted to do this but as an include to that file, you would do:
+gcc -o ./example -x c-header - <your stuff here>
+
+Then, to include it, you would do:
+gcc -o ./example -x c - <your stuff here> -include ./example
+
+If you wanted to do this:
+gcc -o ./example -x - <your stuff here>
+While including this:
+gcc -o ./example -x c-header - <your stuff here>
+You would do this (its a very long line):
+gcc -o ./example -x - <your stuff here> -include <(gcc -x c-header - <your stuff here> -E -P -C)>
+
+*/
