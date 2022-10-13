@@ -1,0 +1,6 @@
+import "essentials"
+
+func main() {
+    print("Hello, world!");
+    return 0;
+}
