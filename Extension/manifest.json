@@ -1,0 +1,29 @@
+{
+
+    "manifest_version": 2,
+    "name": "Learnsharp",
+    "version": "1.0",
+  
+    "description": "Yes",
+  
+    "icons": {
+
+    },
+  
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["learnsharp.js"]
+      }
+    ],
+
+    "permissions": [
+      "tabs",
+      "storage",
+      "webRequest",
+      "webRequestBlocking",
+      "http://*/*",
+      "https://*/*"
+    ]
+  }
+  
