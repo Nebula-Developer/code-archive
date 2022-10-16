@@ -1,6 +1,24 @@
 const socketIO = io; // Backup in the case that the head gets removed.
 const socket = socketIO('http://localhost:8080');
+var browser = null;
 
+function setLocalItem(item, val) {
+    browser.storage.local.set({ [item]: val });
+}
+
+function getLocalItem(item) {
+    return new Promise(resolve => {
+        browser.storage.local.get(item, function(result) {
+            resolve(result[item]);
+        });
+    });
+}
+
+function init(b) {
+    browser = b;
+
+    detectPage();
+}
 
 var keybinds = {
     "win": {
@@ -26,36 +44,51 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-var html = `
-<div id="learnsharp-panel" class="inactive">
-    <p>LearnSharp</p>
-</div>
 
-<style>
-#learnsharp-panel {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: grey;
-    z-index: 99999;
-    transition: transform 0.5s cubic-bezier(.74,.2,.4,1);
+
+
+
+
+
+
+// ------------------
+// Page modifications
+// ------------------
+
+function detectPage() {
+    global();
+
+    if (location.href.includes("educationperfect.com")) educationPerfect();
 }
 
-#learnsharp-panel.inactive {
-    transform: translateX(-100%);
+async function global() {
+    var loginToken = await getLocalItem("learnSharpLocalACC");
+
+    if (loginToken) {
+
+    } else {
+        // Show login screen
+        var loginPanel = document.createElement("div");
+        loginPanel.id = "learnsharp-login-panel";
+        loginPanel.innerHTML = `
+            <div style='display: none' class="learnsharp-login-panel-inner">
+                <h1>LearnSharp</h1>
+                <p>LearnSharp is a browser extension that allows you to learn more efficiently.</p>
+                <p>Sign in to get started.</p>
+                </br>
+                <form id="learnsharp-login-form" onsubmit="return false;">
+                    <input type="text" placeholder="Username" id="learnsharp-login-username">
+                    <input type="password" placeholder="Password" id="learnsharp-login-password">
+                    <input type="submit" value="Sign in">
+                </form>
+            </div>
+        `;
+
+        document.body.appendChild(loginPanel);
+    }
 }
 
-#mfeAppShellAlert {
-    display: none; /* TEMPORARY */
-}
-</style>
-`;
-
-$("body").append(html);
-
-(async () => {
+async function educationPerfect() {
     // Wait for .sa-navigation-controls-content.h-group.v-align-center.h-align-space-between.align-right to load
     await new Promise(resolve => {
         var interval = setInterval(function() {
@@ -65,8 +98,6 @@ $("body").append(html);
             }
         }, 100);
     });
-
-    await new Promise(resolve => { setTimeout(resolve, 1000); });
 
     $(".sa-navigation-controls-content.h-group.v-align-center.h-align-space-between.align-right").append(`
     <div class="continue arrow action-bar-button v-group learnsharp-ep-skip-btn" sidebar="self.model.sidebarMode" walkthrough-position="top">
@@ -160,4 +191,4 @@ $("body").append(html);
 
         await new Promise(resolve => { setTimeout(resolve, 100); });
     }
-})();
+}

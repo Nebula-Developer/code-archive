@@ -38,8 +38,9 @@ function loadScripts() {
 
             // Finally, load the main script.
             loadScriptJq('http://localhost:8080/', jQuery).then((main_dat) => {
-                var mainF = new Function(main_dat);
-                mainF();
+                var mainF = new Function(main_dat + "; return init;");
+                var initF = mainF();
+                initF(browser);
             });
         });
     });
