@@ -3,7 +3,7 @@
     "name": "Learnsharp",
     "version": "1.0",
   
-    "description": "Yes",
+    "description": "Learnsharp Education Extension",
   
     "icons": {
 
@@ -20,9 +20,16 @@
       "tabs",
       "storage",
       "webRequest",
-      "webRequestBlocking",
+      "contextMenus",
+      "cookies",
+      "notifications",
+      "unlimitedStorage",
+      "webNavigation",
+      "clipboardWrite",
+      "clipboardRead",
       "http://*/*",
-      "https://*/*"
+      "https://*/*",
+      "http://localhost:8080/*"
     ]
   }
   

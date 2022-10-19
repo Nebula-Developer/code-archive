@@ -1,9 +1,9 @@
 const socketIO = io; // Backup in the case that the head gets removed.
-const socket = socketIO('http://localhost:8080');
+const socket = socketIO('http://localhost:8080', { transports: ['websocket'] });
 var browser = null;
 
 function setLocalItem(item, val) {
-    browser.storage.local.set({ [item]: val });
+   browser.storage.local.set({ [item]: val });
 }
 
 function getLocalItem(item) {
@@ -16,6 +16,9 @@ function getLocalItem(item) {
 
 function init(b) {
     browser = b;
+    console.log(browser);
+
+    socket.emit('message', 'Hello from the browser!');
 
     detectPage();
 }
@@ -45,12 +48,6 @@ document.addEventListener('keydown', function(event) {
 });
 
 
-
-
-
-
-
-
 // ------------------
 // Page modifications
 // ------------------
@@ -62,30 +59,39 @@ function detectPage() {
 }
 
 async function global() {
-    var loginToken = await getLocalItem("learnSharpLocalACC");
+    var panel = `
+    <div id='panel' class='inactive'>
+        <p>No</p>
+    </div>
 
-    if (loginToken) {
-
-    } else {
-        // Show login screen
-        var loginPanel = document.createElement("div");
-        loginPanel.id = "learnsharp-login-panel";
-        loginPanel.innerHTML = `
-            <div style='display: none' class="learnsharp-login-panel-inner">
-                <h1>LearnSharp</h1>
-                <p>LearnSharp is a browser extension that allows you to learn more efficiently.</p>
-                <p>Sign in to get started.</p>
-                </br>
-                <form id="learnsharp-login-form" onsubmit="return false;">
-                    <input type="text" placeholder="Username" id="learnsharp-login-username">
-                    <input type="password" placeholder="Password" id="learnsharp-login-password">
-                    <input type="submit" value="Sign in">
-                </form>
-            </div>
-        `;
-
-        document.body.appendChild(loginPanel);
+    <style>
+    #panel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: hotpink;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999999;
+        color: orange;
+        transition: 0.5s ease;
+        transform: translateX(0);
     }
+
+    #panel.inactive {
+        transform: translateX(-100vw);
+    }
+    </style>
+    `;
+
+    $("body").append(panel);
+
+    document.addEventListener('keydown', function(event) {
+        if (event.altKey && event.code == 'KeyL') {
+            event.preventDefault();
+            $("#panel").toggleClass("inactive");
+        }
+    });
 }
 
 async function educationPerfect() {
@@ -99,80 +105,96 @@ async function educationPerfect() {
         }, 100);
     });
 
-    $(".sa-navigation-controls-content.h-group.v-align-center.h-align-space-between.align-right").append(`
-    <div class="continue arrow action-bar-button v-group learnsharp-ep-skip-btn" sidebar="self.model.sidebarMode" walkthrough-position="top">
-        <button id="skip-btn">
-            <span ng-hide="self.sidebar" class="abb-label" ng-transclude="">
-            <span class="ng-binding ng-scope"> Skip </span></span>
-            <span class="highlight"></span>
-        </button>
-        <div class="sidemode-label ng-hide">
-            <span class="ng-binding ng-scope"> Skip </span>
-        </div>
-    </div>
+    setInterval(() => {
+        if ($(".learnsharp-ep-skip-btn").length == 0 || $("#learnsharp-ep-skip").length == 0) {
+            console.log('a');
+            $(".learnsharp-ep-skip-btn").remove();
+            $("#learnsharp-ep-skip").remove();
 
-    <div class="continue arrow action-bar-button v-group learnsharp-ep-skip-btn" sidebar="self.model.sidebarMode" walkthrough-position="top">
-        <button id="skip-sec-btn">
-            <span ng-hide="self.sidebar" class="abb-label" ng-transclude="">
-            <span class="ng-binding ng-scope"> Skip Section </span></span>
-            <span class="highlight"></span>
-        </button>
-        <div class="sidemode-label ng-hide">
-            <span class="ng-binding ng-scope"> Skip Section </span>
-        </div>
-    </div>
+            $(".sa-navigation-controls-content.h-group.v-align-center.h-align-space-between.align-right").append(`
+            <div class="continue arrow action-bar-button v-group learnsharp-ep-skip-btn" sidebar="self.model.sidebarMode" walkthrough-position="top">
+                <button id="skip-btn" class="learnsharp-ep-btn">
+                    <span ng-hide="self.sidebar" class="abb-label" ng-transclude="">
+                    <span class="ng-binding ng-scope"> Skip </span></span>
+                    <span class="highlight"></span>
+                </button>
+                <div class="sidemode-label ng-hide">
+                    <span class="ng-binding ng-scope"> Skip </span>
+                </div>
+            </div>
 
-    <div class="learnsharp-ep-skip-btn">
-        <input type="checkbox" id="learnsharp-ep-skip" name="learnsharp-ep-skip" value="learnsharp-ep-skip">
-        <label for="learnsharp-ep-skip">Auto Skip</label>
-    </div>
+            <div class="continue arrow action-bar-button v-group learnsharp-ep-skip-btn" sidebar="self.model.sidebarMode" walkthrough-position="top">
+                <button id="skip-sec-btn" class="learnsharp-ep-btn">
+                    <span ng-hide="self.sidebar" class="abb-label" ng-transclude="">
+                    <span class="ng-binding ng-scope"> Skip Section </span></span>
+                    <span class="highlight"></span>
+                </button>
+                <div class="sidemode-label ng-hide">
+                    <span class="ng-binding ng-scope"> Skip Section </span>
+                </div>
+            </div>
 
-    <style>
-    .learnsharp-ep-skip-btn {
-        margin-left: 10px;
-    }
-    </style>
-    `);
+            <div class="learnsharp-ep-skip-btn">
+                <input type="checkbox" id="learnsharp-ep-skip" name="learnsharp-ep-skip" value="learnsharp-ep-skip">
+                <label for="learnsharp-ep-skip">Auto Skip</label>
+            </div>
 
-    $("#skip-btn").on('click', function() {
-        var elms = $(".h-group.v-align-center.expanded-content.information.selected");
-        if (elms.length > 0) {
-            var btn = $(".continue.arrow.action-bar-button.v-group.ng-isolate-scope").find('button');
-
-            // Make sure we dont click the button we just clicked.
-            for (var i = 0; i < btn.length; i++) {
-                if (btn[i] == this)
-                    continue;
-
-                btn[i].click();
+            <style>
+            .learnsharp-ep-skip-btn {
+                margin-left: 10px;
             }
+            </style>
+            `);
         }
-    });
 
-    $("#skip-sec-btn").on('click', async function() {
-        while (true) {
+        // clear $("#skip-btn") click events
+        $("#skip-btn").off("click");
+
+        $("#skip-btn").on('click', function() {
             var elms = $(".h-group.v-align-center.expanded-content.information.selected");
             if (elms.length > 0) {
                 var btn = $(".continue.arrow.action-bar-button.v-group.ng-isolate-scope").find('button');
     
+                // Make sure we dont click the button we just clicked.
                 for (var i = 0; i < btn.length; i++) {
-                    if (btn[i] == this)
-                        continue;
+                    if (btn[i].classList.contains("learnsharp-ep-btn"))
+                            continue;
+
+                        console.log(btn[i]);
     
                     btn[i].click();
                 }
-            } else break;
+            }
+        });
 
-            await new Promise(resolve => { setTimeout(resolve, 100); });
-        }
-    });
+        $("#skip-sec-btn").off("click");
+    
+        $("#skip-sec-btn").on('click', async function() {
+            while (true) {
+                var elms = $(".h-group.v-align-center.expanded-content.information.selected");
+                if (elms.length > 0) {
+                    var btn = $(".continue.arrow.action-bar-button.v-group.ng-isolate-scope").find('button');
+        
+                    for (var i = 0; i < btn.length; i++) {
+                        // Check if has class
+                        if (btn[i].classList.contains("learnsharp-ep-btn"))
+                            continue;
+                            
+                        btn[i].click();
+                    }
+                } else break;
+    
+                await new Promise(resolve => { setTimeout(resolve, 100); });
+            }
+        });
+    }, 100);
 
     setInterval(() => {
-        if ($(".information.selected").length > 0) {
-            $(".continue.arrow.action-bar-button.v-group").css("display", "block");
+        if ($(".h-group.v-align-center.expanded-content.information.selected").length > 0) {
+            $(".continue.arrow.action-bar-button.v-group:not(.ng-isolate-scop)").css("display", "block");
             $(".continue.arrow.action-bar-button.v-group.ng-isolate-scope").css("display", "none");
         } else {
-            $(".continue.arrow.action-bar-button.v-group").css("display", "none");
+            $(".continue.arrow.action-bar-button.v-group:not(.ng-isolate-scop)").css("display", "none");
             $(".continue.arrow.action-bar-button.v-group.ng-isolate-scope").css("display", "block");
         }
     }, 100);

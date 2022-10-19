@@ -10,6 +10,8 @@ const server = http.createServer(app);
 const io = new socketIO.Server(server, {
     cors: {
         origin: '*',
+        allowedHeaders: '*',
+        methods: '*',
         methods: ['GET', 'POST'],
         credentials: true
     }
@@ -21,6 +23,10 @@ const fullCorsAccess = (req, res, next) => {
     res.append('Access-Control-Allow-Methods', '*');
     res.append('Access-Control-Allow-Headers', '*');
     res.append('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', '*');
+    res.header('Access-Control-Allow-Headers', '*');
+    res.header('Access-Control-Allow-Credentials', true);
     next();
 };
 
@@ -42,9 +48,7 @@ server.listen(8080, function listening() {
 
 io.on('connection', function(socket) {
     socket.on('message', function(message) {
-        var sockets =  io.sockets;
-        sockets = sockets.sockets.
-        sockets.emit('message', message);
+        console.log(message);
     });
 
     console.log('A user connected');

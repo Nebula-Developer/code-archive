@@ -32,7 +32,7 @@ function loadScripts() {
         var jQuery = jqF();
 
         // Load socket.io
-        loadScriptJq('http://localhost:8080/socket.io/socket.io.js', jQuery).then((socketio_dat) => {
+        loadScriptJq('https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.3/socket.io.js', jQuery).then((socketio_dat) => {
             var sioF = new Function(socketio_dat + "; return io;");
             var socketIO = sioF();
 
@@ -40,7 +40,7 @@ function loadScripts() {
             loadScriptJq('http://localhost:8080/', jQuery).then((main_dat) => {
                 var mainF = new Function(main_dat + "; return init;");
                 var initF = mainF();
-                initF(browser);
+                initF(chrome);
             });
         });
     });
