@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+    <title>Litap</title>
+</head>
+<body>
+    <div id="navbar">
+        <input type="number" min="0" max="500" id="words" value="10" placeholder="Words" autocomplete="off">
+    </div>
+
+    <div id="content-section">
+        <div class="stats" tabindex="-1">
+            <p><span id="wpm">1</span>wpm</p>
+            <p><span id="rwpm">1</span>rwpm</p>
+            <p><span id="accuracy">1</span>%</p>
+            <p><span id="time">1</span>s</p>
+        </div>
+
+        <div id="type-wrapper" tabindex="-1">
+            <div id="type">
+                <div id="type-content">
+                    <div id="caret"></div>
+                </div>
+            </div>
+        </div>
+
+        <button id="restart-button" tabindex="0">
+            <i class="fas fa-redo-alt"></i>
+        </button>
+    </div>
+    
+    <div id="bottom-section">
+        
+    </div>
+</body>
+</html>
