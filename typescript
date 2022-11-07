@@ -1,14 +1,0 @@
-Script started on Sat Nov  5 19:14:54 2022
-[1m[7m%[27m[1m[0m                                                                                                                                                                                                                       [0m[27m[24m[Jnebuladev@NebulaDevs-iPro PrysmShell % [K[?2004hsscript c -c vim[?2004l
-script: illegal option -- c
-usage: script [-adkpqr] [-t time] [file [command ...]]
-[1m[7m%[27m[1m[0m                                                                                                                                                                                                                       [0m[27m[24m[Jnebuladev@NebulaDevs-iPro PrysmShell % [K[?2004hscript -c vim   bash r foo[?2004l
-script: illegal option -- c
-usage: script [-adkpqr] [-t time] [file [command ...]]
-[1m[7m%[27m[1m[0m                                                                                                                                                                                                                       [0m[27m[24m[Jnebuladev@NebulaDevs-iPro PrysmShell % [K[?2004h[7mscript -c bash foo[27m[18D[27ms[27mc[27mr[27mi[27mp[27mt[27m [27m-[27mc[27m [27mv[27mi[27mm[27m [27m [27m [27m [27m [?2004l
-script: illegal option -- c
-usage: script [-adkpqr] [-t time] [file [command ...]]
-[1m[7m%[27m[1m[0m                                                                                                                                                                                                                       [0m[27m[24m[Jnebuladev@NebulaDevs-iPro PrysmShell % [K[?2004h[7mscript -c bash foo[27m[18D[27ms[27mc[27mr[27mi[27mp[27mt[27m [27m-[27mc[27m [27mb[27ma[27ms[27mh[27m [27mf[27mo[27mo[?2004l
-script: illegal option -- c
-usage: script [-adkpqr] [-t time] [file [command ...]]
-[1m[7m%[27m[1m[0m                                                                                                                                                                                                                       [0m[27m[24m[Jnebuladev@NebulaDevs-iPro PrysmShell % [K[?2004h
