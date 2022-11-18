@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json.schemastore.org/chrome-manifest",
+    "manifest_version": 3,
+    "name": "Msg Overlay",
+    "version": "1.0",
+    "description": "Overlay for the message page",
+    "permissions": [
+        "activeTab",
+        "tabs",
+        "storage",
+        "webRequest"
+    ],
+    "content_scripts": [
+        {
+            "matches": [ "<all_urls>" ],
+            "js": [
+                "jquery.js",
+                "socketio.js",
+                "autosize.js",
+                "main.js"
+            ],
+            "css": [
+                "whitney.css",
+                "style.css"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "matches": [ "<all_urls>" ],
+            "resources": [
+                "jquery.js",
+                "socketio.js",
+                "autosize.js",
+                "main.js",
+                "style.css",
+                "overlay.html"
+            ]
+        }
+    ]
+}
