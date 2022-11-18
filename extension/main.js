@@ -140,13 +140,23 @@ function initOverlay(overlay) {
 
             socket.emit("message", {
                 text: msg,
-                token: accUser.token
+                token: accUser.token,
+                reply: $("#messenger-input").attr("reply")
             });
+
+            $(".message-reply-to").addClass("inactive");
+            $("#messenger-input").attr("reply", null);
+            scrollToMsgBottom();
         }
     });
 
     $(".expand-button").click(function() {
         $("#msg-overlay").toggleClass("overlay-panel-expanded");
+    });
+
+    $(".message-reply-to-close").click(function() {
+        $(".message-reply-to").addClass("inactive");
+        $("#messenger-input").attr("reply", null);
     });
 }
 
@@ -272,15 +282,10 @@ async function appendMessage(message) {
     $(".reply-button").off("click").on("click", function() {
         var msgId = $(this).parent().parent().attr("msg-id");
 
-        var msg = $("#messenger-input").val();
-        if (msg.length == 0) return;
-        $("#messenger-input").val("");
-
-        socket.emit("message", {
-            text: msg,
-            token: accUser.token,
-            reply: msgId
-        });
+        $("#messenger-input").attr("reply", msgId);
+        $("#messenger-input").focus();
+        $(".message-reply-to").removeClass("inactive");
+        $(".message-reply-to-who").html("Replying to " + $(this).parent().parent().find(".messenger-message-username").html());
     });
 
     $(".messenger-message-reply").off("click").on("click", function() {

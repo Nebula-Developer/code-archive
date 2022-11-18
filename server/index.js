@@ -118,7 +118,7 @@ io.on('connection', (socket) => {
 
         var newMsg = {
             from: account.id,
-            text: dat.text,
+            text: dat.text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
             id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
             date: new Date()
         };
