@@ -34,7 +34,19 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/home/index.html'));
 });
 
+app.get('/ok', (req, res) => {
+    res.send('OK');
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req, res, next) {
+    res.status(404);
+    if (req.accepts('html')) {
+        res.sendFile(path.join(__dirname, 'public/error/404/index.html'));
+        return;
+    }
+});
 
 app.get('/status', (req, res) => {
     var statusHTML = fs.readFileSync(path.join(__dirname, 'private/pages/status.html'), 'utf8');
