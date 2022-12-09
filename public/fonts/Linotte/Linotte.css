@@ -1,0 +1,36 @@
+/* Import all linotte fonts */
+
+@font-face {
+    font-family: 'Linotte';
+    src: url('Linotte Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Linotte';
+    src: url('Linotte Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Linotte';
+    src: url('Linotte Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Linotte';
+    src: url('Linotte Heavy.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Linotte';
+    src: url('Linotte Semi Bold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}

@@ -1,0 +1,132 @@
+:root {
+    --text-primary: #f4f4f4;
+    --nav-bg: #121212;
+    --color-1: #ffffff;
+    --color-2: #ced0fc;
+
+    --background-primary: #0d0d0d;
+    --nav-link-primary: #bdbdbd;
+    --nav-link-hover: #ffffff;
+    --nav-link-hover-bg: #101010;
+
+    --font-modern: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--background-primary);
+    font-family: 'Linotte', 'Roboto', sans-serif;
+    color: var(--text-primary);
+    padding: 0;
+    margin: 0;
+}
+
+.xl-text {
+    font-size: 50px;
+    font-size: 400;
+}
+
+.big-text {
+    font-size: 30px;
+    font-weight: 300;
+}
+
+.medium-text {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.heavy {
+    font-weight: 700;
+}
+
+.gradient-text-colorful {
+    background: -webkit-linear-gradient(270deg, #ffa1e9 0%, #6837c2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-light {
+    background: -webkit-linear-gradient(230deg, #ffd4f7 0%, #dcdaff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.pad-40 {
+    padding: 40px;
+}
+
+.nav {
+    width: calc(100% - 40px);
+    height: 60px;
+    padding: 0 20px;
+    background: var(--nav-bg);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    z-index: 999;
+}
+
+.nav li {
+    list-style: none;
+    margin: 0 20px;
+    cursor: default;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav li a:not(.nav-logo-wrapper) {
+    text-decoration: none;
+    color: var(--nav-link-primary);
+    font-size: 16px;
+    font-weight: 300;
+    padding: 0 15px;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.1s, background 0.1s;
+}
+
+.nav li a:not(.nav-logo-wrapper):hover {
+    color: var(--nav-link-hover);
+    background: var(--nav-link-hover-bg);
+}
+
+.nav li a:not(.nav-logo-wrapper):active {
+    color: var(--nav-link-hover);
+    background: var(--nav-link-hover-bg);
+}
+
+.nav-logo-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-logo {
+    height: 50%;
+    width: auto;
+    margin-right: 10px;
+}
+
+.content:not(.no-span) {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
