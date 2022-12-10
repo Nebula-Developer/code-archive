@@ -10,6 +10,9 @@
     --nav-link-hover-bg: #101010;
 
     --font-modern: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    --scrollbar-background: #1a1a22;
+    --scrollbar-thumb: #2f2c3c;
 }
 
 html {
@@ -52,6 +55,13 @@ body {
 
 .gradient-text-light {
     background: -webkit-linear-gradient(230deg, #ffd4f7 0%, #dcdaff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-light-alt {
+    background: -webkit-linear-gradient(273deg, #e3ffd4 0%, #b7b3ff 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -129,4 +139,137 @@ body {
     width: 100vw;
     margin: 0;
     padding: 0;
+}
+
+
+/* Scrollbar width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Scrollbar background */
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-background);
+}
+
+/* Scrollbar button */
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 5px;
+}
+
+/* Remove corner */
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* Margins */
+.mt-10 { margin-top: 10px; }
+.mt-20 { margin-top: 20px; }
+.mt-40 { margin-top: 40px; }
+.mt-60 { margin-top: 60px; }
+.mt-80 { margin-top: 80px; }
+.mt-100 { margin-top: 100px; }
+
+.mb-10 { margin-bottom: 10px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-40 { margin-bottom: 40px; }
+.mb-60 { margin-bottom: 60px; }
+.mb-80 { margin-bottom: 80px; }
+.mb-100 { margin-bottom: 100px; }
+
+.mr-10 { margin-right: 10px; }
+.mr-20 { margin-right: 20px; }
+.mr-40 { margin-right: 40px; }
+.mr-60 { margin-right: 60px; }
+.mr-80 { margin-right: 80px; }
+.mr-100 { margin-right: 100px; }
+
+.ml-10 { margin-left: 10px; }
+.ml-20 { margin-left: 20px; }
+.ml-40 { margin-left: 40px; }
+.ml-60 { margin-left: 60px; }
+.ml-80 { margin-left: 80px; }
+.ml-100 { margin-left: 100px; }
+
+.m-10 { margin: 10px; }
+.m-20 { margin: 20px; }
+.m-40 { margin: 40px; }
+.m-60 { margin: 60px; }
+.m-80 { margin: 80px; }
+.m-100 { margin: 100px; }
+
+.mlr-10 { margin: 0 10px; }
+.mlr-20 { margin: 0 20px; }
+.mlr-40 { margin: 0 40px; }
+.mlr-60 { margin: 0 60px; }
+.mlr-80 { margin: 0 80px; }
+.mlr-100 { margin: 0 100px; }
+
+.mtb-10 { margin: 10px 0; }
+.mtb-20 { margin: 20px 0; }
+.mtb-40 { margin: 40px 0; }
+.mtb-60 { margin: 60px 0; }
+.mtb-80 { margin: 80px 0; }
+.mtb-100 { margin: 100px 0; }
+
+.footer-content {
+    display: flex;
+    width: calc(100% - 40px);
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    min-height: 200px;
+    position: relative;
+}
+
+.footer-logo {
+    height: 30px;
+    width: auto;
+    margin-bottom: 20px;
+}
+
+.footer-content li {
+    list-style: none;
+    margin: 0 20px;
+    cursor: default;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.footer-content li a {
+    text-decoration: none;
+    color: var(--nav-link-primary);
+    font-size: 16px;
+    font-weight: 300;
+    padding: 1px 5px;
+    margin: 0;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    transition: color 0.1s, background 0.1s;
+}
+
+.footer-content li a:hover {
+    color: var(--nav-link-hover);
+    background: var(--nav-link-hover-bg);
+}
+
+.footer-background {
+    /* If width is bigger, fit to width. if height is bigger, fit to height. */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    opacity: 0.7;
+    user-select: none;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
