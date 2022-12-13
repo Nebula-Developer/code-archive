@@ -4,7 +4,7 @@ const http = require('http');
 const path = require('path');
 const fs = require('fs');
 
-const ramMB = 50;
+const ramMB = 16384; // 16 GB
 
 require('dotenv').config();
 
@@ -41,6 +41,11 @@ app.get('/ok', (req, res) => {
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
+    if (req.path.startsWith('/status') || req.path.startsWith('/ok')) {
+        next();
+        return;
+    }
+
     res.status(404);
     if (req.accepts('html')) {
         res.sendFile(path.join(__dirname, 'public/error/404/index.html'));

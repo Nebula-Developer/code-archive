@@ -7,13 +7,10 @@ body {
 }
 
 .welcome-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: calc(100vh - 10px);
+    min-height: 500px;
     width: calc(100vw - 100px);
     flex-direction: column;
-    margin: 0;
     z-index: 10;
     text-align: center;
     position: relative;
@@ -29,6 +26,29 @@ body {
     justify-content: center;
     background: var(--background-primary);
     height: 30px;
+    border-top: 1px solid rgb(26, 26, 26);
+}
+
+/* Add border expand from center */
+.welcome-scroll-wrapper::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: rgb(55, 21, 83);
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    transform: scaleX(0);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.2s ease;
+    transform-origin: center;
+}
+
+.welcome-scroll-wrapper:hover::after {
+    transform: scaleX(1);
+    opacity: 1;
 }
 
 .welcome-scroll-button {
@@ -45,12 +65,14 @@ body {
     padding: 5px;
     cursor: pointer;
     z-index: 20;
-    animation: float 3s ease-in-out infinite;
-    transition: box-shadow 0.2s ease;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    border: 2px solid rgb(26, 26, 26);
 }
 
 .welcome-scroll-button:hover {
     box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
+    border: 2px solid rgb(55, 21, 83);
+    color: rgb(217, 170, 255);
 }
 
 .welcome-background-image {
@@ -99,7 +121,7 @@ body {
     left: 0;
     display : inline-block;
     transform: scaleX(0);
-    transition: transform 0.6s ease, opacity 0.3s ease, bottom 0.4s ease;
+    transition: transform 0.4s ease, opacity 0.2s ease, bottom 0.4s ease;
     opacity: 0;
     transform-origin: center;
 }
@@ -128,11 +150,6 @@ body {
     font-size: 15px;
     margin-left: 7px;
     margin-top: 1px;
-    transition: margin 0.6s ease;
-}
-
-.home-link-alt:hover .home-link-icon {
-    margin-left: 14px;
 }
 
 .home-link-alt:hover {
@@ -255,18 +272,6 @@ body {
     align-items: center;
     flex-direction: column;
     margin-top: 50px;
-}
-
-@keyframes float {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-    100% {
-        transform: translateY(0);
-    }
 }
 
 .about-wrapper {
