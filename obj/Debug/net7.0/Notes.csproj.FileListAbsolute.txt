@@ -1,0 +1,15 @@
+/Users/nebuladev/Documents/Notes/obj/Debug/net7.0/Notes.csproj.AssemblyReference.cache
+/Users/nebuladev/Documents/Notes/obj/Debug/net7.0/Notes.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nebuladev/Documents/Notes/obj/Debug/net7.0/Notes.AssemblyInfoInputs.cache
+/Users/nebuladev/Documents/Notes/obj/Debug/net7.0/Notes.AssemblyInfo.cs
+/Users/nebuladev/Documents/Notes/obj/Debug/net7.0/Notes.csproj.CoreCompileInputs.cache
+/Users/nebuladev/Documents/Notes/bin/Debug/net7.0/Notes
+/Users/nebuladev/Documents/Notes/bin/Debug/net7.0/Notes.deps.json
+/Users/nebuladev/Documents/Notes/bin/Debug/net7.0/Notes.runtimeconfig.json
+/Users/nebuladev/Documents/Notes/bin/Debug/net7.0/Notes.dll
+/Users/nebuladev/Documents/Notes/bin/Debug/net7.0/Notes.pdb
+/Users/nebuladev/Documents/Notes/obj/Debug/net7.0/Notes.dll
+/Users/nebuladev/Documents/Notes/obj/Debug/net7.0/refint/Notes.dll
+/Users/nebuladev/Documents/Notes/obj/Debug/net7.0/Notes.pdb
+/Users/nebuladev/Documents/Notes/obj/Debug/net7.0/Notes.genruntimeconfig.cache
+/Users/nebuladev/Documents/Notes/obj/Debug/net7.0/ref/Notes.dll
