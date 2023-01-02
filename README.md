@@ -23,3 +23,7 @@ Globe contains variables, which are surrounded by double curly braces. These var
 - `{{author}}` - The author of the project (Global)
 - `{{year}}` - The current year
 - `{{license}}` - The license of the project
+
+### Note
+
+Globe is written in C++ with the idea of being open to everyone. If you would like to design your own CLI, you can use the `globe` library to do so. You can find the library in the `src` directory. (main.cpp is the CLI currently used)
