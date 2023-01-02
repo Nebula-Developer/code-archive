@@ -47,45 +47,53 @@ RGB bgSel = RGB(100, 100, 120);
 
 
 std::string choiceList(std::string prompt, std::vector<std::string> text, int startX, int startY, bool clear) {
-    if (clear) clearBG(bg);
     int x,y;
     getWindowSize(&x, &y);
 
     int width = getLargestString(text);
-    if (startX + width > x) width = x - startX;
-    if (startY + text.size() > y) startY = y - text.size();
-
     if (startX < 0) startX = 0;
     if (startY < 0) startY = 0;
 
-    std::string promptWidthSpan = "";
-    for (int i = 0; i < width - prompt.length(); i++) promptWidthSpan += " ";
-    writeAtPos(underline + prompt + promptWidthSpan + reset, startX, startY, fg1, bg1);
-
+    int selected = 0;
     startY++;
 
-    for (int i = 0; i < text.size(); i++) {
-        RGB fg = (i % 2 == 0) ? fg1 : fg2;
-        RGB bg = (i % 2 == 0) ? bg1 : bg2;
-        if (i == 0) bg = bgSel;
-        std::string widthSpan = "";
-        for (int j = 0; j < width - text[i].length(); j++) widthSpan += " ";
+    int oldY = 0;
 
-        writeAtPos(text[i] + widthSpan, startX, startY + i, fg, bg);
-    }
-    moveCursor(x, y);
+    if (clear) clearBG(bg);
 
-    int selected = 0;
-
+    // TODO: Cleanup
     while (true) {
+        getWindowSize(&x, &y);
+
+        if (clear && oldY < y) clearBG(bg);
+        
+        oldY = y;
+        std::string promptWidthSpan = "";
+        for (int i = 0; i < width - prompt.length(); i++) promptWidthSpan += " ";
+        writeAtPos(underline + prompt + promptWidthSpan + reset, startX, startY - 1, fg1, bg1);
+
+        int startIndex = 0;
+
+        if (text.size() > y - startY) {
+            startIndex = selected;
+            if (startIndex > text.size() - (y + 1 - startY)) startIndex = text.size() - (y + 1 - startY);
+        }
+
+        for (int i = startIndex; i < text.size() && i < y + 1 - startY + startIndex; i++) {
+            std::string textWidthSpan = "";
+            for (int j = 0; j < width - text[i].length(); j++) textWidthSpan += " ";
+            if (i == selected) writeAtPos(text[i] + textWidthSpan, startX, startY + i - startIndex, fg2, bgSel);
+            else writeAtPos(text[i] + textWidthSpan, startX, startY + i - startIndex, fg2, bg2);
+        }
+            
+        moveCursor(x, y);
+        
         int c = getchar();
         if (c == 27) {
             c = getchar();
             if (c == 91) {
                 c = getchar();
-                int oldPos = startY + selected;
-                int oldIndex = selected;
-
+                
                 if (c == 65) {
                     if (selected == 0) selected = text.size() - 1;
                     else selected--;
@@ -94,16 +102,6 @@ std::string choiceList(std::string prompt, std::vector<std::string> text, int st
                     if (selected == text.size() - 1) selected = 0;
                     else selected++;
                 }
-
-                int newPos = startY + selected;
-                RGB fg = (selected % 2 == 0) ? fg1 : fg2;
-                RGB bg = (selected % 2 == 0) ? bg1 : bg2;
-                std::string widthSpan = "";
-                for (int j = 0; j < width - text[selected].length(); j++) widthSpan += " ";
-                writeAtPos(text[selected] + widthSpan, startX, newPos, fg, bgSel);
-                std::string widthSpan2 = "";
-                for (int j = 0; j < width - text[oldIndex].length(); j++) widthSpan2 += " ";
-                writeAtPos(text[oldIndex] + widthSpan2, startX, oldPos, fg, bg);
             }
         }
         if (c == 10) break;
