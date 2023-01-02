@@ -5,6 +5,7 @@ NebulaDev 2023
 
 #include <iostream>
 #include <filesystem>
+#include <vector>
 #include "defs.h"
 #include "template.h"
 #include "manage.h"
@@ -31,13 +32,16 @@ int main(int argc, char *argv[]) {
 
     Template t;
     t.name = "test";
-    // addTemplate(t);
 
     scrollbackMode();
     ttyRaw();
-    writeAtPos("Hello world!", 0, 0, RGB(100, 100, 100), RGB(0, 0, 0));
-    getchar();
+
+    std::vector<std::string> choices = {"Choice 1 Over Twenty characters Testing Test", "Choice 2", "Choice 3", "Choice 4", "Choice 5"};
+    hideCursor();
+    std::string choice = choiceList("Which template?", choices, 0, 1);
+    showCursor();
     normalMode();
     ttyNormal();
+    std::cout << "You chose: " << choice << std::endl;
     return 0;
 }

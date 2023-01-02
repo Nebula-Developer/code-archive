@@ -7,6 +7,7 @@ ui.h - Header for ui.cpp
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 class RGB {
     public:
@@ -40,5 +41,12 @@ void scrollbackMode();
 void normalMode();
 void ttyNormal();
 void ttyRaw();
+std::string choiceList(std::string prompt, std::vector<std::string> text, int startX, int startY, bool clear = true);
+void getWindowSize(int* x, int* y);
+void moveCursor(int x, int y);
+void clearBG(RGB bg = RGB());
+int getLargestString(std::vector<std::string> text);
+void hideCursor();
+void showCursor();
 
 #endif
