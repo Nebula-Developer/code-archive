@@ -9,6 +9,7 @@ NebulaDev 2023
 #include "template.h"
 #include "manage.h"
 #include "returns.h"
+#include "ui.h"
 
 static const char* subdirs[] = {
     "templates"
@@ -28,8 +29,15 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    std::cout << "Globe CLI handler" << std::endl;
-    std::cout << "GLOBE_PATH: " << GLOBE_PATH << std::endl;
-    Template t; // temporary check
+    Template t;
+    t.name = "test";
+    // addTemplate(t);
+
+    scrollbackMode();
+    ttyRaw();
+    writeAtPos("Hello world!", 0, 0, RGB(100, 100, 100), RGB(0, 0, 0));
+    getchar();
+    normalMode();
+    ttyNormal();
     return 0;
 }

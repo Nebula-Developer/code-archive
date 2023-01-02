@@ -15,12 +15,9 @@ class Return {
         }
 
         // success, then va list
-        Return(bool success, ...) {
+        Return(bool success, std::string message) {
             this->success = success;
-            va_list args;
-            va_start(args, success);
-            this->message = va_arg(args, char*);
-            va_end(args);
+            this->message = message;
         }
 
         bool success;

@@ -16,7 +16,7 @@ public:
     std::string name;
     bool exists() {
         // Check if directory exist
-        fs::path dir(GLOBE_PATH);
+        fs::path dir(makePath(GLOBE_PATH));
         dir /= name;
         return fs::exists(dir) && fs::is_directory(dir);
     }

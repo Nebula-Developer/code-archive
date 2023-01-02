@@ -9,5 +9,6 @@ manage.h - manage.cpp header
 #include "returns.h"
 
 Return addTemplate(Template t);
+std::string joinPaths(std::string path, ...);
 
 #endif

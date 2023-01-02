@@ -2,7 +2,13 @@
 
 Globe is a lightweight templating engine that will improve your development process when starting new projects. It allows you to easily create templates for your projects using simple project-based syntax, allowing flexibility and a quick start to your projects.
 
+<br />
+
 ## Usage
+
+#### READ: **Please make sure you have the latest version of [Boost](https://www.boost.org/) installed. You can install it using your package manager, or download it from the [Boost website](https://www.boost.org/users/download/).**
+
+<br />
 
 Globe uses a simple CLI to generate your projects. To use Globe, you must first build it using the provided Makefile, otherwise download the latest release from the [releases page](https://github.com/nebula-developer/globe/releases).
 
