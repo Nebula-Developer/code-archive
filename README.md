@@ -12,14 +12,14 @@ To install Zenex, simply run the following command:
 
 To use Zenex, include the necessary packages:
 
-```
+```js
 const zenex = require('zenex');
 const http = require('http');
 ```
 
 Then, create a new server:
 
-```
+```js
 var zen = zenex();
 zen.addStatic('public'); // Add a static folder
 const server = zen.createServer();
@@ -33,7 +33,7 @@ That's it! You now have a web server running on port 3000.
 
 If you would like to add middleware, you can do so by using the `use` method:
 
-```
+```js
 zen.use((req, res, next) => {
   console.log('Middleware called!');
   next();
