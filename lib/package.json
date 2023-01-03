@@ -1,7 +1,7 @@
 {
   "name": "zenex",
   "version": "1.0.0",
-  "description": "",
+  "description": "Fast web application library for improving production",
   "main": "zenex.js",
   "directories": {
     "test": "tests"

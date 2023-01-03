@@ -1,12 +1,13 @@
 {
-  "name": "zenex",
+  "name": "zenex_test",
   "version": "1.0.0",
   "description": "",
-  "main": "zenex.js",
+  "main": "index.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "type": "git"
   },
   "dependencies": {
-    "ws": "^8.11.0"
+    "ws": "^8.11.0",
+    "zenex": "^1.0.0"
   }
 }

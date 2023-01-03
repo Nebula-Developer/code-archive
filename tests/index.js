@@ -1,6 +1,6 @@
-const zenex = require('zenex');
 const http = require('http');
 const ws = require('ws');
+const zenex = require('zenex');
 
 var zen = zenex();
 zen.addStatic('public');
