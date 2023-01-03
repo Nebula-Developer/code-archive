@@ -1,4 +1,4 @@
-const zenex = require('./src/zenex');
+const zenex = require('zenex');
 const http = require('http');
 const ws = require('ws');
 
@@ -8,7 +8,6 @@ const server = zen.createServer();
 // To Implement socket.io:
 // const io = socketIO(server);
 
-console.log(zen.variables)
 zen.variables.world = "world!";
 zen.variables.example = 0;
 
