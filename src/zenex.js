@@ -66,14 +66,27 @@ module.exports = function() {
                 break;
             }
         }
+
+        if (!found) {
+            // check if + .html exists, if so, use that.
+            for (var i = 0; i < app.static.length; i++) {
+                var p = app.static[i] + path + '.html';
+                if (fs.existsSync(p)) {
+                    found = p;
+                    break;
+                }
+            }
+        }
+
         if (!found) {
             res.writeHead(404);
             res.end('404 Not Found');
             return;
         }
 
-        var ext = path.split('.').pop();
+        var ext = paths.extname(found).substring(1);
         var mime = mimetypes[ext] || 'text/plain';
+        
         res.writeHead(200, {
             'Content-Type': mime
         });
