@@ -48,8 +48,7 @@ module.exports = function() {
             `);
             return;
         }
-
-        if (path === '/favicon.ico' && !fs.existsSync('public/favicon.ico')) {
+        else if (path === '/favicon.ico' && !fs.existsSync('public/favicon.ico')) {
             var img = fs.readFileSync(paths.join(__dirname, 'Favicon.ico'));
             res.writeHead(200, {
                 'Content-Type': 'image/x-icon'
@@ -61,6 +60,7 @@ module.exports = function() {
         var found = null;
         for (var i = 0; i < app.static.length; i++) {
             var p = app.static[i] + path;
+            if (path.endsWith('.raw')) p = p.substring(0, p.length - 4);
             if (fs.existsSync(p)) {
                 found = p;
                 break;
@@ -100,6 +100,43 @@ module.exports = function() {
                     var head = "<script src='/zenex/web/script' zenex></script>";
                     head += "<link rel='stylesheet' href='/zenex/web/stylesheet' zenex>";
                     str = str.replace('</head>', head + '</head>');
+                    chunk = Buffer.from(str);
+                }
+                else if (mime == 'text/css') {
+                    if (path.endsWith('.raw')) {
+                        callback(null, chunk);
+                        return;
+                    }
+
+                    // Replace:
+                    // var <name> = <value>;
+                    // With:
+                    // --<name>: <value>;
+                    // And if it's not in curly braces, add it to :root
+                    var foundNoStatic = found.substring(found.indexOf('/') + 1);
+                    var str = "/* This file has been modified automatically by Zenex */\n/* Go to '" + foundNoStatic + ".raw' For unmodified file */\n\n" + chunk.toString();
+                    var regex = /var\s+([a-zA-Z0-9_]+)\s*=\s*([^;]+);/g;
+                    var match;
+                    while (match = regex.exec(str)) {
+                        var name = match[1];
+                        var value = match[2];
+                        var replacement = '--' + name + ': ' + value + ';';
+
+                        var isInCurlyBraces = false;
+                        var open = 0;
+                        for (var i = 0; i < match.index; i++) {
+                            if (str[i] === '{') open++;
+                            else if (str[i] === '}') open--;
+                        }
+                        
+                        if (open === 0) {
+                            replacement = ':root { ' + replacement + ' }';
+                        }
+
+                        str = str.replace(match[0], replacement);
+                        // Replace calls to $<name> with var(--<name>)
+                        str = str.replace(new RegExp('\\$' + name, 'g'), 'var(--' + name + ')');
+                    }
                     chunk = Buffer.from(str);
                 }
                 callback(null, chunk);

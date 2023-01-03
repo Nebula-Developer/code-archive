@@ -1,5 +1,7 @@
+var testColor = green;
+
 body {
-    background: black;
+    background: $testColor;
     color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
