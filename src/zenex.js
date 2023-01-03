@@ -7,7 +7,7 @@ const websocket = require('ws');
 module.exports = function() {
     var app = (req, res) => {
         for (var i = 0; i < app.middleware.length; i++) {
-            app.middleware[i](req, res, () => {});
+            app.middleware[i](req, res);
         }
 
         if (!req || !res) return;

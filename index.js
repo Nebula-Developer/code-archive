@@ -12,9 +12,8 @@ console.log(zen.variables)
 zen.variables.world = "world!";
 zen.variables.example = 0;
 
-zen.use((req, res, next) => {
+zen.use((req, res) => {
     zen.variables.example++;
-    next();
 });
 
 server.listen(3000, () => {
