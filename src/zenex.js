@@ -6,6 +6,10 @@ const websocket = require('ws');
 
 module.exports = function() {
     var app = (req, res) => {
+        for (var i = 0; i < app.middleware.length; i++) {
+            app.middleware[i](req, res, () => {});
+        }
+
         if (!req || !res) return;
         var path = req.url;
         if (path === '/') path = '/index.html';
@@ -108,11 +112,6 @@ module.exports = function() {
                         return;
                     }
 
-                    // Replace:
-                    // var <name> = <value>;
-                    // With:
-                    // --<name>: <value>;
-                    // And if it's not in curly braces, add it to :root
                     var foundNoStatic = found.substring(found.indexOf('/') + 1);
                     var str = "/* This file has been modified automatically by Zenex */\n/* Go to '" + foundNoStatic + ".raw' For unmodified file */\n\n" + chunk.toString();
                     var regex = /var\s+([a-zA-Z0-9_]+)\s*=\s*([^;]+);/g;
@@ -134,8 +133,42 @@ module.exports = function() {
                         }
 
                         str = str.replace(match[0], replacement);
-                        // Replace calls to $<name> with var(--<name>)
-                        str = str.replace(new RegExp('\\$' + name, 'g'), 'var(--' + name + ')');
+                        str = str.replace(new RegExp('\\$' + name + '(?![a-zA-Z0-9_])', 'g'), 'var(--' + name + ')');
+                    }
+
+                    str = str.replace(/\/\/(.*)\n/g, (match, p1) => {
+                        return '/*' + p1 + '*/\n';
+                    });
+                    chunk = Buffer.from(str);
+                }
+
+                if (mime === 'text/html' || mime === 'text/javascript') {
+                    // Replace variables
+                    var str = chunk.toString();
+                    // Replace variables in string like:
+                    // (quote) ... $<name> ... (quote)
+                    // With:
+                    // (quote) ... var(--<name>) ... (quote
+                    str = str.replace(/("|')([^"']*)\$([a-zA-Z0-9_]+)?;([^"']*)("|')/g, (match, p1, p2, p3, p4, p5) => {
+                        return p1 + p2 + 'var(--' + p3 + ');' + p4 + p5;
+                    });
+
+                    chunk = Buffer.from(str);
+                }
+
+                if (mime === 'text/html' || mime === 'text/css' || mime === 'text/javascript') {
+                    // Replace:
+                    // {{<varname>}}
+                    // with the value of the variable from here
+                    var str = chunk.toString();
+                    var regex = /\{\{([a-zA-Z0-9_]+)\}\}/g;
+                    var match;
+                    while (match = regex.exec(str)) {
+                        var name = match[1];
+                        var value = app.variables[name];
+                        if (value) {
+                            str = str.replace(match[0], value);
+                        }
                     }
                     chunk = Buffer.from(str);
                 }
@@ -153,6 +186,11 @@ module.exports = function() {
         stream.on('end', () => {
             res.end();
         });
+    };
+
+    app.middleware = [];
+    app.use = (middleware) => {
+        app.middleware.push(middleware);
     };
 
     app.static = [];
@@ -176,6 +214,7 @@ module.exports = function() {
         return server;
     };
 
+    app.variables = {};
 
     return app;
 }
