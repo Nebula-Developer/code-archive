@@ -49,6 +49,15 @@ module.exports = function() {
             return;
         }
 
+        if (path === '/favicon.ico' && !fs.existsSync('public/favicon.ico')) {
+            var img = fs.readFileSync(paths.join(__dirname, 'Favicon.ico'));
+            res.writeHead(200, {
+                'Content-Type': 'image/x-icon'
+            });
+            res.end(img, 'binary');
+            return;
+        }
+
         var found = null;
         for (var i = 0; i < app.static.length; i++) {
             var p = app.static[i] + path;
