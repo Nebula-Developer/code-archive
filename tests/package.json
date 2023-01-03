@@ -1,23 +1,15 @@
 {
-  "name": "zenex_test",
+  "name": "tests",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
-    "dev": "nodemon index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "repository": {
-    "url": "https://github.com/nebula-developer/zenex",
-    "type": "git"
-  },
   "dependencies": {
-    "ws": "^8.11.0",
-    "zenex": "^1.0.0"
+    "zenex": "^1.0.2"
   }
 }

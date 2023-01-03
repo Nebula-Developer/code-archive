@@ -1,0 +1,25 @@
+{
+  "name": "zenex",
+  "version": "1.0.3",
+  "description": "Fast web application library for improving production",
+  "main": "index.js",
+  "directories": {},
+  "scripts": {
+    "dev": "nodemon test/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "url": "https://github.com/nebula-developer/zenex",
+    "type": "git"
+  },
+  "dependencies": {
+    "ws": "^8.11.0",
+    "zenex": "^1.0.2"
+  },
+  "files": [
+    "index.js",
+    "lib/"
+  ]
+}

@@ -1,13 +1,18 @@
 const http = require('http');
 const ws = require('ws');
-const zenex = require('zenex');
+const zenex = require('..');
 
 var zen = zenex();
 zen.addStatic('public');
 const server = zen.createServer();
+// To Implement socket.io:
+// const io = socketIO(server);
+
+zen.variables.world = "world!";
+zen.variables.example = 0;
 
 zen.use((req, res) => {
-    res.end('Hello World!');
+    zen.variables.example++;
 });
 
 server.listen(3000, () => {
