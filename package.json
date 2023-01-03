@@ -1,13 +1,22 @@
 {
   "name": "zenex",
-  "version": "1.0.3",
-  "description": "Fast web application library for improving production",
+  "version": "1.0.5",
+  "description": "Blazing fast web application library for improving production",
   "main": "index.js",
   "directories": {},
   "scripts": {
     "dev": "nodemon test/index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "webserver",
+    "web",
+    "static",
+    "middleware",
+    "http",
+    "server",
+    "zenex",
+    "zen"
+  ],
   "author": "",
   "license": "ISC",
   "repository": {
