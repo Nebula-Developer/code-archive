@@ -1,0 +1,18 @@
+{
+  // "$schema": "http://json.schemastore.org/chrome-manifest",
+  "manifest_version": 3,
+  "name": "LearnPlus",
+  "version": "0.0.1",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "lib/socket.io.min.js",
+        "misc.js",
+        "main.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": ["tabs", "storage", "webNavigation", "webRequest"]
+}
