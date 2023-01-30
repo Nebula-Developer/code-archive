@@ -8,10 +8,11 @@
       "matches": ["<all_urls>"],
       "js": [
         "lib/socket.io.min.js",
+        "lib/jquery.min.js",
         "misc.js",
         "main.js"
       ],
-      "run_at": "document_start"
+      "run_at": "document_end"
     }
   ],
   "permissions": ["tabs", "storage", "webNavigation", "webRequest"]

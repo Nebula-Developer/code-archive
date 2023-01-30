@@ -1,0 +1,343 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css);
+
+#learnplus-panels-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 99999;
+}
+
+#learnplus-panel-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    z-index: 99999;
+    flex-direction: row;
+    align-items: flex-end;
+    overflow-x: auto;
+    width: 100%;
+    padding-left: 10px;
+}
+
+#learnplus-panel-wrapper::-webkit-scrollbar {
+    height: 10px;
+}
+
+#learnplus-panel-wrapper::-webkit-scrollbar-track {
+    background: #171a27;
+}
+
+#learnplus-panel-wrapper::-webkit-scrollbar-thumb {
+    background: rgb(66, 67, 99);
+    border-radius: 5px;
+}
+
+.learnplus-messages-panel {
+    height: 350px;
+    min-width: 300px;
+    width: 300px;
+    margin-right: 10px;
+    background: rgb(27, 27, 34);
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.learnplus-panel {
+    height: 330px;
+    min-width: 280px;
+    width: 280px;
+    margin-right: 10px;
+    background: rgb(27, 27, 34);
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+
+.learnplus-messages-panel-top {
+    border-bottom: 1px solid grey;
+    margin: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.learnplus-messages-panel-title {
+    color: white;
+    font-size: 20px;
+    user-select: none;
+}
+
+.learnplus-messages-panel-close {
+    cursor: pointer;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    user-select: none;
+    transition: background 0.2s;
+}
+
+.learnplus-messages-panel-close:hover {
+    background: #74747436;
+}
+
+.learnplus-messages-panel-messages {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.learnplus-message {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin: 10px;
+}
+
+.learnplus-message-avatar {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.learnplus-message-content {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 40px);
+    justify-content: start;
+}
+
+.learnplus-message-content-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.learnplus-message-content-message {
+    height: fit-content;
+    margin-block-end: 0;
+    margin-block-start: 0;
+    font-size: 14px;
+    color: white;
+    white-space: pre-wrap;
+    line-height: 1.2;
+}
+
+.learnplus-message-content-time {
+    font-size: 12px;
+    color: #747474;
+}
+
+.learnplus-message-content-sender {
+    font-size: 14px;
+    color: #9c9c9c;
+}
+
+#learnplus-alerts-wrapper {
+    z-index: 999999;
+
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.learnplus-alert {
+    padding: 20px 30px;
+    min-width: 300px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    background: rgb(38, 38, 48);
+    border-radius: 10px;
+    margin-top: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease;
+}
+
+.learnplus-alert-title {
+    font-size: 18px;
+    color: white;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+.learnplus-alert-title::after {
+    width: 100%;
+    height: 2px;
+    border-radius: 10px;
+    background: linear-gradient(30deg, #463079, #a53f9c);
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    content: '';
+}
+
+.learnplus-alert-content {
+    font-size: 14px;
+    color: white;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.learnplus-alert-text-mb {
+    margin-bottom: 10px;
+    color: white;
+}
+
+.learnplus-button {
+    padding: 8px 15px;
+    margin: 3px 0;
+    border-radius: 5px;
+    background: #463079;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.learnplus-button:hover {
+    background: #a53f9c;
+}
+
+.learnplus-button-alt {
+    padding: 8px 15px;
+    margin: 3px 0;
+    border-radius: 5px;
+    background: #1e1e29;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.learnplus-button-alt:hover {
+    background: #2b2b3a;
+}
+
+.learnplus-input {
+    padding: 8px 15px !important;
+    margin: 3px 0 !important;
+    border-radius: 5px !important;
+    background: #2b2b3a !important;
+    border: none !important;
+    color: white !important;
+    font-size: 14px !important;
+    transition: background 0.2s;
+}
+
+.learnplus-text-big {
+    font-size: 18px;
+    margin: 5px;
+    color: white;
+}
+
+.learnplus-m10 { margin: 10px; }
+.learnplus-m20 { margin: 20px; }
+.learnplus-mt20 { margin-top: 20px; }
+.learnplus-mb-20 { margin-bottom: 20px; }
+
+.learnplus-text-button {
+    font-size: 16px;
+    color: rgb(219, 158, 255);
+    cursor: pointer;
+    transition: color 0.2s;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.learnplus-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+#learnplus-login-panel,
+#learnplus-register-panel
+{
+    transition: opacity 0.3s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 0 0 10px 0;
+}
+
+#learnplus-panels-overlay *:not(i),
+#learnplus-panels-wrapper *:not(i),
+#learnplus-login-panel *:not(i),
+#learnplus-register-panel *:not(i)
+{
+    font-family: Arial, Helvetica, sans-serif, 'Roboto', sans-serif !important;
+    letter-spacing: normal !important;
+    font-weight: normal !important;
+}
+
+.learnplus-close-login-register {
+    color: white;
+    top: 5px;
+    left: 280px;
+    border-radius: 10px;
+    font-size: 20px;
+    position: fixed;
+    cursor: pointer;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.learnplus-close-login-register:hover {
+    background: #74747436;
+}
+
+.learnplus-space-between {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-btn {
+    cursor: pointer;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    user-select: none;
+    transition: background 0.2s;
+}
+
+.close-btn:hover {
+    background: #74747436;
+}
+
+.learnplus-no-pointer {
+    pointer-events: none !important;
+}
