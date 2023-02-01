@@ -9,7 +9,9 @@
       "js": [
         "lib/socket.io.min.js",
         "lib/jquery.min.js",
+        "socket.js",
         "misc.js",
+        "visuals.js",
         "main.js"
       ],
       "run_at": "document_end"
