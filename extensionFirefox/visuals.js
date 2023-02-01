@@ -149,7 +149,7 @@ function handleLoginForm() {
                 loadChannelBrowser();
 
                 var token = res.data.token;
-                browser.storage.sync.set({token: token}, function() {
+                chrome.storage.sync.set({token: token}, function() {
                     logMsg("Token saved to storage.");
                 });
             } else {
@@ -190,7 +190,7 @@ function handleLoginForm() {
                 loadChannelBrowser();
 
                 var token = res.data.token;
-                browser.storage.sync.set({token: token}, function() {
+                chrome.storage.sync.set({token: token}, function() {
                     logMsg("Token saved to storage.");
                 });
             } else {
@@ -199,14 +199,14 @@ function handleLoginForm() {
         });
     });
 
-    browser.storage.sync.get(['token'], function(result) {
+    chrome.storage.sync.get(['token'], function(result) {
         var token = result.token;
         if (token) {
             socket.emit('loginToken', {
                 token: token
             }, (res) => {
                 if (!res.success) {
-                    browser.storage.sync.remove('token', function() {
+                    chrome.storage.sync.remove('token', function() {
                         logMsg("Token removed from storage due to authentication failure.");
                         $("#learnplus-logout-btn").hide();
                     });
@@ -222,7 +222,7 @@ function handleLoginForm() {
     });
 
     $("#learnplus-logout-btn").on('click', function() {
-        browser.storage.sync.remove('token', function() {
+        chrome.storage.sync.remove('token', function() {
             logMsg("Token removed from storage.");
             location.reload();
         });

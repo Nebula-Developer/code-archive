@@ -134,6 +134,7 @@
     position: absolute;
     background: var(--dark-1);
     min-width: 50px;
+    text-align: center;
     bottom: calc(var(--toolbar-height));
     border-radius: 5px;
     line-height: 1.5;
@@ -153,6 +154,8 @@
     overflow: auto;
     max-width: 100%;
     display: flex;
+    flex-direction: row;
+    align-items: flex-end;
 }
 
 .lp-msg-panel {
