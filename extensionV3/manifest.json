@@ -11,6 +11,8 @@
         "lib/jquery.min.js",
         "socket.js",
         "misc.js",
+        "channels.js",
+        "visualsLarge.js",
         "visuals.js",
         "main.js"
       ],
