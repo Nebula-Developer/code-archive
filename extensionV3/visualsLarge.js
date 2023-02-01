@@ -102,7 +102,6 @@ function loadChannelBrowser() {
             channelItem.onclick = () => {
                 joinChannel(channel.id, (res) => {
                     if (res.success) {
-                        showAlert("Joined channel!");
                         handleChannelJoin(channel, res.data);
                     } else {
                         showAlert(res.error);
@@ -124,7 +123,6 @@ function handleChannelJoin(channel, messages) {
     panelHeaderClose.click(() => {
         leaveChannel(channel.id, (res) => {
             if (res.success) {
-                showAlert("Left channel!");
                 handleChannelLeave(channel);
             } else {
                 showAlert(res.error);

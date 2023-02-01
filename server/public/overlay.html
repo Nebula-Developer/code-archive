@@ -1,18 +1,18 @@
 <div id="learnplus-toolbar" class="lp-z-index-1 lp-full-width lp-flex-horizontal lp-flex-space-between">
     <div class="lp-flex-horizontal">
-        <div class="learnplus-toolbar-icon lp-toolbar-ignore-default">
+        <div class="learnplus-toolbar-icon" data-opens="learnplus-channel-browser">
             <i class="fa fa-message"></i>
-            <div class="learnplus-toolbar-icon-popup">Show messages</div>
+            <div class="learnplus-toolbar-icon-popup">Show browser</div>
+        </div>
+
+        <div class="learnplus-toolbar-icon" data-opens="lp-create-channel-form">
+            <i class="fa fa-plus"></i>
+            <div class="learnplus-toolbar-icon-popup">Create channel</div>
         </div>
 
         <div class="learnplus-toolbar-icon lp-toolbar-ignore-default">
-            <i class="fa fa-list"></i>
-            <div class="learnplus-toolbar-icon-popup">Channel list</div>
-        </div>
-
-        <div class="learnplus-toolbar-icon lp-toolbar-ignore-default">
-            <i class="fa fa-maximize"></i>
-            <div class="learnplus-toolbar-icon-popup">Fullscreen</div>
+            <i class="fa fa-question"></i>
+            <div class="learnplus-toolbar-icon-popup">Help</div>
         </div>
     </div>
 
@@ -27,10 +27,10 @@
             <div class="learnplus-toolbar-icon-popup">Logout</div>
         </div>
 
-        <div class="learnplus-toolbar-icon" data-opens="learnplus-settings-panel">
+        <!-- <div class="learnplus-toolbar-icon" data-opens="learnplus-settings-panel">
             <i class="fa-solid fa-gear"></i>
             <div class="learnplus-toolbar-icon-popup">Settings</div>
-        </div>
+        </div> -->
 
         <div class="learnplus-toolbar-icon lp-toolbar-ignore-default" id="lock-toolbar-btn">
             <i class="fa-solid fa-unlock"></i>
@@ -76,8 +76,14 @@
 </div>
 
 <div id="learnplus-msgpanel-wrapper" class="lp-z-index-2 lp-raise-for-toolbar lp-fixed-bl">
-    <div class="lp-msg-panel" id="channel-list">
-        
+    <div class="channel-list-wrapper lp-msg-panel lp-flex-vertical" id="learnplus-channel-browser">
+        <div class="lp-text-title-border">Channel List:</div>
+        <div id="channel-list" class="lp-flex-vertical">
+            <div class="large-text lp-mt-50">
+                Please sign in to view channels.
+                <i class="fa fa-user"></i>
+            </div>
+        </div>
     </div>
 
     <form class="lp-msg-panel" onsubmit="return false" id="lp-create-channel-form">

@@ -4,9 +4,9 @@ function createChannel(name, join = false) {
         name: name
     }, (res) => {
         if (res.success) {
-            showAlert("Channel created!");
-            console.log(res);
             joinChannel(res.data.id);
+            loadChannelBrowser();
+            showAlert('Channel created successfully.');
         } else {
             showAlert(res.error);
         }

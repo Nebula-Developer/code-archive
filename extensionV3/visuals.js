@@ -146,6 +146,7 @@ function handleLoginForm() {
             if (res.success) {
                 showAlert("Logged in successfully.");
                 swapToLogoutFromForm();
+                loadChannelBrowser();
 
                 var token = res.data.token;
                 chrome.storage.sync.set({token: token}, function() {
@@ -186,6 +187,7 @@ function handleLoginForm() {
             if (res.success) {
                 showAlert("Account created!");
                 swapToLogoutFromForm();
+                loadChannelBrowser();
 
                 var token = res.data.token;
                 chrome.storage.sync.set({token: token}, function() {
