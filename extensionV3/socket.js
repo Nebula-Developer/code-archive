@@ -1,4 +1,6 @@
-var globalServer = "https://webpitch.net";
+// var globalServer = "https://webpitch.net";
+// Temp:
+var globalServer = "http://localhost:8008";
 
 /**
  * @type {SocketIOClient.Socket}
