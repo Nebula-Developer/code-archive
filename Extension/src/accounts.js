@@ -6,9 +6,7 @@ function loginHandler(res, callback, useSession = false, useStorage = true) {
     
     var account = res.data;
     if (account.token && useStorage) {
-        var useStorage = useSession ? sessionStorage : localStorage;
-        console.log("Set token: " + account.token);
-        useStorage.setItem('token', account.token);
+        chrome.storage.local.set({ token: account.token });
     }
     
     callback(res);

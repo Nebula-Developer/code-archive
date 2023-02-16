@@ -49,25 +49,6 @@ async function loadContent() {
         });
     });
 
-    for (var i = 0; i < 10; i++) {
-        showAlert("test", "hello, world!", [
-            {
-                text: "OK!",
-                callback: (elm) => {
-                    hideAlert(elm);
-                }
-            },
-            {
-                text: "Nope",
-                callback: (elm) => {
-                    alert('test')
-                }
-            }
-        ]);
-
-        await new Promise(r => setTimeout(r, 5));
-    }
-
     // when the mouse enters, set --lf-login-panel-background-gap to 3, and on exit set it back to 1
     $(".lf-login-panel-wrapper").on('mouseenter', () => {
         document.documentElement.style.setProperty('--lf-login-panel-background-gap', '0.5px');
@@ -80,6 +61,37 @@ async function loadContent() {
         document.documentElement.style.setProperty('--lf-login-panel-background-rotate', '10deg');
         document.documentElement.style.setProperty('--lf-login-panel-background-scale', '1.5');
         document.documentElement.style.setProperty('--lf-login-panel-background-blur', '5px');
+    });
+
+    // get 'token' from storage
+    chrome.storage.local.get('token').then((res) => {
+        if (res.token) {
+            // if token exists, check if it is valid
+            loginToken(res.token);
+        } else {
+            showAlert("You are not logged in", "Would you like to login to LearnFlow?", [
+                {
+                    text: "OK",
+                    callback: (elm) => {
+                        showLogin();
+                        hideAlert(elm);
+                    }
+                },
+                {
+                    text: "NO",
+                    callback: (elm) => {
+                        hideAlert(elm);
+                    }
+                }
+            ]);
+        }
+    });
+
+    $("#lf-login-wrapper").on('mousedown', (e) => {
+        if (e.target.id == 'lf-login-wrapper') {
+            $("#lf-login-wrapper").addClass('lf-opacity-hidden');
+        }
+        console.log(e.target.id);
     });
 }
 
@@ -165,8 +177,12 @@ function hideAlert(elm) {
             $(e).css('top', '-150px');
             $(e).animate({
                 top: '0px'
-            }, 200);
+            }, 400);
         });
         elm.remove();
-    }, 200);
+    }, 400);
+}
+
+function showLogin() {
+    $("#lf-login-wrapper").removeClass('lf-opacity-hidden');
 }

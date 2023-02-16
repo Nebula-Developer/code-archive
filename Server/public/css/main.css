@@ -24,13 +24,11 @@
     width: 100vw;
     height: 100vh;
     z-index: 99999;
-    pointer-events: none;
     animation: boxShadowsLight 5s ease-in-out infinite;
     transition: opacity 0.5s ease;
 }
 
 .lf-login-panel-wrapper {
-    pointer-events: auto;
     position: relative;
     overflow: hidden;
     border-radius: var(--lf-login-panel-border-radius);
@@ -337,9 +335,5 @@
 
 .lf-notification-disappear {
     transform: translateX(calc(100% + 50px));
-    transition: transform 0.2s ease;
-}
-
-#lf-login-wrapper.lf-opacity-hidden .lf-login-panel-wrapper {
-    pointer-events: none !important;
+    transition: transform 0.4s ease;
 }
