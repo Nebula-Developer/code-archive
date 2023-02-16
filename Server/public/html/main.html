@@ -8,7 +8,7 @@
             <div class="lf-login-background-gradient"></div>
         </div>
 
-        <div class="lf-login-panel">
+        <div class="lf-login-panel" id="lf-login-panel">
             <div class="lf-login-panel-header">
                 <div class="lf-login-panel-header-title">Login to LearnFlow</div>
             </div>
@@ -25,6 +25,38 @@
                         <div class="lf-login-panel-button-wrapper flex-center">
                             <button id="lf-login-panel-button" class="lf-login-button">Login</button>
                         </div>
+
+                        <button id="lf-show-register" class="lf-swap-panel-button">Don't have an account? Sign up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="lf-login-panel lf-hidden" id="lf-register-panel">
+            <div class="lf-login-panel-header">
+                <div class="lf-login-panel-header-title">Sign up for LearnFlow</div>
+            </div>
+            <div class="lf-login-panel-body">
+                <div class="lf-login-panel-body-content">
+                    <div class="lf-login-panel-body-content-form">
+                        <div class="lf-login-panel-error lf-opacity-hidden" id="lf-register-panel-error"></div>
+                        <div class="lf-login-panel-body-content-form-input">
+                            <input type="text" id="lf-register-panel-username" class="lf-login-input" placeholder="Username">
+                        </div>
+                        <div class="lf-login-panel-body-content-form-input">
+                            <input type="text" id="lf-register-panel-email" class="lf-login-input" placeholder="Email">
+                        </div>
+                        <div class="lf-login-panel-body-content-form-input">
+                            <input type="password" id="lf-register-panel-password" class="lf-login-input" placeholder="Password">
+                        </div>
+                        <div class="lf-login-panel-body-content-form-input">
+                            <input type="text" id="lf-register-panel-password-confirm" class="lf-login-input" placeholder="Confirm Password">
+                        </div>
+                        <div class="lf-login-panel-button-wrapper flex-center">
+                            <button id="lf-register-panel-button" class="lf-login-button">Register</button>
+                        </div>
+
+                        <button id="lf-show-login" class="lf-swap-panel-button">Already have an account? Login</button>
                     </div>
                 </div>
             </div>
@@ -33,3 +65,9 @@
 </div>
 
 <div id="lf-notification-wrapper"></div>
+
+<div id="lf-disable-glow-popup">
+    <div class="lf-disable-glow-switch">
+        <div class="lf-disable-glow-switch-ball"></div>
+    </div>
+</div>

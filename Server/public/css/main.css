@@ -38,6 +38,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    max-height: calc(100vh - 450px); /* Dont know why this works */
+    overflow: hidden;
 }
 
 .lf-login-background {
@@ -246,6 +248,7 @@
     bottom: 10px;
     display: flex;
     flex-direction: column;
+    align-items: end;
     animation: boxShadowsSmall 10s ease-in-out infinite;
 }
 
@@ -336,4 +339,98 @@
 .lf-notification-disappear {
     transform: translateX(calc(100% + 50px));
     transition: transform 0.4s ease;
+}
+
+.lf-no-glow {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+}
+
+#lf-disable-glow-popup {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 999999;
+}
+
+.lf-disable-glow-switch {
+    width: 80px;
+    height: 30px;
+    background: white;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    animation: boxShadowsSmall 10s ease-in-out infinite;
+}
+
+.lf-disable-glow-switch-ball {
+    position: absolute;
+    height: 100%;
+    width: 30px;
+    left: 0;
+    top: 0;
+    background: rgb(180, 134, 255);
+    transition: 0.25s ease;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.lf-disable-glow-switch:hover .lf-disable-glow-switch-ball {
+    left: 10px;
+}
+
+.lf-disable-glow-switch.lf-switch-active:hover .lf-disable-glow-switch-ball {
+    left: calc(100% - 40px);
+}
+
+.lf-disable-glow-switch:active .lf-disable-glow-switch-ball {
+    left: 20px;
+    transition: 0.1s ease;
+}
+
+.lf-disable-glow-switch.lf-switch-active:active .lf-disable-glow-switch-ball {
+    left: calc(100% - 50px);
+    transition: 0.1s ease;
+}
+
+.lf-disable-glow-switch.lf-switch-active .lf-disable-glow-switch-ball {
+    left: calc(100% - 30px);
+}
+
+.lf-hidden {
+    display: none !important;
+}
+
+.lf-swap-panel-button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    background: none;
+    width: 100%;
+    margin-top: 30px;
+    text-shadow: 0 0 10px #8b56cf, 0 0 38px #bbcf56, 0 0 10px #8b56cf;
+    transition: text-shadow 0.5s ease;
+}
+
+.lf-swap-panel-button:hover {
+    text-shadow: -10px 0 10px #56cf58, -10px 5px 38px #bbcf56, 0 -5px 10px #cf9056;
+}
+
+.lf-swap-panel-button:active {
+    text-shadow: -10px 0 10px #8b56cf, -10px 5px 38px #bbcf56, 0 -5px 10px #8b56cf;
+    transition: text-shadow 0s;
+}
+
+.lf-login-panel-body-content-form-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#lf-register-panel-error {
+    margin-bottom: 10px;
 }

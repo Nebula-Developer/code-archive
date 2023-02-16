@@ -8,6 +8,8 @@ function getFile(file) {
 }
 
 async function loadContent() {
+    $("#learnflow-css").remove();
+    $("#learnflow-wrapper").remove();
     var mainCSS = await getFile('css/main.css');
     var mainHTML = await getFile('html/main.html');
 
@@ -16,7 +18,7 @@ async function loadContent() {
         return;
     }
 
-    $('head').append('<style type="text/css">' + mainCSS.data + '</style>');
+    $('head').append('<style type="text/css" id="learnflow-css">' + mainCSS.data + '</style>');
     $('body').append('<div id="learnflow-wrapper">' + mainHTML.data + '</div>');
 
     setTimeout(() => {
@@ -49,6 +51,31 @@ async function loadContent() {
         });
     });
 
+    $("#lf-register-panel-button").on('click', () => {
+        var username = $("#lf-register-panel-username").val();
+        var email = $("#lf-register-panel-email").val();
+        var password = $("#lf-register-panel-password").val();
+        var password_confirm = $("#lf-register-panel-password-confirm").val();
+
+        if (username == '' || password == '') {
+            $("#lf-register-panel-error").removeClass('lf-opacity-hidden');
+            $("#lf-register-panel-error").text("Please enter a username and password");
+            return;
+        }
+
+        $("#lf-register-panel-error").addClass('lf-opacity-hidden');
+
+        login(username, password, (res) => {
+            if (!res.success) {
+                $("#lf-register-panel-error").removeClass('lf-opacity-hidden');
+                console.log(res);
+                $("#lf-register-panel-error").text(res.error);
+            } else {
+                $("#lf-login-wrapper").addClass('lf-opacity-hidden');
+            }
+        });
+    })
+
     // when the mouse enters, set --lf-login-panel-background-gap to 3, and on exit set it back to 1
     $(".lf-login-panel-wrapper").on('mouseenter', () => {
         document.documentElement.style.setProperty('--lf-login-panel-background-gap', '0.5px');
@@ -63,36 +90,57 @@ async function loadContent() {
         document.documentElement.style.setProperty('--lf-login-panel-background-blur', '5px');
     });
 
-    // get 'token' from storage
-    chrome.storage.local.get('token').then((res) => {
-        if (res.token) {
-            // if token exists, check if it is valid
-            loginToken(res.token);
-        } else {
-            showAlert("You are not logged in", "Would you like to login to LearnFlow?", [
-                {
-                    text: "OK",
-                    callback: (elm) => {
-                        showLogin();
-                        hideAlert(elm);
-                    }
-                },
-                {
-                    text: "NO",
-                    callback: (elm) => {
-                        hideAlert(elm);
-                    }
-                }
-            ]);
-        }
-    });
-
     $("#lf-login-wrapper").on('mousedown', (e) => {
         if (e.target.id == 'lf-login-wrapper') {
             $("#lf-login-wrapper").addClass('lf-opacity-hidden');
         }
         console.log(e.target.id);
     });
+
+    showAlert('Sign out', 'Are you sure you would like to sign out?', [
+        {
+            text: 'YES',
+            callback: (elm) => {
+                chrome.storage.local.remove('token', () => {
+                    tryGetToken();
+                });
+                hideAlert(elm);
+            }
+        },
+        {
+            text: 'NO',
+            callback: (elm) => {
+                hideAlert(elm);
+            }
+        }
+    ]);
+
+    tryGetToken();
+
+    $(".lf-disable-glow-switch").on('click', () => {
+        if ($(".lf-disable-glow-switch").hasClass('lf-switch-active')) {
+            $(".lf-disable-glow-switch").removeClass('lf-switch-active');
+            chrome.storage.local.set({disableGlow: true});
+            disableGlow();
+        } else {
+            $(".lf-disable-glow-switch").addClass('lf-switch-active');
+            chrome.storage.local.set({disableGlow: false});
+            enableGlow();
+        }
+    });
+
+    chrome.storage.local.get(['disableGlow'], (res) => {
+        if (res.disableGlow == true) {
+            $(".lf-disable-glow-switch").removeClass('lf-switch-active');
+            disableGlow();
+        } else {
+            $(".lf-disable-glow-switch").addClass('lf-switch-active');
+            enableGlow();
+        }
+    });
+
+    $("#lf-show-register").on('click', () => { showRegisterForm(); });
+    $("#lf-show-login").on('click', () => { showLoginForm(); });
 }
 
 function scaleGridBG() {
@@ -160,7 +208,7 @@ function showAlert(title, message, buttons = [
         bodyContentButtonWrapper.append(button);
     });
 
-    $('#lf-notification-wrapper').append(elm);
+    $('#lf-notification-wrapper').prepend(elm);
     setTimeout(() => {
         elm.removeClass('lf-notification-appear');
     }, 50);
@@ -185,4 +233,69 @@ function hideAlert(elm) {
 
 function showLogin() {
     $("#lf-login-wrapper").removeClass('lf-opacity-hidden');
+    showLoginForm();
 }
+
+function tryGetToken() {
+    chrome.storage.local.get('token').then((res) => {
+        if (res.token) {
+            // if token exists, check if it is valid
+            loginToken(res.token);
+        } else {
+            showAlert("You are not logged in", "Would you like to login to LearnFlow?", [
+                {
+                    text: "OK",
+                    callback: (elm) => {
+                        showLogin();
+                        hideAlert(elm);
+                    }
+                },
+                {
+                    text: "NO",
+                    callback: (elm) => {
+                        hideAlert(elm);
+                    }
+                }
+            ]);
+        }
+    });
+}
+
+function loadGlowElms() {
+    return [
+        $("#lf-login-wrapper"),
+        $("#lf-login-background-gradient"),
+        $(".lf-login-panel"),
+        $("#lf-notification-wrapper"),
+        $(".lf-disable-glow-switch")
+    ]
+}
+
+function disableGlow() {
+    loadGlowElms().forEach((elm) => {
+        elm.addClass('lf-no-glow');
+    });
+}
+
+function enableGlow() {
+    loadGlowElms().forEach((elm) => {
+        elm.removeClass('lf-no-glow');
+    });
+}
+
+function showLoginForm() {
+    $("#lf-register-panel").addClass('lf-hidden');
+    $("#lf-login-panel").removeClass('lf-hidden');
+}
+
+function showRegisterForm() {
+    $("#lf-register-panel").removeClass('lf-hidden');
+    $("#lf-login-panel").addClass('lf-hidden');
+}
+
+document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key == 'o' && e.shiftKey) {
+        loadContent();
+    }
+    console.log(e);
+})
