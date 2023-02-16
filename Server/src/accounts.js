@@ -195,7 +195,7 @@ async function socketHandler(io) {
             insertUser(data).then((res) => {
                 callback(returns.success(res));
             }).catch((err) => {
-                callback(returns.error(err));
+                callback(returns.error(err.error));
             });
         });
 
@@ -208,10 +208,10 @@ async function socketHandler(io) {
                 shoveToken(user.id).then((token) => {
                     callback(returns.success({ username: user.username, email: user.email, token: token }));
                 }).catch((err) => {
-                    callback(returns.error(err));
+                    callback(returns.error(err.error));
                 });
             }).catch((err) => {
-                callback(returns.error(err));
+                callback(returns.error(err.error));
             });
         });
 
@@ -223,10 +223,10 @@ async function socketHandler(io) {
                 shoveToken(user.id).then((token) => {
                     callback(returns.success({ username: user.username, email: user.email, token: token }));
                 }).catch((err) => {
-                    callback(returns.error(err));
+                    callback(returns.error(err.error));
                 });
             }).catch((err) => {
-                callback(returns.error(err));
+                callback(returns.error(err.error));
             });
         });
     });
