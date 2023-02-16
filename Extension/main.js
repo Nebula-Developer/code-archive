@@ -1,4 +1,2 @@
 
-socket.on('connect', () => {
-    loadContent();
-});
+loadContent();

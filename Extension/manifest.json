@@ -2,7 +2,7 @@
     "$schema": "http://json.schemastore.org/chrome-manifest",
     "name": "LearnFlow",
     "description": "Large library of improvements for expanding online learning",
-    "manifest_version": 2,
+    "manifest_version": 3,
     "version": "0.0.1",
     "content_scripts": [
         {
@@ -10,6 +10,7 @@
             "js": [
                 "lib/socket.io.js",
                 "lib/jquery.js",
+                "lib/jquery.resize.js",
                 ////////////////////
                 "src/socket.js",
                 "src/accounts.js",

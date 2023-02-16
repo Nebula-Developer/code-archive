@@ -1,0 +1,205 @@
+
+.flex-center { display: flex; justify-content: center; align-items: center; }
+
+#lf-login-wrapper * {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+:root {
+    --lf-login-panel-border-radius: 15px;
+    --lf-login-panel-background-gap: 1px;
+}
+
+#lf-login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    pointer-events: none;
+}
+
+.lf-login-panel-wrapper {
+    pointer-events: auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--lf-login-panel-border-radius);
+    padding: 200px;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.486);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lf-login-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+
+.lf-login-background-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    --bg-1: #772986;
+    --bg-2: #dfd6a6;
+    background: linear-gradient(to right, var(--bg-1), var(--bg-2), var(--bg-1), var(--bg-2), var(--bg-1));
+    transform: scale(2) translateX(25%);
+    background-repeat: repeat-x;
+    animation: backgroundMove 3s linear infinite;
+}
+
+.lf-login-background-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - var(--lf-login-panel-background-gap));
+    height: calc(100% - var(--lf-login-panel-background-gap));
+    margin: calc(var(--lf-login-panel-background-gap) / 2);
+    z-index: 1;
+    transition: height 0.3s ease, width 0.3s ease, margin 0.3s ease;
+}
+
+.lf-fill-background-grid-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.lf-fill-background-grid-item::before {
+    content: "";
+    position: absolute;
+    top: var(--lf-login-panel-background-gap);
+    left: var(--lf-login-panel-background-gap);
+    bottom: var(--lf-login-panel-background-gap);
+    right: var(--lf-login-panel-background-gap);
+    background: rgb(28, 28, 34);
+    transition: top 0.3s ease, left 0.3s ease, bottom 0.3s ease, right 0.3s ease;
+}
+
+.lf-grid-tl-br::before { border-radius: var(--lf-login-panel-border-radius) 0 0 0; }
+.lf-grid-tr-bl::before { border-radius: 0 var(--lf-login-panel-border-radius) 0 0; }
+.lf-grid-bl-tr::before { border-radius: 0 0 0 var(--lf-login-panel-border-radius); }
+.lf-grid-br-tl::before { border-radius: 0 0 var(--lf-login-panel-border-radius) 0; }
+
+@keyframes backgroundMove {
+    0% {
+        transform: scaleX(2) translateX(25%);
+    }
+    100% {
+        transform: scaleX(2) translateX(-25%);
+    }
+}
+
+@keyframes loginContentBG {
+    0% {
+        filter: drop-shadow(0 0 20px rgba(128, 0, 128, 0.493)) drop-shadow(0 0 100px rgba(188, 209, 71, 0.712)) drop-shadow(0 0 5px rgba(2, 0, 128, 0.705)) drop-shadow(10px 0 5px rgba(208, 137, 255, 0.445));
+    }
+    50% {
+        filter: drop-shadow(-40px -30px 60px rgb(2, 0, 128)) drop-shadow(50px 0 40px rgb(188, 209, 71) ) drop-shadow(0 -20px 20px purple) drop-shadow(-10px 0 10px rgb(208, 137, 255));
+    }
+    100% {
+        filter: drop-shadow(0 0 20px rgba(128, 0, 128, 0.493)) drop-shadow(0 0 100px rgba(188, 209, 71, 0.712)) drop-shadow(0 0 5px rgba(2, 0, 128, 0.705)) drop-shadow(10px 0 5px rgba(208, 137, 255, 0.445));
+    }
+}
+
+.lf-login-panel {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    animation: loginContentBG 10s ease-in-out infinite;
+}
+
+.lf-login-panel-header {
+    margin-bottom: 10px;
+}
+
+.lf-login-panel-header-title {
+    font-size: 30px;
+    font-weight: 300;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #dfd6a6;
+    background: linear-gradient(83deg, #ff97de, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 20px #1b10188a;
+    text-align: center;
+}
+
+.lf-login-input {
+    padding: 0 10px !important;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    color: #271450;
+    background: linear-gradient(35deg, #f1a6ff, #8b56cf);
+    box-shadow: none;
+    filter: none;
+    margin: 5px 0;
+    width: 250px !important;
+    height: 43px !important;
+    transition: filter 0.2s, background 0.3s ease;
+}
+
+.lf-login-input::placeholder {
+    color: #3b1f77;
+}
+
+.lf-login-input:focus {
+    filter: brightness(1.1);
+    background: linear-gradient(85deg, #f1a6ff, #8b56cf);
+}
+
+.lf-login-button {
+    outline: 1px solid #f55cff;
+    border: none;
+    padding: 9px 30px;
+    border-radius: 5px;
+    background: linear-gradient(40deg, #b181ff, #f238ff);
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: filter 0.2s;
+}
+
+.lf-login-button:hover {
+    filter: brightness(1.1);
+}
+
+.lf-login-button:active {
+    filter: brightness(0.9);
+    transition: filter 0.05s;
+}
+
+.lf-login-panel-button-wrapper {
+    margin-top: 10px;
+}
+
+.lf-login-panel-error {
+    height: 40px;
+    color: #ff7979;
+    max-width: 200px;
+    text-shadow: 0 0 15px #ff5858;
+    user-select: none;
+    transition: opacity 0.5s;
+}
+
+.lf-opacity-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
