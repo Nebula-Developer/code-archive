@@ -61,11 +61,17 @@ var editorLines = $("#editor-lines");
 var editorCarret = $("#editor-carret");
 
 var x = 0, y = 0;
+
+var selectXStart = -1, selectYStart = -1;
+var selectXEnd = -1, selectYEnd = -1;
+
 var lines = [
     "Hello World!",
     "This is a test",
     "How are you doing?"
 ];
+
+var elementLines = [ ];
 
 function updateEditorView() {
     editorLineNumbers.empty();
@@ -74,8 +80,16 @@ function updateEditorView() {
     var selectedElm = null;
     var selectedLine = null;
 
+    console.log("X start: " + selectXStart + ", X end: " + selectXEnd + ", Y start: " + selectYStart + ", Y end: " + selectYEnd + ", X: " + x + ", Y: " + y);
+
+    var endYReal = Math.max(selectYStart, selectYEnd);
+    var startYReal = Math.min(selectYStart, selectYEnd);
+    var endXReal = Math.max(selectXStart, selectXEnd);
+    var startXReal = Math.min(selectXStart, selectXEnd);
+
     for (var i = 0; i < lines.length; i++) {
         editorLineNumbers.append(`<div class="editor-line-number">${i + 1}</div>`);
+        var lineArr = [ ];
         var editorLine = $(`<div class="editor-line"></div>`);
         for (var j = 0; j < lines[i].length + 1; j++) {
             var newElm = $(`<div class="editor-char"></div>`)
@@ -84,7 +98,27 @@ function updateEditorView() {
             if (i == y && j == x) {
                 selectedElm = newElm;
             }
+
+            if (i >= startYReal && i <= endYReal) {
+                if (i == startYReal && i == endYReal) {
+                    if (j >= startXReal && j <= endXReal) {
+                        newElm.addClass("editor-char-selected");
+                    }
+                } else if (i == startYReal) {
+                    if (j >= startXReal) {
+                        newElm.addClass("editor-char-selected");
+                    }
+                } else if (i == endYReal) {
+                    if (j <= endXReal) {
+                        newElm.addClass("editor-char-selected");
+                    }
+                } else {
+                    newElm.addClass("editor-char-selected");
+                }
+            }
+
             editorLine.append(newElm);
+            lineArr.push(newElm);
         }
 
         if (i == y) {
@@ -94,7 +128,9 @@ function updateEditorView() {
                 editorLine.append(selectedElm);
             }
         }
+
         editorLines.append(editorLine);
+        elementLines.push(lineArr);
     }
 
     if (selectedElm != null) {
@@ -105,9 +141,13 @@ function updateEditorView() {
 
 updateEditorView();
 
-var aimForX = 0;
+var wordReg = new RegExp("[a-zA-Z0-9_]");
+var backLock = false;
 
 document.addEventListener("keydown", (e) => {
+    var isArrow = e.key == "ArrowUp" || e.key == "ArrowDown" || e.key == "ArrowLeft" || e.key == "ArrowRight";
+    var previousX = x, previousY = y;
+
     if (e.key == "ArrowUp") {
         if (y > 0) {
             y--;
@@ -119,11 +159,38 @@ document.addEventListener("keydown", (e) => {
     } else if (e.key == "ArrowLeft") {
         if (x > lines[y].length) x = lines[y].length;
         if (x > 0) {
+            var oldX = x;
             x--;
+            if (e.ctrlKey || e.altKey) {
+                if (lines[y][x] == " ") x--;
+
+                var didMove = false;
+                while (x > 0 && wordReg.test(lines[y][x])) {
+                    x--;
+                    didMove = true;
+                }
+                if (lines[y][x] == " " && didMove) x++;
+            }
+        } else {
+            if (y > 0) {
+                y--;
+                x = lines[y].length;
+            }
         }
     } else if (e.key == "ArrowRight") {
         if (x < lines[y].length) {
+            var oldX = x;
             x++;
+            if (e.ctrlKey || e.altKey) {
+                while (x < lines[y].length && wordReg.test(lines[y][x])) {
+                    x++;
+                }
+            }
+        } else {
+            if (y < lines.length - 1) {
+                y++;
+                x = 0;
+            }
         }
     } else if (e.key == "Enter") {
         lines.splice(y + 1, 0, "");
@@ -135,10 +202,28 @@ document.addEventListener("keydown", (e) => {
         x = 0;
     } else if (e.key == "Backspace") {
         if (x > lines[y].length) x = lines[y].length;
-
         if (x > 0) {
-            lines[y] = lines[y].slice(0, x - 1) + lines[y].slice(x);
-            x--;
+            if ((e.ctrlKey || e.altKey) && x > 0) {
+                if (lines[y][x - 1] == " ") {
+                    backspace();
+                }
+
+                var word = "";
+                for (var i = x - 1; i >= 0; i--) {
+                    if (!wordReg.test(lines[y][i])) break;
+                    word = lines[y][i] + word;
+                }
+
+                lines[y] = lines[y].slice(0, x - word.length) + lines[y].slice(x);
+                x -= word.length;
+
+                if (word.length == 0) {
+                    backspace();
+                }
+            } else {
+                lines[y] = lines[y].slice(0, x - 1) + lines[y].slice(x);
+                x--;
+            }
         } else if (y > 0) {
             x = lines[y - 1].length;
             lines[y - 1] += lines[y];
@@ -153,6 +238,33 @@ document.addEventListener("keydown", (e) => {
         x++;
     }
 
-    console.log(x);
+    if (e.shiftKey) {
+        if (selectXStart == -1 && selectYStart == -1) {
+            selectXStart = x;
+            selectYStart = y;
+        }
+    
+        selectXEnd = x - 1;
+        selectYEnd = y;
+    } else {
+        selectXStart = -1;
+        selectYStart = -1;
+        selectXEnd = -1;
+        selectYEnd = -1;
+    }
+    
+
     updateEditorView();
 });
+
+function backspace() {
+    if (x > 0) {
+        x--;
+        lines[y] = lines[y].slice(0, x) + lines[y].slice(x + 1);
+    } else if (y > 0) {
+        x = lines[y - 1].length;
+        lines[y - 1] += lines[y];
+        lines.splice(y, 1);
+        y--;
+    }
+}
