@@ -1,5 +1,6 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const { dialog } = require('electron');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -13,14 +14,36 @@ const createWindow = () => {
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+      contextIsolation: false
     },
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, 'src/index.html'));
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+  // Handle
+  /*
+  function folderSelect() {
+    return new Promise((resolve, reject) => {
+        ipcRenderer.send('folder-select', (event, arg) => {
+            resolve(arg);
+        });
+    });
+  }
+  */
+  ipcMain.on('folder-select', (event, arg) => {
+    dialog.showOpenDialog(mainWindow, {
+      properties: ['openDirectory']
+    }).then(result => {
+      event.reply('folder-select-reply', result.filePaths);
+    }).catch(err => {
+      console.log(err);
+    });
+  });
 };
 
 // This method will be called when Electron has finished
