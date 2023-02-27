@@ -73,6 +73,50 @@ var lines = [
 
 var elementLines = [ ];
 
+var endYReal = Math.max(selectYStart, selectYEnd);
+var startYReal = Math.min(selectYStart, selectYEnd);
+var endXReal = Math.max(selectXStart, selectXEnd);
+var startXReal = Math.min(selectXStart, selectXEnd);
+
+function refreshRealPositions() {
+    endYReal = Math.max(selectYStart, selectYEnd);
+    startYReal = Math.min(selectYStart, selectYEnd);
+    endXReal = Math.max(selectXStart, selectXEnd);
+    startXReal = Math.min(selectXStart, selectXEnd);
+}
+
+function isCharSelected(x, y) {
+    if (y < startYReal || y > endYReal) return false;
+    if (selectXStart == 0 && x == 0 && y == selectYStart) {
+        if (selectYStart < selectYEnd) return true;
+        else return false;
+    }
+
+    if (y == startYReal && y == endYReal) {
+        return x >= startXReal + 1 && x <= endXReal;
+    }
+    
+    if (y == endYReal) {
+        var isStartBeforeEnd = selectYStart < selectYEnd;
+        if (isStartBeforeEnd) return x <= selectXEnd;
+        else if (x <= selectXStart) return true;
+        else return false;
+    }
+    
+    if (y == startYReal) {
+        var isStartBeforeEnd = selectYStart < selectYEnd;
+        if (isStartBeforeEnd) {
+            return x >= selectXStart + 1;
+        } else if (x >= selectXEnd + 1) {
+            return true;
+        }
+    } else {
+        return true;
+    }
+
+    return false;
+}
+
 function updateEditorView() {
     editorLineNumbers.empty();
     editorLines.empty();
@@ -80,12 +124,7 @@ function updateEditorView() {
     var selectedElm = null;
     var selectedLine = null;
 
-    console.log("X start: " + selectXStart + ", X end: " + selectXEnd + ", Y start: " + selectYStart + ", Y end: " + selectYEnd + ", X: " + x + ", Y: " + y);
-
-    var endYReal = Math.max(selectYStart, selectYEnd);
-    var startYReal = Math.min(selectYStart, selectYEnd);
-    var endXReal = Math.max(selectXStart, selectXEnd);
-    var startXReal = Math.min(selectXStart, selectXEnd);
+    refreshRealPositions();
 
     for (var i = 0; i < lines.length; i++) {
         editorLineNumbers.append(`<div class="editor-line-number">${i + 1}</div>`);
@@ -99,22 +138,8 @@ function updateEditorView() {
                 selectedElm = newElm;
             }
 
-            if (i >= startYReal && i <= endYReal) {
-                if (i == startYReal && i == endYReal) {
-                    if (j >= startXReal && j <= endXReal) {
-                        newElm.addClass("editor-char-selected");
-                    }
-                } else if (i == startYReal) {
-                    if (j >= startXReal) {
-                        newElm.addClass("editor-char-selected");
-                    }
-                } else if (i == endYReal) {
-                    if (j <= endXReal) {
-                        newElm.addClass("editor-char-selected");
-                    }
-                } else {
-                    newElm.addClass("editor-char-selected");
-                }
+            if (isCharSelected(j, i)) {
+                newElm.addClass("editor-char-selected");
             }
 
             editorLine.append(newElm);
@@ -128,7 +153,7 @@ function updateEditorView() {
                 editorLine.append(selectedElm);
             }
         }
-
+        
         editorLines.append(editorLine);
         elementLines.push(lineArr);
     }
@@ -238,12 +263,11 @@ document.addEventListener("keydown", (e) => {
         x++;
     }
 
-    if (e.shiftKey) {
-        if (selectXStart == -1 && selectYStart == -1) {
-            selectXStart = x;
-            selectYStart = y;
+    if (e.shiftKey && isArrow) {
+        if (selectXStart == -1) {
+            selectXStart = previousX - 1 == -1 ? 0 : previousX - 1;
+            selectYStart = previousY;
         }
-    
         selectXEnd = x - 1;
         selectYEnd = y;
     } else {
