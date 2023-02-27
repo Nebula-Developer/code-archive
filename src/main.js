@@ -88,7 +88,7 @@ function refreshRealPositions() {
 function isCharSelected(x, y) {
     if (y < startYReal || y > endYReal) return false;
     if (selectXStart == 0 && x == 0 && y == selectYStart) {
-        if (selectYStart < selectYEnd) return true;
+        if (selectYStart <= selectYEnd) return true;
         else return false;
     }
 
