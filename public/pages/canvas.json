@@ -19,7 +19,9 @@
             {
                 "type": "element",
                 "name": [
-                    "#immersive_reader_mount_point button span"
+                    "#immersive_reader_mount_point button span",
+                    ".ic-app-header__menu-list-item",
+                    ".ic-app-header__menu-list-link"
                 ],
                 "css": ["background"]
             }
@@ -32,7 +34,19 @@
                     ".ic-Dashboard-header__layout",
                     ".header-bar",
                     "#breadcrumbs",
-                    ".ic-Layout-contentMain span"
+                    "#context_modules_sortable_container, #context_modules_sortable_container div",
+                    ".collectionViewItems div, #ag-list",
+                    ".ic-Input, .ui-tabs-anchor, #search_field",
+                    ".tab-panel, .StudentEnrollment, .date, #syllabusTableBody td",
+                    ".item-group-container div, .item-group-container p, .item-group-container",
+                    "#calendar-app *, #calendar-list-holder, #minical",
+                    ".header-bar button",
+                    "#create_new_event_link",
+                    ".panel, .panel input, .panel input div, .btn",
+                    "#conversation_filter_select",
+                    ".messages li",
+                    ".ac-input-box",
+                    "table"
                 ],
                 "css": ["background"]
             }
@@ -41,6 +55,7 @@
             {
                 "type": "element",
                 "name": [
+                    "#content span, #content input",
                     ".hidden-phone",
                     ".Sidebar__TodoListContainer *",
                     ".events_list *:not(.event-details__title)",
@@ -48,17 +63,26 @@
                     ".ic-DashboardCard__header_content *",
                     "body h2, body div",
                     "#immersive_reader_mount_point button span",
-                    "#DashboardOptionsMenu_Container span"
+                    "#DashboardOptionsMenu_Container span",
+                    "#context_modules_sortable_container span, .element_toggler, .ic-Input",
+                    "#calendar-app *",
+                    ".header-bar button",
+                    "#create_new_event_link",
+                    ".btn, #conversation_filter_select",
+                    ".messages li, .messages li .subject",
+                    ".ac-input-box"
                 ],
                 "css": ["color"],
                 "custom_css": {
                     "text-decoration": "none !important"
                 }
-            },
+            }
+        ],
+        "primary-text-2": [
             {
                 "type": "element",
                 "name": [
-                    ".ic-app-header__menu-list-item--active svg path"
+                    ".menu-item-icon-container svg path"
                 ],
                 "css": ["fill"]
             }
@@ -66,7 +90,10 @@
         "link-text": [
             {
                 "type": "element",
-                "name": "a",
+                "name": [
+                    "a",
+                    ".navigation-tray-container button span"
+                ],
                 "css": ["color"]
             }
         ],
@@ -76,9 +103,18 @@
                 "name": [
                     ".ic-DashboardCard",
                     ".ic-DashboardCard__header_content",
-                    ".ic-app-header__menu-list-item--active .ic-app-header__menu-list-link",
                     ".navigation-tray-container, .tray-with-space-for-global-nav",
-                    ".button-sidebar-wide"
+                    ".button-sidebar-wide",
+                    ".ic-DashboardCard__header-title *"
+                ],
+                "css": ["background"]
+            }
+        ],
+        "primary-background-4": [
+            {
+                "type": "element",
+                "name": [
+                    ".ic-app-header__menu-list-item--active"
                 ],
                 "css": ["background"]
             }
