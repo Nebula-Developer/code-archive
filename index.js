@@ -29,6 +29,18 @@ io.on('connection', (socket) => {
         const data = fs.readFileSync(relativePath, 'utf8');
         callback(returns.success(data));
     });
+
+    socket.on('list', (p, callback) => {
+        if (!callback || typeof callback !== 'function') return;
+        if (!p || typeof p !== 'string') return callback(returns.error("Invalid path."));
+        const relativePath = path.resolve(path.join(__dirname, 'public', p));
+        if (!relativePath.startsWith(path.resolve(__dirname, 'public'))) return callback(returns.error("Invalid path."));
+        if (!fs.existsSync(relativePath)) return callback(returns.error("File does not exist."));
+        if (fs.statSync(relativePath).isFile()) return callback(returns.error("Cannot list file."));
+
+        const files = fs.readdirSync(relativePath);
+        callback(returns.success(files));
+    });
 });
 
 app.use(express.static('public'));
