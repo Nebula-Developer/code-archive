@@ -5,7 +5,23 @@
         "primary-background-1": [
             {
                 "type": "variable",
-                "name": "ic-brand-global-nav-bgd"
+                "name": "--ic-brand-global-nav-bgd"
+            },
+            {
+                "type": "element",
+                "name": ".ic-app-header__logomark-container",
+                "css": ["background"],
+                "custom_css": {
+                    "transform": "translateX(5px)",
+                    "width": "calc(100% - 5px)"
+                }
+            },
+            {
+                "type": "element",
+                "name": [
+                    "#immersive_reader_mount_point button span"
+                ],
+                "css": ["background"]
             }
         ],
         "primary-background-2": [
@@ -13,8 +29,10 @@
                 "type": "element",
                 "name": [
                     "body",
-                    ".ic-app-header__logomark-container",
-                    ".ic-Dashboard-header__layout"
+                    ".ic-Dashboard-header__layout",
+                    ".header-bar",
+                    "#breadcrumbs",
+                    ".ic-Layout-contentMain span"
                 ],
                 "css": ["background"]
             }
@@ -25,18 +43,53 @@
                 "name": [
                     ".hidden-phone",
                     ".Sidebar__TodoListContainer *",
-                    ".recent_feedback_icon *:not(.event-details__title)"
+                    ".events_list *:not(.event-details__title)",
+                    ".ic-DashboardCard__action svg",
+                    ".ic-DashboardCard__header_content *",
+                    "body h2, body div",
+                    "#immersive_reader_mount_point button span",
+                    "#DashboardOptionsMenu_Container span"
                 ],
                 "css": ["color"],
                 "custom_css": {
                     "text-decoration": "none !important"
                 }
+            },
+            {
+                "type": "element",
+                "name": [
+                    ".ic-app-header__menu-list-item--active svg path"
+                ],
+                "css": ["fill"]
+            }
+        ],
+        "link-text": [
+            {
+                "type": "element",
+                "name": "a",
+                "css": ["color"]
+            }
+        ],
+        "primary-background-3": [
+            {
+                "type": "element",
+                "name": [
+                    ".ic-DashboardCard",
+                    ".ic-DashboardCard__header_content",
+                    ".ic-app-header__menu-list-item--active .ic-app-header__menu-list-link",
+                    ".navigation-tray-container, .tray-with-space-for-global-nav",
+                    ".button-sidebar-wide"
+                ],
+                "css": ["background"]
             }
         ]
     },
     "css": {
-        "#right-side-wrapper *": {
+        "body *:not(a), .ic-app-header__menu-list-link, #DashboardCard_Container *": {
             "text-decoration": "none !important"
+        },
+        ".event-details::after": {
+            "display": "none"
         }
     }
 }
