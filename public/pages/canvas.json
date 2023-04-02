@@ -1,0 +1,42 @@
+
+{
+    "name": "canvas",
+    "bindings": {
+        "primary-background-1": [
+            {
+                "type": "variable",
+                "name": "ic-brand-global-nav-bgd"
+            }
+        ],
+        "primary-background-2": [
+            {
+                "type": "element",
+                "name": [
+                    "body",
+                    ".ic-app-header__logomark-container",
+                    ".ic-Dashboard-header__layout"
+                ],
+                "css": ["background"]
+            }
+        ],
+        "primary-text-1": [
+            {
+                "type": "element",
+                "name": [
+                    ".hidden-phone",
+                    ".Sidebar__TodoListContainer *",
+                    ".recent_feedback_icon *:not(.event-details__title)"
+                ],
+                "css": ["color"],
+                "custom_css": {
+                    "text-decoration": "none !important"
+                }
+            }
+        ]
+    },
+    "css": {
+        "#right-side-wrapper *": {
+            "text-decoration": "none !important"
+        }
+    }
+}
