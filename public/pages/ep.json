@@ -1,0 +1,138 @@
+
+{
+    "name": "ep",
+    "bindings": {
+        "primary-background-1": [
+            {
+                "type": "element",
+                "name": [
+                    ".nav-bar-container",
+                    ".notifications, .notifications__header .popover-content .notifications__item, .notifications__item, .notifications__item-details *",
+                    ".notifications__item.h-group.ng-scope.notifications__item--not-acknowledged, .popover-content",
+                    "footer, #sa-navigation-controls",
+                    ".game-action-bar.sa-action-bar, #scoreboard-bar",
+                    "#mfeAppShellApplications, #content-container"
+                ],
+                "css": "background"
+            }
+        ],
+        "primary-background-2": [
+            {
+                "type": "element",
+                "name": [
+                    ".nav-button:hover",
+                    ".notifications__item--not-acknowledged:hover, .notifications__item--not-acknowledged:hover .notifications__item-details *",
+                    ".scoreboard-table-row, .rankings-chooser",
+                    ".tight.h-group.v-align-center .nav-button.selected, .dropdown-trigger:hover",
+                    ".fill.nav-bar.h-group.v-align-center *:hover[type='button'], .fill.nav-bar.h-group.v-align-center #nav-score:hover",
+                    ".fill.v-group.table-panel, .progress-card:hover",
+                    ".sa-side-bar-content, .section-item, .selected, #header",
+                    ".nothing-available, .subject-fixed, #questions-list-container, .questions-list, .questions-list .question-item, .question-item.ng-scope"
+                ],
+                "css": "background"
+            },
+            {
+                "type": "element",
+                "name": ".notifications__item, .notifications__header",
+                "css": "border-color"
+            }
+        ],
+        "primary-background-3": [
+            {
+                "type": "element",
+                "name": [
+                    ".ep-nav-bar.nav-bar-container.nav-bar.nav-button.selected",
+                    ".notifications-button.ng-scope:hover",
+                    ".background",
+                    "#game-page-main",
+                    ".add-more-text",
+                    ".top-bar.filter-bar",
+                    ".ivu-radio-wrapper, .ivu-radio-wrapper.ivu-radio-wrapper-checked, .table-panel .ivu-radio-group.ivu-radio-group-button",
+                    ".completion-description, .task-details, .text-container",
+                    "#footer *, .save-exit:hover",
+                    ".title-number, #slim-scroll-content, .go-study-history-text.card-action-label"
+                ],
+                "css": "background"
+            }
+        ],
+        "primary-background-4": [
+            {
+                "type": "element",
+                "name": [
+                    ".ep-secondary-button, .ep-secondary-button:hover, .ep-border-button, .ep-border-button:hover",
+                    ".subject-card, .subject-points, .task-counter",
+                    ".add-subjects-card, .ivu-card-body, .ivu-card-body:hover",
+                    ".tight.v-group.h-align-center.summary-panel",
+                    "#paper-mode",
+                    ".formula-component, .symbol-toolbar, .symbol-toolbar .ng-binding.ng-scope, .row-content.fill",
+                    "#formula-list .formula-item.h-group.v-align-top.ng-scope",
+                    ".activity-section, .go-study-history-card, .cheer-button:hover, .scroll-to"
+                ],
+                "css": "background"
+            },
+            {
+                "type": "element",
+                "name": [
+                    "hr",
+                    ".section-item *, #sa-side-bar-content"
+                ],
+                "css": "border-color"
+            }
+        ],
+        "primary-text-4": [
+            {
+                "type": "element",
+                "name": [
+                    ".ep-secondary-button, .ep-secondary-button:hover, .ep-border-button, .ep-border-button:hover",
+                    ".subject-card, .subject-points, .task-counter",
+                    ".add-subjects-card, .add-subjects-card:hover, .dashboard-title",
+                    ".task-name-row, .ivu-card-body span, .task-type, .ivu-chart-circle-inner, .overdue",
+                    ".scoreboard-table-row *, .summary-panel *, .ivu-radio-wrapper, .tight.rankings-chooser.h-group.h-align-center .ivu-radio-wrapper.ivu-radio-wrapper-checked.ivu-radio-group-item",
+                    ".top-bar.filter-bar *, .no-tasks-assessments *",
+                    ".tight.h-group.v-align-center .nav-button.selected",
+                    "#paper-mode span, .go-study-history-text.card-action-label"
+                ],
+                "css": "color"
+            }
+        ],
+        "primary-text-1": [
+            {
+                "type": "element",
+                "name": [
+                    ".nav-button, .nav-button:hover",
+                    ".settings-button *, #nav-score *, .notifications-button.ng-scope",
+                    ".notifications *",
+                    ".dashboard-welcome",
+                    ".ep-custom-icon",
+                    ".item",
+                    ".formula-component, .symbol-toolbar, .symbol-toolbar .ng-binding.ng-scope, .row-content.fill",
+                    "#formula-list .formula-item.h-group.v-align-top.ng-scope",
+                    "#scoreboard-bar *",
+                    ".sa-side-bar-content *, .section-item *, .facts.selected *, #header *, #footer *",
+                    ".activity-section *, .main-text.ng-binding, .tight.ng-binding, .back-arrow, .scroll-to, .section-heading"
+                ],
+                "css": "color"
+            }
+        ]
+    },
+    "css": {
+        ".nav-button.ng-scope.selected": {
+
+        },
+        ".notifications__item-image": {
+            "filter": "invert(100%)"
+        },
+        ".ivu-chart-circle": {
+            "filter": "brightness(1.5) contrast(2)"
+        },
+        ".ivu-icon.no-tasks-assessments-icon": {
+            "filter": "invert(100%)"
+        },
+        ".ep-border-button": {
+            "border": "none"
+        },
+        ".subject-card .icon.tight": {
+            "filter": "contrast(0.75)"
+        }
+    }
+}
