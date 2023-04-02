@@ -1,0 +1,16 @@
+{
+    "window.titleBarStyle": "custom",
+    "workbench.colorTheme": "One Dark Pro Mix",
+    "editor.inlineSuggest.enabled": true,
+    "terminal.integrated.defaultProfile.linux": "fish",
+    "git.enableSmartCommit": true,
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "window.zoomLevel": 1,
+    "workbench.editorAssociations": {
+        "*.db": "sqlite-viewer.option"
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "editor.fontFamily": "'Fira Code', 'Droid Sans Mono', 'monospace', monospace",
+    "editor.fontLigatures": true
+}
