@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/resources/js/jquery.js"></script>
+    <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less" />
+    <meta name="description" content="<%= description %>">
+    <script src="https://cdn.jsdelivr.net/npm/less"></script>
+    <title><%= title %> - Ōtākaro Histories | Te hitori o Aotearoa i roto i te akomanga</title>
+</head>
+<body>
+    <div id="navbar" class="flex flex-column align-center w-100 fixed tl">
+        <div id="navbar-top" class="flex flex-row justify-between">
+            <div class="navbar-top-left">
+                <a href="/" class="flex align-center" style="text-decoration: none; user-select: none;">
+                    <img src="/resources/images/logo.png" alt="Ōtākaro Histories" height="100" width="100">
+                    <div class="flex flex-column h-100">
+                        <div class="navbar-header">Ōtākaro Histories</div>
+                        <div class="navbar-sub-header">New Zealand history in the classroom</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="navbar-top-right">
+                <input type="text" placeholder="Search" class="navbar-search-input">
+            </div>
+        </div>
+
+        <div id="navbar-bottom">
+            <% for (var i = 0; i < files.length; i++) { %>
+                <div class="navbar-browse-section"><%= files[i] %></div>
+            <% } %>
+        </div>
+    </div>
+
+    <div style="height: 168px;"></div>
