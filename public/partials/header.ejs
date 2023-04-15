@@ -8,6 +8,7 @@
     <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less" />
     <meta name="description" content="<%= description %>">
     <script src="https://cdn.jsdelivr.net/npm/less"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title><%= title %> - Ōtākaro Histories | Te hitori o Aotearoa i roto i te akomanga</title>
 </head>
 <body>
@@ -30,7 +31,7 @@
 
         <div id="navbar-bottom">
             <% for (var i = 0; i < files.length; i++) { %>
-                <div class="navbar-browse-section"><%= files[i] %></div>
+                <a class="navbar-browse-section" href="/browse/<%= files[i] %>"><%= files[i] %></a>
             <% } %>
         </div>
     </div>

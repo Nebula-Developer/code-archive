@@ -1,0 +1,9 @@
+<%
+console.log(browse)
+%>
+
+<%- include(baseDir + '/partials/header.ejs', { title: 'Browsing: ' + browse.name, description: 'Browsing folder \'' + browse.title + '\' on Ōtākaro Histories' }) %>
+
+<%- include(baseDir + '/partials/browse-item.ejs', { item: browse }) %>
+
+<%- include(baseDir + '/partials/footer.ejs') %>

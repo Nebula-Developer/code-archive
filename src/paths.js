@@ -5,7 +5,7 @@ const public = path.join(root, 'public');
 const private = path.join(root, 'private');
 const resources = path.join(public, 'resources');
 const pages = path.join(public, 'pages');
-const files = path.join(public, 'files');
+const files = path.join(private, 'files');
 
 const getRoot = (p) => path.join(root, p);
 const getPublic = (p) => path.join(public, p);

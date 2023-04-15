@@ -20,7 +20,8 @@ app.get('/css/tailwind.css', (req, res) => {
 });
 
 function formatRenderVars(req, res) {
-    var files = fs.readdirSync(paths.files);
+    var files = fs.readdirSync(paths.files).filter(f => fs.statSync(path.join(paths.files, f)).isDirectory());
+    
     return {
         user: req.cookies.user,
         files: files,
@@ -30,6 +31,64 @@ function formatRenderVars(req, res) {
 
 app.get('/', (req, res) => {
     res.render(paths.getPages('home/index.ejs'), formatRenderVars(req, res));
+});
+
+// On get:
+// /browse/...
+function readBrowseDir(dir) {
+    if (!fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) return null;
+    var files = fs.readdirSync(dir);
+    var children = [];
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var stats = fs.statSync(path.join(dir, file));
+        
+        if (stats.isDirectory()) {
+            children.push(readBrowseDir(path.join(dir, file)));
+        } else {
+            children.push({
+                name: file,
+                isDir: false,
+                path: path.join(dir, file).replace(paths.files, '')
+            });
+        }
+    }
+
+    return {
+        name: path.basename(dir), isDir: true,
+        children: children,
+        path: path.join(dir).replace(paths.files, '')
+    };
+}
+
+app.get('/browse/*', (req, res) => {
+    var file = req.path.replace('/browse/', '');
+    console.log(file, paths.getFiles(file));
+    if (!fs.existsSync(paths.getFiles(file))) return res.status(404).send('404 Not Found');
+
+    if (fs.statSync(paths.getFiles(file)).isDirectory()) {
+        res.render(paths.getPages('browse/browse.ejs'), {
+            ...formatRenderVars(req, res),
+            browse: readBrowseDir(paths.getFiles(file))
+        });
+    } else {
+        var ext = path.extname(file);
+        if (ext == '.post') {
+            res.render(paths.getPages('browse/post.ejs'), {
+                ...formatRenderVars(req, res),
+                data: JSON.parse(fs.readFileSync(paths.getFiles(file), 'utf8'))
+            });
+        } else {
+            res.sendFile(paths.getFiles(file));
+        }
+    }
+});
+
+app.get('/browse', (req, res) => {
+    res.render(paths.getPages('browse/browse.ejs'), {
+        ...formatRenderVars(req, res),
+        browse: readBrowseDir(paths.files)
+    });
 });
 
 function staticEJSMiddleware(p) {
