@@ -26,6 +26,19 @@
 
             <div class="navbar-top-right">
                 <input type="text" placeholder="Search" class="navbar-search-input">
+                <button class="navbar-search-button"><i class="fas fa-search"></i></button>
+
+                <script>
+                    $(".navbar-search-input").on("keyup", function (e) {
+                        if (e.key === "Enter") {
+                            window.location.href = "/search/" + encodeURI($(this).val());
+                        }
+                    });
+
+                    $(".navbar-search-button").on("click", function () {
+                        window.location.href = "/search/" + encodeURI($(".navbar-search-input").val());
+                    });
+                </script>
             </div>
         </div>
 
@@ -35,5 +48,25 @@
             <% } %>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            function handleResize() {
+                var isOverflowing = $("#navbar-bottom")[0].scrollWidth > $("#navbar-bottom")[0].clientWidth;
+
+                if (isOverflowing) {
+                    $("#navbar-bottom").css("justify-content", "flex-start");
+                } else {
+                    $("#navbar-bottom").css("justify-content", "center");
+                }
+            }
+            
+            $(window).resize(function() {
+                handleResize();
+            });
+            
+            handleResize();
+        });
+    </script>
 
     <div style="height: 168px;"></div>

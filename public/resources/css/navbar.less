@@ -20,8 +20,12 @@
     padding: 0 50px;
     background: #5884d4;
     border-bottom: 3px solid #365a9c;
+
+    overflow-y: hidden;
+    overflow-x: auto;
+    
     .flex;
-    .flex-center;
+    .justify-center;
 }
 
 .navbar-browse-section {
@@ -37,6 +41,7 @@
     padding: 0 40px;
     min-width: 70px;
     position: relative;
+    text-decoration: none;
 
     &::after {
         content: '';
@@ -94,4 +99,24 @@
     &::placeholder { color: #666077; }
     &:-ms-input-placeholder { color: #666077; }
     &::-ms-input-placeholder { color: #666077; }
+}
+
+.navbar-search-button {
+    height: 50px;
+    width: 50px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    background: #3c3591;
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+
+    &:hover {
+        background: #2e2a6e;
+    }
+
+    &:active {
+        background: #1f1c4b;
+    }
 }

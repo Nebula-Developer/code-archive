@@ -1,9 +1,20 @@
-<%
-console.log(browse)
-%>
-
 <%- include(baseDir + '/partials/header.ejs', { title: 'Browsing: ' + browse.name, description: 'Browsing folder \'' + browse.title + '\' on Ōtākaro Histories' }) %>
 
-<%- include(baseDir + '/partials/browse-item.ejs', { item: browse }) %>
+<div class="browse-content">
+    <h1 class="mb-30">Browsing: <%= browse.name %></h1>
+    <div class="browse-panel">
+        <% for (var i = 0; i < browse.children.length; i++) { %>
+            <%- include(baseDir + '/partials/browse-item.ejs', { item: browse.children[i] }) %>
+        <% } %>
+    </div>
+</div>
+
+<style>
+    .browse-content {
+        padding: 100px;
+        min-height: 300px;
+    }
+</style>
+
 
 <%- include(baseDir + '/partials/footer.ejs') %>

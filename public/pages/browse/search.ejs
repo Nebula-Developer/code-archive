@@ -1,0 +1,20 @@
+<%- include(baseDir + '/partials/header.ejs', { title: 'Search: ' + search.query, description: 'Search results for \'' + search.query + '\' on Ōtākaro Histories' }) %>
+
+<div class="search-content">
+    <h1 class="mb-30">Search: <%= search.query %></h1>
+    <div class="search-panel">
+        <% for (var i = 0; i < Math.min(search.results.length, 10); i++) { %>
+            <%- include(baseDir + '/partials/search-item.ejs', { item: search.results[i] }) %>
+        <% } %>
+    </div>
+</div>
+
+<style>
+    .search-panel {
+        display: flex;
+        flex-direction: column;
+        min-height: 300px;
+    }
+</style>
+
+<%- include(baseDir + '/partials/footer.ejs') %>

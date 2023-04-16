@@ -29,9 +29,13 @@
     }
 
     .footer {
-        background: linear-gradient(90deg, #483c7a, #4c5385);
-        padding: 30px 0;
+        background: linear-gradient(90deg, #483c7a, #2a3692);
+        padding: 0;
         border-top: 3px solid #8571a5;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .footer h1 {
@@ -53,6 +57,39 @@
         color: #f5edff;
     }
 </style>
+
+<script>
+    var footerHeight = 200, initialFooterHeight = 200;
+    function handleFooterPositioning() {
+        var footer = document.querySelector('.footer');
+        var bodyHeight = document.body.offsetHeight + (footer.style.position == 'absolute' ? initialFooterHeight : 0)
+
+        if (bodyHeight < window.innerHeight) {
+            footerHeight = window.innerHeight - bodyHeight + initialFooterHeight;
+            footerHeight = footerHeight < 0 ? 0 : footerHeight;
+            footerHeight = footerHeight > 400 ? 400 : footerHeight;
+            console.log(window.innerHeight, "-", bodyHeight, "=", footerHeight, "px");
+        } else {
+            footerHeight = initialFooterHeight;
+        }
+
+        footer.style.height = footerHeight + 'px';
+    }
+
+    $(document).ready(async () => {
+        await new Promise(async (resolve) => {
+            var inc = 0;
+            while (document.body.offsetHeight == 0 && inc++ < 100) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+            resolve();
+        });
+        
+        handleFooterPositioning();
+    });
+    window.addEventListener('resize', handleFooterPositioning);
+</script>
+
 
 </body>
 </html>

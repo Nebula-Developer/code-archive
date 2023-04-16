@@ -14,3 +14,26 @@ body {
     margin: 0;
     padding: 0;
 }
+
+// Scrollbar
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #5884d4;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8e9bfb;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #8e9bfb;
+}
+
+// For firefox
+body {
+    scrollbar-width: thin;
+    scrollbar-color: #8e9bfb #5884d4;
+}

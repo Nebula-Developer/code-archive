@@ -21,7 +21,7 @@ app.get('/css/tailwind.css', (req, res) => {
 
 function formatRenderVars(req, res) {
     var files = fs.readdirSync(paths.files).filter(f => fs.statSync(path.join(paths.files, f)).isDirectory());
-    
+
     return {
         user: req.cookies.user,
         files: files,
@@ -63,6 +63,8 @@ function readBrowseDir(dir) {
 
 app.get('/browse/*', (req, res) => {
     var file = req.path.replace('/browse/', '');
+    file = decodeURI(file);
+    
     console.log(file, paths.getFiles(file));
     if (!fs.existsSync(paths.getFiles(file))) return res.status(404).send('404 Not Found');
 
@@ -87,7 +89,71 @@ app.get('/browse/*', (req, res) => {
 app.get('/browse', (req, res) => {
     res.render(paths.getPages('browse/browse.ejs'), {
         ...formatRenderVars(req, res),
-        browse: readBrowseDir(paths.files)
+        browse: {
+            ...readBrowseDir(paths.files),
+            name: 'All'
+        }
+    });
+});
+
+function readAll(dir) {
+    var files = fs.readdirSync(dir);
+
+    var children = [];
+    for (var i = 0; i < files.length; i++) {
+        if (fs.statSync(path.join(dir, files[i])).isDirectory()) {
+            children.push(...readAll(path.join(dir, files[i])));
+        }
+        children.push(path.join(dir, files[i]).replace(paths.files, ''));
+    }
+
+    return children;
+}
+
+app.get('/search*', (req, res) => {
+    var query = req.path.replace('/search/', '');
+    query = decodeURI(query);
+    if (!query) return res.redirect('/browse');
+
+    var files = readAll(paths.files);
+    
+    var results = [];
+    var lowerQuery = query.toLowerCase();
+
+    for (var i = 0; i < files.length; i++) {
+        var score = 0;
+        var file = files[i];
+        var fileName = path.basename(file);
+        var lowerFileName = fileName.toLowerCase();
+
+        if (lowerFileName.includes(lowerQuery)) {
+            score += 100;
+        }
+
+        if (lowerFileName.startsWith(lowerQuery)) {
+            score += 50;
+        }
+
+        if (lowerFileName.endsWith(lowerQuery)) {
+            score += 50;
+        }
+
+        if (score > 0) {
+            results.push({
+                file: file,
+                score: score,
+                name: fileName
+            });
+        }
+    }
+
+    results.sort((a, b) => b.score - a.score);
+    res.render(paths.getPages('browse/search.ejs'), {
+        ...formatRenderVars(req, res),
+        search: {
+            query: query,
+            results: results
+        }
     });
 });
 
