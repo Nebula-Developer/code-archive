@@ -3,8 +3,12 @@
 <div class="search-content">
     <h1 class="mb-30">Search: <%= search.query %></h1>
     <div class="search-panel">
-        <% for (var i = 0; i < Math.min(search.results.length, 10); i++) { %>
-            <%- include(baseDir + '/partials/search-item.ejs', { item: search.results[i] }) %>
+        <% if (search.results.length == 0) { %>
+            <p>No results found.</p>
+        <% } else { %>
+            <% for (var i = 0; i < Math.min(search.results.length, 10); i++) { %>
+                <%- include(baseDir + '/partials/browse/search-item.ejs', { item: search.results[i] }) %>
+            <% } %>
         <% } %>
     </div>
 </div>
@@ -13,7 +17,23 @@
     .search-panel {
         display: flex;
         flex-direction: column;
+    }
+
+    .search-panel i {
+        margin-left: 5px;
+    }
+
+    .search-content {
         min-height: 300px;
+        padding: 100px;
+        min-width: 700px;
+    }
+
+    body {
+        background: linear-gradient(30deg, #f6f0ff, #e3deff);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
     }
 </style>
 

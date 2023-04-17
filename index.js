@@ -64,7 +64,7 @@ function readBrowseDir(dir) {
 app.get('/browse/*', (req, res) => {
     var file = req.path.replace('/browse/', '');
     file = decodeURI(file);
-    
+
     console.log(file, paths.getFiles(file));
     if (!fs.existsSync(paths.getFiles(file))) return res.status(404).send('404 Not Found');
 
@@ -91,7 +91,7 @@ app.get('/browse', (req, res) => {
         ...formatRenderVars(req, res),
         browse: {
             ...readBrowseDir(paths.files),
-            name: 'All'
+            name: 'All Content'
         }
     });
 });
@@ -142,7 +142,8 @@ app.get('/search*', (req, res) => {
             results.push({
                 file: file,
                 score: score,
-                name: fileName
+                name: fileName,
+                isDir: fs.statSync(paths.getFiles(file)).isDirectory()
             });
         }
     }
