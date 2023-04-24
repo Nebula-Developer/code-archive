@@ -16,7 +16,7 @@
         <div id="navbar-top" class="flex flex-row justify-between">
             <div class="navbar-top-left">
                 <a href="/" class="flex align-center" style="text-decoration: none; user-select: none;">
-                    <img src="/resources/images/logo.png" alt="Ōtākaro Histories" height="100" width="100">
+                    <img src="/resources/images/Logo.png" alt="Ōtākaro Histories" height="100" width="100">
                     <div class="flex flex-column h-100">
                         <div class="navbar-header">Ōtākaro Histories</div>
                         <div class="navbar-sub-header">New Zealand history in the classroom</div>
@@ -24,7 +24,7 @@
                 </a>
             </div>
 
-            <div class="navbar-top-right">
+            <div class="navbar-top-right flex">
                 <input type="text" placeholder="Search" class="navbar-search-input">
                 <button class="navbar-search-button"><i class="fas fa-search"></i></button>
 
@@ -39,6 +39,16 @@
                         window.location.href = "/search/" + encodeURI($(".navbar-search-input").val());
                     });
                 </script>
+
+                <div class="navbar-account ml-20 flex flex-center">
+                    <% if (user) { %>
+                        <a href="/account"><%= user.username %></a>
+                        <a href="/logout">Logout</a>
+                    <% } else { %>
+                        <a href="/login">Login</a>
+                        <a href="/register">Register</a>
+                    <% } %>
+                </div>
             </div>
         </div>
 
