@@ -40,4 +40,7 @@ void set_input_mode();
 /// Move into a mode designed for output (echo, buffering)
 void set_output_mode();
 
+/// Create a string from a set of strings
+std::string create_string(const char *str, ...);
+
 #endif

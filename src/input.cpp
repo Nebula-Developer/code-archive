@@ -5,24 +5,6 @@
 #include "input.hpp"
 #include "term.hpp"
 
-std::string create_string(const char *str, ...) {
-    std::string result = str;
-
-    va_list args;
-    va_start(args, str);
-
-    while (true) {
-        const char *arg = va_arg(args, const char *);
-
-        if (arg == NULL) break;
-        else result += arg;
-    }
-
-    va_end(args);
-
-    return result;
-}
-
 std::string read_input() {
     std::string input;
 

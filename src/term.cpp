@@ -90,3 +90,21 @@ void set_output_mode() {
     term.c_lflag |= (ICANON | ECHO);
     tcsetattr(STDIN_FILENO, TCSANOW, &term);
 }
+
+std::string create_string(const char *str, ...) {
+    std::string result = str;
+
+    va_list args;
+    va_start(args, str);
+
+    while (true) {
+        const char *arg = va_arg(args, const char *);
+
+        if (arg == NULL) break;
+        else result += arg;
+    }
+
+    va_end(args);
+
+    return result;
+}
