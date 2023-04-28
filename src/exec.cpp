@@ -8,6 +8,8 @@
 
 #include "exec.hpp"
 #include "term.hpp"
+#include "integrated.hpp"
+#include "util.hpp"
 
 std::vector<std::string> split(std::string str, std::string delim) {
     std::vector<std::string> result;
@@ -77,17 +79,11 @@ std::vector<std::string> handle_input(std::string input) {
 int execute_primary(std::string input) {
     std::vector<std::string> args = handle_input(input);
 
-    for (int i = 0; i < args.size(); i++) {
-        std::cout << args[i] << std::endl;
+    if (handle_integrated_check(args) == true) {
+        return 0;
     }
 
-    char** argv = new char*[args.size() + 1];
-    for (int i = 0; i < args.size(); i++) {
-        argv[i] = new char[args[i].length() + 1];
-        strcpy(argv[i], args[i].c_str());
-    }
-
-    argv[args.size()] = NULL;
+    char** argv = stringv_to_charv(args);
 
     pid_t pid = fork();
     if (pid == 0) {
@@ -107,7 +103,7 @@ int execute_primary(std::string input) {
         exit(0);
     }
     else if (pid == -1) {
-        std::cout << "Error: fork() failed" << std::endl;
+        std::cout << "shell: fork: error" << std::endl;
         return 1;
     }
     else {
