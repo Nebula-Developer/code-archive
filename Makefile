@@ -8,4 +8,4 @@ run:
 
 build:
 	@mkdir -p bin
-	@g++ -flto -pipe -o bin/$(NAME) src/main.cpp src/input.cpp src/exec.cpp
+	@g++ -flto -pipe -o bin/$(NAME) src/main.cpp src/input.cpp src/exec.cpp src/term.cpp --std=c++11 -lreadline
