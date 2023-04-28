@@ -4,6 +4,7 @@
 #include <vector>
 #include <tuple>
 #include <readline/readline.h>
+#include <regex>
 
 #include "exec.hpp"
 #include "term.hpp"
@@ -21,38 +22,60 @@ std::vector<std::string> split(std::string str, std::string delim) {
     return result;
 }
 
-std::vector<std::string> join(const std::vector<std::string>& strings) {
-    std::vector<std::string> result;
-    bool in_quotes = false;
-    std::string current_string;
-    for (const auto& str : strings) {
-        if (!in_quotes && (str.front() == '\'' || str.front() == '\"')) {
-            // Start of a quoted string
-            in_quotes = true;
-            current_string = str;
-        } else if (in_quotes && str.back() == current_string.front()) {
-            // End of a quoted string
-            in_quotes = false;
-            current_string += " " + str;
-            result.push_back(current_string);
-        } else if (in_quotes) {
-            // Quoted string in the middle
-            current_string += " " + str;
-        } else {
-            // Non-quoted string
-            result.push_back(str);
+const char *quote_placeholder_prefix = "___SH_INTERNAL_QUOTE-";
+std::vector<std::string> handle_input(std::string input) {
+    std::string quote_regex = "\"[^\"]*\"";
+    std::string quote_placeholder_regex = std::string(quote_placeholder_prefix) + "[0-9]+";
+
+    // Replace quotes with placeholders
+    std::vector<std::tuple<std::string, std::string>> quotes;
+    std::regex quote_regex_obj(quote_regex);
+    std::smatch quote_match;
+
+    while (std::regex_search(input, quote_match, quote_regex_obj)) {
+        std::string quote = quote_match.str(0);
+        std::string placeholder = std::string(quote_placeholder_prefix) + std::to_string(quotes.size());
+        quotes.push_back(std::make_tuple(quote, placeholder));
+        input.replace(quote_match.position(0), quote.length(), placeholder);
+        printf("Replaced %s with %s\n", quote.c_str(), placeholder.c_str());
+    }
+
+    // Split input into tokens
+    std::vector<std::string> tokens = split(input, " ");
+
+    // Replace placeholders with quotes
+    std::regex quote_placeholder_regex_obj(quote_placeholder_regex);
+    std::smatch quote_placeholder_match;
+
+    for (int i = 0; i < tokens.size(); i++) {
+        std::string token = tokens[i];
+        
+        // Get all matches
+        std::vector<std::string> matches;
+        while (std::regex_search(token, quote_placeholder_match, quote_placeholder_regex_obj)) {
+            std::string match = quote_placeholder_match.str(0);
+            matches.push_back(match);
+            token.replace(quote_placeholder_match.position(0), match.length(), "");
+        }
+
+        // Replace matches with quotes
+        for (int j = 0; j < matches.size(); j++) {
+            std::string match = matches[j];
+            int index = std::stoi(match.substr(strlen(quote_placeholder_prefix)));
+            std::string quote = std::get<0>(quotes[index]);
+            tokens[i].replace(tokens[i].find(match), match.length(), quote);
+            // Replace quotes with nothing
+            for (int k = 0; k < 2; k++)
+                tokens[i].replace(tokens[i].find("\""), 1, "");
         }
     }
-    if (in_quotes) {
-        // If there was an unmatched quote, append it as is
-        result.push_back(current_string);
-    }
-    return result;
+
+    return tokens;
 }
 
+
 int execute_primary(std::string input) {
-    std::vector<std::string> args = split(input, " ");
-    args = join(args);
+    std::vector<std::string> args = handle_input(input);
 
     for (int i = 0; i < args.size(); i++) {
         std::cout << args[i] << std::endl;
