@@ -1,4 +1,4 @@
-const privKey = "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 safe";
+const privKey = "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";
 
 // call:
 // curl https://api.openai.com/v1/chat/completions \
@@ -11,7 +11,10 @@ const privKey = "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 safe";
 
 function callGPT(prompt) {
     return new Promise((resolve, reject) => {
-        const headers = { "Content-Type": "application/json" }
+        const headers = {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + privKey
+        }
         const body = {
             "model": "gpt-3.5-turbo",
             "messages": [{ "role": "user", "content": prompt }],
@@ -26,6 +29,9 @@ function callGPT(prompt) {
             response.json().then((data) => {
                 resolve(data);
             });
+        }).catch((error) => {
+            console.log(error);
+            reject(error);
         });
     });
 }
@@ -100,6 +106,7 @@ function swapHandleC() {
     document.removeEventListener('keydown', handleA, evConfig);
     document.removeEventListener('keydown', handleB, evConfig);
     document.addEventListener('keydown', handleC, evConfig);
+    if (document.getElementById("ai-input")) document.getElementById("ai-input").remove();
 }
 
 handleB = (e) => {
@@ -117,9 +124,11 @@ handleB = (e) => {
                 bottom: 0;
                 left: 0;
                 color: black;
-                background: white;
+                text-shadow: 0 0 1px white;
                 font-size: 13px;
                 padding: 5px;
+                z-index: 99999;
+                opacity: 0.2;
             `;
 
             el.style = css;
@@ -134,12 +143,13 @@ handleB = (e) => {
     if (e.key === "Enter") {
         swapHandleC();
 
-        // callGPT(input).then((data) => {
-        //     const response = data.choices[0].text;
-        //     emulateKeystroke(response, 50);
-        // });
+        callGPT(input).then((data) => {
+            if (data.choices.length == 0 || data.choices[0].message == null) { swapHandleA(); return; }
+            const response = data.choices[0].message.content;
+            if (response == null || response.length == 0) { swapHandleA(); return; }
+            emulateKeystroke(response);
+        });
 
-        emulateKeystroke("This is an example response");
         return;
     }
 
