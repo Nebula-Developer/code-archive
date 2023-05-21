@@ -10,10 +10,24 @@
   align-items: center;
 }
 
+.ext-prim-flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .ext-prim-color-panel,
 .ext-prim-element-panel {
   background: white;
+}
+
+.ext-prim-color-panel {
   border-top: 2px solid #eaeaea;
+}
+
+.ext-prim-element-panel {
+  border-right: 2px solid #eaeaea;
 }
 
 .ext-prim-color-panel-content {
@@ -27,4 +41,62 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+
+.ext-prim-element-list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.ext-prim-element-list-item {
+  margin: 5px 0;
+}
+
+.ext-prim-add-element-wrapper {
+  width: 100%;
+  padding: 10px;
+}
+
+.ext-prim-add-element-input-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.ext-prim-add-element-input-wrapper input {
+  width: calc(100% - 30px);
+  margin: 5px;
+  padding: 5px 10px;
+  margin: 2px 0;
+}
+
+.ext-prim-add-element-header {
+  text-align: center;
+  margin-bottom: 5px;
+  font-size: 19px;
+}
+
+.ext-prim-add-element-button-wrapper {
+  margin-top: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.ext-prim-element-list-item {
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #eaeaea;
+}
+
+.ext-prim-element-list-wrapper {
+  width: calc(100% - 40px);
+}
+
+.ext-prim-element-list-item-name {
+  font-size: 17px;
 }

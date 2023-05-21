@@ -82,7 +82,7 @@ function loadColorPanel() {
 
 function loadColorPanelListeners() {
     for (const item of colorPanelItems) {
-        document.getElementById(genClassName("color-" + item.variable + "-input")).addEventListener("change", (e) => {
+        document.getElementById(genClassName("color-" + item.variable + "-input")).addEventListener("input", (e) => {
             document.documentElement.style.setProperty("--" + item.variable, e.target.value);
         });
     }
@@ -95,14 +95,14 @@ for (const item of colorPanelItems)
     elementPanelColorDropdown += `<option value="${item.variable}">${item.name}</option>`;
 
 const elementPanelContent = `
-    <div class="${genClassName("flex")} ${genClassName("element-panel-content")}">
+    <div class="${genClassName("flex-column")} ${genClassName("element-panel-content")}">
         <div class="${genClassName("add-element-wrapper")}">
             <div class="${genClassName("add-element-header")}">Add Element</div>
             <div class="${genClassName("add-element-input-wrapper")}">
-                <input type="text" id="${genClassName("add-element-input-name")}" placeholder="Element Name">
-                <input type="text" id="${genClassName("add-element-input-class")}" placeholder="Element Class">
-                <input type="text" id="${genClassName("add-element-input-id")}" placeholder="Element ID">
+                <button id="${genClassName("add-element-input-picker")}">Pick &#128269;</button>
 
+                <input type="text" id="${genClassName("add-element-input-name")}" placeholder="Element Name">
+                <input type="text" id="${genClassName("add-element-input-query")}" placeholder="Element Query">
                 <input type="text" id="${genClassName("add-element-input-targets")}" placeholder="Element Targets">
                 <select id="${genClassName("add-element-input-color")}">
                     ${elementPanelColorDropdown}
@@ -121,14 +121,14 @@ const elementPanelContent = `
     </div>
 `;
 
-const elementPanel = createWindow(elementPanelContent, "element-panel", windowPositions.TOP_LEFT, windowSizes.WIDTH_FULL);
-elementPanel.style.height = "80px";
+const elementPanel = createWindow(elementPanelContent, "element-panel", windowPositions.TOP_LEFT, windowSizes.HEIGHT_FULL);
+elementPanel.style.width = "200px";
+elementPanel.style.height = "calc(100% - 80px)";
 
 var elementList = [
     {
         name: "Example",
-        class: "example",
-        id: "example",
+        query: ".example",
         targets: [ "color", "background" ],
         color: "background1"
     }
@@ -139,12 +139,7 @@ function loadElementPanel() {
     elementListElement.innerHTML = "";
 
     for (const element of elementList) {
-        var elementsFound = [];
-        
-        var classElements = document.getElementsByClassName(element.class);
-        for (const classElement of classElements) elementsFound.push(classElement);
-        var idElement = document.getElementById(element.id);
-        if (idElement) elementsFound.push(idElement);
+        var elementsFound = document.querySelectorAll(element.query);
 
         for (const elementFound of elementsFound) {
             for (const target of element.targets) {
@@ -158,8 +153,7 @@ function loadElementPanel() {
         elementElement.classList.add(genClassName("element-list-item"));
         elementElement.innerHTML = `
             <div class="${genClassName("element-list-item-name")}">${element.name}</div>
-            <div class="${genClassName("element-list-item-class")}">${element.class}</div>
-            <div class="${genClassName("element-list-item-id")}">${element.id}</div>
+            <div class="${genClassName("element-list-item-query")}">${element.query}</div>
             <div class="${genClassName("element-list-item-color")}">${element.color}</div>
         `;
         elementListElement.appendChild(elementElement);
@@ -169,15 +163,13 @@ function loadElementPanel() {
 function loadElementPanelListeners() {
     document.getElementById(genClassName("add-element-button")).addEventListener("click", () => {
         const name = document.getElementById(genClassName("add-element-input-name")).value;
-        const class_ = document.getElementById(genClassName("add-element-input-class")).value;
-        const id = document.getElementById(genClassName("add-element-input-id")).value;
+        const query = document.getElementById(genClassName("add-element-input-query")).value;
         const targets = document.getElementById(genClassName("add-element-input-targets")).value.split(",");
         const color = document.getElementById(genClassName("add-element-input-color")).value;
         
         elementList.push({
             name: name,
-            class: class_,
-            id: id,
+            query: query,
             targets: targets.map((target) => target.trim()),
             color: color
         });
@@ -186,6 +178,32 @@ function loadElementPanelListeners() {
         console.log(elementList);
 
         loadElementPanel();
+    });
+
+    var picker = document.getElementById(genClassName("add-element-input-picker"));
+    picker.addEventListener("click", () => {
+        setTimeout(() => {
+            picker.innerHTML = "Picking &#128269;";
+            picker.style.backgroundColor = "var(--accent1)";
+            picker.style.color = "var(--text1)";
+    
+            document.addEventListener("click", (e) => {
+                picker.innerHTML = "Pick &#128269;";
+                picker.style.backgroundColor = "var(--background1)";
+                picker.style.color = "var(--text1)";
+
+                var query = e.target.tagName.toLowerCase();
+                if (e.target.id)
+                    query += "#" + e.target.id;
+                if (e.target.className)
+                    query += "." + e.target.className.split(" ").join(".");
+    
+                document.getElementById(genClassName("add-element-input-query")).value = query;
+
+                e.stopPropagation();
+                e.preventDefault();
+            }, { once: true });
+        }, 10);
     });
 }
 ////////////// Element Panel End //////////////
