@@ -1,5 +1,7 @@
 :root {
   --size-topbar-margin: 50px;
+  --top-center-max-width: 1000px;
+  --top-center-margin: 200px;
 }
 
 body {
@@ -24,6 +26,12 @@ body {
   align-items: center;
 }
 
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .titlebar-top {
   height: 40px;
   width: 100%;
@@ -36,14 +44,28 @@ body {
 
 .titlebar-top-left {
   background: red;
-  width: 40px;
+  min-width: 40px;
   height: 100%;
 }
 
 .titlebar-top-right {
   background: blue;
-  width: 60px;
+  min-width: 120px;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tb-tr-item {
+  width: 40px;
+  height: 100%;
+  cursor: pointer;
+  color: white;
+}
+
+.tb-tr-item:hover {
+  background: green;
 }
 
 .titlebar-draggable {
@@ -58,4 +80,10 @@ body {
     rgba(0, 0, 0, 0) 10px,
     rgba(0, 0, 0, 0) 20px
   );
+}
+
+.titlebar-top-center {
+  min-width: calc(min(100vw - ((40px + 120px) + var(--top-center-margin)), var(--top-center-max-width)));
+  height: 100%;
+  background: orange;
 }

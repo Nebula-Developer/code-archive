@@ -79,7 +79,10 @@ const browserViewConfig = () => {
 };
 
 let updateLock = false;
+
 function updateWindowSize() {
+  if (mainWindow.isFullScreen()) return;
+
   if (updateLock) return;
   updateLock = true;
 
@@ -88,10 +91,17 @@ function updateWindowSize() {
     height: mainWindow.getSize()[1]
   };
 
-  windowPosition = {
-    x: mainWindow.getPosition()[0],
-    y: mainWindow.getPosition()[1]
-  };
+  if (mainWindow.isMaximized()) {
+    windowPosition = {
+      x: 0,
+      y: 0
+    };
+  } else {
+    windowPosition = {
+      x: mainWindow.getPosition()[0],
+      y: mainWindow.getPosition()[1]
+    };
+  }
 
   mainWindow.setBounds(mainWindowConfig());
   uiView.setBounds(uiViewConfig());
@@ -99,9 +109,25 @@ function updateWindowSize() {
   for (let i = 0; i < browserData.length; i++)
     browserData[i].getBrowserView().setBounds(browserViewConfig());
 
-  mainWindow.webContents.reloadIgnoringCache();
-
   updateLock = false;
+}
+
+function fullscreenWindowHandle() {
+  windowSize = {
+    width: mainWindow.getSize()[0],
+    height: mainWindow.getSize()[1]
+  };
+  
+  windowPosition = {
+    x: 0,
+    y: 0
+  };
+
+  mainWindow.setBounds(mainWindowConfig());
+  uiView.setBounds(uiViewConfig());
+
+  for (let i = 0; i < browserData.length; i++)
+    browserData[i].getBrowserView().setBounds(browserViewConfig());
 }
 
 function createWindow() {
@@ -109,6 +135,7 @@ function createWindow() {
 
   mainWindow.on('resize', () => { setTimeout(updateWindowSize, 0) });
   mainWindow.on('move', () => { setTimeout(updateWindowSize, 0) });
+  mainWindow.on('enter-full-screen', () => { setTimeout(fullscreenWindowHandle, 0) });
 
   uiView = new BrowserView(uiViewConfig());
   mainWindow.addBrowserView(uiView);
