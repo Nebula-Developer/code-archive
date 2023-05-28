@@ -99,15 +99,10 @@ function updateWindowSize() {
   for (let i = 0; i < browserData.length; i++)
     browserData[i].getBrowserView().setBounds(browserViewConfig());
 
-  // Refresh to prevent UI from freezing
   mainWindow.webContents.reloadIgnoringCache();
-
-  console.log(increment++);
 
   updateLock = false;
 }
-
-var increment = 0;
 
 function createWindow() {
   mainWindow = new BrowserWindow(mainWindowConfig());
