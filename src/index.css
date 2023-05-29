@@ -43,13 +43,13 @@ body {
 }
 
 .titlebar-top-left {
-  background: red;
+  /* background: red; */
   min-width: 40px;
   height: 100%;
 }
 
 .titlebar-top-right {
-  background: blue;
+  /* background: blue; */
   min-width: 120px;
   height: 100%;
   display: flex;
@@ -60,7 +60,8 @@ body {
 .tb-tr-item {
   width: 40px;
   height: 100%;
-  cursor: pointer;
+  cursor: default;
+  user-select: none;
   color: white;
 }
 
@@ -75,8 +76,8 @@ body {
 
   background: repeating-linear-gradient(
     45deg,
-    rgb(150, 200, 50),
-    rgb(255, 50, 100) 10px,
+    rgba(150, 200, 50, 0.2),
+    rgba(255, 50, 100, 0.2) 10px,
     rgba(0, 0, 0, 0) 10px,
     rgba(0, 0, 0, 0) 20px
   );
@@ -85,5 +86,17 @@ body {
 .titlebar-top-center {
   min-width: calc(min(100vw - ((40px + 120px) + var(--top-center-margin)), var(--top-center-max-width)));
   height: 100%;
-  background: orange;
+  /* background: orange; */
+}
+
+#url-input {
+  width: calc(100% - 0px);
+  height: calc(100% - 10px);
+  margin: 5px 10px;
+  outline: none;
+  border: none;
+  padding: 0 10px;
+  background: rgba(46, 52, 68, 0.25);
+  border-radius: 5px;
+  color: white;
 }

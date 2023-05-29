@@ -130,8 +130,18 @@ function fullscreenWindowHandle() {
     browserData[i].getBrowserView().setBounds(browserViewConfig());
 }
 
+function groupEvent(name, callback) {
+  uiView.webContents.on(name, callback);
+  for (let i = 0; i < browserData.length; i++)
+    browserData[i].getWebContents().on(name, callback);
+  mainWindow.webContents.on(name, callback);
+}
+
 function createWindow() {
   mainWindow = new BrowserWindow(mainWindowConfig());
+
+  // Hide macOS traffic lights
+  mainWindow.setWindowButtonVisibility(false);
 
   mainWindow.on('resize', () => { setTimeout(updateWindowSize, 0) });
   mainWindow.on('move', () => { setTimeout(updateWindowSize, 0) });
@@ -145,6 +155,14 @@ function createWindow() {
   browserData.push(new BrowserTab());
   mainWindow.addBrowserView(browserData[0].getBrowserView());
   browserData[0].getBrowserView().setBounds(browserViewConfig());
+
+  // Catch keystrokes:
+  groupEvent('before-input-event', (event, input) => {
+    if (input.key === 'r' && (input.control || input.meta)) {
+      mainWindow.reload();
+      uiView.webContents.reload();
+    }
+  });
 }
 
 module.exports = {
