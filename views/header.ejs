@@ -8,3 +8,60 @@
     <title>Ōtākaro Histories</title>
 </head>
 <body>
+    <div id="navbar" class="flex-row">
+        <div class="navbar-content flex-row">
+            <div class="navbar-logo">
+                <div class="navbar-logo-text">Ōtākaro Histories</div>
+            </div>
+    
+            <div class="navbar-links flex-row">
+                <a href="/" class="navbar-link">Home</a>
+                <a href="/login" class="navbar-link">Content</a>
+                <a href="/about" class="navbar-link">About</a>
+                <a href="/contact" class="navbar-link">Contact Us</a>
+                <a href="/login" class="navbar-link">Login & Register</a>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        #navbar {
+            background: white;
+            padding: 30px;
+            justify-content: center;
+        }
+
+        .navbar-content {
+            justify-content: space-between;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-logo-text {
+            font-size: 30px;
+            font-weight: 400;
+
+            background: linear-gradient(45deg, #22678f, #30a9ff, #22678f);
+            background-size: 20%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .navbar-links {
+            align-items: center;
+        }
+
+        .navbar-link {
+            color: rgb(74, 74, 74);
+            font-size: 16px;
+            font-weight: 400;
+            margin-left: 20px;
+            text-decoration: none;
+        }
+    </style>
