@@ -2,8 +2,8 @@
 
 <div class="flex-column">
     <div class="home-text">
-        Aotearoa Ōtākaro Histories <br>
-        Social Sciences Teaching Network
+        <span style="font-size: 45px;">Ōtākaro Histories</span> <br>
+        Aotearoa History, <span style="text-decoration: underline;">in the Classroom</span>
     </div>
 
     <div class="home-gallery flex-row">
@@ -15,14 +15,65 @@
                 <div class="home-gallery-item-date">2020-01-01</div>
                 <a href="#" class="home-gallery-item-link">View</a>
             </div>
+
+            <div class="home-gallery-item">
+                <div class="home-gallery-item-title">Stacked Item</div>
+                <div class="home-gallery-item-date">2020-01-01</div>
+                <a href="#" class="home-gallery-item-link">View</a>
+            </div>
         </div>
 
         <div class="home-gallery-content">
-            <h1 style="margin: 0; font-weight: 400; font-size: 45px; color: rgb(92, 92, 92);">Welcome</h1>
-
+            <h1 style="margin: 0; font-weight: 400; font-size: 45px; color: rgb(92, 92, 92);">Testing</h1>
             <p>
-                This website is in heavy development. It is intended to be a resource for teachers and students of Social Sciences in New Zealand.
+                This website is in heavy development. It is intended to be a network resource for teachers to find and share content for New Zealand social science education.
             </p>
+        </div>
+    </div>
+
+    <div class="home-section-grid-title">Quick Links</div>
+
+    <div class="home-section-grid">
+        <div class="home-section-grid-item">
+            <img src="/images/home/junior.png" alt="Junior">
+            <div class="home-section-grid-item-title">
+                Junior Social Sciences 
+            </div>
+        </div>
+
+        <div class="home-section-grid-item">
+            <img src="/images/home/intermediate.png" alt="Intermediate">
+            <div class="home-section-grid-item-title">
+                Intermediate Social Sciences 
+            </div>
+        </div>
+
+        <div class="home-section-grid-item">
+            <img src="/images/home/senior.png" alt="Senior">
+            <div class="home-section-grid-item-title">
+                Senior Social Sciences 
+            </div>
+        </div>
+
+        <div class="home-section-grid-item">
+            <img src="/images/home/teaching.png" alt="Teaching">
+            <div class="home-section-grid-item-title">
+                Teaching Resources
+            </div>
+        </div>
+
+        <div class="home-section-grid-item">
+            <img src="/images/home/assessment.png" alt="Assessment">
+            <div class="home-section-grid-item-title">
+                Assessment Resources
+            </div>
+        </div>
+
+        <div class="home-section-grid-item">
+            <img src="/images/home/other.png" alt="Other">
+            <div class="home-section-grid-item-title">
+                Other Resources
+            </div>
         </div>
     </div>
 </div>
@@ -70,8 +121,52 @@
         font-size: 15px;
         color: rgb(95, 156, 207);
     }
-
     
+    .home-section-grid-title {
+        padding: 0 100px;
+        padding-bottom: 30px;
+        margin: 0;
+        font-weight: 400;
+        font-size: 45px;
+        background: linear-gradient(45deg, #4187d7, #7de8b1, #4187d7);
+        background-size: 50%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .home-section-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 100px;
+        padding-top: 0;
+    }
+
+    .home-section-grid-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        padding: 50px;
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+        height: 140px;
+        cursor: pointer;
+    }
+
+    .home-section-grid-item:hover {
+        filter: brightness(1.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .home-section-grid-item:nth-child(1) { background: #80daa5; }
+    .home-section-grid-item:nth-child(2) { background: #5ebfd7; }
+    .home-section-grid-item:nth-child(3) { background: #64d7e9; }
+    .home-section-grid-item:nth-child(4) { background: #63d8ff; }
+    .home-section-grid-item:nth-child(5) { background: #56b0c7; }
+    .home-section-grid-item:nth-child(6) { background: #61e498; }
 </style>
 
 <%- include('footer') %>
