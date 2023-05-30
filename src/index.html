@@ -14,28 +14,50 @@
         <div class="titlebar-draggable"></div>
 
         <div class="titlebar-top-center">
-          <input type="text" id="url-input" value="https://google.com">
+          <div id="tabs">
+            <div class="tab">
+              <img src="https://google.com/favicon.ico" alt="Google" class="tab-favicon" />
+              <span class="tab-title">Google</span>
+              <span class="tab-close flex-center"><i class="fas fa-times hoverable"></i></span>
+            </div>
+
+            <div class="tab">
+              <img src="https://bing.com/favicon.ico" alt="Google" class="tab-favicon" />
+              <span class="tab-title">Bing</span>
+              <span class="tab-close flex-center"><i class="fas fa-times hoverable"></i></span>
+            </div>
+          </div>
         </div>
 
         <div class="titlebar-draggable"></div>
 
         <div class="titlebar-top-right">
           <div id="minimize" class="tb-tr-item flex-center">
-            <i class="fas fa-window-minimize"></i>
+            <i class="fas fa-window-minimize flex-center"></i>
           </div>
 
           <div id="maximize" class="tb-tr-item flex-center">
-            <i class="fas fa-window-maximize"></i>
+            <i class="fas fa-window-maximize flex-center"></i>
           </div>
 
           <div id="close" class="tb-tr-item flex-center">
-            <i class="fas fa-times"></i>
+            <i class="fas fa-times flex-center"></i>
           </div>
         </div>
       </div>
 
       <div class="titlebar-bottom flex-between">
+        <div class="titlebar-bottom-left"></div>
 
+        <div class="titlebar-draggable"></div>
+
+        <div class="titlebar-bottom-center">
+          <input type="text" id="url-input" value="https://google.com">
+        </div>
+
+        <div class="titlebar-draggable"></div>
+
+        <div class="titlebar-bottom-right"></div>
       </div>
     </div>
   </body>

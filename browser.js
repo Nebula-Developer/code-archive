@@ -65,7 +65,7 @@ const mainWindowConfig = () => {
 const uiViewConfig = () => {
   return {
     ...globalConfig(),
-    height: 100
+    height: 80
   }
 };
 
@@ -162,6 +162,10 @@ function createWindow() {
       mainWindow.reload();
       uiView.webContents.reload();
     }
+  });
+
+  uiView.webContents.openDevTools({
+    mode: 'detach'
   });
 }
 

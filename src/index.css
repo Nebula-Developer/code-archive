@@ -14,7 +14,6 @@ body {
   left: 0;
   width: 100vw;
   height: 100px;
-  background: rgb(41, 42, 61);
 
   display: flex;
   flex-direction: column;
@@ -32,23 +31,29 @@ body {
   align-items: center;
 }
 
+.titlebar-bottom,
 .titlebar-top {
   height: 40px;
   width: 100%;
 }
 
-.titlebar-bottom {
-  height: 50px;
-  width: 100%;
+.titlebar-top {
+  background: rgb(40, 40, 77);
 }
 
-.titlebar-top-left {
+.titlebar-bottom {
+  background: rgb(41, 42, 61);
+}
+
+.titlebar-top-left,
+.titlebar-bottom-left {
   /* background: red; */
   min-width: 40px;
   height: 100%;
 }
 
-.titlebar-top-right {
+.titlebar-top-right,
+.titlebar-bottom-right {
   /* background: blue; */
   min-width: 120px;
   height: 100%;
@@ -58,15 +63,19 @@ body {
 }
 
 .tb-tr-item {
-  width: 40px;
-  height: 100%;
+  width: 30px;
+  height: 30px;
+  margin: 5px;
   cursor: default;
   user-select: none;
   color: white;
+  position: relative;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .tb-tr-item:hover {
-  background: green;
+  background: rgba(100, 130, 160, 0.1);
 }
 
 .titlebar-draggable {
@@ -74,29 +83,84 @@ body {
   height: 100%;
   width: 100%;
 
-  background: repeating-linear-gradient(
+  /* background: repeating-linear-gradient(
     45deg,
     rgba(150, 200, 50, 0.2),
     rgba(255, 50, 100, 0.2) 10px,
     rgba(0, 0, 0, 0) 10px,
     rgba(0, 0, 0, 0) 20px
-  );
+  ); */
 }
 
-.titlebar-top-center {
+.titlebar-top-center,
+.titlebar-bottom-center {
   min-width: calc(min(100vw - ((40px + 120px) + var(--top-center-margin)), var(--top-center-max-width)));
   height: 100%;
   /* background: orange; */
 }
 
 #url-input {
-  width: calc(100% - 0px);
-  height: calc(100% - 10px);
-  margin: 5px 10px;
+  width: calc(100% - 26px);
+  height: calc(100% - 8px);
+  margin: 4px 3px;
   outline: none;
   border: none;
   padding: 0 10px;
-  background: rgba(46, 52, 68, 0.25);
+  background: rgba(46, 52, 68, 0.7);
   border-radius: 5px;
   color: white;
+}
+
+#tabs {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.tab {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 0;
+  color: white;
+  border: 1.2px solid rgb(72, 0, 255);
+  border-radius: 6px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  height: calc(100% - 6px);
+  margin: 3px;
+  user-select: none;
+  cursor: default;
+}
+
+.tab:hover {
+  background: rgba(103, 69, 255, 0.1);
+}
+
+.tab-favicon {
+  height: 20px;
+  margin-left: 10px;
+}
+
+.tab-title {
+  font-size: 14px;
+  margin: 0 10px;
+}
+
+.tab-close {
+  width: 20px;
+  height: 20px;
+  font-size: 18px;
+  margin-right: 10px;
+  padding: 3px;
+  border-radius: 7px;
+  transition: background 0.1s;
+}
+
+.tab-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.tab-close:active {
+  background: rgba(255, 255, 255, 0.4);
+  transition: background 0s;
 }
