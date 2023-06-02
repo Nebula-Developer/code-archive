@@ -1,4 +1,4 @@
-const { BrowserWindowConstructorOptions, BrowserWindow, BrowserView } = require('electron');
+const { BrowserWindowConstructorOptions, BrowserWindow, BrowserView, WebPreferences } = require('electron');
 
 class BrowserTab {
   constructor() {
@@ -34,10 +34,25 @@ let mainWindow;
 let uiView;
 /** @type {BrowserTab[]} */
 let browserData = [];
+let focusedTab = 0;
+
+function focusTab(index) {
+  if (browserData.length <= index) return;
+  if (mainWindow.getBrowserViews().includes(browserData[focusedTab].getBrowserView()))
+    mainWindow.removeBrowserView(browserData[focusedTab].getBrowserView());
+  mainWindow.addBrowserView(browserData[index].getBrowserView());
+  browserData[index].getBrowserView().setBounds(browserViewConfig());
+  focusedTab = index;
+}
 
 let windowSize = { width: 1080, height: 720 };
 let windowPosition = { x: 0, y: 0 };
-let webPreferences = { nodeIntegration: true };
+
+/** @type {WebPreferences} */
+let webPreferences = {
+  nodeIntegration: true,
+  contextIsolation: false,
+};
 
 /** @returns {BrowserWindowConstructorOptions} */
 const globalConfig = () => {
@@ -57,7 +72,10 @@ const mainWindowConfig = () => {
     x: windowPosition.x,
     y: windowPosition.y,
     titleBarStyle: 'hidden',
-    frame: false
+    frame: false,
+    webPreferences: {
+      nodeIntegration: true
+    }
   }
 };
 
@@ -153,8 +171,14 @@ function createWindow() {
   uiView.setBounds(uiViewConfig());
 
   browserData.push(new BrowserTab());
-  mainWindow.addBrowserView(browserData[0].getBrowserView());
-  browserData[0].getBrowserView().setBounds(browserViewConfig());
+  browserData.push(new BrowserTab());
+  browserData[1].loadURL('https://www.youtube.com');
+
+  focusTab(0);
+
+  setTimeout(() => {
+    focusTab(1);
+  }, 3000);
 
   // Catch keystrokes:
   groupEvent('before-input-event', (event, input) => {

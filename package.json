@@ -18,6 +18,9 @@
   },
   "license": "MIT",
   "dependencies": {
+    "color-name-list": "^10.8.0",
+    "color-namer": "^1.4.0",
+    "color-scheme": "^1.0.1",
     "electron-squirrel-startup": "^1.0.0"
   },
   "devDependencies": {
