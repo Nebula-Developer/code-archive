@@ -164,3 +164,6 @@ body {
   background: rgba(255, 255, 255, 0.4);
   transition: background 0s;
 }
+
+.drag-no-child { -webkit-app-region: drag !important; }
+.drag-no-child * { -webkit-app-region: no-drag; }

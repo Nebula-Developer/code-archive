@@ -8,11 +8,11 @@
   </head>
   <body style="overflow: hidden;">
     <div class="content navbar-content" id="content">
-      <div class="titlebar-top flex-between">
+      <div class="titlebar-top flex-between drag-no-child">
         <div class="titlebar-top-left"></div>
 
         <div class="titlebar-top-center">
-          <div id="tabs">
+          <div id="tabs" class="drag-no-child">
             <div class="tab">
               <img src="https://google.com/favicon.ico" alt="Google" class="tab-favicon" />
               <span class="tab-title">Google</span>
@@ -42,10 +42,10 @@
         </div>
       </div>
 
-      <div class="titlebar-bottom flex-between">
+      <div class="titlebar-bottom flex-between drag-no-child">
         <div class="titlebar-bottom-left"></div>
 
-        <div class="titlebar-bottom-center">
+        <div class="titlebar-bottom-center drag-no-child">
           <input type="text" id="url-input" value="https://google.com">
         </div>
 
@@ -54,36 +54,3 @@
     </div>
   </body>
 </html>
-
-<script>
-  // Navbar dragging, if click parent navbar, enable drag attrib
-  document.onmousedown = function (e) {
-    // Instead of getting the target, get the visible element under the cursor
-    var target = document.elementFromPoint(e.clientX, e.clientY)
-    
-    var validDraggableElements = [
-      "#tabs",
-      ".titlebar-top",
-      ".titlebar-top-left",
-      ".titlebar-bottom"
-    ];
-
-    var didMod = false;
-
-    for (var i = 0; i < validDraggableElements.length; i++) {
-      if (target.matches(validDraggableElements[i])) {
-        // Enable -webkit-app-region: drag on the parent element
-        document.getElementById("content").style["-webkit-app-region"] = "drag";
-        didMod = true;
-        break;
-      }
-    }
-
-    if (!didMod) {
-      // Disable -webkit-app-region: drag on the parent element
-      document.getElementById("content").style["-webkit-app-region"] = "no-drag";  
-    }
-
-    console.log(didMod);
-  };
-</script>
