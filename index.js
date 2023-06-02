@@ -15,7 +15,28 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+// Handle views
+app.get('*', (req, res) => {
+    var ejsPath = path.join(__dirname, 'views', req.path + '.ejs');
+    var normPath = path.join(__dirname, 'public', req.path);
+    ejsPath = path.resolve(ejsPath);
+    normPath = path.resolve(normPath);
+
+    if (!ejsPath.startsWith(path.join(__dirname, 'views')) || !normPath.startsWith(path.join(__dirname, 'public'))) {
+        res.write('403');
+        res.end();
+        return;
+    }
+    
+    if (fs.existsSync(ejsPath)) {
+        res.render(ejsPath);
+    } else if (fs.existsSync(normPath)) {
+        res.sendFile(normPath);
+    } else {
+        res.write('404');
+        res.end();
+    }
+});
 
 io.on('connection', (socket) => {
     console.log('New user connected');
