@@ -7,6 +7,11 @@ loginButton.addEventListener('click', () => {
     const email = loginEmail.value;
     const password = loginPassword.value;
 
+    if (!email || !password) {
+        loginError.innerHTML = "Please fill out all fields.";
+        return;
+    }
+
     socket.emit('login', { email, password }, (data) => {
         if (data.success) {
             console.log("Logged in successfully! ", data);
