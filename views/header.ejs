@@ -11,15 +11,15 @@
     <div id="navbar" class="flex-row">
         <div class="navbar-content flex-row">
             <div class="navbar-logo">
-                <div class="navbar-logo-text">Ōtākaro Histories</div>
+                <a href="/" class="navbar-logo-text">Ōtākaro Histories</a>
             </div>
     
-            <div class="navbar-links flex-row">
+            <div class="navbar-links flex-row" style="align-items: center;">
                 <a href="/" class="navbar-link">Home</a>
-                <a href="/login" class="navbar-link">Content</a>
-                <a href="/about" class="navbar-link">About</a>
-                <a href="/contact" class="navbar-link">Contact</a>
-                <a href="/login" class="navbar-link">Login & Register</a>
+                <a href="/pages/content" class="navbar-link">Content</a>
+                <a href="/pages/about" class="navbar-link">About</a>
+                <a href="/pages/contact" class="navbar-link">Contact</a>
+                <a href="/pages/login" class="navbar-link">Login & Register</a>
             </div>
         </div>
     </div>
@@ -45,16 +45,13 @@
         .navbar-logo-text {
             font-size: 30px;
             font-weight: 400;
+            text-decoration: none;
 
             background: linear-gradient(45deg, #22678f, #30a9ff, #22678f);
             background-size: 20%;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        .navbar-links {
-            align-items: center;
         }
 
         .navbar-link {

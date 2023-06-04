@@ -8,3 +8,75 @@
     display: flex;
     flex-direction: column;
 }
+
+.full-page-wrapper {
+    min-width: 100vw;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+.full-page {
+    max-width: 1200px;
+    width: calc(100% - 40px);
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.button-submit {
+    border-radius: 3px;
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 15px;
+}   
+
+.button-submit:hover { box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); }
+.button-submit:active { box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2); }
+
+.button-text {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.styled-placeholder {
+    position: relative;
+    margin-top: 18px;
+}
+
+.styled-placeholder-input {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid rgb(74, 74, 74);
+    font-size: 16px;
+    font-weight: 400;
+    padding: 0;
+    background: transparent;
+    outline: none;
+}
+
+.styled-placeholder-label {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgb(74, 74, 74);
+    pointer-events: none;
+    transition: 0.2s ease all;
+}
+
+.styled-placeholder-input:focus + .styled-placeholder-label,
+.styled-placeholder-input:not(:placeholder-shown) + .styled-placeholder-label {
+    top: -10px;
+    left: 0;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgb(74, 74, 74);
+}

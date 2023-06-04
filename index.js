@@ -11,7 +11,21 @@ const io = new socketIO.Server(server);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+function getReqAccount(req) {
+    var cookies = req.headers.cookie;
+    if (!cookies) return null;
+    var cookie = cookies.split(';').find(cookie => cookie.trim().startsWith('account='));
+    if (!cookie) return null;
+    return cookie.split('=')[1];
+}
+
+function setResAccount(res, account) {
+    res.setHeader('Set-Cookie', 'account=' + account + '; HttpOnly; SameSite=Strict; Secure');
+}
+
 app.get('/', (req, res) => {
+    console.log(getReqAccount(req));
+    if (getReqAccount(req) === null) setResAccount(res, 'guest');
     res.render('index');
 });
 
