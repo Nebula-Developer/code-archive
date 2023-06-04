@@ -57,6 +57,20 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log('User disconnected');
     });
+
+    socket.on('login', (data, callback) => {
+        callback({
+            success: false,
+            error: "Please come back later."
+        });
+    });
+
+    socket.on('register', (data, callback) => {
+        callback({
+            success: false,
+            error: "Please come back later."
+        });
+    });
 });
 
 server.listen(3000, () => {

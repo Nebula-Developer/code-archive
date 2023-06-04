@@ -1,25 +1,28 @@
 <%- include('../header') %>
 
+<script src="/js/pages/login.js" defer></script>
+
 <div class="full-page-wrapper" style="margin-top: 50px;">
     <div class="full-page" style="display: flex;">
         <div style="padding: 30px; width: 100%;">
             <h1 style="margin: 0; font-weight: 300;">Login to Ōtākaro Histories</h1>
+            <div id="login-error" style="font-size: 14px; color: red; margin-top: 8px;"></div>
 
-            <div class="login-form" style="margin-top: 20px;">
-                <div class="login-input styled-placeholder">
-                    <input type="text" class="login-input styled-placeholder-input" id="login-email" placeholder=" ">
-                    <label for="login-email" class="login-label styled-placeholder-label">Email</label>
+            <div style="margin-top: 20px;">
+                <div class="styled-placeholder">
+                    <input type="text" class="styled-placeholder-input" id="login-email" placeholder=" ">
+                    <label for="login-email" class="styled-placeholder-label">Email</label>
                 </div>
 
-                <div class="login-item styled-placeholder">
-                    <input type="password" class="login-input styled-placeholder-input" id="login-password" placeholder=" ">
-                    <label for="login-password" class="login-label styled-placeholder-label">Password</label>
+                <div class="styled-placeholder">
+                    <input type="password" class="styled-placeholder-input" id="login-password" placeholder=" ">
+                    <label for="login-password" class="styled-placeholder-label">Password</label>
                 </div>
             </div>
 
-            <div class="login-buttons" style="margin-top: 30px;">
+            <div style="margin-top: 30px;">
                 <button id="login-button" class="button-submit">Login</button>
-                <a id="register-button" class="button-text" style="margin-left: 10px;" href="/pages/register">Don't have an account? Register here</a>
+                <a class="button-text" style="margin-left: 10px;" href="/pages/register">Don't have an account? Register here</a>
             </div>
         </div>
 
