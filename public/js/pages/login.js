@@ -14,7 +14,7 @@ loginButton.addEventListener('click', () => {
 
     socket.emit('login', { email, password }, (data) => {
         if (data.success) {
-            console.log("Logged in successfully! ", data);
+            if (data.data.id) window.location.href = '/user/login/' + data.data.id;
         } else {
             loginError.innerHTML = data.error;
         }

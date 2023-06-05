@@ -3,44 +3,16 @@ const socketIO = require('socket.io');
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
-const sqlite3 = require('sqlite3').verbose();
+const accounts = require('./accounts');
 
 const app = express();
 const server = http.createServer(app);
 const io = new socketIO.Server(server);
 
-if (!fs.existsSync(path.join(__dirname, 'db'))) fs.mkdirSync(path.join(__dirname, 'db'));
-const db = new sqlite3.Database(path.join(__dirname, 'db', 'database.db'), (err) => {
-    if (err) {
-        console.error(err.message);
-        return;
-    }
-    console.log('Connected to database');
-    db.run(`
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            email TEXT NOT NULL,
-            password TEXT NOT NULL
-        )
-    `);
-});
-
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-function getReqAccount(req) {
-    var cookies = req.headers.cookie;
-    if (!cookies) return null;
-    var cookie = cookies.split(';').find(cookie => cookie.trim().startsWith('account='));
-    if (!cookie) return null;
-    return cookie.split('=')[1];
-}
-
-function setResAccount(res, account) { res.setHeader('Set-Cookie', 'account=' + account + '; HttpOnly; SameSite=Strict; Secure'); }
-
 app.get('/', (req, res) => {
-    console.log(getReqAccount(req));
-    if (getReqAccount(req) === null) setResAccount(res, 'guest');
     res.render('index');
 });
 
@@ -77,17 +49,11 @@ io.on('connection', (socket) => {
     });
 
     socket.on('login', (data, callback) => {
-        callback({
-            success: false,
-            error: "Please come back later."
-        });
+        accounts.login(data.email, data.password, callback);
     });
 
     socket.on('register', (data, callback) => {
-        callback({
-            success: false,
-            error: "Please come back later."
-        });
+        accounts.register(data.email, data.password, callback);
     });
 });
 

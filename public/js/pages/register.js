@@ -21,7 +21,7 @@ registerButton.addEventListener('click', () => {
 
     socket.emit('register', { email, password }, (data) => {
         if (data.success) {
-            console.log("Registered successfully! ", data);
+            if (data.data.id) window.location.href = '/user/login/' + data.data.id;
         } else {
             registerError.innerHTML = data.error;
         }
