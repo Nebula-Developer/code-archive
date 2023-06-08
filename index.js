@@ -27,6 +27,11 @@ app.get('/user/login/:id', (req, res) => {
     res.redirect('/');
 });
 
+app.get('/user/logout', (req, res) => {
+    accounts.removeResAccount(res);
+    res.redirect('/');
+});
+
 // Handle views
 app.get('*', (req, res) => {
     var ejsPath = path.join(__dirname, 'views', req.path + '.ejs');
@@ -53,6 +58,16 @@ app.get('*', (req, res) => {
     }
 });
 
+function chkArgs(...args) {
+    if (args.length % 2 != 0) return false;
+
+    for (var i = 0; i < args.length; i+=2) {
+        if (typeof args[i] !== args[i + 1]) return false;
+    }
+
+    return true;
+}
+
 io.on('connection', (socket) => {
     console.log('New user connected');
     socket.on('disconnect', () => {
@@ -60,10 +75,24 @@ io.on('connection', (socket) => {
     });
 
     socket.on('login', (data, callback) => {
+        if (!chkArgs(data.email, 'string', data.password, 'string')) {
+            return callback({
+                success: false,
+                error: "Invalid arguments."
+            });
+        }
+
         accounts.login(data.email, data.password, callback);
     });
 
     socket.on('register', (data, callback) => {
+        if (!chkArgs(data.email, 'string', data.password, 'string')) {
+            return callback({
+                success: false,
+                error: "Invalid arguments."
+            });
+        }
+
         accounts.register(data.email, data.password, callback);
     });
 });

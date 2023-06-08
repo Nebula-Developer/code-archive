@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 if (!fs.existsSync(path.join(__dirname, 'db'))) fs.mkdirSync(path.join(__dirname, 'db'));
+
 const db = new sqlite3.Database(path.join(__dirname, 'db', 'database.db'), (err) => {
     if (err) {
         console.error(err.message);
@@ -46,6 +47,7 @@ async function getReqAccount(req) {
 }
 
 function setResAccount(res, account) { res.setHeader('Set-Cookie', 'account=' + account + '; HttpOnly; SameSite=Strict; Path=/'); } 
+function removeResAccount(res) { res.setHeader('Set-Cookie', 'account=; HttpOnly; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT'); }
 
 function login(email, password, callback) {
     db.serialize(() => {
@@ -116,8 +118,7 @@ function register(email, password, callback) {
 
 
 module.exports = {
-    getReqAccount,
-    setResAccount,
-    db,
-    login, register
+    getReqAccount, setResAccount, removeResAccount,
+    login, register,
+    db
 };

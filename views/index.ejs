@@ -6,7 +6,9 @@
         Aotearoa History in the Classroom
     </div>
 
-    <%= JSON.stringify(account) %>
+    <% if (account) { %>
+        <%= JSON.stringify(account) %>
+    <% } %>
 
     <div class="home-gallery flex-row" style="padding: 100px;">
         <div class="home-gallery-index flex-column">
