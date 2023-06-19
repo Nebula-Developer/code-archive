@@ -18,15 +18,34 @@ const db = new sqlite3.Database(path.join(__dirname, 'db', 'database.db'), (err)
     `);
 });
 
-function getReqAccount(req) {
+async function getReqAccount(req) {
     var cookies = req.headers.cookie;
     if (!cookies) return null;
     var cookie = cookies.split(';').find(cookie => cookie.trim().startsWith('account='));
     if (!cookie) return null;
-    return cookie.split('=')[1];
+    var id = cookie.split('=')[1];
+
+    return new Promise((resolve, reject) => {
+        db.serialize(() => {
+            db.get('SELECT * FROM users WHERE id = ?', [id], (err, row) => {
+                if (err) {
+                    console.error(err.message);
+                    resolve(null);
+                    return;
+                }
+
+                if (!row) {
+                    resolve(null);
+                    return;
+                }
+
+                resolve(row);
+            });
+        });
+    });
 }
 
-function setResAccount(res, account) { res.setHeader('Set-Cookie', 'account=' + account + '; HttpOnly; SameSite=Strict; Secure'); }
+function setResAccount(res, account) { res.setHeader('Set-Cookie', 'account=' + account + '; HttpOnly; SameSite=Strict; Path=/'); } 
 
 function login(email, password, callback) {
     db.serialize(() => {

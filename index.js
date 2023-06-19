@@ -9,11 +9,22 @@ const app = express();
 const server = http.createServer(app);
 const io = new socketIO.Server(server);
 
+function render(req, res, file) {
+    accounts.getReqAccount(req).then((acc) => {
+        res.render(file, {
+            account: acc
+        });
+    });
+}
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-app.get('/', (req, res) => {
-    res.render('index');
+app.get('/', (req, res) => { render(req, res, 'index'); });
+
+app.get('/user/login/:id', (req, res) => {
+    accounts.setResAccount(res, req.params.id);
+    res.redirect('/');
 });
 
 // Handle views
@@ -29,7 +40,7 @@ app.get('*', (req, res) => {
         return;
     }
     
-    if (fs.existsSync(ejsPath)) res.render(ejsPath);
+    if (fs.existsSync(ejsPath)) render(req, res, ejsPath);
     else if (fs.existsSync(normPath)) res.sendFile(normPath);
     else {
         res.write(`
