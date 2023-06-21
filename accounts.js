@@ -4,12 +4,12 @@ const path = require('path');
 
 if (!fs.existsSync(path.join(__dirname, 'db'))) fs.mkdirSync(path.join(__dirname, 'db'));
 
-const db = new sqlite3.Database(path.join(__dirname, 'db', 'database.db'), (err) => {
+const db = new sqlite3.Database(path.join(__dirname, 'db', 'users.db'), (err) => {
     if (err) {
         console.error(err.message);
         return;
     }
-    console.log('Connected to database');
+    console.log('Connected to users database');
     db.run(`
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -47,13 +47,11 @@ async function getReqAccount(req) {
                 }
 
                 var tokens = JSON.parse(row.tokens);
-                console.log(tokens)
+
                 if (!tokens.includes(token)) {
                     resolve(null);
-                    console.log("not ok")
                     return;
                 }
-                console.log("ok")
 
                 resolve(row);
             });
@@ -90,7 +88,6 @@ function login(email, password, callback) {
 
             var tokens = JSON.parse(row.tokens);
             tokens.push(genToken());
-            console.log(tokens, tokens.length)
             if (tokens.length > 5) tokens.shift();
 
             db.run('UPDATE users SET tokens = ? WHERE id = ?', [JSON.stringify(tokens), row.id], (err) => {
