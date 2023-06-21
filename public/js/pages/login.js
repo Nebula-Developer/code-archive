@@ -14,7 +14,8 @@ loginButton.addEventListener('click', () => {
 
     socket.emit('login', { email, password }, (data) => {
         if (data.success) {
-            if (data.data.id) window.location.href = '/user/login/' + data.data.id;
+            if (data.data.id && data.data.id) window.location.replace('/user/login/' + data.data.id + '/' + data.data.token);
+            else loginError.innerHTML = "Internal server error.";
         } else {
             loginError.innerHTML = data.error;
         }

@@ -22,8 +22,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.get('/', (req, res) => { render(req, res, 'index'); });
 
-app.get('/user/login/:id', (req, res) => {
-    accounts.setResAccount(res, req.params.id);
+app.get('/user/login/:id/:token', (req, res) => {
+    accounts.setResAccount(res, req.params.id, req.params.token);
     res.redirect('/');
 });
 

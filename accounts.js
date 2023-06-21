@@ -14,7 +14,8 @@ const db = new sqlite3.Database(path.join(__dirname, 'db', 'database.db'), (err)
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             email TEXT NOT NULL,
-            password TEXT NOT NULL
+            password TEXT NOT NULL,
+            tokens TEXT NOT NULL DEFAULT '[]'
         )
     `);
 });
@@ -22,9 +23,14 @@ const db = new sqlite3.Database(path.join(__dirname, 'db', 'database.db'), (err)
 async function getReqAccount(req) {
     var cookies = req.headers.cookie;
     if (!cookies) return null;
-    var cookie = cookies.split(';').find(cookie => cookie.trim().startsWith('account='));
-    if (!cookie) return null;
-    var id = cookie.split('=')[1];
+
+    var id = cookies.split(';').find(c => c.trim().startsWith('account='));
+    if (!id) return null;
+    id = id.split('=')[1];
+
+    var token = cookies.split(';').find(c => c.trim().startsWith('token='));
+    if (!token) return null;
+    token = token.split('=')[1];
 
     return new Promise((resolve, reject) => {
         db.serialize(() => {
@@ -40,14 +46,27 @@ async function getReqAccount(req) {
                     return;
                 }
 
+                var tokens = JSON.parse(row.tokens);
+                console.log(tokens)
+                if (!tokens.includes(token)) {
+                    resolve(null);
+                    console.log("not ok")
+                    return;
+                }
+                console.log("ok")
+
                 resolve(row);
             });
         });
     });
 }
 
-function setResAccount(res, account) { res.setHeader('Set-Cookie', 'account=' + account + '; HttpOnly; SameSite=Strict; Path=/'); } 
-function removeResAccount(res) { res.setHeader('Set-Cookie', 'account=; HttpOnly; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT'); }
+function setResAccount(res, id, token) { res.setHeader('Set-Cookie', `token=${token}; HttpOnly; SameSite=Strict; Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 60 * 24 * 7).toUTCString()}`); }
+function removeResAccount(res) { res.setHeader('Set-Cookie', 'account=; HttpOnly; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; token=; HttpOnly; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT'); }
+
+function genToken() {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
+}
 
 function login(email, password, callback) {
     db.serialize(() => {
@@ -69,9 +88,21 @@ function login(email, password, callback) {
                 return;
             }
 
+            var tokens = JSON.parse(row.tokens);
+            tokens.push(genToken());
+            console.log(tokens, tokens.length)
+            if (tokens.length > 5) tokens.shift();
+
+            db.run('UPDATE users SET tokens = ? WHERE id = ?', [JSON.stringify(tokens), row.id], (err) => {
+                if (err) {
+                    console.error(err.message);
+                    return;
+                }
+            });
+
             callback({
                 success: true,
-                data: { id: row.id }
+                data: { id: row.id, token: tokens[tokens.length - 1] }
             });
         });
     });
@@ -97,7 +128,9 @@ function register(email, password, callback) {
                 return;
             }
 
-            db.run('INSERT INTO users (email, password) VALUES (?, ?)', [email, password], function(err) {
+            var tokens = [genToken()];
+
+            db.run('INSERT INTO users (email, password, tokens) VALUES (?, ?, ?)', [email, password, JSON.stringify(tokens)], function(err) {
                 if (err) {
                     console.error(err.message);
                     callback({
@@ -109,13 +142,12 @@ function register(email, password, callback) {
 
                 callback({
                     success: true,
-                    data: { id: this.lastID }
+                    data: { id: this.lastID, token: tokens[0] }
                 });
             });
         });
     });
 }
-
 
 module.exports = {
     getReqAccount, setResAccount, removeResAccount,
