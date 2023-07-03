@@ -77,7 +77,7 @@ function editPost(post_id, title, content, group_id, author) {
     });
 }
 
-function getJoinedPosts(where = '', single = false, sort = false) {
+function getJoinedPosts(where = '', single = false, sort = true) {
     var select = `
         posts.id, posts.title, posts.content, posts.group_id, posts.author, posts.date,
         groups.name AS group_name,
@@ -92,15 +92,21 @@ function getJoinedPosts(where = '', single = false, sort = false) {
         ${where}
     `;
 
-    if (sort) query += 'ORDER BY posts.date DESC';
-
     return new Promise((resolve, reject) => {
         db.serialize(() => {
             db.all(query, (err, rows) => {
                 if (util.handleError(err)) return resolve(null);
 
                 if (single) return resolve(rows[0]);
-                else resolve(rows);
+                else {
+                    if (!sort) return resolve(rows);
+
+                    rows.sort((a, b) => {
+                        return new Date(b.date) - new Date(a.date);
+                    });
+
+                    resolve(rows);
+                } 
             });
         });
     });

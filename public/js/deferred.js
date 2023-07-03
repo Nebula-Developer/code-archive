@@ -3,6 +3,8 @@ $('.dropdown').each(function() {
     $(this).append('<div class="dropdown-header"><p class="dropdown-header-text">' + firstItem.text() + '</p></div>');
     $(this).attr('data-value', firstItem.data('value') || firstItem.text());
     $(this).find('.dropdown-header').append('<i class="fas fa-caret-down dropdown-caret"></i>');
+
+    $(this).trigger('change');
 });
 
 $('.dropdown-header').click(function() {

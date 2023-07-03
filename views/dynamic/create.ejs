@@ -22,7 +22,7 @@
                             </div>
                         <% } %>
 
-                        <div class="dropdown-item">New</div>
+                        <div class="dropdown-item" data-value="New">New</div>
                         <% for (var i = 0; i < groups.length; i++) { %>
                             <% if (typeof editState !== 'undefined' && groups[i].id == editState.group) { continue; } %>
                             <div class="dropdown-item" data-value="<%= groups[i].id %>">
@@ -45,6 +45,7 @@
 
             <script>
                 function updateChangeView() {
+                    console.log($('#post-group').attr('data-value'))
                     if ($('#post-group').attr('data-value') == 'New') {
                         $('#new-group-wrapper').css('display', 'block');
                     } else {
@@ -53,7 +54,6 @@
                 }
 
                 $('#post-group').on('change', updateChangeView);
-                updateChangeView();
             </script>
         
 
@@ -65,7 +65,7 @@
                 <% } else { %>
                     <button id="create-button" class="button-submit">Publish</button>
                 <% } %>
-                
+
                 <p style="margin-left: 20px;">Stuck? Check <a href="https://www.markdownguide.org/basic-syntax/">here</a> for help.</p>
             </div>
         </div>
