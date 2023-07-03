@@ -24,17 +24,20 @@ async function getReqAccount(req) {
     var cookies = req.headers.cookie;
     if (!cookies) return null;
 
-    var id = cookies.split(';').find(c => c.trim().startsWith('account='));
-    if (!id) return null;
-    id = id.split('=')[1];
+    console.log(cookies);
 
-    var token = cookies.split(';').find(c => c.trim().startsWith('token='));
-    if (!token) return null;
-    token = token.split('=')[1];
+    var acc = cookies.split(';').find(c => c.trim().startsWith('account='));
+    if (!acc) return null;
+    acc = acc.split('=')[1];
+
+    try { acc = JSON.parse(acc); }
+    catch (e) { return null; }
+
+    if (!acc.id || !acc.token) return null;
 
     return new Promise((resolve, reject) => {
         db.serialize(() => {
-            db.get('SELECT * FROM users WHERE id = ?', [id], (err, row) => {
+            db.get('SELECT * FROM users WHERE id = ?', [acc.id], (err, row) => {
                 if (err) {
                     console.error(err.message);
                     resolve(null);
@@ -48,7 +51,7 @@ async function getReqAccount(req) {
 
                 var tokens = JSON.parse(row.tokens);
 
-                if (!tokens.includes(token)) {
+                if (!tokens.includes(acc.token)) {
                     resolve(null);
                     return;
                 }
@@ -59,7 +62,17 @@ async function getReqAccount(req) {
     });
 }
 
-function setResAccount(res, id, token) { res.setHeader('Set-Cookie', `token=${token}; HttpOnly; SameSite=Strict; Path=/; Expires=${new Date(Date.now() + 1000 * 60 * 60 * 24 * 7).toUTCString()}`); }
+function setResAccount(res, id, token) {
+    var content = JSON.stringify({ id, token });
+    var cookie = res.getHeader('Set-Cookie');
+    
+    if (cookie)
+        cookie = cookie.split(';').filter(c => !c.trim().startsWith('account=')).join(';');
+
+    var expires = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7).toUTCString();
+    res.setHeader('Set-Cookie', `${cookie ? cookie + '; ' : ''}` + `account=${content}; HttpOnly; SameSite=Strict; Path=/; Expires=${expires}`);
+}
+
 function removeResAccount(res) { res.setHeader('Set-Cookie', 'account=; HttpOnly; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; token=; HttpOnly; SameSite=Strict; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT'); }
 
 function genToken() {
