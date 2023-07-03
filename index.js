@@ -95,6 +95,23 @@ app.get('/create', (req, res) => {
     });
 });
 
+app.get('/edit/:id', (req, res) => {
+    posts.getPost(req.params.id).then((post) => {
+        if (!post) return res.redirect('/');
+        posts.getGroups().then((groups) => {
+            render(req, res, 'dynamic/create', {
+                groups,
+                editState: {
+                    id: post.id,
+                    title: post.title,
+                    content: post.content,
+                    group: post.group_id
+                }
+            });
+        });
+    });
+});
+
 // Handle views
 app.get('*', (req, res) => {
     var ejsPath = path.join(__dirname, 'views', req.path + '.ejs');
@@ -223,6 +240,37 @@ io.on('connection', (socket) => {
                     callback({
                         success: false,
                         error: "Failed to create group"
+                    });
+                }
+            });
+        });
+    });
+
+    socket.on('editPost', (data, callback) => {
+        if (!chkCallback(callback)) return;
+        if (!chkArgs(data.id, 'number', data.title, 'string', data.content, 'string', data.group, 'number')) {
+            return callback({
+                success: false,
+                error: "Invalid arguments."
+            });
+        }
+
+        accounts.getSocketAccount(socket).then((acc) => {
+            if (!acc) return callback({
+                success: false,
+                error: "You must be logged in to edit a post."
+            });
+
+            posts.editPost(data.id, data.title, data.content, data.group, acc.id).then((id) => {
+                if (id) {
+                    callback({
+                        success: true,
+                        data: id
+                    });
+                } else {
+                    callback({
+                        success: false,
+                        error: "Failed to edit post"
                     });
                 }
             });

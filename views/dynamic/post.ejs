@@ -10,7 +10,7 @@
         <% if (post) { %>
             <div class="post-title">
                 <div>
-                    <%= post.title %>
+                    <%= post.title %> | <a style="font-size: 25px; color: grey;" href="/posts/<%= post.group_id %>"><%= post.group_name %></a>
                 </div>
 
                 <div style="font-size: 18px; color: #999;">

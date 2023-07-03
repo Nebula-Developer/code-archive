@@ -93,15 +93,22 @@
 
 <div id="post-content">
     <% for (var i = 0; i < posts.length; i++) { %>
-        <a class="full-page-wrapper post-listing" id="post-<%= posts[i].id %>" href="/post/<%= posts[i].id %>">
-            <div class="full-page" style="padding: 30px;">
-                <h1 class="post-title"><%= posts[i].title %></h1>
+        <div class="full-page-wrapper post-listing" id="post-<%= posts[i].id %>">
+            <div class="full-page" style="padding: 30px; cursor: pointer;" onmouseup="location.href='/post/<%= posts[i].id %>'">
+                <div class="post-title">
+                    <div><%= posts[i].title %></div>
+                    <div>
+                        <a href="/edit/<%= posts[i].id %>">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+                </div>
 
                 <div class="post-content-wrapper" style="margin-top: 30px;">
                     <div id="post-content-<%= posts[i].id %>" class="post-content"></div>
                 </div>
             </div>
-        </a>
+        </div>
     <% } %>
 </div>
 

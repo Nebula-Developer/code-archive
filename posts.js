@@ -66,6 +66,17 @@ function createPost(title, content, group_id, author) {
     });
 }
 
+function editPost(post_id, title, content, group_id, author) {
+    return new Promise((resolve, reject) => {
+        db.serialize(() => {
+            db.run('UPDATE posts SET title = ?, content = ?, group_id = ?, author = ? WHERE id = ?', [title, content, group_id, author, post_id], function(err) {
+                if (util.handleError(err)) return resolve(null);
+                resolve(post_id);
+            });
+        });
+    });
+}
+
 function getJoinedPosts(where = '', single = false, sort = false) {
     var select = `
         posts.id, posts.title, posts.content, posts.group_id, posts.author, posts.date,
@@ -161,5 +172,5 @@ module.exports = {
     createGroup, getGroups,
     createPost, getPosts,
     getPostsByGroup, getPost,
-    searchPosts
+    searchPosts, editPost
 };

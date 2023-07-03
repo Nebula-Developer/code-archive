@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
 
-
 <div class="full-page-wrapper">
     <div class="full-page" style="padding: 100px; justify-content: center; display: flex;">
         <div id="editor-wrapper" style="width: 100%;">
@@ -12,8 +11,20 @@
             <div style="display: flex; align-items: end; width: 100%; margin-bottom: 30px;">
                 <div class="dropdown" id="post-group">
                     <div class="dropdown-content">
+                        <% if (typeof editState !== 'undefined') { %>
+                            <div class="dropdown-item" data-value="<%- editState.group %>">
+                                <%
+                                    for (var i = 0; i < groups.length; i++)
+                                        if (groups[i].id == editState.group)
+                                            var n = (groups[i].name);
+                                %>
+                                <%= n %>
+                            </div>
+                        <% } %>
+
                         <div class="dropdown-item">New</div>
                         <% for (var i = 0; i < groups.length; i++) { %>
+                            <% if (typeof editState !== 'undefined' && groups[i].id == editState.group) { continue; } %>
                             <div class="dropdown-item" data-value="<%= groups[i].id %>">
                                 <%= groups[i].name %>
                             </div>
@@ -33,38 +44,53 @@
             </div>
 
             <script>
-                $('#post-group').on('change', (e) => {
-                    if (e.target.dataset.value == 'New') {
+                function updateChangeView() {
+                    if ($('#post-group').attr('data-value') == 'New') {
                         $('#new-group-wrapper').css('display', 'block');
                     } else {
                         $('#new-group-wrapper').css('display', 'none');
                     }
-                })
+                }
+
+                $('#post-group').on('change', updateChangeView);
+                updateChangeView();
             </script>
         
 
             <textarea id="editor"></textarea>
         
             <div style="margin-top: 20px;" class="flex-row align-center">
-                <button id="create-button" class="button-submit">Publish</button>
+                <% if (typeof editState !== 'undefined') { %>
+                    <button id="create-button" class="button-submit">Save</button>
+                <% } else { %>
+                    <button id="create-button" class="button-submit">Publish</button>
+                <% } %>
+                
                 <p style="margin-left: 20px;">Stuck? Check <a href="https://www.markdownguide.org/basic-syntax/">here</a> for help.</p>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-const content = `
+<script defer>
+var content = `
 ## New Post
 
 Type **here** to add content to the post.
 `;
 
-document.getElementById('editor').value = content;
+<% if (typeof editState !== 'undefined') { %>
+content = `<%- editState.content.replaceAll('/script', '\\/script') %>`;
+document.getElementById('post-title').value = '<%- editState.title %>';
+document.getElementById('post-group').dataset.value = '<%- editState.group %>';
+<% } %>
+
 
 const easymde = new EasyMDE({
     element: document.getElementById('editor')
 });
+
+easymde.value(content);
 
 document.getElementById('create-button').addEventListener('click', async () => {
     var title = document.getElementById('post-title').value;
@@ -99,7 +125,15 @@ document.getElementById('create-button').addEventListener('click', async () => {
     } else {
         group = parseInt(group);
     }
-
+    <% if (typeof editState !== 'undefined') { %>
+    socket.emit('editPost', { title, content, group, id: <%- editState.id %> }, (res) => {
+        if (res.success) {
+            window.location.href = '/post/' + res.data;
+        } else {
+            alert(res.error);
+        }
+    });
+    <% } else { %>
     socket.emit('createPost', { title, content, group }, (res) => {
         if (res.success) {
             window.location.href = '/post/' + res.data;
@@ -107,6 +141,7 @@ document.getElementById('create-button').addEventListener('click', async () => {
             alert(res.error);
         }
     });
+    <% } %>
 });
 </script>
 
