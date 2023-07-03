@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="styled-placeholder">
-                    <input type="password" class="styled-placeholder-input" id="register-confirm-password" placeholder=" ">
+                    <input type="password" class="styled-placeholder-input" id="register-confirm-password" placeholder=" " onkeydown="if (event.keyCode == 13) document.getElementById('register-button').click()">
                     <label for="register-password" class="styled-placeholder-label">Confirm Password</label>
                 </div>
             </div>

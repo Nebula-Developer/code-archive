@@ -66,7 +66,7 @@ function createPost(title, content, group_id, author) {
     });
 }
 
-function getJoinedPosts(where = '', single = false) {
+function getJoinedPosts(where = '', single = false, sort = false) {
     var select = `
         posts.id, posts.title, posts.content, posts.group_id, posts.author, posts.date,
         groups.name AS group_name,
@@ -80,6 +80,8 @@ function getJoinedPosts(where = '', single = false) {
         INNER JOIN users ON posts.author = users.id
         ${where}
     `;
+
+    if (sort) query += 'ORDER BY posts.date DESC';
 
     return new Promise((resolve, reject) => {
         db.serialize(() => {
@@ -95,7 +97,8 @@ function getJoinedPosts(where = '', single = false) {
 
 function getPosts(limit = -1) { return getJoinedPosts(limit == -1 ? '' : `LIMIT ${limit}`); }
 function getPostsByGroup(group_id, limit = -1) { return getJoinedPosts(`WHERE posts.group_id = ${group_id} ${limit == -1 ? '' : `LIMIT ${limit}`}`); }
-function getPost(id) { return getJoinedPosts(`WHERE posts.id = ${id}`, true); }
+function getPost(id) { return getJoinedPosts(`WHERE posts.id = ${id}`, true, false); }
+
 function searchPosts(group, search, limit = -1) {
     return new Promise(async (resolve, reject) => {
         if (group == 'all') {

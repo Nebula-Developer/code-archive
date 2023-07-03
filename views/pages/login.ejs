@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="styled-placeholder">
-                    <input type="password" class="styled-placeholder-input" id="login-password" placeholder=" ">
+                    <input type="password" class="styled-placeholder-input" id="login-password" placeholder=" " onkeydown="if (event.keyCode == 13) document.getElementById('login-button').click()">
                     <label for="login-password" class="styled-placeholder-label">Password</label>
                 </div>
             </div>

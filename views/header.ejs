@@ -23,7 +23,11 @@
                 <a href="/posts" class="navbar-link">Posts</a>
                 <a href="/pages/about" class="navbar-link">About</a>
                 <a href="/pages/contact" class="navbar-link">Contact</a>
-                <a href="/pages/login" class="navbar-link">Login & Register</a>
+                <% if (!account) { %>
+                    <a href="/pages/login" class="navbar-link">Login & Register</a>
+                <% } else { %>
+                    <a href="/user/logout" class="navbar-link">Logout</a>
+                <% } %>
             </div>
         </div>
     </div>

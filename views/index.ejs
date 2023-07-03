@@ -6,52 +6,48 @@
         Aotearoa History in the Classroom
     </div>
 
-    <% if (account) { %>
-        <%= JSON.stringify(account) %>
-    <% } %>
-
     <div class="home-section-grid-title">Quick Links</div>
 
     <div class="home-section-grid">
         <a class="home-section-grid-item" style="background: #80daa5;" href="/posts">
-            <img src="/images/home/browse-all.png" alt="Browse All">
+            <i class="fas fa-book"></i>
             <div class="home-section-grid-item-title">
                 Browse All Posts
             </div>
         </a>
 
         <a class="home-section-grid-item" style="background: #5ebfd7;" href="/pages/contact">
-            <img src="/images/home/contact.png" alt="Contact">
+            <i class="fas fa-envelope"></i>
             <div class="home-section-grid-item-title">
                 Contact
             </div>
         </a>
 
         <a class="home-section-grid-item" style="background: #64d7e9;" href="/pages/login">
-            <img src="/images/home/login.png" alt="Login">
+            <i class="fas fa-sign-in-alt"></i>
             <div class="home-section-grid-item-title">
                 Login
             </div>
         </a>
 
         <a class="home-section-grid-item" style="background: #63d8ff;" href="/pages/logout">
-            <img src="/images/home/logout.png" alt="Logout">
+            <i class="fas fa-sign-out-alt"></i>
             <div class="home-section-grid-item-title">
                 Logout
             </div>
         </a>
 
         <a class="home-section-grid-item" style="background: #56b0c7;" href="/pages/register">
-            <img src="/images/home/register.png" alt="Register">
+            <i class="fas fa-user-plus"></i>
             <div class="home-section-grid-item-title">
                 Register
             </div>
         </a>
 
-        <a class="home-section-grid-item" style="background: #61e498;">
-            <img src="/images/home/coming-soon.png" alt="Coming Soon">
+        <a class="home-section-grid-item" style="background: #61e498;" href="/pages/create">
+            <i class="fas fa-plus"></i>
             <div class="home-section-grid-item-title">
-                N/A
+                Create Post
             </div>
         </a>
     </div>
@@ -70,12 +66,13 @@
         </div>
 
         <div class="home-gallery-content">
-            <h1 style="margin: 0; font-weight: 400; font-size: 45px; color: rgb(92, 92, 92);">Welcome</h1>
+            <h1 style="margin: 0; font-weight: 400; font-size: 45px; color: rgb(92, 92, 92);">Ōtākaro Histories</h1>
             <p>
                 This website is in heavy development.
-                It is intended to be a network resource for teachers to find and share content for New Zealand social science education.
-                <br/>
-                You can find recent posts on the left, or in the navagation bar at the top of the page.
+                <br>
+                Ōtākaro Histories is a website that provides teachers with resources to teach history in the classroom.
+                <br>
+                You can find more information about the project <a href="/pages/about">here</a>.
             </p>
         </div>
     </div>
@@ -154,6 +151,11 @@
         height: 140px;
         cursor: pointer;
         text-decoration: none;
+    }
+
+    .home-section-grid-item i {
+        margin-bottom: 20px;
+        font-size: 40px;
     }
 
     .home-section-grid-item:hover {
