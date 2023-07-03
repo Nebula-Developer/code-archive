@@ -76,6 +76,17 @@ app.get('/posts/:group', (req, res) => {
     });
 });
 
+app.get('/posts/:group/:search', (req, res) => {
+    posts.searchPosts(req.params.group, decodeURIComponent(req.params.search), 5).then((post) => {
+        posts.getGroups().then((groups) => {
+            render(req, res, 'dynamic/posts', {
+                posts: post, groups,
+                sort: req.params.group
+            });
+        });
+    });
+});
+
 app.get('/create', (req, res) => {
     posts.getGroups().then((groups) => {
         render(req, res, 'dynamic/create', {

@@ -96,6 +96,50 @@ function getJoinedPosts(where = '', single = false) {
 function getPosts(limit = -1) { return getJoinedPosts(limit == -1 ? '' : `LIMIT ${limit}`); }
 function getPostsByGroup(group_id, limit = -1) { return getJoinedPosts(`WHERE posts.group_id = ${group_id} ${limit == -1 ? '' : `LIMIT ${limit}`}`); }
 function getPost(id) { return getJoinedPosts(`WHERE posts.id = ${id}`, true); }
+function searchPosts(group, search, limit = -1) {
+    return new Promise(async (resolve, reject) => {
+        if (group == 'all') {
+            var groupPosts = await getPosts(limit);
+        } else {
+            var groupPosts = await getPostsByGroup(group, limit);
+        }
+
+        if (!groupPosts) return resolve(null);
+
+        var results = [];
+        search = search.toLowerCase();
+        var searchWords = search.split(' ');
+
+        for (var i = 0; i < groupPosts.length; i++) {
+            var score = 0;
+            var post = groupPosts[i];
+            var title = post.title.toLowerCase();
+
+            if (title.includes(search)) score += 1;
+            if (title.startsWith(search)) score += 2;
+
+            for (var j = 0; j < searchWords.length; j++) {
+                if (title.includes(searchWords[j])) score += 1;
+            }
+
+            if (score > 0) results.push({
+                score: score,
+                post: post
+            });
+        }
+
+        results.sort((a, b) => {
+            return b.score - a.score;
+        });
+
+        var posts = [];
+        for (var i = 0; i < results.length; i++) {
+            posts.push(results[i].post);
+        }
+
+        resolve(posts);
+    });
+}
 
 function test() {
     createGroup("Test").then((groupID) => {
@@ -113,5 +157,6 @@ function test() {
 module.exports = {
     createGroup, getGroups,
     createPost, getPosts,
-    getPostsByGroup, getPost
+    getPostsByGroup, getPost,
+    searchPosts
 };

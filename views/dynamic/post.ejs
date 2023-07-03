@@ -31,7 +31,6 @@
 <script>
     var content = `<%= post.content %>`;
     content = new DOMParser().parseFromString(content, "text/html").documentElement.textContent;
-    content = content.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
     document.getElementById('post-content').innerHTML = DOMPurify.sanitize(marked.parse(content));
 </script>
 
