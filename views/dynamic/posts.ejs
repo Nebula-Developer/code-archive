@@ -1,0 +1,100 @@
+<%- include('../header') %>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/5.1.0/marked.min.js" integrity="sha512-j5KAPeir0rGl+OSddiUeUtUlG+GK7acI/kNQqrpjSSB1IlDUbj3VnQOyoW3GWpPj7i8CSfb0T+Q4IRHxAPRxCA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.4/purify.min.js" integrity="sha512-Ppv1jKk0X8u28/MsfyW8gWQmfP2HDmCJd03tC4qrFoVZwUdjfkbX14wiBP5akSlM00EP8Kgt1UDZfvdFKLVNmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<link rel="stylesheet" href="/css/pages/posts.css">
+
+<div class="home-text">
+    <span style="font-size: 45px;">Posts</span> <br>
+    Browse all, search, or sort posts
+</div>
+
+<style>
+    .home-text {
+        padding: 80px 50px;
+        background: linear-gradient(70deg, #1e5799, #2989d8, #7db9e8);
+        font-size: 36px;
+        font-weight: 600;
+        color: white;
+        text-align: center;
+        line-height: 60px;
+        margin-bottom: 40px;
+    }
+</style>
+
+<div class="sort-wrapper" style="display: flex; align-items: center; justify-content: center; width: 100%; margin-bottom: 40px;">
+    <div>
+        <div>Sort By Group</div>
+        <div class="dropdown" id="sort-dropdown">
+            <div class="dropdown-content">
+                <%
+                    // If 'sort' != 'all', then put the right group first.
+                    if (sort != 'all') {
+                        for (var i = 0; i < groups.length; i++) {
+                            if (groups[i].id == sort) {
+                                var temp = groups[0];
+                                groups[0] = groups[i];
+                                groups[i] = temp;
+                                break;
+                            }
+                        }
+                    } else {
+                %>
+                <div class="dropdown-item">All</div>
+                <% } %>
+
+                <% for (var i = 0; i < groups.length; i++) { %>
+                    <div class="dropdown-item" data-value="<%= groups[i].id %>">
+                        <%= groups[i].name %>
+                    </div>
+                <% } %>
+
+                <% if (sort != 'all') { %>
+                    <div class="dropdown-item">All</div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <button class="button-submit" style="margin-left: 20px; height: fit-content;" id="sort-btn">Sort</button>
+
+    <script>
+        document.getElementById('sort-btn').addEventListener('click', function() {
+            var group = document.getElementById('sort-dropdown').dataset.value;
+            group = group == 'All' ? '' : group;
+            window.location.href = '/posts/' + group;
+        });
+    </script>
+</div>
+
+<% if (posts && posts.length > 0) { %>
+
+<div id="post-content">
+    <% for (var i = 0; i < posts.length; i++) { %>
+        <a class="full-page-wrapper post-listing" id="post-<%= posts[i].id %>" href="/post/<%= posts[i].id %>">
+            <div class="full-page" style="padding: 30px;">
+                <h1 class="post-title"><%= posts[i].title %></h1>
+
+                <div class="post-content-wrapper" style="margin-top: 30px;">
+                    <div id="post-content-<%= posts[i].id %>" class="post-content" data-content="<%= posts[i].content %>"></div>
+                </div>
+            </div>
+        </a>
+    <% } %>
+</div>
+
+<script>
+    $('.post-content').each(function() {
+        var content = $(this).data('content');
+        content = new DOMParser().parseFromString(content, "text/html").documentElement.textContent;
+        $(this).html(DOMPurify.sanitize(marked.parse(content)));
+        $(this).data('content', null);
+    });
+</script>
+
+<% } else { %>
+    <h1 style="font-weight: 300; padding: 100px; padding-top: 20px;">No Posts Found</h1>
+<% } %>
+
+<%- include('../footer') %>

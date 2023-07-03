@@ -10,74 +10,73 @@
         <%= JSON.stringify(account) %>
     <% } %>
 
+    <div class="home-section-grid-title">Quick Links</div>
+
+    <div class="home-section-grid">
+        <a class="home-section-grid-item" style="background: #80daa5;" href="/posts">
+            <img src="/images/home/browse-all.png" alt="Browse All">
+            <div class="home-section-grid-item-title">
+                Browse All Posts
+            </div>
+        </a>
+
+        <a class="home-section-grid-item" style="background: #5ebfd7;" href="/pages/contact">
+            <img src="/images/home/contact.png" alt="Contact">
+            <div class="home-section-grid-item-title">
+                Contact
+            </div>
+        </a>
+
+        <a class="home-section-grid-item" style="background: #64d7e9;" href="/pages/login">
+            <img src="/images/home/login.png" alt="Login">
+            <div class="home-section-grid-item-title">
+                Login
+            </div>
+        </a>
+
+        <a class="home-section-grid-item" style="background: #63d8ff;" href="/pages/logout">
+            <img src="/images/home/logout.png" alt="Logout">
+            <div class="home-section-grid-item-title">
+                Logout
+            </div>
+        </a>
+
+        <a class="home-section-grid-item" style="background: #56b0c7;" href="/pages/register">
+            <img src="/images/home/register.png" alt="Register">
+            <div class="home-section-grid-item-title">
+                Register
+            </div>
+        </a>
+
+        <a class="home-section-grid-item" style="background: #61e498;">
+            <img src="/images/home/coming-soon.png" alt="Coming Soon">
+            <div class="home-section-grid-item-title">
+                N/A
+            </div>
+        </a>
+    </div>
+
     <div class="home-gallery flex-row" style="padding: 100px;">
         <div class="home-gallery-index flex-column">
             <div class="home-gallery-title">Recent Items</div>
 
-            <div class="home-gallery-item">
-                <div class="home-gallery-item-title">Test Social Sciences Item</div>
-                <div class="home-gallery-item-date">2020-01-01</div>
-                <a href="#" class="home-gallery-item-link">View</a>
-            </div>
-
-            <div class="home-gallery-item">
-                <div class="home-gallery-item-title">Stacked Item</div>
-                <div class="home-gallery-item-date">2020-01-01</div>
-                <a href="#" class="home-gallery-item-link">View</a>
-            </div>
+            <% for (var i = 0; i < posts.length; i++) { %>
+                <div class="home-gallery-item">
+                    <div class="home-gallery-item-title"><%= posts[i].title %></div>
+                    <div class="home-gallery-item-date"><%= new Date(posts[i].date).toLocaleString() %></div>
+                    <a href="/post/<%= posts[i].id %>" class="home-gallery-item-link">View</a>
+                </div>
+            <% } %>
         </div>
 
         <div class="home-gallery-content">
-            <h1 style="margin: 0; font-weight: 400; font-size: 45px; color: rgb(92, 92, 92);">Testing</h1>
+            <h1 style="margin: 0; font-weight: 400; font-size: 45px; color: rgb(92, 92, 92);">Welcome</h1>
             <p>
-                This website is in heavy development. It is intended to be a network resource for teachers to find and share content for New Zealand social science education.
+                This website is in heavy development.
+                It is intended to be a network resource for teachers to find and share content for New Zealand social science education.
+                <br/>
+                You can find recent posts on the left, or in the navagation bar at the top of the page.
             </p>
-        </div>
-    </div>
-
-    <div class="home-section-grid-title">Quick Links</div>
-
-    <div class="home-section-grid">
-        <div class="home-section-grid-item" style="background: #80daa5;">
-            <img src="/images/home/junior.png" alt="Junior">
-            <div class="home-section-grid-item-title">
-                Junior Social Sciences 
-            </div>
-        </div>
-
-        <div class="home-section-grid-item" style="background: #5ebfd7;">
-            <img src="/images/home/intermediate.png" alt="Intermediate">
-            <div class="home-section-grid-item-title">
-                Intermediate Social Sciences 
-            </div>
-        </div>
-
-        <div class="home-section-grid-item" style="background: #64d7e9;">
-            <img src="/images/home/senior.png" alt="Senior">
-            <div class="home-section-grid-item-title">
-                Senior Social Sciences 
-            </div>
-        </div>
-
-        <div class="home-section-grid-item" style="background: #63d8ff;">
-            <img src="/images/home/teaching.png" alt="Teaching">
-            <div class="home-section-grid-item-title">
-                Teaching Resources
-            </div>
-        </div>
-
-        <div class="home-section-grid-item" style="background: #56b0c7;">
-            <img src="/images/home/assessment.png" alt="Assessment">
-            <div class="home-section-grid-item-title">
-                Assessment Resources
-            </div>
-        </div>
-
-        <div class="home-section-grid-item" style="background: #61e498;">
-            <img src="/images/home/other.png" alt="Other">
-            <div class="home-section-grid-item-title">
-                Other Resources
-            </div>
         </div>
     </div>
 </div>
@@ -126,6 +125,7 @@
         padding: 0 100px;
         padding-bottom: 30px;
         margin: 0;
+        margin-top: 80px;
         font-weight: 400;
         font-size: 45px;
         background: linear-gradient(45deg, #4187d7, #7de8b1, #4187d7);
@@ -138,8 +138,7 @@
     .home-section-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        padding: 100px;
-        padding-top: 0;
+        padding: 0 100px;
     }
 
     .home-section-grid-item {
@@ -154,6 +153,7 @@
         text-align: center;
         height: 140px;
         cursor: pointer;
+        text-decoration: none;
     }
 
     .home-section-grid-item:hover {

@@ -1,0 +1,38 @@
+<%- include('../header') %>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/5.1.0/marked.min.js" integrity="sha512-j5KAPeir0rGl+OSddiUeUtUlG+GK7acI/kNQqrpjSSB1IlDUbj3VnQOyoW3GWpPj7i8CSfb0T+Q4IRHxAPRxCA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.4/purify.min.js" integrity="sha512-Ppv1jKk0X8u28/MsfyW8gWQmfP2HDmCJd03tC4qrFoVZwUdjfkbX14wiBP5akSlM00EP8Kgt1UDZfvdFKLVNmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<link rel="stylesheet" href="/css/pages/posts.css">
+
+<div class="full-page-wrapper">
+    <div class="full-page" style="padding: 30px;">
+        <% if (post) { %>
+            <div class="post-title">
+                <div>
+                    <%= post.title %>
+                </div>
+
+                <div style="font-size: 18px; color: #999;">
+                    <%= new Date(post.date).toLocaleString() %>;
+                    <%= post.author_email %>
+                </div>
+            </div>
+            
+            <div class="post-content-wrapper" style="margin-top: 30px;">
+                <div id="post-content"></div>
+            </div>
+        <% } else { %>
+            <h1>Post not found</h1>
+        <% } %>
+    </div>
+</div>
+
+<script>
+    var content = `<%= post.content %>`;
+    content = new DOMParser().parseFromString(content, "text/html").documentElement.textContent;
+    content = content.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+    document.getElementById('post-content').innerHTML = DOMPurify.sanitize(marked.parse(content));
+</script>
+
+<%- include('../footer') %>

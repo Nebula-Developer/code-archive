@@ -2,14 +2,14 @@ const sqlite3 = require('sqlite3').verbose();
 const fs = require('fs');
 const path = require('path');
 
-if (!fs.existsSync(path.join(__dirname, 'db'))) fs.mkdirSync(path.join(__dirname, 'db'));
+const accounts = require('./accounts');
+const util = require('./util');
 
-const db = new sqlite3.Database(path.join(__dirname, 'db', 'posts.db'), (err) => {
-    if (err) {
-        console.error(err.message);
-        return;
-    }
+const db = new sqlite3.Database(path.join(__dirname, 'db', 'database.db'), (err) => {
+    if (util.handleError(err)) return;
+
     console.log('Connected to post database');
+
     db.run(`
         CREATE TABLE IF NOT EXISTS posts (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -20,10 +20,11 @@ const db = new sqlite3.Database(path.join(__dirname, 'db', 'posts.db'), (err) =>
             date TEXT NOT NULL
         )
     `);
+
     db.run(`
         CREATE TABLE IF NOT EXISTS groups (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL
+            name TEXT NOT NULL UNIQUE
         )
     `);
 });
@@ -31,14 +32,13 @@ const db = new sqlite3.Database(path.join(__dirname, 'db', 'posts.db'), (err) =>
 function createGroup(name) {
     return new Promise((resolve, reject) => {
         db.serialize(() => {
-            db.run('INSERT INTO groups (name) VALUES (?)', [name], (err) => {
-                if (err) {
-                    console.error(err.message);
-                    resolve(null);
-                    return;
-                }
+            db.get('SELECT * FROM groups WHERE name = ?', [name], (err, row) => {
+                if (util.handleError(err) || row) return resolve(null);
 
-                resolve(true);
+                db.run('INSERT INTO groups (name) VALUES (?)', [name], function(err) {
+                    if (util.handleError(err)) return resolve(null);
+                    resolve(this.lastID);
+                });
             });
         });
     });
@@ -48,12 +48,7 @@ function getGroups() {
     return new Promise((resolve, reject) => {
         db.serialize(() => {
             db.all('SELECT * FROM groups', (err, rows) => {
-                if (err) {
-                    console.error(err.message);
-                    resolve(null);
-                    return;
-                }
-
+                if (util.handleError(err)) return resolve(null);
                 resolve(rows);
             });
         });
@@ -63,72 +58,60 @@ function getGroups() {
 function createPost(title, content, group_id, author) {
     return new Promise((resolve, reject) => {
         db.serialize(() => {
-            db.run('INSERT INTO posts (title, content, group_id, author, date) VALUES (?, ?, ?, ?, ?)', [title, content, group_id, author, new Date().toISOString()], (err) => {
-                if (err) {
-                    console.error(err.message);
-                    resolve(null);
-                    return;
-                }
-
-                resolve(true);
+            db.run('INSERT INTO posts (title, content, group_id, author, date) VALUES (?, ?, ?, ?, ?)', [title, content, group_id, author, new Date().toISOString()], function(err) {
+                if (util.handleError(err)) return resolve(null);
+                resolve(this.lastID);
             });
         });
     });
 }
 
-function getPosts() {
+function getJoinedPosts(where = '', single = false) {
+    var select = `
+        posts.id, posts.title, posts.content, posts.group_id, posts.author, posts.date,
+        groups.name AS group_name,
+        users.email AS author_email, users.password AS author_password
+    `;
+
+    var query = `
+        SELECT ${select}
+        FROM posts
+        INNER JOIN groups ON posts.group_id = groups.id
+        INNER JOIN users ON posts.author = users.id
+        ${where}
+    `;
+
     return new Promise((resolve, reject) => {
         db.serialize(() => {
-            db.all('SELECT * FROM posts', (err, rows) => {
-                if (err) {
-                    console.error(err.message);
-                    resolve(null);
-                    return;
-                }
+            db.all(query, (err, rows) => {
+                if (util.handleError(err)) return resolve(null);
 
-                resolve(rows);
+                if (single) return resolve(rows[0]);
+                else resolve(rows);
             });
         });
     });
 }
 
-function getPostsByGroup(group_id) {
-    return new Promise((resolve, reject) => {
-        db.serialize(() => {
-            db.all('SELECT * FROM posts WHERE group_id = ?', [group_id], (err, rows) => {
-                if (err) {
-                    console.error(err.message);
-                    resolve(null);
-                    return;
-                }
+function getPosts(limit = -1) { return getJoinedPosts(limit == -1 ? '' : `LIMIT ${limit}`); }
+function getPostsByGroup(group_id, limit = -1) { return getJoinedPosts(`WHERE posts.group_id = ${group_id} ${limit == -1 ? '' : `LIMIT ${limit}`}`); }
+function getPost(id) { return getJoinedPosts(`WHERE posts.id = ${id}`, true); }
 
-                resolve(rows);
-            });
-        });
-    });
-}
-
-function getPost(id) {
-    return new Promise((resolve, reject) => {
-        db.serialize(() => {
-            db.get('SELECT * FROM posts WHERE id = ?', [id], (err, row) => {
-                if (err) {
-                    console.error(err.message);
-                    resolve(null);
-                    return;
-                }
-
-                resolve(row);
+function test() {
+    createGroup("Test").then((groupID) => {
+        console.log(groupID);
+    
+        createPost("Test", "Test", groupID, 1).then((postID) => {
+            console.log(postID);
+            getPost(postID).then((post) => {
+                console.log(post);
             });
         });
     });
 }
 
 module.exports = {
-    createGroup,
-    getGroups,
-    createPost,
-    getPosts,
-    getPostsByGroup,
-    getPost
+    createGroup, getGroups,
+    createPost, getPosts,
+    getPostsByGroup, getPost
 };

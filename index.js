@@ -3,24 +3,27 @@ const socketIO = require('socket.io');
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
+
+if (!fs.existsSync(path.join(__dirname, 'db'))) fs.mkdirSync(path.join(__dirname, 'db'));
+
 const accounts = require('./accounts');
+const posts = require('./posts');
 
 const app = express();
 const server = http.createServer(app);
 const io = new socketIO.Server(server);
 
-function render(req, res, file) {
+function render(req, res, file, data = {}) {
     accounts.getReqAccount(req).then((acc) => {
         res.render(file, {
-            account: acc
+            account: acc,
+            ...data
         });
     });
 }
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-
-app.get('/', (req, res) => { render(req, res, 'index'); });
 
 app.get('/user/login/:id/:token', (req, res) => {
     accounts.setResAccount(res, req.params.id, req.params.token);
@@ -30,6 +33,55 @@ app.get('/user/login/:id/:token', (req, res) => {
 app.get('/user/logout', (req, res) => {
     accounts.removeResAccount(res);
     res.redirect('/');
+});
+
+app.get('/post/:id', (req, res) => {
+    var id = req.params.id;
+    if (!id) return res.redirect('/');
+
+    posts.getPost(id).then((post) => {
+        if (!post) return res.redirect('/');
+
+        render(req, res, 'dynamic/post', { post });
+    });
+});
+
+app.get('/', (req, res) => {
+    posts.getPosts(3).then((post) => {
+        render(req, res, 'index', {
+            posts: post
+        });
+    });
+});
+
+app.get('/posts', (req, res) => {
+    posts.getPosts(5).then((post) => {
+        posts.getGroups().then((groups) => {
+            render(req, res, 'dynamic/posts', {
+                posts: post, groups,
+                sort: 'all'
+            });
+        });
+    });
+});
+
+app.get('/posts/:group', (req, res) => {
+    posts.getPostsByGroup(req.params.group, 5).then((post) => {
+        posts.getGroups().then((groups) => {
+            render(req, res, 'dynamic/posts', {
+                posts: post, groups,
+                sort: req.params.group
+            });
+        });
+    });
+});
+
+app.get('/create', (req, res) => {
+    posts.getGroups().then((groups) => {
+        render(req, res, 'dynamic/create', {
+            groups
+        });
+    });
 });
 
 // Handle views
@@ -68,6 +120,11 @@ function chkArgs(...args) {
     return true;
 }
 
+function chkCallback(callback) {
+    if (typeof callback !== 'function') return false;
+    return true;
+}
+
 io.on('connection', (socket) => {
     console.log('New user connected');
     socket.on('disconnect', () => {
@@ -75,6 +132,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('login', (data, callback) => {
+        if (!chkCallback(callback)) return;
         if (!chkArgs(data.email, 'string', data.password, 'string')) {
             return callback({
                 success: false,
@@ -86,6 +144,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('register', (data, callback) => {
+        if (!chkCallback(callback)) return;
         if (!chkArgs(data.email, 'string', data.password, 'string')) {
             return callback({
                 success: false,
@@ -94,6 +153,69 @@ io.on('connection', (socket) => {
         }
 
         accounts.register(data.email, data.password, callback);
+    });
+
+    socket.on('createGroup', (name, callback) => {
+        if (!chkCallback(callback)) return;
+        if (!chkArgs(name, 'string')) {
+            return callback({
+                success: false,
+                error: "Invalid arguments."
+            });
+        }
+
+        accounts.getSocketAccount(socket).then((acc) => {
+            if (!acc) return callback({
+                success: false,
+                error: "You must be logged in to create a group."
+            });
+
+            posts.createGroup(name).then((id) => {
+                if (id) {
+                    callback({
+                        success: true,
+                        data: id
+                    });
+                } else {
+                    callback({
+                        success: false,
+                        error: "Group already exists."
+                    });
+                }
+            });
+        });
+    });
+
+    socket.on('createPost', (data, callback) => {
+        if (!chkCallback(callback)) return;
+        if (!chkArgs(data.title, 'string', data.content, 'string', data.group, 'number')) {
+            return callback({
+                success: false,
+                error: "Invalid arguments."
+            });
+        }
+
+        accounts.getSocketAccount(socket).then((acc) => {
+            if (!acc) return callback({
+                success: false,
+                error: "You must be logged in to create a post."
+            });
+
+            posts.createPost(data.title, data.content, data.group, acc.id).then((id) => {
+                console.log(id);
+                if (id) {
+                    callback({
+                        success: true,
+                        data: id
+                    });
+                } else {
+                    callback({
+                        success: false,
+                        error: "Failed to create group"
+                    });
+                }
+            });
+        });
     });
 });
 

@@ -58,7 +58,7 @@
     margin-top: 18px;
 }
 
-.styled-placeholder-input {
+.styled-placeholder .styled-placeholder-input {
     width: 100%;
     height: 40px;
     border: none;
@@ -70,9 +70,10 @@
     outline: none;
 }
 
-.styled-placeholder-label {
+.styled-placeholder .styled-placeholder-label {
     position: absolute;
-    top: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     left: 0;
     font-size: 16px;
     font-weight: 400;
@@ -81,11 +82,52 @@
     transition: 0.2s ease all;
 }
 
-.styled-placeholder-input:focus + .styled-placeholder-label,
-.styled-placeholder-input:not(:placeholder-shown) + .styled-placeholder-label {
-    top: -10px;
+.styled-placeholder .styled-placeholder-input:focus + .styled-placeholder-label,
+.styled-placeholder .styled-placeholder-input:not(:placeholder-shown) + .styled-placeholder-label {
+    top: 0;
     left: 0;
     font-size: 12px;
     font-weight: 400;
     color: rgb(74, 74, 74);
+}
+
+
+.styled-placeholder-alt {
+    position: relative;
+    margin-top: 18px;
+}
+
+.styled-placeholder-alt .styled-placeholder-input {
+    width: calc(100% - 20px);
+    height: 40px;
+    border: none;
+    border: 1px solid rgb(74, 74, 74);
+    font-size: 16px;
+    font-weight: 400;
+    padding: 2px 10px;
+    background: transparent;
+    outline: none;
+    border-radius: 5px;
+}
+
+.styled-placeholder-alt .styled-placeholder-label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgb(74, 74, 74);
+    pointer-events: none;
+    transition: 0.2s ease all;
+}
+
+.styled-placeholder-alt .styled-placeholder-input:focus + .styled-placeholder-label,
+.styled-placeholder-alt .styled-placeholder-input:not(:placeholder-shown) + .styled-placeholder-label {
+    top: 0;
+    left: 5px;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgb(74, 74, 74);
+    background: white;
 }

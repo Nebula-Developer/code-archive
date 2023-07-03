@@ -1,0 +1,79 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 140px;
+    height: 30px;
+}
+
+.dropdown-header {
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    background: white;
+    border-radius: 5px;
+    height: 15px;
+
+    z-index: 6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 20px);
+    transition: border-bottom 0.2s ease;
+    padding: 7.5px 10px;
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-header-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 120px;
+}
+
+.dropdown.active .dropdown-header {
+    border-radius: 5px 5px 0 0;
+    border-bottom: rgba(255, 255, 255, 0);
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 3px;        
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 0 0 5px 5px;
+    overflow: hidden;
+    border-top: none;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 5;
+    transition: 0.2s ease;
+}
+
+.dropdown.active .dropdown-content {
+    opacity: 1;
+    pointer-events: all;
+    top: 30px;
+}
+
+.dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.dropdown-item:hover {
+    background: #eee;
+}
+
+.dropdown-caret {
+    margin-left: 5px;
+    transition: transform 0.2s;
+}
+
+.dropdown.active .dropdown-caret {
+    transform: rotate(180deg);
+}
