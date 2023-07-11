@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "5P7PZnUFEBHzonrfmXpx7disqJfeEhwJ3otdvy8t9IeVEElUB4DhEwFDQ3cE08qUkxOvsorw+gEfok9DvRgocA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\nebula\\Documents\\VN\\VN.Core\\VN.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nebula\\.nuget\\packages\\csfml\\2.5.2\\csfml.2.5.2.nupkg.sha512",
+    "C:\\Users\\nebula\\.nuget\\packages\\sfml.audio\\2.5.1\\sfml.audio.2.5.1.nupkg.sha512",
+    "C:\\Users\\nebula\\.nuget\\packages\\sfml.graphics\\2.5.1\\sfml.graphics.2.5.1.nupkg.sha512",
+    "C:\\Users\\nebula\\.nuget\\packages\\sfml.net\\2.5.1\\sfml.net.2.5.1.nupkg.sha512",
+    "C:\\Users\\nebula\\.nuget\\packages\\sfml.system\\2.5.1\\sfml.system.2.5.1.nupkg.sha512",
+    "C:\\Users\\nebula\\.nuget\\packages\\sfml.window\\2.5.1\\sfml.window.2.5.1.nupkg.sha512"
+  ],
+  "logs": []
+}
