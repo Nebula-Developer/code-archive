@@ -2,50 +2,43 @@
 using SFML.Window;
 using SFML.System;
 using System;
+using System.Diagnostics;
 
 namespace VN;
 
-public static class Paths {
-    public static string GetAssetPath(string path) => Path.Join(AppContext.BaseDirectory, path);
-}
+#nullable disable
 
+public static partial class VisualNovel {
+    public static RenderWindow Window { get; private set; }
 
-public partial class VisualNovel {
-    public RenderWindow Window;
-    public Vector2u BaseSize = new Vector2u(800, 600);
-
-    public ImgElement TextBox = new ImgElement("Assets/GUI/TextBox.png");
-
-    public void Resize(object? sender = null, SizeEventArgs? e = null) {
-        Window.SetView(new View(new FloatRect(0, 0, e?.Width ?? BaseSize.X, e?.Height ?? BaseSize.Y)));
-        OnResize?.Invoke();
+    public static Dictionary<Element, int> Elements { get; private set; } = new Dictionary<Element, int>();
+    
+    public static void AddElement(Element element, int index = -1) {
+        Elements.Add(element, index);
+        Elements = Elements.OrderBy((pair) => pair.Value).ToDictionary((pair) => pair.Key, (pair) => pair.Value);
+        VisualNovelEvents.AddElement(element);
     }
 
-    public Action? OnResize;
+    public static void RemoveElement(Element element) {
+        Elements.Remove(element);
+        VisualNovelEvents.RemoveElement(element);
+    }
+    
+    public static void Init() {
+        Window = new RenderWindow(new VideoMode(1280, 720), "Visual Novel", Styles.Default);
+        Window.Closed += (sender, e) => { Window.Close(); };
+        Window.Resized += (sender, e) => { Window.SetView(new View(new FloatRect(0, 0, e.Width, e.Height))); };
+    }
 
-    public void Render() {
-        Window = new RenderWindow(new VideoMode(BaseSize.X, BaseSize.Y), "Visual Novel");
-
-
-        Resize();
-        Window.Resized += Resize;
-
-        Clock deltaClock = new Clock();
-        float deltaTime = 0f;
-
+    public static void Run() {
         while (Window.IsOpen) {
-            deltaTime = deltaClock.Restart().AsSeconds();
-
             Window.DispatchEvents();
-            Window.Clear();
+            Window.Clear(Color.Black);
 
-            TextBox.Draw(Window);
-            
-            if (Window.HasFocus()) {
-                if (Keyboard.IsKeyPressed(Keyboard.Key.Right)) TextBox.Position += new Vector2f(100f * deltaTime, 0f);
-                if (Keyboard.IsKeyPressed(Keyboard.Key.Left)) TextBox.Position -= new Vector2f(100f * deltaTime, 0f);
-                if (Keyboard.IsKeyPressed(Keyboard.Key.Up)) TextBox.Position -= new Vector2f(0f, 100f * deltaTime);
-                if (Keyboard.IsKeyPressed(Keyboard.Key.Down)) TextBox.Position += new Vector2f(0f, 100f * deltaTime);
+            foreach (var element in Elements.Keys) {
+                if (element.IsVisible) {
+                    element.Render();
+                }
             }
 
             Window.Display();
