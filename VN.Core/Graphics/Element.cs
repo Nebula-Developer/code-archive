@@ -39,6 +39,7 @@ public class Element {
     public bool Visible { get; set; } = true;
 
     public Element Parent { get; set; }
+    public int zIndex { get; set; } = 0;
 
     public virtual void Render() { }
     public virtual void Resize(SizeEventArgs e) { }
@@ -50,4 +51,17 @@ public class Element {
     public virtual void MouseRelease(MouseButtonEventArgs e) { }
     public virtual void MouseMove(MouseMoveEventArgs e) { }
     public virtual void MouseScroll(MouseWheelScrollEventArgs e) { }
+
+    public override bool Equals(object obj) {
+        return obj is Element element &&
+               WorldPosition.Equals(element.WorldPosition) &&
+               WorldRotation == element.WorldRotation &&
+               Visible == element.Visible &&
+               EqualityComparer<Element>.Default.Equals(Parent, element.Parent) &&
+               zIndex == element.zIndex;
+    }
+
+    public override int GetHashCode() {
+        return HashCode.Combine(WorldPosition, WorldRotation, Visible, Parent, zIndex);
+    }
 }
