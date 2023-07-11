@@ -32,6 +32,7 @@ public class RectangleElement : Element {
 
     public RectangleElement(Vector2f size) {
         Rectangle = new RectangleShape(size);
+        Rectangle.Origin = Rectangle.Size / 2;
         FillColor = new Binding<Color>(Color.White, (value) => Rectangle.FillColor = value);
     }
 
@@ -51,7 +52,7 @@ public class RectangleElement : Element {
 
     public override void KeyPress(KeyEventArgs e) {
         if (e.Code == Keyboard.Key.E) {
-            FillColor.Set(Color.Red);
+            FillColor.Set(new Color(255, 255, 255, 100));
         } else if (e.Code == Keyboard.Key.F) {
             FillColor.Set(Color.Blue);
         }
@@ -61,11 +62,21 @@ public class RectangleElement : Element {
         Vector2f mouseClickPosition = new Vector2f(e.X, e.Y);
         Vector2f currentPos = Position;
 
-        float time = 1000;
+        float time = 1500;
+        float distance = 0;
+        distance += Math.Abs(mouseClickPosition.X - currentPos.X);
+        distance += Math.Abs(mouseClickPosition.Y - currentPos.Y);
+        // time *= distance / 100;
         
         float Lerp(float a, float b, float t) => a + (b - a) * t;
         Animation.Animate(time, (t) => {
             Position = new Vector2f(Lerp(currentPos.X, mouseClickPosition.X, t), Lerp(currentPos.Y, mouseClickPosition.Y, t));
-        }, "BoxMovement", Easing.QuintOut);
+            
+            if (t < 0.5) {
+                Rotation = Lerp(0, distance / 10, t * 2);
+            } else {
+                Rotation = Lerp(distance / 10, 0, (t - 0.5f) * 2);
+            }
+        }, "BoxRotation", Easing.ElasticOut);
     }
 }
