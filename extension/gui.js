@@ -2,6 +2,9 @@ var globalBrowser = chrome || browser;
 
 const getUrl = (url) => globalBrowser.runtime.getURL(url);
 
+var nContainer = $(`<div class="n-container">`);
+$('body').append(nContainer);
+
 function calculateBounds(target, x, y) {
     return [
         Math.max(Math.min(x, window.innerWidth - target.offsetWidth), 0),
@@ -11,10 +14,24 @@ function calculateBounds(target, x, y) {
 
 function calculateWidthBounds(target, width, height) {
     return [
-        Math.max(Math.min(width, window.innerWidth - target.getBoundingClientRect().left), 0),
-        Math.max(Math.min(height, window.innerHeight - target.getBoundingClientRect().top), 0)
+        Math.max(Math.min(width, window.innerWidth - target.getBoundingClientRect().left), 20),
+        Math.max(Math.min(height, window.innerHeight - target.getBoundingClientRect().top), 50)
     ]
 }
+
+function setXY(target, x, y, bounded = false) {
+    if (bounded) [x, y] = calculateBounds(target, x, y);
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+}
+
+function getXY(target) {
+    return [
+        parseFloat(target.getAttribute('data-x')) || 0,
+        parseFloat(target.getAttribute('data-y')) || 0
+    ]
+}
+
 
 class NWindow {
     constructor(title, width = 0, height = 0, resize = false, restrict = { min: { width: 200, height: 200 }, max: { width: 1000, height: 1000 } }) {
@@ -32,7 +49,7 @@ class NWindow {
 
     create(content) {
         this.window = {
-            window: $(`<div class="n-window" style="width: ${this.width}px; height: ${this.height}px;">`),
+            window: $(`<div class="n-window ${this.resize ? 'n-resizable' : ''}" style="width: ${this.width}px; height: ${this.height}px;">`),
             container: $(`<div class="n-window-container">`),
             titlebar: $(`<div class="n-titlebar flex-between">`),
             title: $(`<div class="n-title">${this.title}</div>`),
@@ -54,11 +71,27 @@ class NWindow {
         var maximize = createTitlebarButton(getUrl('assets/icons/maximize.svg'));
         var close = createTitlebarButton(getUrl('assets/icons/close.svg'));
 
+        minimize.click(() => {
+            minimizeWindow(this.window.window);
+        });
+
+        maximize.click(() => {
+            this.window.window.toggleClass('n-maximized');
+            if (!this.window.window.hasClass('n-maximized')) {
+                this.window.window.css('transition', 'width 0.2s cubic-bezier(.19,1,.22,1), height 0.2s cubic-bezier(.19,1,.22,1), top 0.2s cubic-bezier(.19,1,.22,1), left 0.2s cubic-bezier(.19,1,.22,1), transform 0.2s cubic-bezier(.19,1,.22,1)');
+                setTimeout(() => {
+                    this.window.window.css('transition', '');
+                }, 200);
+            }
+        });
+
+
+
         this.window.buttons.append(minimize);
         this.window.buttons.append(maximize);
         this.window.buttons.append(close);
         
-        $('body').append(this.window.window);
+        nContainer.append(this.window.window);
 
         if (this.resize) {
             interact(this.window.window[0]).resizable({
@@ -72,10 +105,11 @@ class NWindow {
                     }),
                     interact.modifiers.restrictSize(this.restrict)
                 ]
-            }).on('resizemove', function (event) {
+            }).on('resizemove', (event) => {
+                if (this.window.window.hasClass('n-maximized')) return;
+                
                 var target = event.target;
-                var x = (parseFloat(target.getAttribute('data-x')) || 0);
-                var y = (parseFloat(target.getAttribute('data-y')) || 0);
+                var [x, y] = getXY(target);
                 
                 x += event.deltaRect.left;
                 y += event.deltaRect.top;
@@ -87,30 +121,23 @@ class NWindow {
 
                 var [bX, bY] = calculateBounds(target, x, y);
                 
-                target.style.webkitTransform = target.style.transform =
-                    'translate(' + bX + 'px,' + bY + 'px)';
+                target.style.webkitTransform = target.style.transform = 'translate(' + bX + 'px,' + bY + 'px)';
                 
-                target.setAttribute('data-x', x);
-                target.setAttribute('data-y', y);
-            }).on('resizestart', function (event) {
+                setXY(target, x, y);
+            }).on('resizestart', (event) => {
+                if (this.window.window.hasClass('n-maximized')) return;
+
                 var target = event.target;
-                var x = (parseFloat(target.getAttribute('data-x')) || 0);
-                var y = (parseFloat(target.getAttribute('data-y')) || 0);
-                x = Math.min(Math.max(x, 0), window.innerWidth - target.offsetWidth);
-                y = Math.min(Math.max(y, 0), window.innerHeight - target.offsetHeight);
-                target.setAttribute('data-x', x);
-                target.setAttribute('data-y', y);
+                var [x, y] = getXY(target);
+                setXY(target, x, y, true);
             });
         }
 
-        interact(this.window.titlebar[0]).draggable({
-            modifiers: [
-                
-            ]
-        }).on('dragmove', (event) => {
+        interact(this.window.titlebar[0]).draggable({}).on('dragmove', (event) => {
+            if (this.window.window.hasClass('n-maximized')) return;
+
             var target = this.window.window[0];
-            var x = (parseFloat(target.getAttribute('data-x')) || 0);
-            var y = (parseFloat(target.getAttribute('data-y')) || 0);
+            var [x, y] = getXY(target);
             
             x += event.dx;
             y += event.dy;
@@ -120,16 +147,13 @@ class NWindow {
             target.style.webkitTransform = target.style.transform =
                 'translate(' + bX + 'px,' + bY + 'px)';
             
-            target.setAttribute('data-x', x);
-            target.setAttribute('data-y', y);
+            setXY(target, x, y);
         }).on('dragstart', (event) => {
+            if (this.window.window.hasClass('n-maximized')) return;
+
             var target = this.window.window[0];
-            var x = (parseFloat(target.getAttribute('data-x')) || 0);
-            var y = (parseFloat(target.getAttribute('data-y')) || 0);
-            x = Math.min(Math.max(x, 0), window.innerWidth - target.offsetWidth);
-            y = Math.min(Math.max(y, 0), window.innerHeight - target.offsetHeight);
-            target.setAttribute('data-x', x);
-            target.setAttribute('data-y', y);
+            var [x, y] = getXY(target);
+            setXY(target, x, y, true);
         });
     }
 }
@@ -138,25 +162,29 @@ window.addEventListener('resize', function() {
     $('.n-window:not(.n-window-minimized)').each(function() {
         /** @type {HTMLElement} */
         var win = $(this)[0];
+        if (win.classList.contains('n-maximized')) return;
+
+        const xOff = () => win.getBoundingClientRect().left + win.offsetWidth > window.innerWidth;
+        const yOff = () => win.getBoundingClientRect().top + win.offsetHeight > window.innerHeight;
 
         // if off of screen, move back on
-        if (win.getBoundingClientRect().left + win.offsetWidth > window.innerWidth ||
-            win.getBoundingClientRect().top + win.offsetHeight > window.innerHeight) {
-            var x = (parseFloat(win.getAttribute('data-x')) || 0);
-            var y = (parseFloat(win.getAttribute('data-y')) || 0);
-            x = Math.max(Math.min(x, window.innerWidth - win.offsetWidth), 0);
-            y = Math.max(Math.min(y, window.innerHeight - win.offsetHeight), 0);
-            win.setAttribute('data-x', x);
-            win.setAttribute('data-y', y);
+        if (xOff() || yOff()) {
+            var [x, y] = getXY(win);
+            [x, y] = calculateBounds(win, x, y);
+            
+            setXY(win, x, y);
+
             win.style.webkitTransform = win.style.transform =
                 'translate(' + x + 'px, ' + y + 'px)';
 
-            if (win.getBoundingClientRect().left + win.offsetWidth > window.innerWidth) {
-                win.style.width = window.innerWidth - win.getBoundingClientRect().left + 'px';
+            if (!win.classList.contains('n-resizable')) return;
+
+            if (xOff()) {
+                win.style.width = Math.max(window.innerWidth - win.getBoundingClientRect().left, 50) + 'px';
             }
 
-            if (win.getBoundingClientRect().top + win.offsetHeight > window.innerHeight) {
-                win.style.height = window.innerHeight - win.getBoundingClientRect().top + 'px';
+            if (yOff()) {
+                win.style.height = Math.max(window.innerHeight - win.getBoundingClientRect().top, 50) + 'px';
             }
         }
     });

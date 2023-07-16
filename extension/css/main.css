@@ -1,11 +1,25 @@
+.n-container {
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 
 .n-window {
     position: fixed;
     top: 0;
     left: 0;
-    background: red;
     z-index: 99999;
-    transition: top 0.2s ease, left 0.2s ease, opacity 0.2s ease;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+    animation: dropTransition 0.8s linear;
+    animation-fill-mode: forwards;
+}
+
+.n-maximized {
+    width: 100vw !important;
+    height: 100vh !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    transition: width 0.2s cubic-bezier(.19,1,.22,1), height 0.2s cubic-bezier(.19,1,.22,1), top 0.2s cubic-bezier(.19,1,.22,1), left 0.2s cubic-bezier(.19,1,.22,1), transform 0.2s cubic-bezier(.19,1,.22,1);
 }
 
 .n-window-minimized {
@@ -16,31 +30,43 @@
 
 .n-window-container {
     position: relative;
-    width: calc(100% - 20px);
-    height: calc(100% - 20px);
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
     margin: 10px;
     background: orange;
+    padding: 10px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .n-titlebar {
-    height: 30px;
+    height: 40px;
     background: blue;
     width: 100%;
     position: absolute;
     top: 0;
     left: 0;
+    user-select: none;
+}
+
+.n-titlebar-buttons {
+    margin-right: 6px;
 }
 
 .n-titlebar-button {
     width: 30px;
-    height: 30px;
+    height: 40px;
     cursor: pointer;
-    margin: 0 5px;
+    margin: 0;
 }
 
 .n-titlebar-button div {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
+}
+
+.n-title {
+    margin-left: 10px;
 }
 
 .flex-between {
