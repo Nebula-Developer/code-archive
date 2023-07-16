@@ -32,6 +32,8 @@ function getXY(target) {
     ]
 }
 
+var windowId = 1;
+var windows = [];
 
 class NWindow {
     constructor(title, width = 0, height = 0, resize = false, restrict = { min: { width: 200, height: 200 }, max: { width: 1000, height: 1000 } }) {
@@ -45,6 +47,9 @@ class NWindow {
         this.height = height;
         this.resize = resize;
         this.restrict = restrict;
+        this.id = windowId++;
+
+        windows.push(this);
     }
 
     create(content) {
@@ -56,6 +61,10 @@ class NWindow {
             buttons: $(`<div class="n-titlebar-buttons flex-between">`),
             content: $(`<div class="n-content">${content}</div>`)
         };
+
+        this.window.window.on('mousedown', () => {
+            this.window.window.css('zIndex', ++windowId + 9999);
+        });
         
         this.window.titlebar.append(this.window.title);
         this.window.titlebar.append(this.window.buttons);
@@ -72,7 +81,7 @@ class NWindow {
         var close = createTitlebarButton(getUrl('assets/icons/close.svg'));
 
         minimize.click(() => {
-            minimizeWindow(this.window.window);
+            minimizeWindow(this);
         });
 
         maximize.click(() => {
@@ -85,7 +94,9 @@ class NWindow {
             }
         });
 
-
+        close.click(() => {
+            this.window.window.remove();
+        });
 
         this.window.buttons.append(minimize);
         this.window.buttons.append(maximize);
@@ -190,6 +201,40 @@ window.addEventListener('resize', function() {
     });
 });
 
-function minimizeWindow(win) { win.addClass('n-window-minimized'); }
-function maximizeWindow(win) { win.removeClass('n-window-minimized'); }
+var minimizedWindows = [];
+var minimizeView = $('<div class="n-minimize-view"></div>');
+nContainer.append(minimizeView);
+
+function minimizeWindow(win) {
+    win.window.window.addClass('n-window-minimized');
+    minimizedWindows.push(win);
+
+    var minimizeViewItem = $(`
+        <div class="n-minimize-view-item">
+            <div class="n-minimize-view-item-title">${win.title}</div>
+        </div>
+    `);
+    minimizeView.append(minimizeViewItem);
+
+    minimizeViewItem.click(() => {
+        maximizeWindow(win.window.window);
+        minimizedWindows.splice(minimizedWindows.indexOf(win), 1);
+        minimizeViewItem.css('opacity', '0');
+        setTimeout(() => {
+            minimizeViewItem.remove();
+        }, 100);
+    });
+
+    setTimeout(() => {
+        maximizeWindow(win);
+    }, 500);
+}
+
+function maximizeWindow(win) {
+    win.css('transition', 'opacity 0.1s ease, filter 0.1s ease, transform 0.5s cubic-bezier(.36,.79,0,1), width 0.25s ease, height 0.25s ease');
+    setTimeout(() => {
+        win.css('transition', '');
+    }, 500);
+    win.removeClass('n-window-minimized');
+}
 

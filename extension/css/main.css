@@ -7,10 +7,11 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 99999;
+    z-index: 9999;
     filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
     animation: dropTransition 0.8s linear;
     animation-fill-mode: forwards;
+    filter: none;
 }
 
 .n-maximized {
@@ -23,9 +24,13 @@
 }
 
 .n-window-minimized {
+    transition: opacity 0.5s ease, filter 0.1s ease, transform 0.5s cubic-bezier(.36,.79,0,1), width 0.25s ease, height 0.25s ease !important;
     opacity: 0;
-    top: 100%;
-    left: 100%;
+    filter: saturate(0);
+    transform: translateY(calc(100vh - 100%)) translateX(calc(100vw - 100%)) !important;
+    width: 200px !important;
+    height: 60px !important;
+    pointer-events: none;
 }
 
 .n-window-container {
@@ -67,6 +72,10 @@
 
 .n-title {
     margin-left: 10px;
+    white-space: nowrap;
+    max-width: calc(100% - 96px);
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .flex-between {
@@ -81,4 +90,32 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.n-minimize-view {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.n-minimize-view-item {
+    min-width: 50px;
+    width: fit-content;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    background: grey;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 5px;
+    transition: background 0.05s linear, opacity 0.1s ease;
+}
+
+.n-minimize-view-item:hover {
+    background: rgb(156, 156, 156);
 }
