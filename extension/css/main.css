@@ -1,0 +1,58 @@
+
+.n-window {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: red;
+    z-index: 99999;
+    transition: top 0.2s ease, left 0.2s ease, opacity 0.2s ease;
+}
+
+.n-window-minimized {
+    opacity: 0;
+    top: 100%;
+    left: 100%;
+}
+
+.n-window-container {
+    position: relative;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    margin: 10px;
+    background: orange;
+}
+
+.n-titlebar {
+    height: 30px;
+    background: blue;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.n-titlebar-button {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.n-titlebar-button div {
+    width: 20px;
+    height: 20px;
+}
+
+.flex-between {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
