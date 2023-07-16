@@ -1,0 +1,19 @@
+{
+    "$schema": "https://json.schemastore.org/chrome-manifest",
+    "manifest_version": 3,
+    "version": "0.0.1",
+    "name": "School Extension",
+    "permissions": [
+        "activeTab"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ]
+}
