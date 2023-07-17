@@ -17,6 +17,10 @@
             <div class="navbar-logo">
                 <a href="/" class="navbar-logo-text">Ōtākaro Histories</a>
             </div>
+
+            <div id="nav-dropdown-button">
+                <i class="fas fa-bars"></i>
+            </div>
     
             <div class="navbar-links flex-row" style="align-items: center;">
                 <a href="/" class="navbar-link">Home</a>
@@ -29,6 +33,13 @@
                     <a href="/user/logout" class="navbar-link">Logout</a>
                 <% } %>
             </div>
+
+
+            <script>
+                $("#nav-dropdown-button").on('click', () => {
+                    $(".navbar-links").toggleClass("nav-dropdown-visible");
+                });
+            </script>
         </div>
     </div>
 
@@ -68,5 +79,67 @@
             font-weight: 400;
             margin-left: 20px;
             text-decoration: none;
+        }
+
+        #nav-dropdown-button {
+            display: none;
+            color: rgb(74, 74, 74);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 10px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+        }
+
+        #nav-dropdown-button:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        #nav-dropdown-button i {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media screen and (max-width: 1000px) {
+            #nav-dropdown-button {
+                display: flex;
+            }
+
+            .navbar-links {
+                display: flex;
+                position: absolute;
+                top: 91px;
+                left: 0;
+                width: calc(100% - 40px);
+                background: white;
+                padding: 20px;
+                flex-direction: column;
+                align-items: center;
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(-10px);
+                transition: opacity 0.2s ease, transform 0.2s ease;
+            }
+
+            .navbar-links.nav-dropdown-visible {
+                pointer-events: all;
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .navbar-links .navbar-link {
+                padding: 10px 0;
+                margin: 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            .navbar-links .navbar-link:hover {
+                color: grey;
+            }
         }
     </style>
