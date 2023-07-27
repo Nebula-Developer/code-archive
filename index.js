@@ -25,6 +25,7 @@ function render(req, res, file, data = {}) {
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// TODO: Modify login cookie set method
 app.get('/user/login/:id/:token', (req, res) => {
     accounts.setResAccount(res, req.params.id, req.params.token);
     res.redirect('/');

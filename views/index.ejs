@@ -52,8 +52,8 @@
         </a>
     </div>
 
-    <div class="home-gallery flex-row" style="padding: 100px;">
-        <div class="home-gallery-index flex-column">
+    <div class="home-gallery flex-row" style="padding: 100px; flex-wrap: wrap">
+        <div class="home-gallery-index flex-column" style="flex-wrap: wrap">
             <div class="home-gallery-title">Recent Items</div>
 
             <% for (var i = 0; i < posts.length; i++) { %>
@@ -134,8 +134,14 @@
 
     .home-section-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, 33%);
         padding: 0 100px;
+    }
+
+    @media screen and (max-width: 900px) {
+        .home-section-grid {
+            grid-template-columns: repeat(auto-fit, 100%);
+        }
     }
 
     .home-section-grid-item {
