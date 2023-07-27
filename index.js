@@ -8,6 +8,7 @@ if (!fs.existsSync(path.join(__dirname, 'db'))) fs.mkdirSync(path.join(__dirname
 
 const accounts = require('./accounts');
 const posts = require('./posts');
+const { success } = require('./util');
 
 const app = express();
 const server = http.createServer(app);
@@ -142,9 +143,9 @@ app.get('*', (req, res) => {
 function chkArgs(...args) {
     if (args.length % 2 != 0) return false;
 
-    for (var i = 0; i < args.length; i+=2) {
-        if (typeof args[i] !== args[i + 1]) return false;
-    }
+    for (var i = 0; i < args.length; i+=2)
+        if (typeof args[i] !== args[i + 1])
+            return false;
 
     return true;
 }
@@ -201,10 +202,7 @@ io.on('connection', (socket) => {
 
             posts.createGroup(name).then((id) => {
                 if (id) {
-                    callback({
-                        success: true,
-                        data: id
-                    });
+                    callback(success({ data: id }));
                 } else {
                     callback({
                         success: false,
