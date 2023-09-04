@@ -1,0 +1,11 @@
+/home/nebuladev/Documents/SSHLanding/Landing.Library/bin/Debug/net7.0/Landing.Library.deps.json
+/home/nebuladev/Documents/SSHLanding/Landing.Library/bin/Debug/net7.0/Landing.Library.dll
+/home/nebuladev/Documents/SSHLanding/Landing.Library/bin/Debug/net7.0/Landing.Library.pdb
+/home/nebuladev/Documents/SSHLanding/Landing.Library/obj/Debug/net7.0/Landing.Library.GeneratedMSBuildEditorConfig.editorconfig
+/home/nebuladev/Documents/SSHLanding/Landing.Library/obj/Debug/net7.0/Landing.Library.AssemblyInfoInputs.cache
+/home/nebuladev/Documents/SSHLanding/Landing.Library/obj/Debug/net7.0/Landing.Library.AssemblyInfo.cs
+/home/nebuladev/Documents/SSHLanding/Landing.Library/obj/Debug/net7.0/Landing.Library.csproj.CoreCompileInputs.cache
+/home/nebuladev/Documents/SSHLanding/Landing.Library/obj/Debug/net7.0/Landing.Library.dll
+/home/nebuladev/Documents/SSHLanding/Landing.Library/obj/Debug/net7.0/refint/Landing.Library.dll
+/home/nebuladev/Documents/SSHLanding/Landing.Library/obj/Debug/net7.0/Landing.Library.pdb
+/home/nebuladev/Documents/SSHLanding/Landing.Library/obj/Debug/net7.0/ref/Landing.Library.dll
