@@ -1,0 +1,32 @@
+{
+    "$schema": "https://json.schemastore.org/chrome-manifest",
+    "manifest_version": 2,
+    "name": "Extensionify",
+    "description": "Boost your learning and productivity with a set of useful and interactive tools.",
+    "version": "1.0",
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "css": ["src/ui/css/style.css"],
+            "js": [
+                "lib/jquery.js",
+                "src/main.js"
+            ]
+        }
+    ],
+    "background": {
+        "scripts": [
+            "lib/socket.io.js",
+            "src/background.js"
+        ]
+    },
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "storage"
+    ],
+    "web_accessible_resources": [
+        "src/ui/css/style.css",
+        "src/ui/html/index.html"
+    ]
+}
