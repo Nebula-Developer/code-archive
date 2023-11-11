@@ -1,0 +1,132 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/nebuladev/Documents/Programming/Novel/VN.Test/VN.Test.csproj": {}
+  },
+  "projects": {
+    "/Users/nebuladev/Documents/Programming/Novel/VN.Core/VN.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/nebuladev/Documents/Programming/Novel/VN.Core/VN.Core.csproj",
+        "projectName": "VN.Core",
+        "projectPath": "/Users/nebuladev/Documents/Programming/Novel/VN.Core/VN.Core.csproj",
+        "packagesPath": "/Users/nebuladev/.nuget/packages/",
+        "outputPath": "/Users/nebuladev/Documents/Programming/Novel/VN.Core/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/nebuladev/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "OpenTK": {
+              "target": "Package",
+              "version": "[4.8.1, )"
+            },
+            "SkiaSharp": {
+              "target": "Package",
+              "version": "[2.88.6, )"
+            },
+            "Topten.RichTextKit": {
+              "target": "Package",
+              "version": "[0.4.166, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/nebuladev/Documents/Programming/Novel/VN.Test/VN.Test.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/nebuladev/Documents/Programming/Novel/VN.Test/VN.Test.csproj",
+        "projectName": "VN.Test",
+        "projectPath": "/Users/nebuladev/Documents/Programming/Novel/VN.Test/VN.Test.csproj",
+        "packagesPath": "/Users/nebuladev/.nuget/packages/",
+        "outputPath": "/Users/nebuladev/Documents/Programming/Novel/VN.Test/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/nebuladev/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "/Users/nebuladev/Documents/Programming/Novel/VN.Core/VN.Core.csproj": {
+                "projectPath": "/Users/nebuladev/Documents/Programming/Novel/VN.Core/VN.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
