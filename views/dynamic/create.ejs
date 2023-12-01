@@ -22,7 +22,7 @@
                             </div>
                         <% } %>
 
-                        <div class="dropdown-item" data-value="New">New</div>
+                        <div class="dropdown-item" data-value="New">New Group</div>
                         <% for (var i = 0; i < groups.length; i++) { %>
                             <% if (typeof editState !== 'undefined' && groups[i].id == editState.group) { continue; } %>
                             <div class="dropdown-item" data-value="<%= groups[i].id %>">
