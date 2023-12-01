@@ -112,6 +112,30 @@
     <% } %>
 </div>
 
+<div style="display: flex; justify-content: center; margin: 20px 0;">
+    <a class="create-post-button" href="/create">
+        <i class="fas fa-plus"></i>
+    </a>
+</div>
+
+<style>
+    .create-post-button {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(rgb(97, 231, 97), rgb(0, 255, 51));
+        color: white;
+        font-size: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    
+    .create-post-button:hover {
+        background: linear-gradient(rgb(87, 208, 87), rgb(56, 215, 88));
+    }
+</style>
 <script>
     var pages = <%- JSON.stringify(posts, null, 2).replaceAll("</script", "<\\/script") %>
     

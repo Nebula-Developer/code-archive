@@ -78,7 +78,31 @@
     </div>
 </div>
 
+<!-- <input type="text" class="test-bg">
+
+<script>
+    var test = $('.test-bg');
+    var home = $('.home-text');
+
+    test.on('input', function() {
+        home.css('background-image', 'url(' + test.val() + ')');
+    });
+</script> -->
+
 <style>
+    .test-bg {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 20px;
+        padding: 20px;
+        background: black;
+        color: white;
+        border: none;
+        outline: none;
+    }
+
     .home-text {
         padding: 120px 50px;
         background: linear-gradient(70deg, #1e5799, #2989d8, #7db9e8);
@@ -87,6 +111,9 @@
         color: white;
         text-align: center;
         line-height: 60px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
     .home-gallery-index {

@@ -4,6 +4,9 @@ const http = require('http');
 const path = require('path');
 const fs = require('fs');
 
+require('dotenv').config({
+    path: path.join(__dirname, '.env')
+});
 if (!fs.existsSync(path.join(__dirname, 'db'))) fs.mkdirSync(path.join(__dirname, 'db'));
 
 const accounts = require('./accounts');
@@ -277,6 +280,9 @@ io.on('connection', (socket) => {
     });
 });
 
-server.listen(3000, () => {
-    console.log('Server on port 3000');
+const PORT = process.env.PORT || 3000;
+console.log(process.env, process.env.PORT);
+
+server.listen(PORT, () => {
+    console.log('Server on port', PORT);
 });

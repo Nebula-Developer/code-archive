@@ -121,7 +121,7 @@ document.getElementById('create-button').addEventListener('click', async () => {
         }
         
         console.log(newGroupRes);
-        group = newGroupRes.data;
+        group = newGroupRes.data.data;
     } else {
         group = parseInt(group);
     }
