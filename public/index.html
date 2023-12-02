@@ -5,91 +5,307 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/socket.io/socket.io.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="account.js" defer></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/account.js" defer></script>
     <title>Document</title>
 </head>
 <body>
-    <h2>Update User</h2>
-    <div>
-        <input type="text" id="updateUsername" class="my-user-username-input"></input>
-        <input type="text" id="updateEmail" class="my-user-email-input"></input>
-        <input type="text" id="updatePassword" class="my-user-password-input"></input>
-        <input type="text" id="updateBio" class="my-user-bio-input"></input>
-        <input type="text" id="updateAvatar" class="my-user-avatar-input"></input>
-        <button type="button" onclick="updateUser()">Update</button>
-    </div>
+    <canvas id="canvas" width="2000" height="2000"></canvas>
+    <div id="highlight"></div>
 
-    <hr>
+    <div id="interactive-zone"></div>
+    <div id="palette"></div>
 
-    <h2>Register</h2>
-    <div>
-        <div>
-            <label for="regUsername">Username:</label>
-            <input type="text" id="regUsername" name="username" required value="testUser">
-        </div>
+    <div id="cooldown"></div>
 
-        <div>
-            <label for="regEmail">Email:</label>
-            <input type="email" id="regEmail" name="email" required value="testUser@gmail.com">
-        </div>
+    <style>
+        :root {
+            --pixel-width: 20px;
+            --pixel-border-size: 3px;
+            --pixel-color: white;
+        }
 
-        <div>
-            <label for="regPassword">Password:</label>
-            <input type="password" id="regPassword" name="password" required value="testPassword">
-        </div>
+        #highlight {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: var(--pixel-width);
+            height: var(--pixel-width);
+            outline: var(--pixel-border-size) solid black;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
 
-        <button type="button" onclick="registerUser()">Register</button>
-    </div>
+        #highlight::before {
+            content: "";
+            outline: var(--pixel-border-size) solid var(--pixel-color);
+            
+            width: calc(100% - (var(--pixel-border-size) * 2));
+            height: calc(100% - (var(--pixel-border-size) * 2));
+            
+            position: absolute;
+        }
 
-    <hr>
+        #canvas {
+            image-rendering: pixelated;
+            background: black;
+            position: absolute;
+            transform-origin: top left;
+        }
 
-    <h2>Login</h2>
-    <div>
-        <div>
-            <label for="loginEmail">Email:</label>
-            <input type="text" id="loginEmail" name="email" required value="testUser@gmail.com">
-        </div>
+        body {
+            padding: 0;
+            margin: 0;
+            background: white;
+            overflow: hidden;
+        }
 
-        <div>
-            <label for="loginPassword">Password:</label>
-            <input type="password" id="loginPassword" name="password" required value="testPassword">
-        </div>
+        .color {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            transition: transform 0.1s cubic-bezier(0,.57,.25,1);
+        }
 
-        <button type="button" onclick="loginUser()">Login</button>
-        <button type="button" onclick="logout()">Logout</button>
-    </div>
+        .color:hover {
+            filter: brightness(1.1);
+        }
+
+        .color.selected {
+            transform: scale(1.25);
+            z-index: 5;
+        }
+
+        #palette {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            height: auto;
+            background: rgb(44, 42, 55);
+            display: flex;
+            z-index: 101;
+            border-top: 3px solid rgb(50, 58, 97);
+        }
+
+        #interactive-zone {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 100;
+        }
+        
+        #cooldown {
+            animation-timing-function: linear;
+            position: fixed;
+            top: 0;
+            left: 0;
+            /* width: 100vw; */
+            height: 10px;
+            background: rgb(44, 42, 55);
+            border-bottom: 1px black;
+        }
+
+        @keyframes cooldown {
+            0% {
+                width: 100vw;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+                width: 90vw;
+            }
+
+            95% {
+                width: 5vw;
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            100% {
+                width: 0;
+                opacity: 0;
+            }
+        }
+    </style>
 
     <script>
-        function registerUser() {
-            const username = document.getElementById('regUsername').value;
-            const email = document.getElementById('regEmail').value;
-            const password = document.getElementById('regPassword').value;
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        const socket = io();
+        
+        // canvas.height = (window.innerHeight - 52 / 2);
+        // canvas.width = canvas.height;
+        var pixelSize = 20;
 
-            register(username, email, password).then((res) => {
-                console.log("Registered:", res);
+        // window.addEventListener("resize", () => {
+        //     canvas.width = window.innerWidth;
+        //     canvas.height = window.innerHeight;
+        //     pixelSize = canvas.height / 100;
+        //     document.styleSheets[0].rules[0].style.setProperty("--pixel-width", pixelSize + "px");
+        //     placePixels();
+        // });
+
+        socket.on("place", (a) => {
+            placePixel(a);
+            pixels[a.x + "," + a.y] = a;
+        });
+
+        socket.on("places", (a) => {
+            a.forEach((pixel) => {
+                placePixel(pixel);
+                pixels[pixel.x + "," + pixel.y] = pixel;
             });
+        });
+
+        var pixelX = 0;
+        var pixelY = 0;
+
+
+        var colors = [ ];
+        socket.on("colors", (c) => {
+            colors = c;
+            createPalette();
+            placePixels();
+        });
+
+        var pixels = { };
+        function placePixels() {
+            for (var i in pixels)
+                placePixel(pixels[i]);
         }
 
-        function updateUser() {
-            const username = document.getElementById('updateUsername').value;
-            const email = document.getElementById('updateEmail').value;
-            const password = document.getElementById('updatePassword').value;
-            const bio = document.getElementById('updateBio').value;
-            const avatar = document.getElementById('updateAvatar').value;
+        var palette = document.getElementById("palette");
+        var color = 0;
 
-            update(username, email, password, bio, avatar).then((res) => {
-                console.log("Updated:", res);
-            });
+        function createPalette() {
+            palette.innerHTML = "";
+            for (var i = 0; i < colors.length; i++) {
+                var cc = colors[i];
+    
+                var div = document.createElement("div");
+                div.className = "color";
+    
+                div.style.backgroundColor = cc;
+                div.setAttribute("data-color", i);
+    
+                div.addEventListener("click", (e) => {
+                    color = e.target.attributes["data-color"].value;
+                    document.styleSheets[0].rules[0].style.setProperty("--pixel-color", e.target.style.backgroundColor);
+                    $(".color").removeClass("selected");
+                    e.target.classList.add("selected");
+                });
+    
+                palette.appendChild(div);
+            }
         }
 
-        function loginUser() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
+        var interactiveZone = document.getElementById("interactive-zone");
 
-            login(email, password).then((res) => {
-                console.log("Logged in:", res);
-            });
+        interactiveZone.addEventListener("mousemove", (e) => {
+            var realPixelSize = pixelSize * zoom;
+            pixelX = Math.floor((e.clientX - canvas.offsetLeft) / realPixelSize);
+            pixelY = Math.floor((e.clientY - canvas.offsetTop) / realPixelSize);
+
+            // if (pixelX < 0 || pixelY < 0 || pixelX > 100 || pixelY > 100) {
+            //     document.getElementById("highlight").style.left = "-100px";
+            //     document.getElementById("highlight").style.top = "-100px";
+            //     return;
+            // }
+
+            document.getElementById("highlight").style.left = ((pixelX * realPixelSize) + canvas.offsetLeft) + "px";
+            document.getElementById("highlight").style.top = ((pixelY * realPixelSize) + canvas.offsetTop) + "px";
+        });
+        
+        var cooldown = 5;
+
+        socket.on('cooldown', (c) => {
+            cooldown = c;
+        });
+
+        interactiveZone.addEventListener("mousedown", (e) => {
+            var mouseMoveDist = 0;
+
+            function mouseUp(e) {
+                mouseLeave();
+
+                if (Math.abs(mouseMoveDist) > 10) return;
+
+                socket.emit("place", {
+                    x: pixelX, y: pixelY, color: color
+                }, (res) => {
+                    if (res.error) {
+                        console.log(res);
+                        if (res.error.includes("logged in")) location.href = '/login';
+                        return;
+                    }
+    
+                    console.log("Place res", res);
+    
+                    var coolEl = document.getElementById("cooldown");
+                    coolEl.style.animation = 'none';
+                    coolEl.offsetHeight;
+                    coolEl.style.animation = null;
+    
+                    coolEl.style.animation = `cooldown ${cooldown}s linear`;
+                });
+            }
+
+            function mouseLeave() {
+                document.removeEventListener("mousemove", mouseMove);
+                interactiveZone.removeEventListener("mouseup", mouseUp);
+                document.removeEventListener("mouseleave", mouseLeave);
+            }
+
+            var startX = e.clientX;
+            var startY = e.clientY;
+            var startOffsetX = canvas.offsetLeft;
+            var startOffsetY = canvas.offsetTop;
+            
+            // move the canvas's left/top to drag
+            function mouseMove(e) {
+                mouseMoveDist += Math.sqrt(Math.pow(e.clientX - startX, 2) + Math.pow(e.clientY - startY, 2));
+                
+                var x = e.clientX - startX;
+                var y = e.clientY - startY;
+
+                canvas.style.left = (startOffsetX + x) + "px";
+                canvas.style.top = (startOffsetY + y) + "px";
+            }
+
+            document.addEventListener("mousemove", mouseMove);
+            interactiveZone.addEventListener("mouseup", mouseUp);
+            document.addEventListener("mouseleave", mouseLeave);
+        });
+
+        interactiveZone.addEventListener("mouseleave", (e) => {
+            document.getElementById("highlight").style.left = "-100px";
+            document.getElementById("highlight").style.top = "-100px";
+        });
+
+        function placePixel(pixel) {
+            ctx.fillStyle = colors[pixel.color];
+            ctx.fillRect(pixel.x * pixelSize, pixel.y * pixelSize, pixelSize, pixelSize);
         }
+
+        var zoom = 2;
+
+        document.body.addEventListener('wheel', (e) => {
+            zoom += e.deltaY / 1000;
+
+            if (zoom < 0.1) zoom = 0.1;
+            if (zoom > 10) zoom = 10;
+
+            canvas.style.transform = `scale(${zoom})`;
+            document.getElementById("highlight").style.transform = `scale(${zoom})`;
+        });
+
     </script>
 </body>
 </html>

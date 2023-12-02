@@ -6,7 +6,8 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const uuid = require('uuid');
 const socketIO = require('socket.io');
-const accountHandler = require('./socketHandlers/placeHandler');
+const placeHandler = require('./socketHandlers/placeHandler');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const customIdGenerator = () => {
     console.log('gen')
@@ -26,7 +27,10 @@ const sessionMiddleware = session({
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 365,
         httpOnly: true
-    }
+    },
+    store: new SequelizeStore({
+        db: database,
+    })
 });
 app.use(sessionMiddleware);
 
@@ -37,13 +41,13 @@ const server = require('http').createServer(app);
 const io = socketIO(server);
 
 io.on('connection', async (socket) => {
-    accountHandler(io, socket);
+    placeHandler(io, socket);
 });
 
 io.engine.use(sessionMiddleware);
 
 database.sync({
-    force: true
+    force: false
 }).then(() => {
     server.listen(8080, () => {
         console.log('Server running on port 8080');
