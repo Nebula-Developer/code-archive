@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/socket.io/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="account.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <h2>Update User</h2>
+    <div>
+        <input type="text" id="updateUsername" class="my-user-username-input"></input>
+        <input type="text" id="updateEmail" class="my-user-email-input"></input>
+        <input type="text" id="updatePassword" class="my-user-password-input"></input>
+        <input type="text" id="updateBio" class="my-user-bio-input"></input>
+        <input type="text" id="updateAvatar" class="my-user-avatar-input"></input>
+        <button type="button" onclick="updateUser()">Update</button>
+    </div>
+
+    <hr>
+
+    <h2>Register</h2>
+    <div>
+        <div>
+            <label for="regUsername">Username:</label>
+            <input type="text" id="regUsername" name="username" required value="testUser">
+        </div>
+
+        <div>
+            <label for="regEmail">Email:</label>
+            <input type="email" id="regEmail" name="email" required value="testUser@gmail.com">
+        </div>
+
+        <div>
+            <label for="regPassword">Password:</label>
+            <input type="password" id="regPassword" name="password" required value="testPassword">
+        </div>
+
+        <button type="button" onclick="registerUser()">Register</button>
+    </div>
+
+    <hr>
+
+    <h2>Login</h2>
+    <div>
+        <div>
+            <label for="loginEmail">Email:</label>
+            <input type="text" id="loginEmail" name="email" required value="testUser@gmail.com">
+        </div>
+
+        <div>
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" name="password" required value="testPassword">
+        </div>
+
+        <button type="button" onclick="loginUser()">Login</button>
+        <button type="button" onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        function registerUser() {
+            const username = document.getElementById('regUsername').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+
+            register(username, email, password).then((res) => {
+                console.log("Registered:", res);
+            });
+        }
+
+        function updateUser() {
+            const username = document.getElementById('updateUsername').value;
+            const email = document.getElementById('updateEmail').value;
+            const password = document.getElementById('updatePassword').value;
+            const bio = document.getElementById('updateBio').value;
+            const avatar = document.getElementById('updateAvatar').value;
+
+            update(username, email, password, bio, avatar).then((res) => {
+                console.log("Updated:", res);
+            });
+        }
+
+        function loginUser() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            login(email, password).then((res) => {
+                console.log("Logged in:", res);
+            });
+        }
+    </script>
+</body>
+</html>
