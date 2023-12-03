@@ -1,4 +1,4 @@
 .PHONY: run
 
 run:
-	@nodemon ./backend/app.js
+	@nodemon ./backend/index.js

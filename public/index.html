@@ -12,6 +12,7 @@
 <body>
     <canvas id="canvas" width="2000" height="2000"></canvas>
     <div id="highlight"></div>
+    <div id="userHighlight"></div>
 
     <div id="interactive-zone"></div>
     <div id="palette"></div>
@@ -20,9 +21,10 @@
 
     <style>
         :root {
-            --pixel-width: 20px;
-            --pixel-border-size: 3px;
             --pixel-color: white;
+            --pixel-border-size: calc(0.1 * var(--pixel-width));
+            --zoom: 1;
+            --pixel-width: calc(20px * var(--zoom));
         }
 
         #highlight {
@@ -31,22 +33,48 @@
             left: 0;
             width: var(--pixel-width);
             height: var(--pixel-width);
-            outline: var(--pixel-border-size) solid black;
+            /* outline: var(--pixel-border-size) solid white; */
             z-index: 99;
             display: flex;
             align-items: center;
             justify-content: center;
             pointer-events: none;
+            box-shadow: 0 0 10px 5px rgb(107, 107, 107);
+            /* filter: drop-shadow(0 0 20px var(--pixel-color)); */
+            outline: var(--pixel-border-size) solid var(--pixel-color);
+            border-radius: calc(2px * var(--zoom));
+            transition: transform 0.5s cubic-bezier(0,.83,.18,.99), opacity 0.2s cubic-bezier(0,.83,.18,.99);
         }
 
-        #highlight::before {
-            content: "";
-            outline: var(--pixel-border-size) solid var(--pixel-color);
-            
-            width: calc(100% - (var(--pixel-border-size) * 2));
-            height: calc(100% - (var(--pixel-border-size) * 2));
-            
+        .hidden#highlight {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        #userHighlight {
             position: absolute;
+            top: 0;
+            left: 0;
+            margin-top: calc(var(--pixel-width) + 10px);
+            text-shadow: 0 0 20px black, 0 0 10px black;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: var(--pixel-width);
+
+            pointer-events: none;
+            color: white;
+            font-size: 15px;
+            font-family: sans-serif;
+            padding: 2px;
+
+            transition: opacity 0.1s ease, transform 0.1s ease;
+        }
+
+        #userHighlight.hidden {
+            transform: scale(0.4);
+            opacity: 0;
         }
 
         #canvas {
@@ -67,15 +95,17 @@
             width: 50px;
             height: 50px;
             cursor: pointer;
-            transition: transform 0.1s cubic-bezier(0,.57,.25,1);
+            transition: 0.1s cubic-bezier(0,.57,.25,1);
         }
 
         .color:hover {
-            filter: brightness(1.1);
+            filter: invert(0.2);
         }
 
         .color.selected {
-            transform: scale(1.25);
+            /* transform: scale(2); */
+            /* margin: 0 25px; */
+            width: 75px;
             z-index: 5;
         }
 
@@ -136,21 +166,79 @@
     </style>
 
     <script>
+        const userHighlight = document.getElementById("userHighlight");
+        const highlight = document.getElementById("highlight");
+
         const canvas = document.getElementById("canvas");
         const ctx = canvas.getContext("2d");
         const socket = io();
-        
-        // canvas.height = (window.innerHeight - 52 / 2);
-        // canvas.width = canvas.height;
+
+        var mouseX = 0;
+        var mouseY = 0;
+
+        var canvasWidth = 100;
+        var canvasHeight = 100;
         var pixelSize = 20;
 
-        // window.addEventListener("resize", () => {
-        //     canvas.width = window.innerWidth;
-        //     canvas.height = window.innerHeight;
-        //     pixelSize = canvas.height / 100;
-        //     document.styleSheets[0].rules[0].style.setProperty("--pixel-width", pixelSize + "px");
-        //     placePixels();
-        // });
+        function setSize(width, height) {
+            canvasWidth = width;
+            canvasHeight = height;
+
+            canvas.width = canvasWidth * pixelSize;
+            canvas.height = canvasHeight * pixelSize;
+        }
+
+        setSize(5, 5);
+
+        socket.on('placeSize', (size) => {
+            setSize(size.width, size.height);
+        });
+
+        window.addEventListener("mousemove", (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        
+        var zoom = 1;
+        var oldZoom = 1;
+        
+        function setZoom(newZoom) {
+            oldZoom = zoom;
+            zoom = newZoom;
+            canvas.style.transform = `scale(${zoom})`;
+
+            var x = pLeft * (zoom / oldZoom)
+            var y = pTop * (zoom / oldZoom);
+
+
+            setPosition(x, y);
+
+            // Update pixel width in CSS variables
+            document.styleSheets[0].rules[0].style.setProperty("--zoom", zoom);
+        }
+
+        setZoom(0.5);
+
+        var pLeft = 0;
+        var pTop = 0;
+
+        function setPosition(x, y) {
+            if (x < (window.innerWidth - (canvas.width * zoom)) - 100) x = (window.innerWidth - (canvas.width * zoom)) - 100;
+            if (y < (window.innerHeight - (canvas.height * zoom)) - 150) y = (window.innerHeight - (canvas.height * zoom)) - 150;
+
+            if (x > 100) x = 100;
+            if (y > 100) y = 100;
+
+            pLeft = x;
+            pTop = y;
+
+            canvas.style.left = x + "px";
+            canvas.style.top = y + "px";
+        }
+
+        window.addEventListener("resize", (e) => {
+            setPosition(pLeft, pTop);
+        });
 
         socket.on("place", (a) => {
             placePixel(a);
@@ -190,7 +278,7 @@
                 var cc = colors[i];
     
                 var div = document.createElement("div");
-                div.className = "color";
+                div.className = "color " + ((i == 0) ? "selected" : "");
     
                 div.style.backgroundColor = cc;
                 div.setAttribute("data-color", i);
@@ -207,20 +295,55 @@
         }
 
         var interactiveZone = document.getElementById("interactive-zone");
+        var timeout = null;
+        var timeoutX = null;
+        var timeoutY = null;
 
-        interactiveZone.addEventListener("mousemove", (e) => {
+        interactiveZone.addEventListener("pointermove", (e) => {
             var realPixelSize = pixelSize * zoom;
             pixelX = Math.floor((e.clientX - canvas.offsetLeft) / realPixelSize);
             pixelY = Math.floor((e.clientY - canvas.offsetTop) / realPixelSize);
 
-            // if (pixelX < 0 || pixelY < 0 || pixelX > 100 || pixelY > 100) {
-            //     document.getElementById("highlight").style.left = "-100px";
-            //     document.getElementById("highlight").style.top = "-100px";
-            //     return;
-            // }
+            if (pixelX >= canvasWidth || pixelY >= canvasHeight || pixelX < 0 || pixelY < 0) {
+                highlight.classList.add("hidden");
+                return;
+            } else {
+                highlight.classList.remove("hidden");
+                highlight.style.left = ((pixelX * realPixelSize) + canvas.offsetLeft) + "px";
+                highlight.style.top = ((pixelY * realPixelSize) + canvas.offsetTop) + "px";
+            }
 
-            document.getElementById("highlight").style.left = ((pixelX * realPixelSize) + canvas.offsetLeft) + "px";
-            document.getElementById("highlight").style.top = ((pixelY * realPixelSize) + canvas.offsetTop) + "px";
+            if (timeout && (timeoutX == pixelX && timeoutY == pixelY)) {
+                return;
+            }
+
+            if (timeout)
+                clearTimeout(timeout);
+
+            timeoutX = pixelX;
+            timeoutY = pixelY;
+
+            userHighlight.classList.add("hidden");
+
+            timeout = setTimeout(() => {
+                socket.emit("getPixelOwner", { x: pixelX, y: pixelY }, (res) => {
+                    if (res.error) {
+                        console.log(res);
+                        if (res.error.includes("logged in")) location.href = '/login';
+                        return;
+                    }
+    
+                    if (!res.owner) {
+                        userHighlight.classList.add("hidden");
+                        return;
+                    }
+                    
+                    userHighlight.classList.remove("hidden");
+                    userHighlight.style.left = ((pixelX * realPixelSize) + canvas.offsetLeft) + "px";
+                    userHighlight.style.top = ((pixelY * realPixelSize) + canvas.offsetTop) + "px";
+                    userHighlight.innerHTML = res.owner.username;
+                });
+            }, 1000);
         });
         
         var cooldown = 5;
@@ -229,13 +352,17 @@
             cooldown = c;
         });
 
-        interactiveZone.addEventListener("mousedown", (e) => {
+        interactiveZone.addEventListener("pointerdown", (e) => {
+            if (e.button != 0) return;
+
             var mouseMoveDist = 0;
+            var mouseDownStart = Date.now();
 
             function mouseUp(e) {
                 mouseLeave();
 
-                if (Math.abs(mouseMoveDist) > 10) return;
+                if (Math.abs(mouseMoveDist) > 20) return;
+                if (Date.now() - mouseDownStart > 300) return;
 
                 socket.emit("place", {
                     x: pixelX, y: pixelY, color: color
@@ -258,9 +385,9 @@
             }
 
             function mouseLeave() {
-                document.removeEventListener("mousemove", mouseMove);
-                interactiveZone.removeEventListener("mouseup", mouseUp);
-                document.removeEventListener("mouseleave", mouseLeave);
+                document.removeEventListener("pointermove", mouseMove);
+                interactiveZone.removeEventListener("pointerup", mouseUp);
+                $(interactiveZone).off("pointerleave", mouseLeave);
             }
 
             var startX = e.clientX;
@@ -275,18 +402,19 @@
                 var x = e.clientX - startX;
                 var y = e.clientY - startY;
 
-                canvas.style.left = (startOffsetX + x) + "px";
-                canvas.style.top = (startOffsetY + y) + "px";
+                var cLeft = (startOffsetX + x);
+                var cTop = (startOffsetY + y);
+
+                setPosition(cLeft, cTop);
             }
 
-            document.addEventListener("mousemove", mouseMove);
-            interactiveZone.addEventListener("mouseup", mouseUp);
-            document.addEventListener("mouseleave", mouseLeave);
+            document.addEventListener("pointermove", mouseMove);
+            interactiveZone.addEventListener("pointerup", mouseUp);
+            $(interactiveZone).on("pointerleave", mouseLeave);
         });
 
-        interactiveZone.addEventListener("mouseleave", (e) => {
-            document.getElementById("highlight").style.left = "-100px";
-            document.getElementById("highlight").style.top = "-100px";
+        interactiveZone.addEventListener("pointerleave", (e) => {
+            highlight.classList.add("hidden");
         });
 
         function placePixel(pixel) {
@@ -294,16 +422,12 @@
             ctx.fillRect(pixel.x * pixelSize, pixel.y * pixelSize, pixelSize, pixelSize);
         }
 
-        var zoom = 2;
-
-        document.body.addEventListener('wheel', (e) => {
-            zoom += e.deltaY / 1000;
-
-            if (zoom < 0.1) zoom = 0.1;
-            if (zoom > 10) zoom = 10;
-
-            canvas.style.transform = `scale(${zoom})`;
-            document.getElementById("highlight").style.transform = `scale(${zoom})`;
+        document.addEventListener("wheel", (e) => {
+            if (e.deltaY > 0 && zoom > 0.25) {
+                setZoom(zoom - 0.1);
+            } else if (e.deltaY < 0 && zoom < 5) {
+                setZoom(zoom + 0.1);
+            }
         });
 
     </script>

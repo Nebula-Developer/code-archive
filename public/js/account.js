@@ -6,7 +6,8 @@ const logout = () => sendUserRequest('/api/logout', {}, true);
 const update = (username, email, password, bio, avatar) => sendUserRequest('/api/update', { username, email, password, bio, avatar });
 const fetchUser = () => {
     return new Promise((resolve, reject) => {
-        fetch('http://localhost:8080/api/user')
+        var baseURL = window.location.origin;
+        fetch(`${baseURL}api/user`)
         .then(response => response.json())
         .then(data => {
             if (data.error) {
@@ -24,7 +25,8 @@ const fetchUser = () => {
 
 function sendUserRequest(url, values, updateSessionUser = true) {
     return new Promise((resolve, reject) => {
-        fetch(`http://localhost:8080${url}`, {
+        var baseURL = window.location.origin;
+        fetch(`${baseURL}${url}`, {
             method: 'POST',
             body: JSON.stringify(values),
             headers: {
