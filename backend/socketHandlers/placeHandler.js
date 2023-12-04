@@ -4,30 +4,113 @@ const { Socket, Server } = require('socket.io');
 const io = require('../io');
 
 var userTimers = {}
-var cooldown = 0.1;
+var cooldown = 0;
 
 var placeWidth = 100;
 var placeHeight = 100;
 
-var colors = [
-    "white",
-    "rgb(228, 228, 228)",
-    "rgb(136, 136, 136)",
-    "rgb(34, 34, 34)",
-    "black",
-    "rgb(255, 167, 209)",
-    "rgb(229, 0, 0)",
-    "rgb(229, 149, 0)",
-    "rgb(160, 106, 66)",
-    "rgb(229, 217, 0)",
-    "rgb(148, 224, 68)",
-    "rgb(2, 190, 1)",
-    "rgb(0, 211, 221)",
-    "rgb(0, 131, 199)",
-    "rgb(0, 0, 234)",
-    "rgb(207, 110, 228)",
-    "rgb(130, 0, 128)"
+var palettes = {
+    "Basic": [
+        "white",
+        "black",
+        "red",
+        "lime",
+        "blue",
+        "yellow",
+        "cyan",
+        "magenta",
+        "silver",
+        "gray",
+        "maroon",
+        "olive",
+        "green",
+        "purple",
+        "teal",
+        "navy"
+    ],  
+    "Warm Beige":  [
+        "#454545",
+        "#FF6000",
+        "#FFA559",
+        "#FFE6C7"
+    ],
+    "Neon Tokyo": [
+        "#191825",
+        "#865DFF",
+        "#E384FF",
+        "#FFA3FD"
+    ],
+    "Retro Arcade": [
+        "#22A699",
+        "#F2BE22",
+        "#F29727",
+        "#F24C3D"
+    ],
+    "Kids Summer": [
+        "#FFB84C",
+        "#F266AB",
+        "#A459D1",
+        "#2CD3E1"
+    ],
+    "Vintage Coffee": [
+        "#F3EEEA",
+        "#EBE3D5",
+        "#B0A695",
+        "#776B5D"
+    ],
+    "Light Lavender": [
+        "#F1EAFF",
+        "#E5D4FF",
+        "#DCBFFF",
+        "#D0A2F7"
+    ],
+    "Sunset": [
+        "#F9ED69",
+        "#F08A5D",
+        "#B83B5E",
+        "#6A2C70"
+    ]
+}
+
+// create the shades of each color:
+var shades = [
+    [], [], [], [], [], []
 ];
+for (var r = 0; r < 256; r += 51) {
+    for (var g = 0; g < 256; g += 51) {
+        var i = 0;
+        for (var b = 0; b < 256; b += 51) {
+            shades[i].push(`rgb(${r},${g},${b})`);
+            i++;
+        }
+    }
+}
+
+shades = [
+    ...shades[0],
+    ...shades[1],
+    ...shades[2],
+    ...shades[3],
+    ...shades[4],
+    ...shades[5]
+]
+
+// sort 
+shades.sort((a, b) => {
+    var aSplit = a.split(',');
+    var bSplit = b.split(',');
+    var aSum = 0;
+    var bSum = 0;
+    for (var i = 0; i < 3; i++) {
+        aSum += parseInt(aSplit[i]);
+        bSum += parseInt(bSplit[i]);
+    }
+    return aSum - bSum;
+});
+
+
+// add the shades to the palettes:
+palettes['All Colors'] = shades;
 
 module.exports =
 /**
@@ -35,7 +118,7 @@ module.exports =
  */
 (socket) => {
     // if at /place
-    if (socket.handshake.headers.referer.endsWith('8080/')) {
+    if (socket.handshake.headers.referer.includes('/place')) {
         socket.join('place');
 
         // get place
@@ -44,7 +127,8 @@ module.exports =
         });
 
         socket.emit('cooldown', cooldown);
-        socket.emit('colors', colors);
+        socket.emit('colors', palettes);
+
         socket.emit('placeSize', {
             width: placeWidth,
             height: placeHeight
@@ -82,6 +166,12 @@ module.exports =
                     y: data.y
                 }
             });
+
+
+            var colorSplit = data.color.split(',');
+            if (colorSplit.length != 2 || !palettes[colorSplit[0]] || !palettes[colorSplit[0]][colorSplit[1]]) {
+                throw new Error('Invalid color.');
+            }
 
             if (place) {
                 place.color = data.color;
