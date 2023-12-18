@@ -1,0 +1,18 @@
+{
+    "development": {
+        "database": {
+            "name": "development",
+            "host": "localhost",
+            "user": "NebulaDev",
+            "password": "mazzys123"
+        }
+    },
+    "production": {
+        "database": {
+            "name": "production",
+            "host": "localhost",
+            "user": "NebulaDev",
+            "password": "mazzys123"
+        }
+    }
+}
