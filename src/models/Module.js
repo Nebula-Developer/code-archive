@@ -1,19 +1,39 @@
-const Sequelize = require('sequelize');
-const database = require('../database');
-const User = require('./User');
+const Sequelize = require("sequelize");
+const database = require("../database");
+const User = require("./User");
+const { Model } = Sequelize;
 
-const Module = database.define('module', {
-    name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-    content: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    }    
-});
+/**
+ * @type {Model}
+ */
+const Module = database.define(
+	"module",
+	{
+		name: {
+			type: Sequelize.STRING,
+			allowNull: false,
+		},
+		content: {
+			type: Sequelize.STRING,
+			allowNull: false,
+		},
+		ageGroup: {
+			type: Sequelize.INTEGER,
+			allowNull: true,
+		},
+		tags: {
+			type: Sequelize.ARRAY(Sequelize.STRING),
+			allowNull: true,
+		},
+	},
+	{
+		defaultScope: {
+			include: [User],
+		},
+	},
+);
 
-User.hasMany(Module, { as: 'modules' });
-Module.belongsTo(User, { as: 'user' });
+Module.belongsTo(User, { foreignKey: "userId" });
+User.hasMany(Module, { foreignKey: "userId" });
 
 module.exports = Module;

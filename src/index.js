@@ -32,7 +32,7 @@ if (env.production) {
 } else {
 	logger.debug("Using development environment");
 	app.use(morgan("dev"));
-	
+
 	logger.warn("Using development SESSION_SECRET");
 	sess.secret = "test";
 }
