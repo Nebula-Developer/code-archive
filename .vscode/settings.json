@@ -1,0 +1,15 @@
+{
+	"editor.fontFamily": "Fira Code",
+	"editor.fontLigatures": true,
+	"editor.fontSize": 16,
+	"editor.cursorSmoothCaretAnimation": "off",
+	"editor.cursorBlinking": "phase",
+	"editor.hover.sticky": true,
+	"editor.indentSize": "tabSize",
+	"editor.tabSize": 4,
+	"javascript.inlayHints.parameterNames.enabled": "literals",
+	"javascript.inlayHints.functionLikeReturnTypes.enabled": false,
+	"editor.stickyScroll.scrollWithEditor": true,
+	"workbench.tree.enableStickyScroll": true,
+	"editor.stickyScroll.enabled": false
+}
