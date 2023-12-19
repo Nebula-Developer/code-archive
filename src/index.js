@@ -1,20 +1,46 @@
-const express = require("express");
-const session = require("express-session");
 require("dotenv").config();
+const express = require("express");
+const fs = require("fs");
 
 const helmet = require("helmet");
 const compression = require("compression");
 const morgan = require("morgan");
 const path = require("path");
+const session = require("express-session");
+const { SessionOptions } = require("express-session");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const logger = require("./logger");
 const env = require("./env");
+const database = require("./database");
+const controller = require("./controller");
+const User = require("./models/User");
 
 const app = express();
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "..", "views"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// [IMPORTANT] Normalizes url slashes
+app.use((req, res, next) => {
+	req.url = req.url.replace(/\/+/g, "/");
+	next();
+});
+
+const sessionStore = new SequelizeStore({
+	db: database,
+	tableName: "sessions",
+});
 
 const sess = {
-	cookie: {},
+	cookie: {
+		// 20 seconds
+		maxAge: 20 * 1000,
+	},
+	resave: false,
+	store: sessionStore,
+	saveUninitialized: true,
 };
 
 if (env.production) {
@@ -37,16 +63,28 @@ if (env.production) {
 	sess.secret = "test";
 }
 
-const singleResponseApi = (url, call) => {
-	app.get("/api/" + url, (req, res) => {
-		res.json(call(req));
-	});
-};
+app.use(session(sess));
 
-singleResponseApi("prod", () => process.env.NODE_ENV == "production");
+app.use("/admin", require("./routes/admin"));
+app.use("/account", require("./routes/account"));
+app.use("/", require("./routes/pages"));
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-	logger.info(`Listening on port ${port}`);
+database.sync({ force: true }).then(() => {
+	User.findOne({ where: { username: "admin" } }).then((user) => {
+		if (user == null) {
+			User.create({
+				username: "admin",
+				password: "admin",
+				email: "admin@localhost",
+			}, {
+				validate: false
+			});
+		}
+	});
+
+	app.listen(port, () => {
+		logger.info(`Listening on port ${port}`);
+	});
 });

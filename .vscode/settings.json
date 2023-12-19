@@ -1,7 +1,7 @@
 {
 	"editor.fontFamily": "Fira Code",
 	"editor.fontLigatures": true,
-	"editor.fontSize": 16,
+	"editor.fontSize": 13,
 	"editor.cursorSmoothCaretAnimation": "off",
 	"editor.cursorBlinking": "phase",
 	"editor.hover.sticky": true,

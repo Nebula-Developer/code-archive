@@ -13,7 +13,7 @@ function createModule(name, content, user, ageGroup, tags) {
 	});
 }
 
-function createUser(username, password, email) {
+function createUser(username, email, password) {
 	return User.create({
 		username,
 		password,
@@ -31,6 +31,14 @@ function getUser(email, password) {
 				[Op.iLike]: email,
 			},
 			password,
+		},
+	});
+}
+
+function getModule(id) {
+	return Module.findOne({
+		where: {
+			id,
 		},
 	});
 }
@@ -54,10 +62,30 @@ function updateModule(id, name, content, ageGroup, tags) {
 	);
 }
 
+function updateUser(id, username, email, password) {
+	return User.update(
+		{
+			username,
+			password,
+			email,
+		},
+		{
+			where: {
+				id,
+			},
+		},
+	);
+}
+
 module.exports = {
 	createModule,
 	createUser,
 	getModules,
 	getUsers,
 	getUser,
+	getModule,
+	deleteModule,
+	deleteUser,
+	updateModule,
+	updateUser,
 };

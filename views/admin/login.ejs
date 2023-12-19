@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+</head>
+<body>
+    <input type="text" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginPassword" placeholder="Password">
+    <button id="loginBtn">Login</button>
+
+    <hr>
+
+    <input type="text" id="registerName" placeholder="Name">
+    <input type="text" id="registerEmail" placeholder="Email">
+    <input type="password" id="registerPassword" placeholder="Password">
+    <button id="registerBtn">Register</button>
+
+    <script>
+        // the posts are /account/login and /account/register
+
+        document.getElementById("loginBtn").addEventListener("click", function() {
+            var email = document.getElementById("loginEmail").value;
+            var password = document.getElementById("loginPassword").value;
+
+            var data = {
+                email: email,
+                password: password
+            };
+
+            console.log(data);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/account/login");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify(data));
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                }
+            }
+        });
+
+        document.getElementById("registerBtn").addEventListener("click", function() {
+            var name = document.getElementById("registerName").value;
+            var email = document.getElementById("registerEmail").value;
+            var password = document.getElementById("registerPassword").value;
+
+            var data = {
+                username: name,
+                email: email,
+                password: password
+            };
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/account/register");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify(data));
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
