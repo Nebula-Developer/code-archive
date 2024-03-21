@@ -72,12 +72,7 @@ const createWindow = () => {
   
   globalShortcut.register('CommandOrControl+Alt+Enter', () => handleVisible(!visible));
   ipcMain.on('toggle-visibility', (event, value) => handleVisible(value));
-  ipcMain.on('get-visible', (event) => {
-    console.log('test')
-    ipcMain.emit('toggle-visibility', visible)
-  });
-
-
+  ipcMain.on('get-visibility', (event) => handleVisible(visible));
 };
 
 app.on('ready', createWindow);
