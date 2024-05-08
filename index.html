@@ -5,24 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="main.js" defer></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
     <title>Home | The Great and Dangerous World of Sharks</title>
 </head>
 
 <body>
-    <div id="navbar"></div>
+    <div id="navbar" class="flex-center">
+        <div class="navbar-content">
+            <a class="navbar-header">
+                <div class="navbar-header-top">Sharks</div>
+                <div class="navbar-header-bottom">The great and dangerous world of</div>
+            </a>
+
+            <div class="navbar-links">
+                <a href="index.html" class="navbar-link">Home</a>
+                <a href="index.html#about" class="navbar-link">About</a>
+            </div>
+        </div>
+    </div>
 
     <div class="content">
         <div class="content-header">
-            <img src="images/GrayReefShark.jpg" alt="Gray Reef Shark" class="content-header-background-image">
+            <img src="images/GrayReefShark.jpg" alt="Gray Reef Shark" class="content-header-background">
             <div class="content-header-background-cover"></div>
-            <div class="content-header-text">
-                <div class="content-header-title">Sharks</div>
-                <div class="content-header-subtitle">The most feared predator in the ocean</div>
+            <div class="content-header-text-wrapper flex-center">
+                <div class="content-header-text">
+                    <div class="content-header-title">Sharks</div>
+                    <div class="content-header-subtitle">The most feared predator in the ocean</div>
+                </div>
             </div>
         </div>
 
-        <div class="home-about section">
+        <div class="home-about section" id="about">
             <div class="section-header">All about Sharks</div>
 
             <div class="section-content">
