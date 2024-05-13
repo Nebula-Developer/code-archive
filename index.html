@@ -1,79 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="main.js" defer></script>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/home.css">
+    <script src="home.js" defer></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/home.css" />
     <title>Home | The Great and Dangerous World of Sharks</title>
-</head>
+  </head>
 
-<body>
+  <body>
+    <div class="hover-text-container">
+      <div class="hover-text-name"></div>
+      <div class="hover-text-definition"></div>
+    </div>
     <div id="navbar" class="flex-center">
-        <div class="navbar-content">
-            <a href="index.html" class="navbar-header">
-                <div class="navbar-header-top">Sharks</div>
-                <div class="navbar-header-bottom">The great and dangerous world of</div>
-            </a>
+      <div class="navbar-content">
+        <a href="index.html" class="navbar-header">
+          <div class="navbar-header-top">Sharks</div>
+          <div class="navbar-header-bottom">
+            The great and dangerous world of
+          </div>
+        </a>
 
-            <div class="navbar-links">
-                <a href="index.html" class="navbar-link">Home</a>
-                <a href="index.html#about" class="navbar-link">About</a>
-            </div>
+        <div class="navbar-links">
+          <a href="index.html" class="navbar-link">Home</a>
+          <a href="index.html#about" class="navbar-link">About</a>
         </div>
+      </div>
     </div>
 
     <div class="content">
-        <div class="content-header">
-            <img src="images/GrayReefShark.jpg" alt="Gray Reef Shark" class="content-header-background">
-            <div class="content-header-background-cover"></div>
-            <div class="content-header-text-wrapper flex-center">
-                <div class="content-header-text">
-                    <div class="content-header-title">Sharks</div>
-                    <div class="content-header-subtitle">The most feared predator in the ocean</div>
-                </div>
+      <div class="content-header">
+        <img
+          src="images/GrayReefShark.jpg"
+          alt="Gray Reef Shark"
+          class="content-header-background"
+        />
+        <div class="content-header-background-cover"></div>
+        <div class="content-header-text-wrapper flex-center">
+          <div class="content-header-text">
+            <div class="content-header-title">Sharks</div>
+            <div class="content-header-subtitle">
+              The most feared predator in the ocean
             </div>
+          </div>
         </div>
+      </div>
 
-        <div class="home-about section" id="about">
-            <div class="section-header">All about Sharks</div>
+      <div class="home-about section" id="about">
+        <div class="section-header">All about Sharks</div>
 
-            <div alt="Repeating wave background" class="home-about-background"></div>
-            <div class="home-about-background-color"></div>
+        <div
+          alt="Repeating wave background"
+          class="home-about-background"
+        ></div>
+        <div class="home-about-background-color"></div>
 
-            <div class="section-content">
-                <div class="section-content-text">
-                    <img src="images/GreatWhiteShark.webp" alt="Great White Shark" class="section-content-image">
-                    <p>Sharks are sea animals that have been around for more than 400 million years. There are over 500
-                        different species of sharks, and ranging from the tiny dwarf lanternshark, which is only 6
-                        inches long, to the whale shark, which can be up to 50 feet long. Most sharks are predators,
-                        meaning they hunt and eat fish, seals, and other sea animals. Some sharks eat plankton, the
-                        smallest creatures in the ocean, and are called filter feeders.</p>
-                </div>
+        <div class="section-content">
+          <div class="section-content-text">
+            <img
+              src="images/GreatWhiteShark.webp"
+              alt="Great White Shark"
+              class="section-content-image"
+            />
+            <div class="home-about-content">
+              Sharks, often known as the apex predators of the oceans, are a
+              diverse group of
+              <span
+                class="hover-word"
+                data-define="Made of cartilage, a tough, elastic tissue that is lighter and more flexible than bone. Other fish like rays and skates are also made of cartilage, and are named 'elasmobranchs'."
+                >cartilaginous</span
+              >
+              fish characterized by their streamlined bodies, multiple rows of
+              sharp teeth, and unparalleled hunting abilities. With over 500
+              species found in oceans around the world, sharks come in various
+              shapes, sizes, and colors, ranging from the massive whale shark,
+              the largest fish in the sea, to the sleek and agile great white
+              shark, infamous for its powerful jaws and impressive swimming
+              prowess. Despite their fearsome reputation, sharks play a vital
+              role in maintaining the health and balance of marine ecosystems by
+              regulating prey populations and promoting
+              <!-- biodiversity -->
+              <span
+                class="hover-word"
+                data-define="The variety of life in the world or in a particular habitat or ecosystem."
+                >biodiversity</span
+              >
+              From ancient species that have roamed the seas for millions of
+              years to newly discovered deep-sea dwellers, sharks captivate the
+              imagination and inspire awe and respect among people of all ages.
             </div>
+          </div>
         </div>
+      </div>
 
-        <div class="home-scared section">
-            <div class="section-header">Are Sharks Scary?</div>
+      <div class="home-scared section">
+        <div class="section-header">Are Sharks Scary?</div>
 
-            <div class="section-content">
-                <div class="section-content-text">
-                    <img src="" alt="Bull Shark" class="section-content-image">
-                    <p>Sharks are often thought of as dangerous killers that attack humans, but this is usually not the
-                        case. Most sharks are not interested in attacking humans, and will only do so if they are
-                        confused or curious. Sometimes, a shark may mistake a human for a seal, or may be curious about
-                        what that human is. But, <b>this is not to say that sharks are not dangerous!</b> Some species
-                        of sharks are more aggressive than others, and some are more likely to attack humans. This
-                        includes the <b>great white shark</b>, <b>the tiger shark</b>, and the <b>bull shark</b>.
-                        However, these sharks are not the mindless killers that they are often made out to be. Let's
-                        take a closer look at some of the dangerous species of sharks, and why we should be cautious
-                        around them.
-                    </p>
-                </div>
-            </div>
+        <div class="section-content">
+          <div class="section-content-text">
+            <img
+              src="images/BullShark.jpg"
+              alt="Bull Shark"
+              class="section-content-image"
+            />
+            <p>
+              Sharks are often thought of as dangerous killers that attack
+              humans, but this is usually not the case. Most sharks are not
+              interested in attacking humans, and will only do so if they are
+              confused or curious. Sometimes, a shark may mistake a human for a
+              seal, or may be curious about what that human is. But,
+              <b>this is not to say that sharks are not dangerous!</b> Some
+              species of sharks are more aggressive than others, and some are
+              more likely to attack humans. This includes the
+              <b>great white shark</b>, <b>the tiger shark</b>, and the
+              <b>bull shark</b>. However, these sharks are not the mindless
+              killers that they are often made out to be. Let's take a closer
+              look at some of the dangerous species of sharks, and why we should
+              be cautious around them.
+            </p>
+          </div>
         </div>
-</body>
-
+      </div>
+    </div>
+  </body>
 </html>

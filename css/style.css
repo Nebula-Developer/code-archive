@@ -194,3 +194,48 @@ body {
 ::-webkit-scrollbar-thumb {
     background: #4f829f;
 }
+
+.hover-word {
+    position: relative;
+    z-index: 11;
+    font-weight: 600;
+    text-shadow: 0 0 3px grey;
+    cursor: alias;
+    text-decoration: underline;
+}
+
+.hover-text-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: fit-content;
+    background: linear-gradient(-90deg, #0c2844, black);
+    color: rgb(174, 255, 252);
+    text-shadow: none;
+    box-shadow: 0 0 30px 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 10;
+    font-family: monospace;
+    font-size: 12px;
+    transition: opacity 0.3s;
+}
+
+.hover-text-name {
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 3px;
+    color: #9df9d6;
+}
+
+.hover-text-container.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
