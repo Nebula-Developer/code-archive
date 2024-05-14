@@ -3,11 +3,9 @@
 var homeAboutBackground = $(".home-about-background");
 
 $(window).on("scroll", function() {
-    // get the scroll top value
     var st = $(this).scrollTop();
-    // set the background position
     homeAboutBackground.css({
-        "background-position": st / 4 + "px center"
+        "background-position": st / 4 + "px " + Math.sin(st / 100) * 10 + "px" // the sin gives it a bit more of a wave effect, although it's not very noticeable
     });
 });
 

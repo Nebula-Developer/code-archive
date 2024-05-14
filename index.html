@@ -17,7 +17,7 @@
   </head>
 
   <body>
-    <div class="hover-text-container">
+    <div class="hover-text-container hide">
       <div class="hover-text-name"></div>
       <div class="hover-text-definition"></div>
     </div>
@@ -72,31 +72,44 @@
               class="section-content-image"
             />
             <div class="home-about-content">
+              <small style="font-size: 18px">
+                Hint: &nbsp; Try hovering over text that looks like
+                <span
+                  class="hover-word"
+                  data-define="You can hover over words like this to see their definitions. Try it out!"
+                  >this!</span
+                >
+              </small>
+              <div style="height: 20px"></div>
               Sharks, often known as the apex predators of the oceans, are a
               diverse group of
               <span
                 class="hover-word"
-                data-define="Made of cartilage, a tough, elastic tissue that is lighter and more flexible than bone. Other fish like rays and skates are also made of cartilage, and are named 'elasmobranchs'."
+                data-define="Made of <a target='blank' href='https://www.merriam-webster.com/dictionary/cartilage'>cartilage</a>, a tough, elastic tissue that is lighter and more flexible than bone. Other fish like rays and skates are also made of cartilage, and are named 'elasmobranchs'."
                 >cartilaginous</span
               >
-              fish characterized by their streamlined bodies, multiple rows of
-              sharp teeth, and unparalleled hunting abilities. With over 500
-              species found in oceans around the world, sharks come in various
-              shapes, sizes, and colors, ranging from the massive whale shark,
-              the largest fish in the sea, to the sleek and agile great white
-              shark, infamous for its powerful jaws and impressive swimming
-              prowess. Despite their fearsome reputation, sharks play a vital
-              role in maintaining the health and balance of marine ecosystems by
-              regulating prey populations and promoting
-              <!-- biodiversity -->
+              fish known for their streamlined bodies, multiple rows of sharp
+              teeth, and amazing hunting abilities. With over 500 species found
+              in oceans around the world, sharks come in various shapes, sizes,
+              and colors, ranging from the massive whale shark - the largest
+              fish in the sea to the sleek and agile great white shark, infamous
+              for its powerful jaws and impressive swimming abilities. Despite
+              their fearsome reputation, sharks play a major role in maintaining
+              the health and balance of marine
+              <span
+                class="hover-word"
+                data-define="A biological community of interacting organisms and their physical environment."
+                >ecosystems</span
+              >
+              by keeping populations of prey species in check and improving
               <span
                 class="hover-word"
                 data-define="The variety of life in the world or in a particular habitat or ecosystem."
                 >biodiversity</span
               >
               From ancient species that have roamed the seas for millions of
-              years to newly discovered deep-sea dwellers, sharks captivate the
-              imagination and inspire awe and respect among people of all ages.
+              years, to newly discovered deep-sea divers, sharks are fascinating
+              creatures that have shocked and awed humans for centuries.
             </div>
           </div>
         </div>
@@ -105,29 +118,54 @@
       <div class="home-scared section">
         <div class="section-header">Are Sharks Scary?</div>
 
-        <div class="section-content">
-          <div class="section-content-text">
+        <div class="scary-content">
+          <div class="scary-text">
             <img
-              src="images/BullShark.jpg"
+              src="images/BullShark.webp"
               alt="Bull Shark"
-              class="section-content-image"
+              class="bullshark-image"
+              style="
+                float: right;
+                min-width: 400px;
+                max-width: 700px;
+                width: 10vw;
+                object-fit: contain;
+              "
             />
-            <p>
-              Sharks are often thought of as dangerous killers that attack
-              humans, but this is usually not the case. Most sharks are not
-              interested in attacking humans, and will only do so if they are
-              confused or curious. Sometimes, a shark may mistake a human for a
-              seal, or may be curious about what that human is. But,
-              <b>this is not to say that sharks are not dangerous!</b> Some
-              species of sharks are more aggressive than others, and some are
-              more likely to attack humans. This includes the
-              <b>great white shark</b>, <b>the tiger shark</b>, and the
-              <b>bull shark</b>. However, these sharks are not the mindless
-              killers that they are often made out to be. Let's take a closer
-              look at some of the dangerous species of sharks, and why we should
-              be cautious around them.
-            </p>
+
+            Sharks are often thought of as dangerous killers that attack humans,
+            but this is
+            <span
+              class="hover-word"
+              data-define="Each year, there are around 80 unprovoked shark attacks worldwide, with only a few being fatal. The majority of shark attacks are thought to be cases of mistaken identity, where the shark confuses a human for its natural prey."
+              >usually not the case.</span
+            >
+            Most sharks are not interested in attacking humans, and will only do
+            so if they are confused or curious. Sometimes, a shark may mistake a
+            human for a seal, or may be curious about what that human is. But,
+            <b>this is not to say that sharks are not dangerous!</b> Some
+            species of sharks are more aggressive than others, and some are more
+            likely to attack humans. This includes the
+            <a href="sharks/great-white.html">great white shark</a>,
+            <a href="sharks/tiger-shark.html">the tiger shark</a>, and the
+            <a href="sharks/bull-shark.html">bull shark</a>. However, these
+            sharks are not the mindless killers that they are often made out to
+            be. Let's take a closer look at some of the dangerous species of
+            sharks, and why we should be cautious around them.
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-content">
+        <a class="footer-header" href="index.html">
+          Sharks
+        </a>
+
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="index.html#about" class="footer-link">About</a>
         </div>
       </div>
     </div>

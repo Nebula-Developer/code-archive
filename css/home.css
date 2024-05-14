@@ -52,7 +52,7 @@
 
 .home-about-content {
     font-size: calc(max(30px, 2vw));
-    max-width: 800px;
+    max-width: 1000px;
     width: calc(100% - 50px);
 }
 
@@ -66,3 +66,25 @@
     transform: rotateY(180deg) rotateZ(-10deg);
 }
 
+
+.home-scared {
+    background: linear-gradient(black, rgb(25, 68, 81));
+}
+
+.scary-text {
+    padding: 50px;
+    max-width: 1000px;
+    font-size: 30px;
+    letter-spacing: 1px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.scary-text a {
+    text-decoration: none;
+}
+
+.scary-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
