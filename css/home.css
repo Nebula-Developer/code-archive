@@ -32,7 +32,7 @@
     background-size: 100%;
     background-image: url("../images/wave-background.avif");
     opacity: 0.1;
-    filter: blur(7px);
+    filter: blur(10px);
 }
 
 .home-about .section-content {
@@ -47,7 +47,6 @@
 
 .home-about .section-header {
     padding-top: 50px;
-    margin-top: 100px;
 }
 
 .home-about-content {
@@ -77,10 +76,6 @@
     font-size: 30px;
     letter-spacing: 1px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.scary-text a {
-    text-decoration: none;
 }
 
 .scary-content {

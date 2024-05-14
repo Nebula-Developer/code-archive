@@ -50,6 +50,7 @@ body {
 .navbar-header:hover {
     background: rgba(0, 0, 0, 0.3);
     transition: background 0s;
+    text-decoration: none;
 }
 
 .navbar-header-top {
@@ -82,6 +83,7 @@ body {
 .navbar-link:hover {
     background: rgba(0, 0, 0, 0.2);
     transition: background 0s;
+    text-decoration: none;
 }
 
 .content {
@@ -208,8 +210,9 @@ body {
     position: relative;
     z-index: 10;
     font-weight: 600;
-    text-shadow: 0 0 5px white;
+    /* text-shadow: 0 0 2px white; */
     cursor: alias;
+    color: rgb(114, 255, 213);
     transition: text-shadow 0.5s ease;
 }
 
@@ -246,6 +249,11 @@ body {
 a {
     color: cyan;
     font-family: monospace;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 .hover-text-container.hide {
@@ -280,7 +288,6 @@ a {
 
 .footer-header {
     font-size: 40px;
-    text-decoration: none;
 }
 
 .footer-links {
