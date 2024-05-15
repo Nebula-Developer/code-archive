@@ -14,7 +14,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     height: var(--navbar-height);
     background: linear-gradient(-5deg, rgb(3 84 121), #182b41);
     border-bottom: 2px solid #9df9d6;
@@ -278,7 +278,7 @@ a:hover {
 
 .footer-content {
     height: 100%;
-    width: 100%;
+    width: calc(100% - 100px);
     max-height: 100px;
     max-width: 1000px;
     display: flex;
