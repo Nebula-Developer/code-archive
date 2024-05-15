@@ -84,3 +84,41 @@
     display: flex;
     justify-content: center;
 }
+
+.content-scroll {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 30;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: bounce 5s infinite ease;
+    box-shadow: 0px 0px 10px 1px rgb(72, 87, 87);
+    transition: background 0.3s;
+}
+
+.content-scroll:hover {
+    background: rgba(0, 0, 0, 0.5);
+    transition: background 0s;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0) translateX(-50%);
+    }
+
+    50% {
+        transform: translateY(-10px) translateX(-50%);
+        box-shadow: 0px 0px 10px 10px rgb(72, 87, 87);
+    }
+    
+    100% {
+        transform: translateY(0) translateX(-50%);
+    }
+}

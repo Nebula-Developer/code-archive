@@ -3,8 +3,9 @@ var hoverTextName = $(".hover-text-name");
 var hoverTextDefinition = $(".hover-text-definition");
 
 $(".hover-word").on("mouseover", function() { // shows a tooltip when hovering over a word
-    var hoverWord = $(this).attr("data-define");
-    var hoverWordName = $(this).text();
+    var hoverWord = $(this).attr("data-define").trim();
+    var hoverWordName = $(this).text().trim();
+    hoverWordName = hoverWordName.replace(/[^a-zA-Z ]/g, ""); // removes any special characters
     hoverWordName = hoverWordName[0].toUpperCase() + hoverWordName.slice(1); // capitalizes the first letter of the word
 
     hoverTextContainer.removeClass("hide");
