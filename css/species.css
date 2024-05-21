@@ -1,0 +1,56 @@
+.shark-species-grid-section {
+    padding: 80px;
+    border-top: 1px solid cyan;
+    background: linear-gradient(-5deg, black, #182b41);
+}
+
+.shark-grid-header {
+    font-size: 40px;
+    text-align: center;
+    color: white;
+}
+
+.shark-species-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+	grid-gap: 20px;
+	padding: 80px;
+}
+
+.shark-species-card {
+	background: linear-gradient(black, #0c2844);
+	border-top: 2px solid cyan;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border-radius: 10px;
+	text-decoration: none !important;
+	outline: 1px solid transparent;
+	transition: transform 0.3s ease, outline 0.3s ease;
+}
+
+.shark-species-card:hover {
+	transform: translateY(-10px);
+	outline: 1px solid cyan;
+	transition: transform 0.3s ease, outline 0.1s ease;
+}
+
+.shark-species-name {
+	font-size: 18px;
+	padding-top: 10px;
+    padding-bottom: 3px;
+}
+
+.shark-species-desc {
+	line-height: 1;
+	color: rgb(73, 133, 169);
+	font-size: 15px;
+}
+
+.shark-species-card-image {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+	border-radius: 10px;
+}
