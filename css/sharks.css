@@ -45,7 +45,7 @@
     padding: 30px;
     max-height: 200px;
     height: 30vh;
-    max-width: 80vw;
+    max-width: max(20vw, 250px);
     object-fit: contain;
 }
 
