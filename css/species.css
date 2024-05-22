@@ -1,13 +1,13 @@
 .shark-species-grid-section {
-    padding: 80px;
-    border-top: 1px solid cyan;
-    background: linear-gradient(-5deg, black, #182b41);
+	padding: 80px;
+	border-top: 1px solid cyan;
+	background: linear-gradient(-5deg, black, #182b41);
 }
 
 .shark-grid-header {
-    font-size: 40px;
-    text-align: center;
-    color: white;
+	font-size: 40px;
+	text-align: center;
+	color: white;
 }
 
 .shark-species-grid {
@@ -39,7 +39,7 @@
 .shark-species-name {
 	font-size: 18px;
 	padding-top: 10px;
-    padding-bottom: 3px;
+	padding-bottom: 3px;
 }
 
 .shark-species-desc {
