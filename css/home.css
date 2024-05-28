@@ -105,6 +105,46 @@
 	transition: background 0s;
 }
 
+.home-map {
+	border-top: 2px solid #4b93b3;
+	background: radial-gradient(circle, #0c2844, black);
+}
+
+body {
+	background: black;
+}
+
+.image-wrapper {
+	position: relative;
+	background: radial-gradient(silver, transparent 70%);
+}
+
+.interactive-wrapper {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: 80px;
+}
+
+#image {
+	position: absolute;
+	top: 0;
+	object-fit: cover;
+	border: none;
+	outline: none;
+	width: calc(100vw - 100px);
+	max-width: 1000px;
+	height: auto;
+}
+
+#svg {
+	z-index: 1;
+	pointer-events: none;
+	filter: blur(10px);
+	transition: opacity 0.15s ease;
+	opacity: 0;
+}
+
 @keyframes bounce {
 	0% {
 		transform: translateY(0) translateX(-50%);
