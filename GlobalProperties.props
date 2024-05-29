@@ -1,0 +1,14 @@
+<Project>
+  <PropertyGroup>
+    <ProjectVersion>1.2.3</ProjectVersion>
+  </PropertyGroup>
+</Project>
+
+// in another csproj:
+<Import Project="GlobalProperties.props" />
+
+<Project>
+  <PropertyGroup>
+    <Version>$(ProjectVersion)</Version>
+  </PropertyGroup>
+</Project>

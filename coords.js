@@ -1,3 +1,7 @@
+// Externally referenced map, consisting of a dictionary of URLs and their normalized coordinates
+// for the image map. This is utilised in 'js/home.js', and the actual coordinates were generated
+// from a method in 'js/home.js' that is further documented there.
+
 var coords = {
     "https://anatomywarehouse.com/4d-vision-great-white-shark-anatomy-model-a-103537": [[0.22,0.79],[0.74,0.79],[0.82,0.93],[0.82,0.97],[0.81,0.97],[0.15,0.97],[0.14,0.96],[0.15,0.93],[0.21,0.82],[0.22,0.8]],
     "https://berkeley.pressbooks.pub/morphology/chapter/vertebral-column-and-turtle-shells/": [[0.2,0.23],[0.35,0.29],[0.43,0.29],[0.61,0.36],[0.86,0.46],[0.89,0.61],[0.9,0.6],[0.9,0.52],[0.93,0.38],[0.96,0.3],[0.96,0.27],[0.95,0.27],[0.93,0.3],[0.87,0.39],[0.86,0.41],[0.79,0.4],[0.59,0.33],[0.47,0.28],[0.4,0.26],[0.35,0.25],[0.25,0.21],[0.2,0.18]],
