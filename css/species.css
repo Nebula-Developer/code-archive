@@ -1,3 +1,5 @@
+/* Only for /species.html */
+
 .shark-species-grid-section {
 	padding: 80px;
 	border-top: 1px solid cyan;
@@ -11,13 +13,19 @@
 }
 
 .shark-species-grid {
+	/* Simple grid with its elements having a min-width of 400px and a max-width of 1fr (which is 1 fraction of the available space) */
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+	/* Space them nicely.. */
 	grid-gap: 20px;
 	padding: 80px;
 }
 
 .shark-species-card {
+	/* The little cards use a nice design trick with css:
+	   Single / opposite borders with a border-radius make
+	   the edges of the border shrink into the corners, which
+	   looks quite fancy! */
 	background: linear-gradient(black, #0c2844);
 	border-top: 2px solid cyan;
 	padding: 20px;
@@ -25,6 +33,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	border-radius: 10px;
+	/* !important to override the :hover text-decoration target in style.css. */
 	text-decoration: none !important;
 	outline: 1px solid transparent;
 	transition: transform 0.3s ease, outline 0.3s ease;
