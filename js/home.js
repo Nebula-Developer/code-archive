@@ -96,6 +96,8 @@ function logNormalisedAreas() {
 
 updateImageAreas();
 window.addEventListener('resize', updateImageAreas);
+window.addEventListener('load', updateImageAreas);
+image.on('load', updateImageAreas);
 
 $('body').on('contextmenu', 'area', function (e) {
 	return false;
