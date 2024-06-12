@@ -85,8 +85,16 @@
 					<div class="shark-bio-text">
 						The Tiger Shark is a large species of shark that is
 						known for its voracious appetite. It is one of the few
-						shark species that is known to eat almost anything,
-						including fish, birds, turtles, rays, and even garbage.
+						shark species that is known to eat almost anything.
+						A few things they are known to eat include:
+						<ul class="tiger-list">
+							<li>Fish</li>
+							<li>Birds</li>
+							<li>Turtles</li>
+							<li>Rays</li>
+							<li>Crustaceans</li>
+							<li>Garbage</li>
+						</ul>
 						The Tiger Shark is a solitary predator that is found in
 						warm coastal waters around the world, and it is known
 						for its distinctive stripes that give it its name.
@@ -174,5 +182,48 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- I use internal CSS as it is only used on this page. -->
+		 <style>
+			.tiger-list {
+				list-style-type: none;
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+			}
+
+			.tiger-list li {
+				line-height: 1;
+				/* So the ::before pseudo is positioned relative to the li, not the ul/parent */
+				position: relative;
+			}
+			
+			.tiger-list li::before {
+				/* All pseudo elements require a 'content' property */
+				content: "";
+				position: absolute;
+				left: -20px;
+
+				/* Center on the Y, as stated in css/style.css (1/2p-1/2c = center) */
+				top: 50%;
+				transform: translateY(-50%);
+
+				width: 0;
+				height: 0;
+
+				/* Fancy little trick to make a triangle.
+				   It works by making the top and bottom borders transparent,
+				   and the left border a solid color which will cause the
+				   left border to be clipped from the top and bottom. */
+				border-top: 10px solid transparent;
+				border-bottom: 10px solid transparent;
+				border-left: 10px solid rgba(0, 123, 255, 0.2);
+				transition: border-left 0.3s;
+			}
+
+			.tiger-list li:hover::before {
+				border-left: 10px solid rgba(0, 123, 255, 0.5);
+			}
+		 </style>
 	</body>
 </html>

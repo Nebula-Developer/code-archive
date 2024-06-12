@@ -1,9 +1,5 @@
 var homeAboutBackground = $('.home-about-background');
-// var map = document.querySelector('map');
-// var image = document.getElementById('image');
-// var wrapper = document.getElementById('wrapper');
-// var svg = document.getElementById('svg');
-// var polygon = document.getElementById('polygon');
+
 var map = $('map');
 var image = $('#imageMap');
 var wrapper = $('#wrapper');
