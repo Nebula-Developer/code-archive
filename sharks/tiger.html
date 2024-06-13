@@ -85,8 +85,8 @@
 					<div class="shark-bio-text">
 						The Tiger Shark is a large species of shark that is
 						known for its voracious appetite. It is one of the few
-						shark species that is known to eat almost anything.
-						A few things they are known to eat include:
+						shark species that is known to eat almost anything. A
+						few things they are known to eat include:
 						<ul class="tiger-list">
 							<li>Fish</li>
 							<li>Birds</li>
@@ -169,6 +169,14 @@
 					</tr>
 				</table>
 			</div>
+
+			<div class="shark-page-references">
+				<div class="shark-page-references-header">Content references</div>
+				<div class="shark-page-references-list">
+					<a href="https://en.wikipedia.org/wiki/Tiger_shark" class="shark-page-reference">Tiger Shark - Wikipedia</a>
+					<a href="https://www.nationalgeographic.com/animals/fish/facts/tiger-shark" class="shark-page-reference">Tiger Shark Facts - National Geographic</a>
+				</div>
+			</div>
 		</div>
 
 		<div class="footer">
@@ -184,7 +192,7 @@
 		</div>
 
 		<!-- I use internal CSS as it is only used on this page. -->
-		 <style>
+		<style>
 			.tiger-list {
 				list-style-type: none;
 				display: flex;
@@ -197,10 +205,10 @@
 				/* So the ::before pseudo is positioned relative to the li, not the ul/parent */
 				position: relative;
 			}
-			
+
 			.tiger-list li::before {
 				/* All pseudo elements require a 'content' property */
-				content: "";
+				content: '';
 				position: absolute;
 				left: -20px;
 
@@ -224,6 +232,6 @@
 			.tiger-list li:hover::before {
 				border-left: 10px solid rgba(0, 123, 255, 0.5);
 			}
-		 </style>
+		</style>
 	</body>
 </html>

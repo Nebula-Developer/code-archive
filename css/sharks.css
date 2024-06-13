@@ -99,3 +99,18 @@
 .shark-stats-table tr:not(:first-child) {
 	border: 1px solid rgb(78 151 165 / 50%);
 }
+
+.shark-page-references {
+	display: flex;
+	flex-direction: column;
+	padding: 30px;
+	border-top: 2px solid cyan;
+	background: linear-gradient(-50deg, rgb(17, 64, 84), #23476b);
+}
+
+.shark-page-references-list {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	gap: 20px;
+}
