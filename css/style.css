@@ -14,8 +14,11 @@ body {
 	/* Global body styling, just so we don't have to target every element on the page to override browser defaults. */
 	background: black;
 	color: white;
+	/* This primary font is overriden when we target elements at a lower level,
+	   because CSS prioritizes the most specific selector. */
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
 		sans-serif;
+    /* Overrides the browser's default margin and padding */
 	margin: 0;
 	padding: 0;
 }
@@ -58,6 +61,7 @@ body {
 	color: white;
 	text-decoration: none;
 	padding: 0 10px;
+	/* Makes the text in the element uppercase. Saves me from having to keep spamming caps lock. */
 	text-transform: uppercase;
 	/* Smoothly transitions back when the mouse leaves */
 	transition: background 0.3s;
@@ -206,6 +210,8 @@ body {
 	font-size: 60px;
 	text-transform: uppercase;
 	user-select: none;
+	/* Similar idea - changing the font helps separate the header from the rest of the content.
+	   It helps it stand out slightly. Also, this font was nicer to use in this instance. */
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
 		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }

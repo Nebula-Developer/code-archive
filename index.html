@@ -26,10 +26,16 @@
 	</head>
 
 	<body>
+		<!-- This container is manually copied to all pages.
+		     It is referenced in /js/main.js for the definition
+			 hover elements. -->
 		<div class="hover-text-container hide">
 			<div class="hover-text-name"></div>
 			<div class="hover-text-definition"></div>
 		</div>
+
+		<!-- This navbar is also manually copied to all pages.
+		     Web frameworks often do this for us. -->
 		<div id="navbar" class="flex-center">
 			<div class="navbar-content">
 				<a href="index.html" class="navbar-header">
@@ -94,6 +100,10 @@
 							<small style="font-size: 18px">
 								Hint: &nbsp; Try hovering over text that looks
 								like
+								<!-- data-define is an attribute that doesn't exist,
+								     but I am using it to store the definition of a word
+									 so that it can be accessed by the hover-text-container
+									 in /js/main.js. -->
 								<span
 									class="hover-word"
 									data-define="You can hover over words like this to see their definitions. Try it out!"
@@ -104,6 +114,8 @@
 							<div style="height: 20px"></div>
 							Sharks, often known as the apex predators of the
 							oceans, are a diverse group of
+							<!-- Because it is setting the inner html of the hover container,
+							     we can embed html right in the data-define attribute, as shown here. -->
 							<span
 								class="hover-word"
 								data-define="Made of <a target='blank' href='https://www.merriam-webster.com/dictionary/cartilage'>cartilage</a>, a tough, elastic tissue that is lighter and more flexible than bone. Other fish like rays and skates are also made of cartilage, and are named 'elasmobranchs'."
@@ -210,6 +222,9 @@
 				<div class="section-header">Interactive Shark Anatomy</div>
 				<div style="text-align: center; display: flex; justify-content: center; width: 100%; margin-top: 20px; color: grey; font-size: 20px;">Warning:&nbsp;All links are external, and may contain graphic images.</div>
 
+				<!-- This is all controlled by the CSS and JS.
+					 All children are absolutely positioned to this wrapper (which is relative),
+					 then the javascript places the calculated positions from the normal values in the map. -->
 				<div class="interactive-wrapper">
 					<div class="image-wrapper" id="wrapper">
 						<img
@@ -220,7 +235,9 @@
 						/>
 						
 						<map name="map"></map>
-	
+						
+						<!-- This svg helps the user understand what they are hovering over.
+						     It is also controlled by the JS. -->
 						<svg
 							id="svg"
 							width="100%"
@@ -238,7 +255,8 @@
 				</div>
 			</div>
 		</div>
-	
+		
+		<!-- This footer element is copied to all pages. It is farily basic. -->
 		<div class="footer">
 			<div class="footer-content">
 				<a class="footer-header" href="index.html">Sharks</a>
@@ -246,7 +264,7 @@
 				<div class="footer-links">
 					<a href="index.html" class="footer-link">Home</a>
 					<a href="index.html#about" class="footer-link">About</a>
-					<a href="species.html" class="footer-link">About</a>
+					<a href="species.html" class="footer-link">Species</a>
 				</div>
 			</div>
 		</div>
