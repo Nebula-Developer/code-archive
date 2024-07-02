@@ -177,7 +177,8 @@ body {
    (you will notice it in on the arrow at the bottom of the front page) */
 @keyframes bounce {
 	0% {
-		/* translateX -50% because $1/2p - 1/2c = center$ and we aren't using flexbox. (Although I probably should have) */
+		/* translateX -50% because $1/2p - 1/2c = center$ and we aren't using flexbox.
+		   (Although I probably should have) */
 		transform: translateY(0) translateX(-50%);
 	}
 
