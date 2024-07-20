@@ -8,7 +8,8 @@ export default function Page() {
         <div
           className="sm:max-w-4xl sm:p-10 p-5 m-2 text-slate-100 rounded-lg shadow-xl shadow-gray-400"
           style={{
-            background: "linear-gradient(30deg, rgb(120, 166, 119), #366037)",
+            // background: "linear-gradient(30deg, rgb(120, 166, 119), rgb(138, 159, 114))",
+            background: "linear-gradient(30deg, rgb(109, 112, 137), rgb(167, 157, 162))"
           }}
         >
           <div className="sm:text-2xl text-xl mb-3 italic font-light">
@@ -18,11 +19,11 @@ export default function Page() {
           <div className="flex flex-col space-y-5 sm:text-base text-sm">
             <p>
               <Image
-                src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg"
+                src="https://via.placeholder.com/500x300"
                 width={500}
                 height={300}
                 alt="Kim"
-                className="sm:float-right object-cover sm:w-1/4 w-full h-32 sm:ml-5 mb-5 min-w-28 rounded-md"
+                className="sm:float-right object-cover sm:w-1/4 w-full h-32 sm:ml-5 mb-5 min-w-28 rounded-md shadow-xl"
               />
               I am a qualified <i>Clinical Medical Herbalist</i>,{" "}
               <i>Aromatherapist</i>, <i>Reflexologist</i>, <i>Nutritionist</i>,{" "}
@@ -41,11 +42,11 @@ export default function Page() {
 
             <p>
               <Image
-                src="https://cdn.mos.cms.futurecdn.net/ASHH5bDmsp6wnK6mEfZdcU.jpg"
+                src="/Images/Lulu.png"
                 width={500}
                 height={300}
-                alt="Kim"
-                className="sm:float-left object-cover sm:w-72 w-full sm:h-52 h-40 sm:mr-5 mb-1 rounded-md"
+                alt="Border Terrier Dog"
+                className="sm:float-left object-cover sm:w-72 w-full sm:h-52 h-40 sm:mr-5 mb-1 rounded-md shadow-xl"
               />
               Ive got several neighbourhood numbers because their four legs
               decide to visit with me at my house whenever they choose, which of
