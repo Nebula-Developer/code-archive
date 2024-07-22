@@ -15,7 +15,7 @@ function endPoint(name: string, method: EndpointMethod, auth: boolean = false) {
 
     if (req.headers.authorization) {
       const token = req.headers.authorization.split(' ')[1];
-      jwt.verify(token, 'secret', async (err, userRes) => {
+      jwt.verify(token, secret, async (err, userRes) => {
         if (err && auth) {
           res.status(401).json({ error: 'Unauthorized' });
           return;
@@ -34,6 +34,31 @@ function endPoint(name: string, method: EndpointMethod, auth: boolean = false) {
   });
 }
 
+function formatClientUser(user: User) {
+  return {
+    id: user.id,
+    email: user.email,
+    name: user.name
+  };
+}
+
+const secret = 'this is a super long secret';
+
+const formatUserJwt = (user: User) => jwt.sign(formatClientUser(user), secret);
+
+function verifyUserJwt(token: string) {
+  return new Promise<User | null>((resolve) => {
+    jwt.verify(token, secret, async (err, user) => {
+      if (err) {
+        resolve(null);
+        return;
+      }
+
+      resolve(await User.findByPk((user as any).id));
+    });
+  });
+}
+
 endPoint('login', async ({ req, res, next }, success, error) => {
   const { email, password } = req.body;
   if (typeof email !== 'string' || typeof password !== 'string') {
@@ -48,8 +73,10 @@ endPoint('login', async ({ req, res, next }, success, error) => {
     return;
   }
 
-  const token = jwt.sign({ id: user.id }, 'secret');
-  success({ token });
+  success({
+    user: formatClientUser(user),
+    token: formatUserJwt(user)
+  });
 });
 
 endPoint('register', async ({ req, res, next }, success, error) => {
@@ -61,10 +88,39 @@ endPoint('register', async ({ req, res, next }, success, error) => {
 
   try {
     const user = await User.create({ email, name, password });
-    success({ user });
+    success({
+      user: formatClientUser(user),
+      token: formatUserJwt(user)
+    });
   } catch (e) {
     error('Email already exists');
   }
+});
+
+endPoint('me', async ({ req, res, next }, success, error) => {
+  if (!req.headers.authorization) {
+    error('Unauthorized');
+    return;
+  }
+
+  var jwtValue = req.headers.authorization.split(' ')[1];
+
+  verifyUserJwt(jwtValue).then(async (user: any | null) => {
+    if (!user) {
+      error('Unauthorized');
+      return;
+    }
+    
+    const userRes = await User.findByPk(user.id);
+    if (!userRes) {
+      error('Unauthorized');
+      return;
+    }
+
+    success({
+      user: formatClientUser(userRes)
+    });
+  });
 });
 
 export default router;

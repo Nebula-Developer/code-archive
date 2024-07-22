@@ -313,10 +313,10 @@ function FormContents() {
   return (
     <div className="m-5">
       <div className="flex justify-center">
-        <div className="container shadow-lg space-y-4 flex flex-col p-5 bg-white rounded-md">
+        <div className="container shadow-lg space-y-10 flex flex-col p-6 sm:p-8 bg-white rounded-md">
           <div className="text-2xl md:text-4xl">Create Your Remedy</div>
 
-          <div className="flex flex-col space-y-5">
+          <div className="flex flex-col sm:space-y-8 space-y-6">
             <div className="flex flex-col space-y-2">
               <label>Name of Four Leg</label>
               <Input onChange={(e: any) => setName(e.target.value)} />
