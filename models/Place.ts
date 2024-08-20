@@ -39,7 +39,12 @@ Place.init(
 Place.belongsTo(User, { foreignKey: "ownerId" });
 User.hasMany(Place, { foreignKey: "ownerId" });
 
-export async function placePixel(x: number, y: number, color: string, ownerId: number) {
+export async function placePixel(
+  x: number,
+  y: number,
+  color: string,
+  ownerId: number
+) {
   const place = await Place.findOne({ where: { x, y } });
   if (place) {
     await place.update({ color, ownerId });
@@ -55,7 +60,7 @@ export async function getPlace(x: number, y: number) {
       {
         model: User,
         as: "User",
-        attributes: ["username", "email", "id"]
+        attributes: ["username", "email", "id"],
       },
     ],
   });

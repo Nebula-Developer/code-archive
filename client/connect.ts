@@ -2,9 +2,12 @@ import { io } from "socket.io-client";
 import { createInterface } from "readline";
 import { configDotenv } from "dotenv";
 import logger from "../logger";
+
 configDotenv({
   path: __dirname + "/../.env",
 });
+
+console.log("\x1Bc\x1B[2J");
 
 const rl = createInterface({
   input: process.stdin,
@@ -15,13 +18,15 @@ const socket = io("http://localhost:" + process.env.PORT, {
   reconnection: false,
 });
 
-logger.info("http://localhost:" + process.env.PORT);
-
 socket.connect();
 
-socket.on("connect", () => {
-  logger.info("Connected to server");
-});
+function setAuth(jwt: string) {
+  socket.disconnect();
+  socket.auth = {
+    jwt,
+  };
+  socket.connect();
+}
 
 socket.emit(
   "register",
@@ -31,14 +36,24 @@ socket.emit(
     email: "time" + new Date().getTime() + "@test.com",
   },
   (res) => {
-    logger.info(res);
-
     if (res.success) {
-      socket.disconnect();
-      socket.auth = {
-        jwt: res.data.jwt,
-      };
-      socket.connect();
+      socket.emit(
+        "login",
+        { email: res.data.user.email, password: "test" },
+        (res) => {
+          if (res.success) {
+            setAuth(res.data.jwt);
+          } else {
+            logger.error(res);
+          }
+        }
+      );
     }
   }
 );
+
+socket.on("auth", (res) => {
+  socket.emit("say", { message: "Hello, world!" }, (res) => {
+    logger.info(res);
+  });
+});

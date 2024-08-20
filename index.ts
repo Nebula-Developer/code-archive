@@ -1,7 +1,7 @@
 import sequelize from "./database";
 import User from "./models/User";
 import Place from "./models/Place";
-import Game from "./gameManager";
+import PlaceGame from "./placeGameManager";
 import server from "./server";
 import logger from "./logger";
 import { configDotenv } from "dotenv";
@@ -16,6 +16,6 @@ sequelize.sync({ force: FORCE }).then(async () => {
   await User.sync({ force: FORCE });
   await Place.sync({ force: FORCE });
 
-  Game.load();
+  PlaceGame.load();
   server.listen(PORT);
 });

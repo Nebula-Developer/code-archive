@@ -1,6 +1,9 @@
 import sequelize from "../database";
 import { DataTypes, Model } from "sequelize";
 
+/**
+ * The base User model used across all platforms.
+ */
 class User extends Model {
   declare id: number;
   declare username: string;
@@ -28,12 +31,32 @@ User.init(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
   },
   {
     sequelize,
     modelName: "User",
   }
 );
+
+type SafeUser = {
+  id: number;
+  username: string;
+  email: string;
+};
+
+/**
+ * All User instances sent to the client are passed through this function,
+ * which only includes any non-sensitive information.
+ * @param user The User instance to be sanitized.
+ * @returns A SafeUser instance. (This type may change)
+ */
+export function safeUser(user: User): SafeUser {
+  return {
+    id: user.id,
+    username: user.username,
+    email: user.email,
+  };
+}
 
 export default User;
