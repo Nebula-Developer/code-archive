@@ -21,9 +21,24 @@ socket.connect();
 
 socket.on("connect", () => {
   logger.info("Connected to server");
-  socket.emit("say", {
-
-  }, (res) => {
-    logger.info(res);
-  });
 });
+
+socket.emit(
+  "register",
+  {
+    username: "test",
+    password: "test",
+    email: "time" + new Date().getTime() + "@test.com",
+  },
+  (res) => {
+    logger.info(res);
+
+    if (res.success) {
+      socket.disconnect();
+      socket.auth = {
+        jwt: res.data.jwt,
+      };
+      socket.connect();
+    }
+  }
+);

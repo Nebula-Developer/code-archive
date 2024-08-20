@@ -2,6 +2,8 @@ import { Server as IOServer } from "socket.io";
 import { Server } from "http";
 import Game, { Result } from "./gameManager";
 import logger from "./logger";
+import User from "./models/User";
+import jwt from "./jwt";
 
 const httpServer = new Server((req, res) => {
   res.writeHead(200, { "Content-Type": "text/plain" });
@@ -14,17 +16,19 @@ const io = new IOServer(httpServer, {
   },
 });
 
-type DataTypeSchema = { [key: string]: { type: string; required: boolean } };
+type DataTypeSchema = { [key: string]: { type: string; required: boolean } | string };
+
+type SocketHandlerProps = {
+  data: { [key: string]: any };
+  success: (data?: any) => void;
+  error: (error: string) => void;
+  callback: (...args: any[]) => void;
+};
 
 io.on("connection", (socket) => {
   function socketListener(
     name: string,
-    handler: (props: {
-      data: any;
-      success: (data?: any) => void;
-      error: (error?: string) => void;
-      callback: (...args: any[]) => void;
-    }) => void,
+    handler: (props: SocketHandlerProps) => void,
     datatypes?: DataTypeSchema
   ) {
     socket.on(name, (data, callback) => {
@@ -48,7 +52,14 @@ io.on("connection", (socket) => {
       }
 
       if (datatypes) {
-        for (const [key, { type, required }] of Object.entries(datatypes)) {
+        for (const [key, raw] of Object.entries(datatypes)) {
+          const entry = typeof raw == "string" ? {
+            type: raw,
+            required: true
+          } : raw;
+          
+          const { type, required } = entry;
+
           if (required && data[key] === undefined) {
             cbk({
               success: false,
@@ -91,6 +102,40 @@ io.on("connection", (socket) => {
       },
     }
   );
+
+  socketListener("register", async ({ data, success, error }) => {
+    const { username, password, email } = data;
+    
+    try {
+      const user = await User.create({ username, password, email });
+      var json = user.toJSON();
+      delete json.password;
+
+      success({
+        user: json,
+        jwt: jwt.createToken(json),
+      });
+    } catch (e) {
+      var msgComp = e.message.toLowerCase();
+      if (msgComp.includes("isemail")) {
+        error("Invalid email");
+        return;
+      }
+
+      if (msgComp.includes("validation")) {
+        error("Email already in use");
+        return;
+      }
+
+      error(e.message);
+    }
+  }, {
+    username: "string",
+    password: "string",
+    email: "string",
+  });
+
+  console.log(socket.handshake.auth);
 });
 
 async function listen(port: number) {
