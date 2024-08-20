@@ -8,7 +8,7 @@ const sequelize = new Sequelize({
   dialect: "sqlite",
   storage: "database.sqlite",
   logging: (sql, timing) => {
-    logger.debug(sql);
+    // logger.debug(sql);
   },
 });
 

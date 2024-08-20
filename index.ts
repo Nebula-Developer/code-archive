@@ -10,7 +10,7 @@ configDotenv();
 const PORT = (process.env.PORT || 3000) as number;
 const FORCE = process.env.FORCE === "true";
 
-logger.info(`Starting server on port ${PORT} with force=${FORCE}`);
+logger.log(`Starting server on port ${PORT} with force=${FORCE}`);
 
 sequelize.sync({ force: FORCE }).then(async () => {
   await User.sync({ force: FORCE });

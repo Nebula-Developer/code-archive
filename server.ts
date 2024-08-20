@@ -1,4 +1,4 @@
-import { Server as IOServer } from "socket.io";
+import { Server as IOServer, Socket } from "socket.io";
 import { Server } from "http";
 import PlaceGame from "./placeGameManager";
 import logger from "./logger";
@@ -22,7 +22,7 @@ export type Result = {
 /**
  * The http server instance that hosts the socket.io server.
  */
-const httpServer = new Server((req, res) => {
+export const httpServer = new Server((req, res) => {
   res.writeHead(200, { "Content-Type": "text/plain" });
   res.end("Hello, World!\n");
 });
@@ -30,7 +30,7 @@ const httpServer = new Server((req, res) => {
 /**
  * The socket.io server instance.
  */
-const io = new IOServer(httpServer, {
+export const io = new IOServer(httpServer, {
   cors: {
     origin: "*",
   },
@@ -39,21 +39,21 @@ const io = new IOServer(httpServer, {
 /**
  * The schema for the data types that are expected to be received from the client.
  */
-type DataTypeSchema = {
+export type DataTypeSchema = {
   [key: string]: { type: string; required: boolean } | string;
 };
 
 /**
  * A set of rules that determine how the socket should handle or validate the incoming data.
  */
-type SocketRules = {
+export type SocketRules = {
   auth?: boolean;
 };
 
 /**
  * The properties that are passed to the socket handler.
  */
-type SocketHandlerProps = {
+export type SocketHandlerProps = {
   /** The data that was received from the client. */
   data: { [key: string]: any };
   /** A callback that should be called when the operation was successful. */
@@ -62,50 +62,106 @@ type SocketHandlerProps = {
   error: (error: string) => void;
   /** The raw callback function that was passed by the client (try to avoid using this). */
   callback: (...args: any[]) => void;
+  /** The user that is authenticated with the socket. */
+  user: User | null;
 };
 
-io.on("connection", (socket) => {
-  var user: User | null = null;
+/**
+ * List of all socket listeners registered by `socketListener`.
+ *
+ * Example of a socket listener:
+ * ```ts
+ * socketListeners["say"] = {
+ *  handler: ({ data, success }) => {
+ *    logger.info("Client said: " + data.message);
+ *    success();
+ *  },
+ *  rules: { auth: true },
+ *  datatypes: {
+ *    message: {
+ *      required: true,
+ *      type: "string",
+ *    },
+ *  },
+ * };
+ * ```
+ */
+export let socketListeners: {
+  [key: string]: {
+    handler: (props: SocketHandlerProps) => void;
+    datatypes?: DataTypeSchema;
+    rules?: SocketRules;
+  };
+} = {};
 
+/**
+ * Registers a new safe socket listener with the given name, handler, datatypes, and rules.
+ *
+ * The event will be registered with all new socket connections.
+ * @param name The name of the socket event from the client.
+ * @param handler The handler function that will be called when the event is received.
+ * @param datatypes The schema for the data types that are expected to be received from the client.
+ * @param rules A set of rules that determine how the socket should handle or validate the incoming data.
+ */
+export function registerSocketListener(
+  name: string,
+  handler: (props: SocketHandlerProps) => void,
+  datatypes?: DataTypeSchema,
+  rules?: SocketRules
+) {
+  socketListeners[name] = { handler, datatypes, rules };
+}
+
+/**
+ * Removes a socket listener with the given name.
+ * @param name The name of the socket event to remove.
+ */
+export function removeSocketListener(name: string) {
+  delete socketListeners[name];
+}
+
+/**
+ * Authenticates a socket connection with the given handshake JWT token.
+ * @param socket The socket connection that is being authenticated.
+ * @returns The user that is authenticated with the socket, or null if the token is invalid or missing.
+ */
+export async function authenticateSocket(socket: Socket): Promise<User | null> {
   if (socket.handshake.auth) {
-    /**
-     * Fails the token authentication process.
-     */
-    function failTokenAuth() {
-      socket.emit("auth", {
-        success: false,
-        error: "Invalid token",
-      });
-    }
-
     try {
       const token = socket.handshake.auth.jwt;
       const decoded: any | null = jwt.verifyToken(token);
 
       if (decoded) {
-        User.findByPk(decoded.id).then((u) => {
-          if (u) {
-            user = u;
-            socket.emit("auth", {
-              success: true,
-              user: safeUser(u),
-            });
-          } else failTokenAuth();
-        });
-      } else failTokenAuth();
+        return await User.findByPk(decoded.id);
+      }
     } catch {
-      failTokenAuth();
+      return null;
     }
   }
 
+  return null;
+}
+
+io.on("connection", (socket) => {
+  var user: User | null = null;
+
+  authenticateSocket(socket).then((u) => {
+    user = u;
+    socket.emit("auth", {
+      success: !!u,
+      user: u ? safeUser(u) : null,
+      error: u ? undefined : "Invalid token",
+    });
+  });
+
   /**
-   * Registers a new safe socket listener with the given name, handler, datatypes, and rules.
+   * Registers a new safe socket listener within the socket connection.
    * @param name The name of the socket event from the client.
    * @param handler The handler function that will be called when the event is received.
    * @param datatypes The schema for the data types that are expected to be received from the client.
    * @param rules A set of rules that determine how the socket should handle or validate the incoming data.
    */
-  function socketListener(
+  function innerSocketListener(
     name: string,
     handler: (props: SocketHandlerProps) => void,
     datatypes?: DataTypeSchema,
@@ -171,28 +227,21 @@ io.on("connection", (socket) => {
         success: (data) => cbk({ success: true, data }),
         error: (error) => cbk({ success: false, error }),
         callback: cbk,
+        user,
       });
     });
   }
 
-  socketListener(
-    "say",
-    ({ data, success }) => {
-      logger.info("Client said: " + data.message);
-      success();
-    },
-    {
-      message: {
-        required: false,
-        type: "string",
-      },
-    },
-    {
-      auth: true,
-    }
-  );
+  for (const [name, listener] of Object.entries(socketListeners)) {
+    innerSocketListener(
+      name,
+      listener.handler,
+      listener.datatypes,
+      listener.rules
+    );
+  }
 
-  socketListener(
+  innerSocketListener(
     "register",
     async ({ data, success, error }) => {
       const { username, password, email } = data;
@@ -210,7 +259,9 @@ io.on("connection", (socket) => {
           user: su,
           jwt: jwt.createToken(su),
         });
-      } catch (e) {
+      } catch (cth: any) {
+        var e = cth as Error;
+
         var msgComp = e.message.toLowerCase();
         if (msgComp.includes("isemail")) {
           error("Invalid email");
@@ -232,7 +283,7 @@ io.on("connection", (socket) => {
     }
   );
 
-  socketListener(
+  innerSocketListener(
     "login",
     async ({ data, success, error }) => {
       const { email, password } = data;
@@ -270,12 +321,18 @@ io.on("connection", (socket) => {
  */
 async function listen(port: number) {
   return httpServer.listen(port, () => {
-    logger.info("listening on *:" + port);
+    logger.log("Server listening on port " + port + " 🚀");
   });
 }
 
+/**
+ * Holder of all server-related methods, primarily for the socket server.
+ */
 export default {
   listen,
-  httpServer,
   io,
+  httpServer,
+  authenticateSocket,
+  registerSocketListener,
+  removeSocketListener,
 };

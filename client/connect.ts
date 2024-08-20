@@ -1,59 +1,48 @@
 import { io } from "socket.io-client";
-import { createInterface } from "readline";
 import { configDotenv } from "dotenv";
 import logger from "../logger";
+import fs from "fs";
 
-configDotenv({
-  path: __dirname + "/../.env",
-});
+configDotenv({ path: __dirname + "/../.env" });
 
 console.log("\x1Bc\x1B[2J");
 
-const rl = createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+var jwt = "";
+if (fs.existsSync("jwt.txt")) jwt = fs.readFileSync("jwt.txt").toString();
 
 const socket = io("http://localhost:" + process.env.PORT, {
-  reconnection: false,
+  autoConnect: true,
+  reconnection: true,
+  reconnectionDelay: 500,
+  reconnectionAttempts: Infinity,
+  auth: { jwt },
 });
 
-socket.connect();
-
 function setAuth(jwt: string) {
-  socket.disconnect();
-  socket.auth = {
-    jwt,
-  };
-  socket.connect();
+  socket.auth = { jwt };
+  socket.disconnect().connect();
 }
 
-socket.emit(
-  "register",
-  {
-    username: "test",
-    password: "test",
-    email: "time" + new Date().getTime() + "@test.com",
-  },
-  (res) => {
-    if (res.success) {
-      socket.emit(
-        "login",
-        { email: res.data.user.email, password: "test" },
-        (res) => {
-          if (res.success) {
-            setAuth(res.data.jwt);
-          } else {
-            logger.error(res);
-          }
-        }
-      );
+function register() {
+  socket.emit(
+    "register",
+    {
+      username: "test",
+      password: "test",
+      email: "time" + new Date().getTime() + "@test.com",
+    },
+    (res) => {
+      if (res.success) {
+        setAuth(res.data.jwt);
+        fs.writeFileSync("jwt.txt", res.data.jwt);
+      }
     }
-  }
-);
+  );
+}
+
+if (!jwt) register();
 
 socket.on("auth", (res) => {
-  socket.emit("say", { message: "Hello, world!" }, (res) => {
-    logger.info(res);
-  });
+  if (!res.success) register();
+  else logger.log(res)
 });
