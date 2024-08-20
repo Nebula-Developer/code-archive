@@ -24,12 +24,12 @@ class User extends Model {
   /**
    * Adds a role to this user.
    */
-  declare addRole: (role: Role) => void;
+  declare addRole: (role: Role) => Promise<void>;
 
   /**
    * Removes a role from this user.
    */
-  declare removeRole: (role: Role) => void;
+  declare removeRole: (role: Role) => Promise<void>;
 }
 
 User.init(
@@ -92,6 +92,29 @@ export function safeUser(user: User): SafeUser {
     username: user.username,
     email: user.email,
   };
+}
+
+/**
+ * Checks whether a user has a role with the given string ID.
+ * @param user The user to check.
+ * @param stringId The string ID of the role to check for.
+ * @returns Whether the user has the role.
+ */
+export function hasRole(user: User, stringId: string): boolean {
+  return user.roles.some((role) => role.stringId === stringId);
+}
+
+
+/**
+ * Checks whether a user has a role with the given string ID.
+ * @param userId The id of the user to check.
+ * @param stringId The string ID of the role to check for.
+ * @returns Whether the user has the role.
+ */
+export async function idHasRole(userId: number, stringId: string): Promise<boolean> {
+  const user = await User.findByPk(userId);
+  if (!user) return false;
+  return user.roles.some((role) => role.stringId === stringId);
 }
 
 export default User;
