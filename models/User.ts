@@ -1,5 +1,6 @@
 import sequelize from "../database";
 import { DataTypes, Model } from "sequelize";
+import Role from "./Role";
 
 /**
  * The base User model used across all platforms.
@@ -9,6 +10,26 @@ class User extends Model {
   declare username: string;
   declare email: string;
   declare password: string;
+
+  /**
+   * The roles assigned to this user.
+   */
+  declare roles: Role[];
+
+  /**
+   * The roles assigned to this user.
+   */
+  declare getRoles: () => Promise<Role[]>;
+
+  /**
+   * Adds a role to this user.
+   */
+  declare addRole: (role: Role) => void;
+
+  /**
+   * Removes a role from this user.
+   */
+  declare removeRole: (role: Role) => void;
 }
 
 User.init(
@@ -39,7 +60,21 @@ User.init(
   }
 );
 
-type SafeUser = {
+User.hasMany(Role, {
+  foreignKey: "userId",
+  as: "roles",
+});
+
+Role.belongsTo(User, {
+  foreignKey: "userId",
+  as: "user",
+});
+
+User.addScope("defaultScope", {
+  include: [{ model: Role, as: "roles" }],
+});
+
+export type SafeUser = {
   id: number;
   username: string;
   email: string;
