@@ -79,11 +79,11 @@ function joinArgs(args: any[], color: Color) {
 export const logger = {
   /** Logs a message with the INFO level. */
   log: (...args: any[]) => {
-    logFormatted(colorString("INFO", [0, 255, 0]), joinArgs(args, [0, 40, 0]));
+    logFormatted(colorString("INFO", [0, 255, 0]), joinArgs(args, [200, 250, 200]));
   },
   /** Logs a message with the DEBUG level. */
   debug: (...args: any[]) => {
-    logFormatted(colorString("DEBUG", [50, 50, 50]), joinArgs(args, [10, 10, 10]), [50, 50, 50]);
+    logFormatted(colorString("DEBUG", [120, 120, 120]), joinArgs(args, [100, 100, 100]), [100, 100, 100]);
   },
   /** Logs a message with the WARN level. */
   warn: (...args: any[]) => {
