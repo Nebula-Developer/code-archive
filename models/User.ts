@@ -72,6 +72,7 @@ Role.belongsTo(User, {
 
 User.addScope("defaultScope", {
   include: [{ model: Role, as: "roles" }],
+  attributes: { exclude: ["password"] },
 });
 
 export type SafeUser = {

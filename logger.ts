@@ -55,9 +55,9 @@ function joinArgs(args: any[], color: Color) {
       case "object":
           var stringifySL = JSON.stringify(arg);
           if (stringifySL.length > 100)
-            return "\n" + colorString(JSON.stringify(arg, null, 2), [10,30,100]) + lastNewline;
+            return "\n" + colorString(JSON.stringify(arg, null, 2), [100,200,255]) + lastNewline;
           else
-            return colorString(stringifySL, [10,30,100]) + lastSpace;
+            return colorString(stringifySL, [100,200,255]) + lastSpace;
       case "boolean":
         return colorString(arg.toString(), [230, 100, 250]) + lastSpace;
       case "number":

@@ -1,10 +1,11 @@
 import sequelize from "./database";
-import User, { hasRole } from "./models/User";
+import User from "./models/User";
 import PlaceGame from "./placeGameManager";
 import server from "./server";
 import logger from "./logger";
-import { configDotenv } from "dotenv";
 import Role from "./models/Role";
+import "./chatappListeners";
+import { configDotenv } from "dotenv";
 configDotenv();
 
 const PORT = (process.env.PORT || 3000) as number;
