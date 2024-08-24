@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  directus:
+    image: directus/directus:11.0.2
+    ports:
+      - 8055:8055
+    volumes:
+      - ./backend/database:/directus/database
+      - ./backend/uploads:/directus/uploads
+      - ./backend/extensions:/directus/extensions
+    environment:
+      SECRET: "replace-with-secure-random-value"
+      ADMIN_EMAIL: "admin@example.com"
+      ADMIN_PASSWORD: "d1r3ctu5"
+      DB_CLIENT: "sqlite3"
+      DB_FILENAME: "/directus/database/data.db"
+      WEBSOCKETS_ENABLED: "true"
+      REFRESH_TOKEN_COOKIE_SECURE: true
+      REFRESH_TOKEN_COOKIE_SAME_SITE: "none"
+      SESSION_COOKIE_SECURE: true
+    restart: unless-stopped
+
+  nextjs:
+    build:
+      context: ./frontend
+    ports:
+      - 3000:3000
+    depends_on:
+      - directus
+    restart: unless-stopped

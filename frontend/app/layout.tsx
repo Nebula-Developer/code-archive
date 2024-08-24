@@ -1,4 +1,9 @@
 import React from "react"
+import "./globals.css"
+import Navbar from "./components/Navbar"
+import { getUser } from "../lib/state"
+import CookieSetter from "./CookieSetter"
+import { storage } from "../lib/directus"
 
 export const metadata = {
   title: 'Next.js',
@@ -10,9 +15,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  console.log("DAT", JSON.stringify(storage.data));
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <CookieSetter cookie={JSON.stringify(storage.data)} />
+        <Navbar user={getUser()} />
+        {children}
+      </body>
     </html>
   )
 }
