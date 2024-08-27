@@ -10,7 +10,7 @@ services:
       - ./backend/uploads:/directus/uploads
       - ./backend/extensions:/directus/extensions
     environment:
-      SECRET: "$OtakaroW3bs1t3S3cr3t-013579$"
+      SECRET: "$$OtakaroW3bs1t3S3cr3t-013579$$"
       ADMIN_EMAIL: "admin@example.com"
       ADMIN_PASSWORD: "your-secure-password"
       DB_CLIENT: "sqlite3"
