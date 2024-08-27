@@ -1,21 +1,25 @@
-import { authentication, AuthenticationData, createDirectus, rest, RestCommand } from '@directus/sdk';
-import { cookies } from 'next/headers';
+import {authentication, AuthenticationData, createDirectus, rest, RestCommand} from '@directus/sdk';
+import {cookies} from 'next/headers';
+
+export const ADMIN_ROLE = "9fa25a08-fb14-4706-bc80-6794987342f1";
 
 class DirectusStorage {
     data = {};
+
     async get(): Promise<AuthenticationData> {
-        console.log("GETTING DATA", this.data);
+        // console.log("GETTING DATA", this.data);
         return this.data as any;
     }
-    set(data) { }
+
+    set(data) {
+        // this.data = data;
+    }
 }
 
 export const storage = new DirectusStorage();
 
-const directus = createDirectus('http://directus:8055', {
-
-}).with(rest({
-    onRequest: (options) => ({ ...options, cache: 'no-store' }),
+const directus = createDirectus('http://directus:8055', {}).with(rest({
+    onRequest: (options) => ({...options, cache: 'no-store'}),
     credentials: 'include'
 })).with(authentication('json', {
     storage,

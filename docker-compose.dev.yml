@@ -10,15 +10,11 @@ services:
       - ./backend/uploads:/directus/uploads
       - ./backend/extensions:/directus/extensions
     environment:
-      SECRET: "your-production-secure-random-value"
+      SECRET: "$OtakaroW3bs1t3S3cr3t-013579$"
       ADMIN_EMAIL: "admin@example.com"
       ADMIN_PASSWORD: "your-secure-password"
       DB_CLIENT: "sqlite3"
       DB_FILENAME: "/directus/database/data.db"
-      WEBSOCKETS_ENABLED: "true"
-      REFRESH_TOKEN_COOKIE_SECURE: false
-      REFRESH_TOKEN_COOKIE_SAME_SITE: "none"
-      SESSION_COOKIE_SECURE: false
     restart: unless-stopped
 
   nextjs:

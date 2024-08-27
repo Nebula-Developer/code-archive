@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AuthenticatedPage, Page } from "../../../lib/pages";
+import { Page } from "../../../lib/pages";
 import Image from "next/image";
 import PageContent from "../../components/PageContent";
 import React from "react";
@@ -8,7 +8,7 @@ import { randomIntFromInt } from "../../components/PageCard";
 import directus from "../../../lib/directus";
 import { readItem } from "@directus/sdk";
 
-export default AuthenticatedPage(async ({ params }) => {
+export default Page(async ({ params }) => {
   let page: any;
   try {
       page = await directus.request(readItem('pages', params.id, {

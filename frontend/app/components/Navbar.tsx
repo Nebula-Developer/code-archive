@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { User } from "../../lib/types";
 import { useEffect, useRef, useState } from "react";
+import {isAdmin} from "../../lib/state";
 
 export type NavbarItem = {
   name: string;
@@ -27,7 +28,7 @@ function NavbarItem({
   );
 }
 
-export default function Navbar({ user }: { user: User | null }) {
+export default function Navbar({ user, admin }: { user: User | null, admin: boolean }) {
   const [open, setOpen] = useState(false);
 
   let items: NavbarItem[] = [
@@ -37,10 +38,10 @@ export default function Navbar({ user }: { user: User | null }) {
   ];
 
   if (user !== null) {
-    if (user.role === "admin")  {
+    if (admin)  {
         items.push({ name: "Admin", href: "/admin" });
     }
-    items.push({ name: "Logout", href: "/logout" });
+    items.push({ name: "Logout", href: "/api/logout" });
   } else {
     items.push({ name: "Login", href: "/login" });
     items.push({ name: "Register", href: "/register" });
@@ -60,7 +61,7 @@ export default function Navbar({ user }: { user: User | null }) {
   }, [open]);
 
   return (
-    <div className="fixed top-0 left-0 w-full flex-shrink-0 h-32 bg-white shadow-xl z-[1000] flex justify-center">
+    <div className="fixed top-0 left-0 w-full flex-shrink-0 h-32 bg-white shadow-xl z-[1000] flex justify-center text-black">
       <div className="mx-5 h-full flex items-center justify-between w-full max-w-7xl">
         <Link className="flex flex-col justify-center items-center h-full px-5" href="/">
           <h1 className="text-2xl ">Ōtākaro Ako</h1>

@@ -6,11 +6,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 // import pageCSS from "../lib/pageCSS";
 // import Category from "../lib/models/Category";
 import Image from "next/image";
-import TinyEditor from "./TinyEditor";
-import { fetchAPI } from "@/app/lib/api";
-import state from "@/app/lib/state";
-import { User } from "@/app/lib/types";
-import AdminInput from "@/app/components/AdminInput";
+import TinyEditor from "./TinyEditor";;
+import AdminInput from "../../components/AdminInput";
 import { CategorySelect } from "./CategorySelect";
 
 function mapTags(tags: string) {
@@ -24,7 +21,7 @@ export function EditorPanel({
   user,
   categoryFetch,
 }: {
-  user: User;
+  user: any;
   categoryFetch: any;
 }) {
   var page = {
@@ -73,20 +70,20 @@ export function EditorPanel({
             <button
               className="bg-gradient-to-b from-blue-400 to-sky-600 px-5 py-2 text-white rounded-md border-[1px] border-sky-500"
               onClick={() => {
-                fetchAPI("/api/pages", {
-                  method: "POST",
-                  body: {
-                    data: {
-                      title: name,
-                      content: content,
-                        hero: image || undefined,
-                      slug: slug,
-                      categories: selected[selected.length - 1],
-                    },
-                  },
-                }).then((res) => {
-                  location.href = "/page/" + res.data.attributes.slug;
-                });
+                // fetchAPI("/api/pages", {
+                //   method: "POST",
+                //   body: {
+                //     data: {
+                //       title: name,
+                //       content: content,
+                //         hero: image || undefined,
+                //       slug: slug,
+                //       categories: selected[selected.length - 1],
+                //     },
+                //   },
+                // }).then((res) => {
+                //   location.href = "/page/" + res.data.attributes.slug;
+                // });
               }}
             >
               Save Page
@@ -256,21 +253,21 @@ export function EditorPanel({
                         var formData = new FormData();
                         formData.append("files", e.target.files![0]);
 
-                        fetchAPI("/api/upload", {
-                          method: "POST",
-                          rawBody: formData,
-                        }).then(async (res) => {
-                          if (!Array.isArray(res)) {
-                            setImageError("Failed to upload image");
-                            return;
-                          }
-
-                          setImageError(null);
-
-                          let data = res[0];
-                          setImage(data.id);
-                          setHeroImage(data);
-                        });
+                        // fetchAPI("/api/upload", {
+                        //   method: "POST",
+                        //   rawBody: formData,
+                        // }).then(async (res) => {
+                        //   if (!Array.isArray(res)) {
+                        //     setImageError("Failed to upload image");
+                        //     return;
+                        //   }
+                        //
+                        //   setImageError(null);
+                        //
+                        //   let data = res[0];
+                        //   setImage(data.id);
+                        //   setHeroImage(data);
+                        // });
                       }}
                       ref={heroImageRef}
                     />

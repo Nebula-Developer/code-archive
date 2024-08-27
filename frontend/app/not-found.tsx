@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Page } from "./lib/pages";
+import {Page} from "../lib/pages";
 import React from "react";
 
 export default Page(() => {

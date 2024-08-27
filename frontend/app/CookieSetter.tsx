@@ -6,7 +6,7 @@ import { setCookie } from "../lib/setCookie";
 export default function CookieSetter({ cookie }: { cookie: string }) {
     useEffect(() => {
         console.log(cookie);
-        setCookie("directus", decodeURIComponent(cookie));
+        setCookie("token", decodeURIComponent(cookie));
     }, [cookie]);
     return (<></>);
 }

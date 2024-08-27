@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { AuthenticatedPage } from "../lib/pages";
-import { API_URL } from "../lib/api";
+import {AuthenticatedPage} from "../../lib/pages";
+import directus from "../../lib/directus";
 
 function AdminGridItem({ name, location, image, inactive }: { name: string; location: string; image: string, inactive?: boolean }) {
     return (
@@ -19,7 +19,7 @@ export default AuthenticatedPage(() => {
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 <AdminGridItem name="Create New Page" location="/admin/create" image="/images/Estuary2.jpg" />
                 <AdminGridItem inactive={true} name="Edit Page" location="/admin/edit" image="/images/Estuary3.jpg" />
-                <AdminGridItem inactive={true} name="Admin Console" location={API_URL + "admin"} image="/images/Estuary4.jpg" />
+                <AdminGridItem name="Admin Console" location={"http://localhost:8055"} image="/images/Estuary4.jpg" />
             </div>
         </div>
     );
