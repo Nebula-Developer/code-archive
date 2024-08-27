@@ -34,7 +34,7 @@ export function CategorySelect({
                 return category.attributes.category.data?.id === parent;
             })
         );
-    }, [parent]);
+    }, [parent, categories]);
 
     function show(category: any): boolean {
         return !(

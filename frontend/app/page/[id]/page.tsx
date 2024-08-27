@@ -61,7 +61,7 @@ export default Page(async ({ params }) => {
           
           <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-5">
             {files.map(file => (
-              <a className="flex justify-center items-center flex-col p-5 shadow-xl border border-gray-200 rounded-xl hover:scale-105" href={API_URL + 'assets/' + file.id}>
+              <a key={file.id} className="flex justify-center items-center flex-col p-5 shadow-xl border border-gray-200 rounded-xl hover:scale-105" href={API_URL + 'assets/' + file.id}>
                 {file.title}
                 {file.type.startsWith('image') && (
                   <Image alt={file.title} src={directus.url + 'assets/' + file.id} width={112} height={112} className="w-24 h-12 sm:h-20 sm:w-28 object-cover mt-3" />
