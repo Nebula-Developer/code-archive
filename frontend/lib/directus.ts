@@ -2,6 +2,7 @@ import {authentication, AuthenticationData, createDirectus, rest, RestCommand} f
 import {cookies} from 'next/headers';
 
 export const ADMIN_ROLE = "9fa25a08-fb14-4706-bc80-6794987342f1";
+export const API_URL = "http://localhost:8055/";
 
 class DirectusStorage {
     data = {};

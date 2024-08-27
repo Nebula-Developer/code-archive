@@ -5,16 +5,25 @@ import PageContent from "../../components/PageContent";
 import React from "react";
 import { notFound } from "next/navigation";
 import { randomIntFromInt } from "../../components/PageCard";
-import directus from "../../../lib/directus";
-import { readItem } from "@directus/sdk";
+import directus, { API_URL } from "../../../lib/directus";
+import { readItem, readFile, readFiles } from "@directus/sdk";
 
 export default Page(async ({ params }) => {
   let page: any;
+  let files: any[] = [];
   try {
       page = await directus.request(readItem('pages', params.id, {
-          fields: ['title', 'category.name', 'category.id', 'content', 'hero', 'date_created']
+          fields: ['title', 'category.name', 'category.id', 'content', 'hero', 'date_created', 'media.directus_files_id']
       }));
+      
+      for (var i in page.media) {
+          var file = await directus.request(readFile(page.media[i].directus_files_id, {
+            fields: ['title', 'id', 'type']
+          }));
+          files.push(file);
+      }
   } catch (e) {
+    console.log(e)
       return notFound();
   }
 
@@ -46,6 +55,21 @@ export default Page(async ({ params }) => {
 
       <div className="container mx-auto px-5 py-12">
         <PageContent content={page.content ?? ""} />
+
+        <div className="mt-5">
+          <div className="text-2xl">Assets</div>
+          
+          <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+            {files.map(file => (
+              <a className="flex justify-center items-center flex-col p-5 shadow-xl border border-gray-200 rounded-xl hover:scale-105" href={API_URL + 'assets/' + file.id}>
+                {file.title}
+                {file.type.startsWith('image') && (
+                  <Image alt={file.title} src={directus.url + 'assets/' + file.id} width={112} height={112} className="w-24 h-12 sm:h-20 sm:w-28 object-cover mt-3" />
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </main>
   );
