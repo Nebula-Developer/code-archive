@@ -1,4 +1,4 @@
-import {authentication, AuthenticationData, createDirectus, rest, RestCommand} from '@directus/sdk';
+import {authentication, AuthenticationData, createDirectus, readItems, rest, RestCommand} from '@directus/sdk';
 import {cookies} from 'next/headers';
 
 export const ADMIN_ROLE = "9fa25a08-fb14-4706-bc80-6794987342f1";

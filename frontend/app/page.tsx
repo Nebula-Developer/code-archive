@@ -15,7 +15,7 @@ export default Page(async () => {
     try {
         pages = await directus.request(readItems('pages', {
           fields: ['title', 'hero', 'category.name', 'category.id', 'id', 'tags'],
-          sort: 'user_created',
+          sort: [ "-date_created" ],
           limit: 6
         }));
     } catch (e) {
@@ -39,7 +39,7 @@ export default Page(async () => {
                 <div className="container mx-auto px-5 py-20">
                     <h2 className="text-2xl md:text-3xl  mb-6">Recently Updated Pages</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                        {pages.reverse().map((page) => (
+                        {pages.map((page) => (
                             <PageCard key={page.id} page={page}/>
                         ))}
                     </div>

@@ -8,6 +8,8 @@ import { randomIntFromInt } from "../../components/PageCard";
 import directus, { API_URL } from "../../../lib/directus";
 import { readItem, readFile, readFiles } from "@directus/sdk";
 
+export const dynamic = 'force-dynamic';
+
 export default Page(async ({ params }) => {
   let page: any;
   let files: any[] = [];
@@ -23,6 +25,7 @@ export default Page(async ({ params }) => {
           "date_created",
           "media.directus_files_id",
           "tags",
+          "id"
         ],
       })
     );
@@ -46,7 +49,7 @@ export default Page(async ({ params }) => {
   }
 
   return (
-    <main>
+    <main className="bg-gray-100">
       <div className="w-full p-20 min-h-72 md:min-h-96 border-b-2 border-gray-200 relative">
         <Image
           src={hero}
@@ -68,7 +71,7 @@ export default Page(async ({ params }) => {
                   page.tags.map((tag) => (
                     <a
                       href={"/search?tags=" + tag}
-                      className="opacity-75 hover:opacity-100 bg-sky-600 cursor-pointer px-2 p-1 rounded-lg text-xs text-white"
+                      className="hover:bg-sky-500 bg-sky-600 cursor-pointer px-2 p-1 rounded-lg text-xs text-white"
                       key={tag}
                     >
                       {tag}
@@ -102,16 +105,18 @@ export default Page(async ({ params }) => {
       </div>
 
       <div className="container mx-auto px-5 py-12">
-        <PageContent content={page.content ?? ""} />
+        <div className="p-5 bg-white rounded-xl shadow-xl">
+          <PageContent content={page.content ?? ""} />
+        </div>
 
-        <div className="mt-5">
+        <div className="mt-12">
           <div className="text-2xl">Assets</div>
 
           <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-5">
             {files.map((file) => (
               <a
                 key={file.id}
-                className="text-center flex justify-center items-center flex-col p-5 shadow-sm hover:shadow-xl transition-all duration-100 ease-out border border-gray-200 rounded-xl hover:scale-105"
+                className="bg-gray-200 hover:bg-gray-100 text-center flex justify-center items-center flex-col p-5 shadow-sm hover:shadow-xl transition-all duration-100 ease-out border border-gray-200 rounded-xl hover:scale-105"
                 href={API_URL + "assets/" + file.id}
                 target="_blank"
               >
@@ -148,9 +153,9 @@ export default Page(async ({ params }) => {
                   <Image
                     alt={file.title}
                     src={directus.url + "assets/" + file.id}
-                    width={112}
-                    height={112}
-                    className="w-24 h-12 sm:h-20 sm:w-28 object-cover mt-3"
+                    width={200}
+                    height={200}
+                    className="w-24 h-12 sm:h-20 sm:w-28 object-cover mt-3 rounded-lg"
                   />
                 )}
               </a>
