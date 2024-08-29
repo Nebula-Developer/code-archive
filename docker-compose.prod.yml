@@ -15,6 +15,7 @@ services:
       ADMIN_PASSWORD: "your-secure-password"
       DB_CLIENT: "sqlite3"
       DB_FILENAME: "/directus/database/data.db"
+      API_URL: "https://api.otakaro.nz"
     restart: unless-stopped
 
   nextjs:
