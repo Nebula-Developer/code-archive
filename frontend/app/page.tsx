@@ -14,7 +14,7 @@ export default Page(async () => {
 
     try {
         pages = await directus.request(readItems('pages', {
-          fields: ['title', 'hero', 'category.name', 'category.id', 'id'],
+          fields: ['title', 'hero', 'category.name', 'category.id', 'id', 'tags'],
           sort: 'user_created',
           limit: 6
         }));

@@ -10,15 +10,12 @@ export function randomIntFromInt(input: number, min: number, max: number) {
 export default function PageCard({ page }: { page: any }) {
   var hero = "/images/Estuary" + randomIntFromInt(page.id, 1, 6) + ".jpg";
   if (page.hero) {
-    hero = directus.url + 'assets/' + page.hero;
+    hero = directus.url + "assets/" + page.hero;
   }
 
   return (
     <div className="bg-white shadow-xl rounded-lg hover:scale-105 transition-transform duration-200 border border-gray-200 overflow-hidden pb-5">
-      <Link
-        href={`/page/${page.id ?? "404"}`}
-        className="w-full flex flex-col"
-      >
+      <Link href={`/page/${page.id ?? "404"}`} className="w-full flex flex-col">
         <Image
           src={hero}
           // src="/images/HomeBG.jpg"
@@ -32,11 +29,15 @@ export default function PageCard({ page }: { page: any }) {
       {page.category && (
         <Link
           href={"/search?category=" + page.category.id}
-          className="p-5 text-sm  text-gray-400 hover:underline"
+          className="p-5 text-sm  text-gray-400 underline hover:no-underline hover:text-gray-500"
         >
           {page.category.name}
         </Link>
       )}
+
+      <div className="flex gap-2 flex-wrap mx-5 mt-2">
+        {page.tags && page.tags.map((tag) => <a href={"/search?tags=" + tag} className="bg-sky-500 hover:bg-sky-700 cursor-pointer px-2 p-1 rounded-lg text-xs text-white" key={tag}>{tag}</a>)}
+      </div>
     </div>
   );
-}
+}   
