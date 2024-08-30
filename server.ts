@@ -6,6 +6,7 @@ import jwt from "./jwt";
 import hash from "./hash";
 import express from "express";
 import path from "path";
+import env from "./env";
 
 /**
  * The result of an operation that is returned to the client or sender.
@@ -51,8 +52,8 @@ export const io = new IOServer(httpServer, {
 });
 
 const rateLimits = new Map<string, number>();
-const RATE_LIMIT = (process.env.RATE_LIMIT || 1000) as number;
-const RATE_ENABLED = (process.env.RATE_ENABLED || "false") == "true";
+const RATE_LIMIT = env("RATE_LIMIT", 100);
+const RATE_ENABLED = env("RATE_ENABLED", false);
 
 httpServer.prependListener("request", (req, res) => {
   if (!req.socket.remoteAddress || !RATE_ENABLED) return;

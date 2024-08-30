@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
+import env from "./env";
 
-const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS || "10");
+const SALT_ROUNDS = env("SALT_ROUNDS", 10);
 
 /**
  * Method to hash a password

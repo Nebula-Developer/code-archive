@@ -1,7 +1,7 @@
 import { verify, sign } from "jsonwebtoken";
+import env from "./env";
 
-const JWT_SECRET = (process.env.JWT_SECRET ||
-  new Date().getTime().toString());
+const JWT_SECRET = env("JWT_SECRET", "secret");
 
 /**
  * Creates a JWT from the given data, encoded with the JWT_SECRET

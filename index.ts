@@ -6,10 +6,11 @@ import logger from "./logger";
 import Role from "./models/Role";
 import "./chatappListeners";
 import { configDotenv } from "dotenv";
+import env from "./env";
 configDotenv();
 
-const PORT = (process.env.PORT || 3000) as number;
-const FORCE = process.env.FORCE === "true";
+const PORT = env("PORT", 3000);
+const FORCE = env("FORCE", false);
 
 logger.debug(`:sparkle: Starting server on port ${PORT} with force=${FORCE} :sparkle:`);
 

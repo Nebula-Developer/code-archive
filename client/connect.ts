@@ -2,6 +2,7 @@ import { io } from "socket.io-client";
 import { configDotenv } from "dotenv";
 import logger from "../logger";
 import * as fs from "fs";
+import env from "../env";
 
 configDotenv({ path: __dirname + "/../.env" });
 
@@ -17,7 +18,7 @@ logger.debug(startBar);
 let jwt = "";
 if (fs.existsSync("jwt.txt")) jwt = fs.readFileSync("jwt.txt").toString();
 
-const socket = io("http://localhost:" + process.env.PORT, {
+const socket = io("http://localhost:" + env("port", 3000), {
   autoConnect: true,
   reconnection: true,
   reconnectionDelay: 500,
