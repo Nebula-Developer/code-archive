@@ -1,11 +1,11 @@
 import { Server as IOServer, Socket } from "socket.io";
 import { Server } from "http";
-import PlaceGame from "./placeGameManager";
 import logger from "./logger";
 import User, { safeUser } from "./models/User";
 import jwt from "./jwt";
 import hash from "./hash";
-import { JwtPayload } from "jsonwebtoken";
+import express from "express";
+import path from "path";
 
 /**
  * The result of an operation that is returned to the client or sender.
@@ -20,11 +20,24 @@ export type Result = {
 };
 
 /**
+ * The express server instance that handles the HTTP requests.
+ */
+const app = express();
+
+app.get("/logo", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/assets/logo.png"));
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/index.html"));
+});
+
+/**
  * The http server instance that hosts the socket.io server.
  */
 export const httpServer = new Server((req, res) => {
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("Hello, World!\n");
+  logger.debug(`Got request: ${req.method} ${req.url}`);
+  app(req, res);
 });
 
 /**
@@ -34,6 +47,24 @@ export const io = new IOServer(httpServer, {
   cors: {
     origin: "*",
   },
+  maxHttpBufferSize: 1e8,
+});
+
+const rateLimits = new Map<string, number>();
+const RATE_LIMIT = (process.env.RATE_LIMIT || 1000) as number;
+const RATE_ENABLED = (process.env.RATE_ENABLED || "false") == "true";
+
+httpServer.prependListener("request", (req, res) => {
+  if (!req.socket.remoteAddress || !RATE_ENABLED) return;
+
+  if (rateLimits.has(req.socket.remoteAddress) && rateLimits.get(req.socket.remoteAddress)! > RATE_LIMIT) {
+    res.end("Rate limited");
+    (res.end as any) = () => {
+      logger.debug("Called reassigned end method:", req.socket.remoteAddress);
+    };
+  }
+
+  rateLimits.set(req.socket.remoteAddress, (rateLimits.get(req.socket.remoteAddress) || 0) + 1);
 });
 
 /**
@@ -64,6 +95,8 @@ export type SocketHandlerProps = {
   callback: (...args: any[]) => void;
   /** The user that is authenticated with the socket. */
   user: User | null;
+  /** The socket connection that is being handled. */
+  socket: Socket;
 };
 
 /**
@@ -86,7 +119,7 @@ export type SocketHandlerProps = {
  * };
  * ```
  */
-export let socketListeners: {
+export const socketListeners: {
   [key: string]: {
     handler: (props: SocketHandlerProps) => void;
     datatypes?: DataTypeSchema;
@@ -143,7 +176,7 @@ export async function authenticateSocket(socket: Socket): Promise<User | null> {
 }
 
 io.on("connection", (socket) => {
-  var user: User | null = null;
+  let user: User | null = null;
 
   authenticateSocket(socket).then((u) => {
     user = u;
@@ -169,7 +202,7 @@ io.on("connection", (socket) => {
   ) {
     socket.on(name, (data, callback) => {
       // Falls back to an empty callback if none is provided.
-      var cbk =
+      const cbk =
         !!callback && typeof callback === "function" ? callback : () => {};
 
       if (rules?.auth && !user) {
@@ -228,6 +261,7 @@ io.on("connection", (socket) => {
         error: (error) => cbk({ success: false, error }),
         callback: cbk,
         user,
+        socket,
       });
     });
   }
@@ -247,22 +281,22 @@ io.on("connection", (socket) => {
       const { username, password, email } = data;
 
       try {
-        var passwordHash = await hash.hash(password);
+        const passwordHash = await hash.hash(password);
         const user = await User.create({
           username,
           password: passwordHash,
           email,
         });
-        var su = safeUser(user);
+        const su = safeUser(user);
 
         success({
           user: su,
           jwt: jwt.createToken(su),
         });
       } catch (cth: any) {
-        var e = cth as Error;
+        const e = cth as Error;
 
-        var msgComp = e.message.toLowerCase();
+        const msgComp = e.message.toLowerCase();
         if (msgComp.includes("isemail")) {
           error("Invalid email");
           return;
@@ -299,7 +333,7 @@ io.on("connection", (socket) => {
         return;
       }
 
-      var su = safeUser(user);
+      const su = safeUser(user);
       success({
         user: su,
         jwt: jwt.createToken(su),
@@ -316,12 +350,16 @@ io.on("connection", (socket) => {
   });
 });
 
+export function close() {
+  httpServer.close();
+}
+
 /**
  * Starts the HTTP server on the given port.
  */
 async function listen(port: number) {
   return httpServer.listen(port, () => {
-    logger.log("Server listening on port " + port + " 🚀");
+    logger.log("Server listening on port " + port + " :rocket:");
   });
 }
 
@@ -330,6 +368,7 @@ async function listen(port: number) {
  */
 export default {
   listen,
+  close,
   io,
   httpServer,
   authenticateSocket,

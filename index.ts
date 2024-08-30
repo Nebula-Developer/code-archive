@@ -11,7 +11,7 @@ configDotenv();
 const PORT = (process.env.PORT || 3000) as number;
 const FORCE = process.env.FORCE === "true";
 
-logger.debug(`Starting server on port ${PORT} with force=${FORCE}`);
+logger.debug(`:sparkle: Starting server on port ${PORT} with force=${FORCE} :sparkle:`);
 
 sequelize.sync({ force: FORCE }).then(async () => {
   User.create({
@@ -28,7 +28,6 @@ sequelize.sync({ force: FORCE }).then(async () => {
         User.findOne({ where: { username: "admin" }}).then((user) => {
           if (user) {
             logger.log("Amount of roles:", user.roles.length);
-            logger.error("Got undefined value from logger:", undefined);
           }
         });
       });

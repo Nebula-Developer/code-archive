@@ -117,7 +117,7 @@ export class PlaceGameManager {
     width: number,
     height: number
   ): Promise<Array<Array<Place>>> {
-    var places = await Place.findAll({
+    const places = await Place.findAll({
       where: {
         x: {
           [Op.gte]: x,
@@ -130,7 +130,7 @@ export class PlaceGameManager {
       },
     });
 
-    var map: Array<Array<Place>> = [...Array(width)].map(() => Array(height));
+    const map: Array<Array<Place>> = [...Array(width)].map(() => Array(height));
 
     places.forEach((place) => {
       map[place.x][place.y] = place;

@@ -1,7 +1,7 @@
 import { verify, sign } from "jsonwebtoken";
 
 const JWT_SECRET = (process.env.JWT_SECRET ||
-  new Date().getTime().toString()) as string;
+  new Date().getTime().toString());
 
 /**
  * Creates a JWT from the given data, encoded with the JWT_SECRET

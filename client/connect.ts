@@ -14,7 +14,7 @@ logger.debug(startBar);
 logger.debug(startString);
 logger.debug(startBar);
 
-var jwt = "";
+let jwt = "";
 if (fs.existsSync("jwt.txt")) jwt = fs.readFileSync("jwt.txt").toString();
 
 const socket = io("http://localhost:" + process.env.PORT, {
@@ -40,7 +40,7 @@ function register() {
       password: "test",
       email: "time" + new Date().getTime() + "@test.com",
     },
-    (res) => {
+    (res: any) => {
       if (res.success) {
         setAuth(res.data.jwt);
         fs.writeFileSync("jwt.txt", res.data.jwt);
@@ -58,9 +58,20 @@ socket.on("auth", (res) => {
     socket.emit("createGroup", {
       name: "testing-" + new Date().getTime(),
       password: "password",
-    }, (res) => {
+    }, (res: any) => {
       if (res.success) {
         logger.debug("Group created:", res.data.group);
+
+        socket.emit("sendMessage", {
+          groupName: res.data.group.name,
+          content: "Hello, world!",
+        }, (res: any) => {
+          if (res.success) {
+            logger.debug("Message sent:", res.data.message);
+          } else {
+            logger.error("Error sending message:", res.error);
+          }
+        });
       } else {
         logger.error("Error creating group:", res.error);
       }

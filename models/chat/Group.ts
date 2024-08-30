@@ -10,8 +10,11 @@ class Group extends Model {
 
   declare getUsers: () => Promise<User[]>;
   declare addUser: (user: User) => Promise<void>;
+  declare removeUser: (user: User) => Promise<void>;
   declare addAdmin: (user: User) => Promise<void>;
+  declare removeAdmin: (user: User) => Promise<void>;
   declare setOwner: (user: User) => Promise<void>;
+  declare hasUser: (user: User) => Promise<boolean>;
 }
 
 Group.init(
@@ -40,5 +43,9 @@ User.belongsToMany(Group, { through: "GroupAdmins", as: "adminOf" });
 
 Group.belongsTo(User, { foreignKey: "ownerId", as: "owner" });
 User.hasMany(Group, { foreignKey: "ownerId", as: "ownedGroups" });
+
+Group.addScope("defaultScope", {
+  attributes: { exclude: ["password"] },
+});
 
 export default Group;

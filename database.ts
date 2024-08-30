@@ -1,5 +1,4 @@
 import { Sequelize } from "sequelize";
-import logger from "./logger";
 
 /***
  * The Sequelize instance used to interact with the database.
@@ -7,9 +6,7 @@ import logger from "./logger";
 const sequelize = new Sequelize({
   dialect: "sqlite",
   storage: "database.sqlite",
-  logging: (sql, timing) => {
-    // logger.debug(sql);
-  },
+  logging: false
 });
 
 export default sequelize;

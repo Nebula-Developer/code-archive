@@ -29,4 +29,19 @@ Group.hasMany(Message, { foreignKey: "groupId", as: "messages" });
 Message.belongsTo(User, { foreignKey: "userId", as: "user" });
 User.hasMany(Message, { foreignKey: "userId", as: "messages" });
 
+Message.addScope("defaultScope", {
+  include: [
+    {
+      model: Group,
+      as: "group",
+      attributes: ["id", "name"],
+    },
+    {
+      model: User,
+      as: "user",
+      attributes: ["id", "username", "email"],
+    },
+  ],
+});
+
 export default Message;

@@ -1,4 +1,5 @@
 import pino from "pino";
+import emoji from "./emoji";
 
 /**
  * Pino logger instance
@@ -36,8 +37,28 @@ function colorString(str: string, color: Color) {
  * @param message The message to log.
  * @param bracketColor The color of the brackets around the level.
  */
-function logFormatted(level: string, message: string, bracketColor: Color = [255, 255, 255]) {
-  console.log(colorString("[", bracketColor) + level + colorString("] ", bracketColor) + message);
+function logFormatted(
+  level: string,
+  message: string,
+  bracketColor: Color = [255, 255, 255]
+) {
+  const time = colorString(
+    "[" +
+      new Date().toLocaleTimeString("en-US", {
+        hour12: false,
+      }) +
+      "]",
+    [50, 100, 100]
+  );
+
+  console.log(
+    time +
+      " " +
+      colorString("[", bracketColor) +
+      level +
+      colorString("] ", bracketColor) +
+      message
+  );
 }
 
 /**
@@ -47,30 +68,43 @@ function logFormatted(level: string, message: string, bracketColor: Color = [255
  * @returns The joined string.
  */
 function joinArgs(args: any[], color: Color) {
-  return args.map((arg) => {
-    var last = args.indexOf(arg) === args.length - 1;
-    var lastSpace = last ? "" : " ";
-    var lastNewline = last ? "" : "\n";
-    switch (typeof arg) {
-      case "object":
-          var stringifySL = JSON.stringify(arg);
+  return args
+    .map((arg) => {
+      const last = args.indexOf(arg) === args.length - 1;
+      const lastSpace = last ? "" : " ";
+      const lastNewline = last ? "" : "\n";
+      switch (typeof arg) {
+        case "object": {
+          const stringifySL = JSON.stringify(arg);
           if (stringifySL.length > 100)
-            return "\n" + colorString(JSON.stringify(arg, null, 2), [100,200,255]) + lastNewline;
-          else
-            return colorString(stringifySL, [100,200,255]) + lastSpace;
-      case "boolean":
-        return colorString(arg.toString(), [230, 100, 250]) + lastSpace;
-      case "number":
-      case "bigint":
-        return colorString(arg.toString(), [100, 200, 200]) + lastSpace;
-      case "function":
-        return colorString("[Function]", [150, 200, 200]) + lastSpace;
-      case "undefined":
-        return colorString("undefined", [150, 150, 200]) + lastSpace;
-    }
-    
-    return colorString(arg, color) + lastSpace;
-  }).join("");
+            return (
+              "\n" +
+              colorString(JSON.stringify(arg, null, 2), [100, 200, 255]) +
+              lastNewline
+            );
+          else return colorString(stringifySL, [100, 200, 255]) + lastSpace;
+        }
+        case "boolean":
+          return colorString(arg.toString(), [230, 100, 250]) + lastSpace;
+        case "number":
+        case "bigint":
+          return colorString(arg.toString(), [100, 200, 200]) + lastSpace;
+        case "function":
+          return colorString("[Function]", [150, 200, 200]) + lastSpace;
+        case "undefined":
+          return colorString("undefined", [150, 150, 200]) + lastSpace;
+      }
+
+      arg = arg.replace(
+        /:([a-zA-Z0-9_]+):/g,
+        (match: string, emojiName: string) => {
+          return emoji[emojiName] || match;
+        }
+      );
+
+      return colorString(arg, color) + lastSpace;
+    })
+    .join("");
 }
 
 /**
@@ -79,20 +113,37 @@ function joinArgs(args: any[], color: Color) {
 export const logger = {
   /** Logs a message with the INFO level. */
   log: (...args: any[]) => {
-    logFormatted(colorString("INFO", [0, 255, 0]), joinArgs(args, [200, 250, 200]));
+    logFormatted(
+      colorString("INFO", [0, 255, 0]),
+      joinArgs(args, [200, 250, 200])
+    );
   },
   /** Logs a message with the DEBUG level. */
   debug: (...args: any[]) => {
-    logFormatted(colorString("DEBUG", [120, 120, 120]), joinArgs(args, [100, 100, 100]), [100, 100, 100]);
+    logFormatted(
+      colorString("DEBUG", [120, 120, 120]),
+      joinArgs(args, [100, 100, 100]),
+      [100, 100, 100]
+    );
   },
   /** Logs a message with the WARN level. */
   warn: (...args: any[]) => {
-    logFormatted(colorString("WARN", [255, 255, 0]), joinArgs(args, [255, 255, 0]), [150, 200, 10]);
+    logFormatted(
+      colorString("WARN", [255, 255, 0]),
+      joinArgs(args, [255, 255, 0]),
+      [150, 200, 10]
+    );
   },
   /** Logs a message with the ERROR level. */
   error: (...args: any[]) => {
-    logFormatted(colorString("ERROR", [250, 50, 50]), joinArgs(args, [255, 150, 150]), [250, 50, 50]);
+    logFormatted(
+      colorString("ERROR", [250, 50, 50]),
+      joinArgs(args, [255, 150, 150]),
+      [250, 50, 50]
+    );
   },
 };
+
+logger.debug("Logger initialized :magic:");
 
 export default logger;
