@@ -108,16 +108,72 @@ function joinArgs(args: any[], color: Color) {
 }
 
 /**
+ * Refines an object to only contain the specified attributes.
+ * @param obj The object to refine.
+ * @param attributes The attributes to keep.
+ * @param exclude The attributes to exclude.
+ * @returns The refined object.
+ * @example attributeObject({ hello: 123, world: 456 }, ["hello"]) => { hello: 123 }
+ * @example attributeObject({ hello: { value: 123 }, world: ...}, ["hello.value"]) => { hello: { value: 123 } }
+ * @example attributeObject({ hello: 123, world: 456 }, null, ["world"]) => { hello: 123 }
+ */
+export function attributeObject(
+  obj: { [key: string]: any },
+  attributes?: string[] | null,
+  exclude?: string[] | null
+): { [key: string]: any } {
+  const newObj: { [key: string]: any } = {};
+
+  if (attributes) {
+    for (const attribute of attributes) {
+      const parts = attribute.split(".");
+      let current = obj;
+      let newCurrent = newObj;
+      for (let i = 0; i < parts.length; i++) {
+        const part = parts[i];
+        if (current[part] === undefined) break;
+
+        if (i === parts.length - 1) {
+          newCurrent[part] = current[part];
+        } else {
+          if (!newCurrent[part]) newCurrent[part] = {};
+          current = current[part];
+          newCurrent = newCurrent[part];
+        }
+      }
+    }
+  } else {
+    Object.assign(newObj, obj);
+  }
+
+  if (exclude) {
+    for (const key of exclude) {
+      const parts = key.split(".");
+      let current = newObj;
+      for (let i = 0; i < parts.length - 1; i++) {
+        if (!current[parts[i]]) break;
+        current = current[parts[i]];
+      }
+      delete current[parts[parts.length - 1]];
+    }
+  }
+
+  return newObj;
+}
+
+/**
  * A static logger instance that formats and logs messages to the console.
  */
 export const logger = {
   /** Logs a message with the INFO level. */
-  log: (...args: any[]) => {
+  info: (...args: any[]) => {
     logFormatted(
       colorString("INFO", [0, 255, 0]),
       joinArgs(args, [200, 250, 200])
     );
   },
+  /** Alias for info method. Logs a message with the INFO level. */
+  log: (...args: any[]) => { logger.info(...args); },
   /** Logs a message with the DEBUG level. */
   debug: (...args: any[]) => {
     logFormatted(
@@ -142,6 +198,14 @@ export const logger = {
       [250, 50, 50]
     );
   },
+  /** Just for special prints, like a CLI banner, eg */
+  system: (...args: any[]) => {
+    logFormatted(
+      colorString("SYSTEM", [230, 150, 255]),
+      joinArgs(args, [255, 130, 255]),
+      [255, 200, 255]
+    );
+  }
 };
 
 logger.debug("Logger initialized :magic:");

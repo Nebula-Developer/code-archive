@@ -1,8 +1,9 @@
 import { io } from "socket.io-client";
 import { configDotenv } from "dotenv";
-import logger from "../src/logger";
+import logger, { attributeObject } from "../src/logger";
 import * as fs from "fs";
 import env from "../src/env";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 configDotenv({ path: __dirname + "/../.env" });
 
@@ -11,18 +12,19 @@ console.log("\x1Bc\x1B[2J");
 const startString = "Global Server Connection Test";
 const startBar = String('―').repeat(startString.length);
 
-logger.debug(startBar);
-logger.debug(startString);
-logger.debug(startBar);
+logger.system(startBar);
+logger.system(startString);
+logger.system(startBar);
 
-let jwt = "";
-if (fs.existsSync("jwt.txt")) jwt = fs.readFileSync("jwt.txt").toString();
+let jwtToken = "";
+if (fs.existsSync("jwt.txt")) jwtToken = fs.readFileSync("jwt.txt").toString();
 
 const socket = io("http://localhost:" + env("port", 3030), {
   autoConnect: true,
-  reconnection: false,
-  auth: { jwt },
-  timeout: 1000,
+  reconnection: true,
+  reconnectionAttempts: 5,
+  reconnectionDelay: 1000,
+  auth: { jwt: jwtToken },
 });
 
 socket.on("connect", () => {
@@ -37,21 +39,11 @@ socket.on("error", (err) => {
   logger.error("Error:", err);
 });
 
-setTimeout(() => {
-  if (!socket.connected) {
-    logger.debug("Failed to connect to server.");
-    process.exit(1);
-  }
-}, 1000);
-
-socket.onAny((event, ...args) => {
-  logger.debug("Event:", event, "Args:", args);
-});
-
-function setAuth(jwt: string) {
-  socket.auth = { jwt };
+function setAuth(newJwtToken: string) {
+  jwtToken = newJwtToken;
+  socket.auth = { jwt: jwtToken };
   socket.disconnect().connect();
-  logger.debug("JWT saved:", jwt);
+  logger.log("JWT saved: :password:", jwtToken.substring(0, 20) + "...");
 }
 
 function register() {
@@ -75,7 +67,8 @@ function register() {
 socket.on("auth", (res) => {
   if (!res.success) register();
   else {
-    logger.debug("Authenticated with server.");
+    logger.log(":key: Authenticated with server");
+    logger.debug("JWT decoded:", attributeObject(jwt.decode(jwtToken) as JwtPayload, null, ["iat", "exp"]));
     logger.debug("Attempting to create group...");
 
     socket.emit("createGroup", {
@@ -83,20 +76,20 @@ socket.on("auth", (res) => {
       password: "password",
     }, (res: any) => {
       if (res.success) {
-        logger.debug("Group created:", res.data.group);
+        logger.debug("Group created:", attributeObject(res.data.group, ["id", "name"]));
 
         socket.emit("sendMessage", {
           groupName: res.data.group.name,
           content: "Hello, world!",
         }, (res: any) => {
           if (res.success) {
-            logger.debug("Message sent:", res.data.message);
+            logger.debug("Message sent:", attributeObject(res.data.message, ["id", "content"]));
           } else {
-            logger.error("Error sending message:", res.error);
+            logger.error("Error sending message: :error:", res.error);
           }
         });
       } else {
-        logger.error("Error creating group:", res.error);
+        logger.error("Error creating group: :error:", res.error);
       }
     });
   }
