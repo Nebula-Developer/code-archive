@@ -3,7 +3,7 @@ import { Server } from "http";
 import logger from "./logger";
 import User, { safeUser } from "./models/User";
 import jwt from "./jwt";
-import hash from "./hash";
+import hash from "./hashing";
 import express from "express";
 import path from "path";
 import env from "./env";
@@ -26,11 +26,11 @@ export type Result = {
 const app = express();
 
 app.get("/logo", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/assets/logo.png"));
+  res.sendFile(path.join(__dirname, "../client/assets/logo.png"));
 });
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/index.html"));
+  res.sendFile(path.join(__dirname, "../client/index.html"));
 });
 
 /**
@@ -352,7 +352,13 @@ io.on("connection", (socket) => {
 });
 
 export function close() {
-  httpServer.close();
+  return new Promise<void>((resolve) => {
+    io.close(() => {
+      httpServer.close(() => {
+        resolve();
+      });
+    });
+  });
 }
 
 /**

@@ -3,3 +3,4 @@ bun.lockb
 database.sqlite
 pnpm-lock.yaml
 client/jwt.txt
+database/

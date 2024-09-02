@@ -1,4 +1,4 @@
-import sequelize from "../../database";
+import database from "../../database";
 import { DataTypes, Model } from "sequelize";
 import User from "../User";
 
@@ -30,7 +30,7 @@ Group.init(
     },
   },
   {
-    sequelize,
+    sequelize: database,
     modelName: "Group",
   }
 );

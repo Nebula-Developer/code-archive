@@ -1,8 +1,8 @@
 import { io } from "socket.io-client";
 import { configDotenv } from "dotenv";
-import logger from "../logger";
+import logger from "../src/logger";
 import * as fs from "fs";
-import env from "../env";
+import env from "../src/env";
 
 configDotenv({ path: __dirname + "/../.env" });
 
@@ -18,12 +18,34 @@ logger.debug(startBar);
 let jwt = "";
 if (fs.existsSync("jwt.txt")) jwt = fs.readFileSync("jwt.txt").toString();
 
-const socket = io("http://localhost:" + env("port", 3000), {
+const socket = io("http://localhost:" + env("port", 3030), {
   autoConnect: true,
-  reconnection: true,
-  reconnectionDelay: 500,
-  reconnectionAttempts: Infinity,
+  reconnection: false,
   auth: { jwt },
+  timeout: 1000,
+});
+
+socket.on("connect", () => {
+  logger.debug("Connected to server.");
+});
+
+socket.on("disconnect", () => {
+  logger.debug("Disconnected from server.");
+});
+
+socket.on("error", (err) => {
+  logger.error("Error:", err);
+});
+
+setTimeout(() => {
+  if (!socket.connected) {
+    logger.debug("Failed to connect to server.");
+    process.exit(1);
+  }
+}, 1000);
+
+socket.onAny((event, ...args) => {
+  logger.debug("Event:", event, "Args:", args);
 });
 
 function setAuth(jwt: string) {

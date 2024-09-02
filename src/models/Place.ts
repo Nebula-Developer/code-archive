@@ -1,4 +1,4 @@
-import sequelize from "../database";
+import database from "../database";
 import { DataTypes, Model } from "sequelize";
 import User from "./User";
 
@@ -31,7 +31,7 @@ Place.init(
     },
   },
   {
-    sequelize,
+    sequelize: database,
     modelName: "Place",
   }
 );

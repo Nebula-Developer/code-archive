@@ -2,7 +2,7 @@ import logger from "./logger";
 import { io, registerSocketListener } from "./server";
 import Group from "./models/chat/Group";
 import Message from "./models/chat/Message";
-import hash from "./hash";
+import hash from "./hashing";
 
 registerSocketListener(
   "createGroup",

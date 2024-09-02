@@ -1,4 +1,4 @@
-import logger from "../logger";
+import logger from "../src/logger";
 
 test("Logger Test", () => {
   logger.debug("debug");

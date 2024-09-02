@@ -1,4 +1,4 @@
-import sequelize from "../database";
+import database from "../database";
 import { DataTypes, Model } from "sequelize";
 import Role from "./Role";
 
@@ -55,7 +55,7 @@ User.init(
     },
   },
   {
-    sequelize,
+    sequelize: database,
     modelName: "User",
   }
 );
