@@ -1,5 +1,9 @@
 import pino from "pino";
 import emoji from "./emoji";
+import env from "./env";
+
+if (env("LOGGER_CLEAR", false))
+  console.clear();
 
 /**
  * Pino logger instance
@@ -124,21 +128,37 @@ export function attributeObject(
 ): { [key: string]: any } {
   const newObj: { [key: string]: any } = {};
 
+  const setNestedValue = (target: any, path: string[], value: any) => {
+    let current = target;
+    for (let i = 0; i < path.length - 1; i++) {
+      const part = path[i];
+      current[part] = current[part] || {};
+      current = current[part];
+    }
+    current[path[path.length - 1]] = value;
+  };
+
+  const deleteNestedValue = (target: any, path: string[]) => {
+    let current = target;
+    for (let i = 0; i < path.length - 1; i++) {
+      const part = path[i];
+      if (!current[part]) return;
+      current = current[part];
+    }
+    delete current[path[path.length - 1]];
+  };
+
+  // If attributes are specified, only include those
   if (attributes) {
     for (const attribute of attributes) {
       const parts = attribute.split(".");
       let current = obj;
-      let newCurrent = newObj;
       for (let i = 0; i < parts.length; i++) {
-        const part = parts[i];
-        if (current[part] === undefined) break;
-
+        if (current[parts[i]] === undefined) break;
         if (i === parts.length - 1) {
-          newCurrent[part] = current[part];
+          setNestedValue(newObj, parts, current[parts[i]]);
         } else {
-          if (!newCurrent[part]) newCurrent[part] = {};
-          current = current[part];
-          newCurrent = newCurrent[part];
+          current = current[parts[i]];
         }
       }
     }
@@ -146,15 +166,11 @@ export function attributeObject(
     Object.assign(newObj, obj);
   }
 
+  // Exclude specified attributes
   if (exclude) {
     for (const key of exclude) {
       const parts = key.split(".");
-      let current = newObj;
-      for (let i = 0; i < parts.length - 1; i++) {
-        if (!current[parts[i]]) break;
-        current = current[parts[i]];
-      }
-      delete current[parts[parts.length - 1]];
+      deleteNestedValue(newObj, parts);
     }
   }
 

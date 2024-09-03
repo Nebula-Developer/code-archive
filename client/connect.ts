@@ -7,8 +7,6 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 
 configDotenv({ path: __dirname + "/../.env" });
 
-console.log("\x1Bc\x1B[2J");
-
 const startString = "Global Server Connection Test";
 const startBar = String("―").repeat(startString.length);
 

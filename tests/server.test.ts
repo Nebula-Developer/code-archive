@@ -1,4 +1,4 @@
-import server from '../src/server';
+import server from '../src/server/server';
 
 describe('Server Test', () => {
   beforeAll(() => {

@@ -1,5 +1,9 @@
 import { configDotenv } from "dotenv";
-configDotenv();
+import { resolve, join } from "path";
+
+configDotenv({
+  path: resolve(join(__dirname, "..", ".env"))
+});
 
 export default function <T>(name: string, fallback: T): T {
   const value = process.env[name];

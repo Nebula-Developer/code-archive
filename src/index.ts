@@ -1,13 +1,19 @@
 import database from "./database";
 import User from "./models/User";
-import PlaceGame from "./placeGameManager";
-import server from "./server";
+import server from "./server/server";
 import logger from "./logger";
-import "./chatappListeners";
+import "./server/chatappListeners";
 import { configDotenv } from "dotenv";
 import env from "./env";
 import hashing from "./hashing";
 configDotenv();
+
+const startString = ":sparkle: NebulaDev Global Server :sparkle:";
+const startBar = String("―").repeat(startString.length - 14);
+
+logger.system(startBar);
+logger.system(startString);
+logger.system(startBar);
 
 const PORT = env("PORT", 3000);
 const FORCE = env("FORCE", false);
@@ -15,7 +21,7 @@ const FORCE = env("FORCE", false);
 const ADMIN_PASSWORD = env("ADMIN_PASSWORD", "admin123");
 
 logger.debug(
-  `:sparkle: Starting server on port ${PORT} with force=${FORCE} :sparkle:`
+  `Starting server on port ${PORT} with force=${FORCE} ${FORCE ? ":bomb:" : ":globe:"}`
 );
 
 database.sync({ force: FORCE }).then(async () => {
@@ -40,6 +46,5 @@ database.sync({ force: FORCE }).then(async () => {
     logger.debug("Admin user found.");
   }
 
-  PlaceGame.load();
   server.listen(PORT);
 });
