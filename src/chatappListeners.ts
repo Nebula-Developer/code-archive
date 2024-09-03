@@ -8,7 +8,6 @@ registerSocketListener(
   "createGroup",
   async ({ data, user, success, error }) => {
     try {
-      logger.log("User trying to create group:", data);
       const group = await Group.create({
         name: data.name,
         password: data.password ? await hash.hash(data.password) : null,

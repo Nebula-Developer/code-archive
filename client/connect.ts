@@ -1,9 +1,10 @@
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import { configDotenv } from "dotenv";
 import logger, { attributeObject } from "../src/logger";
 import * as fs from "fs";
 import env from "../src/env";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { chatappSocket, setAuth, socket } from "./ioSet";
 
 configDotenv({ path: __dirname + "/../.env" });
 
@@ -13,17 +14,6 @@ const startBar = String("―").repeat(startString.length);
 logger.system(startBar);
 logger.system(startString);
 logger.system(startBar);
-
-let jwtToken = "";
-if (fs.existsSync("jwt.txt")) jwtToken = fs.readFileSync("jwt.txt").toString();
-
-const socket = io("http://localhost:" + env("port", 3030), {
-  autoConnect: true,
-  reconnection: true,
-  reconnectionAttempts: 5,
-  reconnectionDelay: 1000,
-  auth: { jwt: jwtToken },
-});
 
 socket.on("connect", () => {
   logger.debug("Connected to server.");
@@ -36,13 +26,6 @@ socket.on("disconnect", () => {
 socket.on("error", (err) => {
   logger.error("Error:", err);
 });
-
-function setAuth(newJwtToken: string) {
-  jwtToken = newJwtToken;
-  socket.auth = { jwt: jwtToken };
-  socket.disconnect().connect();
-  logger.log("JWT saved: :password:", jwtToken.substring(0, 20) + "...");
-}
 
 function register() {
   logger.debug("Registering new account with server...");
@@ -62,7 +45,11 @@ function register() {
   );
 }
 
-async function awaitSocket(event: string, ...args: any[]): Promise<any> {
+async function awaitSocket(
+  socket: Socket,
+  event: string,
+  ...args: any[]
+): Promise<any> {
   return new Promise((resolve, reject) => {
     socket.emit(event, ...args, (res: any) => {
       if (res.success) {
@@ -83,7 +70,7 @@ async function initiate() {
 
   try {
     const group = (
-      await awaitSocket("createGroup", {
+      await awaitSocket(chatappSocket, "createGroup", {
         name: "testing-" + new Date().getTime(),
         password: "password",
       })
@@ -92,7 +79,7 @@ async function initiate() {
     logger.debug("Group created:", attributeObject(group, ["id", "name"]));
 
     const message = (
-      await awaitSocket("sendMessage", {
+      await awaitSocket(chatappSocket, "sendMessage", {
         groupName: group.name,
         content: "Hello, world!",
       })
@@ -107,10 +94,6 @@ socket.on("auth", async (res) => {
   if (!res.success) return register();
 
   logger.log(":key: Authenticated with server");
-  logger.debug(
-    "JWT decoded:",
-    attributeObject(jwt.decode(jwtToken) as JwtPayload, null, ["iat", "exp"])
-  );
 
   await initiate();
   logger.info("Initiate method finished :rocket:");

@@ -3,10 +3,8 @@ import User from "./models/User";
 import server from "./server/server";
 import logger from "./logger";
 import "./server/chatappListeners";
-import { configDotenv } from "dotenv";
 import env from "./env";
 import hashing from "./hashing";
-configDotenv();
 
 const startString = ":sparkle: NebulaDev Global Server :sparkle:";
 const startBar = String("―").repeat(startString.length - 14);
