@@ -173,7 +173,9 @@ export const logger = {
     );
   },
   /** Alias for info method. Logs a message with the INFO level. */
-  log: (...args: any[]) => { logger.info(...args); },
+  log: (...args: any[]) => {
+    logger.info(...args);
+  },
   /** Logs a message with the DEBUG level. */
   debug: (...args: any[]) => {
     logFormatted(
@@ -205,7 +207,7 @@ export const logger = {
       joinArgs(args, [255, 130, 255]),
       [255, 200, 255]
     );
-  }
+  },
 };
 
 logger.debug("Logger initialized :magic:");

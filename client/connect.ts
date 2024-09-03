@@ -10,7 +10,7 @@ configDotenv({ path: __dirname + "/../.env" });
 console.log("\x1Bc\x1B[2J");
 
 const startString = "Global Server Connection Test";
-const startBar = String('―').repeat(startString.length);
+const startBar = String("―").repeat(startString.length);
 
 logger.system(startBar);
 logger.system(startString);
@@ -64,33 +64,56 @@ function register() {
   );
 }
 
-socket.on("auth", (res) => {
-  if (!res.success) register();
-  else {
-    logger.log(":key: Authenticated with server");
-    logger.debug("JWT decoded:", attributeObject(jwt.decode(jwtToken) as JwtPayload, null, ["iat", "exp"]));
-    logger.debug("Attempting to create group...");
-
-    socket.emit("createGroup", {
-      name: "testing-" + new Date().getTime(),
-      password: "password",
-    }, (res: any) => {
+async function awaitSocket(event: string, ...args: any[]): Promise<any> {
+  return new Promise((resolve, reject) => {
+    socket.emit(event, ...args, (res: any) => {
       if (res.success) {
-        logger.debug("Group created:", attributeObject(res.data.group, ["id", "name"]));
-
-        socket.emit("sendMessage", {
-          groupName: res.data.group.name,
-          content: "Hello, world!",
-        }, (res: any) => {
-          if (res.success) {
-            logger.debug("Message sent:", attributeObject(res.data.message, ["id", "content"]));
-          } else {
-            logger.error("Error sending message: :error:", res.error);
-          }
-        });
+        resolve(res.data);
       } else {
-        logger.error("Error creating group: :error:", res.error);
+        reject(res.error);
       }
     });
+  });
+}
+
+let initLock = false;
+async function initiate() {
+  if (initLock) return;
+  initLock = true;
+
+  logger.debug("Attempting to create group...");
+
+  try {
+    const group = (
+      await awaitSocket("createGroup", {
+        name: "testing-" + new Date().getTime(),
+        password: "password",
+      })
+    ).group;
+
+    logger.debug("Group created:", attributeObject(group, ["id", "name"]));
+
+    const message = (
+      await awaitSocket("sendMessage", {
+        groupName: group.name,
+        content: "Hello, world!",
+      })
+    ).message;
+    logger.debug("Message sent:", attributeObject(message, ["id", "content"]));
+  } catch (error) {
+    logger.error("Error: :error:", error);
   }
+}
+
+socket.on("auth", async (res) => {
+  if (!res.success) return register();
+
+  logger.log(":key: Authenticated with server");
+  logger.debug(
+    "JWT decoded:",
+    attributeObject(jwt.decode(jwtToken) as JwtPayload, null, ["iat", "exp"])
+  );
+
+  await initiate();
+  logger.info("Initiate method finished :rocket:");
 });
