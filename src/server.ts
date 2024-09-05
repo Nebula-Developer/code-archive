@@ -58,14 +58,20 @@ const RATE_ENABLED = env("RATE_ENABLED", false);
 httpServer.prependListener("request", (req, res) => {
   if (!req.socket.remoteAddress || !RATE_ENABLED) return;
 
-  if (rateLimits.has(req.socket.remoteAddress) && rateLimits.get(req.socket.remoteAddress)! > RATE_LIMIT) {
+  if (
+    rateLimits.has(req.socket.remoteAddress) &&
+    rateLimits.get(req.socket.remoteAddress)! > RATE_LIMIT
+  ) {
     res.end("Rate limited");
     (res.end as any) = () => {
       logger.debug("Called reassigned end method:", req.socket.remoteAddress);
     };
   }
 
-  rateLimits.set(req.socket.remoteAddress, (rateLimits.get(req.socket.remoteAddress) || 0) + 1);
+  rateLimits.set(
+    req.socket.remoteAddress,
+    (rateLimits.get(req.socket.remoteAddress) || 0) + 1,
+  );
 });
 
 /**
@@ -141,7 +147,7 @@ export function registerSocketListener(
   name: string,
   handler: (props: SocketHandlerProps) => void,
   datatypes?: DataTypeSchema,
-  rules?: SocketRules
+  rules?: SocketRules,
 ) {
   socketListeners[name] = { handler, datatypes, rules };
 }
@@ -199,7 +205,7 @@ io.on("connection", (socket) => {
     name: string,
     handler: (props: SocketHandlerProps) => void,
     datatypes?: DataTypeSchema,
-    rules?: SocketRules
+    rules?: SocketRules,
   ) {
     socket.on(name, (data, callback) => {
       // Falls back to an empty callback if none is provided.
@@ -272,7 +278,7 @@ io.on("connection", (socket) => {
       name,
       listener.handler,
       listener.datatypes,
-      listener.rules
+      listener.rules,
     );
   }
 
@@ -315,7 +321,7 @@ io.on("connection", (socket) => {
       username: "string",
       password: "string",
       email: "string",
-    }
+    },
   );
 
   innerSocketListener(
@@ -343,7 +349,7 @@ io.on("connection", (socket) => {
     {
       email: "string",
       password: "string",
-    }
+    },
   );
 
   socket.onAny((event) => {

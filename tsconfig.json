@@ -8,6 +8,9 @@
     "noImplicitThis": true,
     "alwaysStrict": true,
     "esModuleInterop": true,
+    "target": "ES5",
+    "module": "NodeNext"
   },
-  
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
 }

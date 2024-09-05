@@ -1,16 +1,16 @@
-import { Server as IOServer, Namespace as IONamespace, Socket } from "socket.io";
+import {
+  Server as IOServer,
+  Namespace as IONamespace,
+  Socket,
+} from "socket.io";
 import { Server } from "http";
 import logger from "../logger";
 import User, { safeUser } from "../models/User";
-import jwt, { verifyToken } from "../jwt";
+import jwt from "../jwt";
 import express from "express";
 import path from "path";
-import {
-  AuthSocket,
-  SocketCallback,
-  SocketHandler,
-} from "./socketTypes";
-import { DefaultEventsMap } from "socket.io/dist/typed-events";
+import { AuthSocket, SocketCallback, SocketHandler } from "./socketTypes";
+
 import hashing from "../hashing";
 
 /**
@@ -32,11 +32,11 @@ const app = express();
 
 // Public HTTP request handlers
 app.get("/logo", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/assets/logo.png"));
+  res.sendFile(path.join(__dirname, "../../client/assets/logo.png"));
 });
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/index.html"));
+  res.sendFile(path.join(__dirname, "../../client/index.html"));
 });
 
 /**
@@ -76,16 +76,12 @@ export async function authenticateSocket(socket: Socket): Promise<User | null> {
   return null;
 }
 
-type IORawNamespace = IONamespace<
-  DefaultEventsMap,
-  DefaultEventsMap,
-  DefaultEventsMap,
-  any
->;
-
+/**
+ * Custom Socket.IO namespace with handlers.
+ */
 export class Namespace {
   /** The socket.io namespace that is being managed. */
-  io: IORawNamespace;
+  io: IONamespace;
 
   /**
    * Creates a new socket.io namespace with the given path.
@@ -181,7 +177,7 @@ export class Namespace {
 
     callback({
       success: false,
-      error: "Unauthorized"
+      error: "Unauthorized",
     });
   }
 
@@ -192,12 +188,16 @@ export class Namespace {
   async connection(rawSocket: Socket) {
     const socket: AuthSocket = rawSocket;
 
-    socket.user = await authenticateSocket(socket) ?? undefined;
+    socket.user = (await authenticateSocket(socket)) ?? undefined;
 
     socket.emit("auth", {
       success: !!socket.user,
       user: socket.user ? safeUser(socket.user) : null,
-      error: socket.user ? null : (socket.handshake.auth?.jwt ? "Invalid token" : "No token provided")
+      error: socket.user
+        ? null
+        : socket.handshake.auth?.jwt
+          ? "Invalid token"
+          : "No token provided",
     });
 
     for (const i in this.handlers) {
@@ -210,9 +210,14 @@ export class Namespace {
       this.appendHandler(socket, handler);
     }
   }
+
+  /**
+   * Loads the current namespace, ensuring it is in use.
+   */
+  public load = () => io.timeout(0);
 }
 
-const rootNamespace = new Namespace("/");
+export const rootNamespace = new Namespace("/");
 
 rootNamespace.addHandler({
   name: "register",

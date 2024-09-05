@@ -1,39 +1,39 @@
-import User from "../src/models/User"
+import User from "../src/models/User";
 
-describe('Users Test', () => {
+describe("Users Test", () => {
   const email = "testuser" + Date.now() + "@test.com";
-  it('should create a user', (done) => {
+  it("should create a user", (done) => {
     const user = User.create({
       username: "testuser",
       email: email,
-      password: "password"
+      password: "password",
     }).then(() => {
       expect(user).toBeTruthy();
       done();
     });
   });
 
-  it('should find a user', (done) => {
+  it("should find a user", (done) => {
     User.findOne({
       where: {
-        email
-      }
+        email,
+      },
     }).then((user) => {
       expect(user).toBeTruthy();
       done();
     });
   });
 
-  it('should delete a user', (done) => {
+  it("should delete a user", (done) => {
     User.destroy({
       where: {
-        email
-      }
+        email,
+      },
     }).then(() => {
       User.findOne({
         where: {
-          email
-        }
+          email,
+        },
       }).then((user) => {
         expect(user).toBeFalsy();
         done();
@@ -41,11 +41,11 @@ describe('Users Test', () => {
     });
   });
 
-  it('should not find a user', (done) => {
+  it("should not find a user", (done) => {
     User.findOne({
       where: {
-        email
-      }
+        email,
+      },
     }).then((user) => {
       expect(user).toBeFalsy();
       done();

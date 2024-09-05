@@ -40,7 +40,7 @@ Role.init(
   {
     sequelize: database,
     modelName: "Role",
-  }
+  },
 );
 
 export default Role;

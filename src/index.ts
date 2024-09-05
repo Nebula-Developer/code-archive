@@ -1,10 +1,11 @@
 import database from "./database";
 import User from "./models/User";
-import server from "./server/server";
+import server, { rootNamespace } from "./server/server";
 import logger from "./logger";
 import "./server/chatappListeners";
 import env from "./env";
 import hashing from "./hashing";
+import { chatappNamespace } from "./server/chatappListeners";
 
 const startString = ":sparkle: NebulaDev Global Server :sparkle:";
 const startBar = String("―").repeat(startString.length - 14);
@@ -19,7 +20,9 @@ const FORCE = env("FORCE", false);
 const ADMIN_PASSWORD = env("ADMIN_PASSWORD", "admin123");
 
 logger.debug(
-  `Starting server on port ${PORT} with force=${FORCE} ${FORCE ? ":bomb:" : ":globe:"}`
+  `Starting server on port ${PORT} with force=${FORCE} ${
+    FORCE ? ":bomb:" : ":globe:"
+  }`,
 );
 
 database.sync({ force: FORCE }).then(async () => {
@@ -45,4 +48,6 @@ database.sync({ force: FORCE }).then(async () => {
   }
 
   server.listen(PORT);
+  rootNamespace.load();
+  chatappNamespace.load();
 });

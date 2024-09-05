@@ -24,7 +24,7 @@ const config = {
   },
 
   rules: {
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
   },
 
   ignores: ["**/*.js", "eslint.config.mjs"],
@@ -33,7 +33,7 @@ const config = {
 export default [
   ...compat.extends(
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
   ),
   config,
 ];

@@ -27,7 +27,7 @@ registerSocketListener(
       error(
         e.message.toLowerCase().includes("validation")
           ? "Group name already taken"
-          : e.message
+          : e.message,
       );
     }
   },
@@ -38,7 +38,7 @@ registerSocketListener(
       type: "string",
     },
   },
-  { auth: true }
+  { auth: true },
 );
 
 registerSocketListener(
@@ -47,7 +47,10 @@ registerSocketListener(
     Group.findOne({ where: { name: data.name } }).then(async (group) => {
       if (!group) return error("Group not found");
 
-      if (group.password && !await hash.compare(data.password, group.password))
+      if (
+        group.password &&
+        !(await hash.compare(data.password, group.password))
+      )
         return error("Incorrect password");
 
       await group.addUser(user!);
@@ -62,7 +65,7 @@ registerSocketListener(
       type: "string",
     },
   },
-  { auth: true }
+  { auth: true },
 );
 
 registerSocketListener(
@@ -79,7 +82,7 @@ registerSocketListener(
   {
     name: "string",
   },
-  { auth: true }
+  { auth: true },
 );
 
 registerSocketListener(
@@ -106,7 +109,7 @@ registerSocketListener(
     groupName: "string",
     content: "string",
   },
-  { auth: true }
+  { auth: true },
 );
 
 registerSocketListener(
@@ -114,12 +117,14 @@ registerSocketListener(
   async ({ data, user, success, error, socket }) => {
     const group = await Group.findOne({
       where: { name: data.name },
-      include: [{
-        model: Message,
-        as: "messages",
-        limit: 25,
-        order: [["createdAt", "DESC"]],
-      }],
+      include: [
+        {
+          model: Message,
+          as: "messages",
+          limit: 25,
+          order: [["createdAt", "DESC"]],
+        },
+      ],
     });
     if (!group) return error("Group not found");
 
@@ -133,7 +138,7 @@ registerSocketListener(
   {
     name: "string",
   },
-  { auth: true }
+  { auth: true },
 );
 
 registerSocketListener(
@@ -145,5 +150,5 @@ registerSocketListener(
   {
     name: "string",
   },
-  { auth: true }
+  { auth: true },
 );

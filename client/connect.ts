@@ -1,9 +1,7 @@
-import { io, Socket } from "socket.io-client";
+import { Socket } from "socket.io-client";
 import { configDotenv } from "dotenv";
 import logger, { attributeObject } from "../src/logger";
 import * as fs from "fs";
-import env from "../src/env";
-import jwt, { JwtPayload } from "jsonwebtoken";
 import { chatappSocket, setAuth, socket } from "./ioSet";
 
 configDotenv({ path: __dirname + "/../.env" });
@@ -23,7 +21,7 @@ socket.on("disconnect", () => {
   logger.debug("Disconnected from server.");
 });
 
-socket.on("error", (err) => {
+socket.on("error", (err: any) => {
   logger.error("Error:", err);
 });
 
@@ -41,7 +39,7 @@ function register() {
         setAuth(res.data.jwt);
         fs.writeFileSync("jwt.txt", res.data.jwt);
       }
-    }
+    },
   );
 }
 
@@ -78,6 +76,12 @@ async function initiate() {
 
     logger.debug("Group created:", attributeObject(group, ["id", "name"]));
 
+    const listenGroup = await awaitSocket(chatappSocket, "listenGroup", {
+      groupName: group.name,
+    });
+
+    logger.debug("Group listened:", listenGroup);
+
     const message = (
       await awaitSocket(chatappSocket, "sendMessage", {
         groupName: group.name,
@@ -90,7 +94,7 @@ async function initiate() {
   }
 }
 
-socket.on("auth", async (res) => {
+socket.on("auth", async (res: any) => {
   if (!res.success) return register();
 
   logger.log(":key: Authenticated with server");

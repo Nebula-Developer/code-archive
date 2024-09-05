@@ -22,7 +22,7 @@ Group.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
     },
     password: {
       type: DataTypes.STRING,
@@ -32,7 +32,7 @@ Group.init(
   {
     sequelize: database,
     modelName: "Group",
-  }
+  },
 );
 
 Group.belongsToMany(User, { through: "GroupMembers" });

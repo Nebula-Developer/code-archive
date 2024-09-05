@@ -57,7 +57,7 @@ User.init(
   {
     sequelize: database,
     modelName: "User",
-  }
+  },
 );
 
 User.hasMany(Role, {
@@ -105,14 +105,16 @@ export function hasRole(user: User, stringId: string): boolean {
   return user.roles.some((role) => role.stringId === stringId);
 }
 
-
 /**
  * Checks whether a user has a role with the given string ID.
  * @param userId The id of the user to check.
  * @param stringId The string ID of the role to check for.
  * @returns Whether the user has the role.
  */
-export async function idHasRole(userId: number, stringId: string): Promise<boolean> {
+export async function idHasRole(
+  userId: number,
+  stringId: string,
+): Promise<boolean> {
   const user = await User.findByPk(userId);
   if (!user) return false;
   return user.roles.some((role) => role.stringId === stringId);

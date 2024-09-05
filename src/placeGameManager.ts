@@ -65,7 +65,7 @@ export class PlaceGameManager {
     y: number,
     color: string,
     ownerId: number,
-    callback: (res: Result) => void
+    callback: (res: Result) => void,
   ) {
     if (x < 0 || x >= this.mapSize.width || y < 0 || y >= this.mapSize.height) {
       callback({ success: false, error: "Tile out of bounds" });
@@ -115,7 +115,7 @@ export class PlaceGameManager {
     x: number,
     y: number,
     width: number,
-    height: number
+    height: number,
   ): Promise<Array<Array<Place>>> {
     const places = await Place.findAll({
       where: {
@@ -148,7 +148,7 @@ export class PlaceGameManager {
       0,
       0,
       this.mapSize.width,
-      this.mapSize.height
+      this.mapSize.height,
     );
   }
 

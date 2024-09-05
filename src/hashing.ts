@@ -20,7 +20,7 @@ export const hash = async (password: string): Promise<string> => {
  */
 export const compare = async (
   password: string,
-  hash: string
+  hash: string,
 ): Promise<boolean> => {
   if (typeof password !== "string" || typeof hash !== "string") return false;
   return await bcrypt.compare(password, hash);

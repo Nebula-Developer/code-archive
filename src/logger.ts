@@ -2,8 +2,7 @@ import pino from "pino";
 import emoji from "./emoji";
 import env from "./env";
 
-if (env("LOGGER_CLEAR", false))
-  console.clear();
+if (env("LOGGER_CLEAR", false)) console.clear();
 
 /**
  * Pino logger instance
@@ -44,7 +43,7 @@ function colorString(str: string, color: Color) {
 function logFormatted(
   level: string,
   message: string,
-  bracketColor: Color = [255, 255, 255]
+  bracketColor: Color = [255, 255, 255],
 ) {
   const time = colorString(
     "[" +
@@ -52,7 +51,7 @@ function logFormatted(
         hour12: false,
       }) +
       "]",
-    [50, 100, 100]
+    [50, 100, 100],
   );
 
   console.log(
@@ -61,7 +60,7 @@ function logFormatted(
       colorString("[", bracketColor) +
       level +
       colorString("] ", bracketColor) +
-      message
+      message,
   );
 }
 
@@ -103,7 +102,7 @@ function joinArgs(args: any[], color: Color) {
         /:([a-zA-Z0-9_]+):/g,
         (match: string, emojiName: string) => {
           return emoji[emojiName] || match;
-        }
+        },
       );
 
       return colorString(arg, color) + lastSpace;
@@ -124,7 +123,7 @@ function joinArgs(args: any[], color: Color) {
 export function attributeObject(
   obj: { [key: string]: any },
   attributes?: string[] | null,
-  exclude?: string[] | null
+  exclude?: string[] | null,
 ): { [key: string]: any } {
   const newObj: { [key: string]: any } = {};
 
@@ -185,7 +184,7 @@ export const logger = {
   info: (...args: any[]) => {
     logFormatted(
       colorString("INFO", [0, 255, 0]),
-      joinArgs(args, [200, 250, 200])
+      joinArgs(args, [200, 250, 200]),
     );
   },
   /** Alias for info method. Logs a message with the INFO level. */
@@ -197,7 +196,7 @@ export const logger = {
     logFormatted(
       colorString("DEBUG", [120, 120, 120]),
       joinArgs(args, [100, 100, 100]),
-      [100, 100, 100]
+      [100, 100, 100],
     );
   },
   /** Logs a message with the WARN level. */
@@ -205,7 +204,7 @@ export const logger = {
     logFormatted(
       colorString("WARN", [255, 255, 0]),
       joinArgs(args, [255, 255, 0]),
-      [150, 200, 10]
+      [150, 200, 10],
     );
   },
   /** Logs a message with the ERROR level. */
@@ -213,7 +212,7 @@ export const logger = {
     logFormatted(
       colorString("ERROR", [250, 50, 50]),
       joinArgs(args, [255, 150, 150]),
-      [250, 50, 50]
+      [250, 50, 50],
     );
   },
   /** Just for special prints, like a CLI banner, eg */
@@ -221,7 +220,7 @@ export const logger = {
     logFormatted(
       colorString("SYSTEM", [230, 150, 255]),
       joinArgs(args, [255, 130, 255]),
-      [255, 200, 255]
+      [255, 200, 255],
     );
   },
 };

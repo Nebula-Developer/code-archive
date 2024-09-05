@@ -1,6 +1,6 @@
-import server from '../src/server/server';
+import server from "../src/server/server";
 
-describe('Server Test', () => {
+describe("Server Test", () => {
   beforeAll(() => {
     server.listen(4000).then(() => {
       expect(server.httpServer.listening).toBe(true);
@@ -13,7 +13,7 @@ describe('Server Test', () => {
     });
   });
 
-  test('Server should run and respond', (done) => {
+  test("Server should run and respond", (done) => {
     expect(server.httpServer.listening).toBe(true);
     done();
   });

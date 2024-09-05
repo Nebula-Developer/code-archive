@@ -1,5 +1,5 @@
 import logger from "../logger";
-import { io, Namespace } from "./server";
+import { Namespace } from "./server";
 import Group from "../models/chat/Group";
 import Message from "../models/chat/Message";
 import hash from "../hashing";
@@ -29,7 +29,7 @@ chatappNamespace.addHandler({
       error(
         e.message.toLowerCase().includes("validation")
           ? "Group name already taken"
-          : e.message
+          : e.message,
       );
     }
   },
@@ -54,7 +54,10 @@ chatappNamespace.addHandler({
     Group.findOne({ where: { name: data.name } }).then(async (group) => {
       if (!group) return error("Group not found");
 
-      if (group.password && !(await hash.compare(data.password, group.password)))
+      if (
+        group.password &&
+        !(await hash.compare(data.password, group.password))
+      )
         return error("Incorrect password");
 
       await group.addUser(user!);
@@ -113,10 +116,12 @@ chatappNamespace.addHandler({
       groupId: group.id,
       userId: user!.id,
     });
-    
+
     (message as any) = await Message.findByPk(message.id);
 
-    chatappNamespace.io.to("group-" + data.groupName).emit("message", { message });
+    chatappNamespace.io
+      .to("group-" + data.groupName)
+      .emit("message", { message });
     success({ message });
   },
   schema: {
@@ -131,5 +136,19 @@ chatappNamespace.addHandler({
   },
   rules: {
     auth: true,
+  },
+});
+
+chatappNamespace.addHandler({
+  name: "focusGroup",
+  method: async ({ data, user, success, error, socket }) => {
+    const group = await Group.findOne({ where: { name: data.name } });
+    if (!group) return error("Group not found");
+
+    if (!(await group.hasUser(user!)))
+      return error("You are not in this group");
+
+    socket.join("group-" + data.name);
+    success();
   },
 });

@@ -33,7 +33,7 @@ Place.init(
   {
     sequelize: database,
     modelName: "Place",
-  }
+  },
 );
 
 Place.belongsTo(User, { foreignKey: "ownerId" });
@@ -43,7 +43,7 @@ export async function placePixel(
   x: number,
   y: number,
   color: string,
-  ownerId: number
+  ownerId: number,
 ) {
   const place = await Place.findOne({ where: { x, y } });
   if (place) {
