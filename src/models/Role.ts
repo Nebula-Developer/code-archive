@@ -43,4 +43,8 @@ Role.init(
   },
 );
 
+Role.addScope("defaultScope", {
+  attributes: ["id", "name", "stringId", "color"],
+});
+
 export default Role;

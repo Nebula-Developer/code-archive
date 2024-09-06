@@ -15,6 +15,7 @@ class Group extends Model {
   declare removeAdmin: (user: User) => Promise<void>;
   declare setOwner: (user: User) => Promise<void>;
   declare hasUser: (user: User) => Promise<boolean>;
+  declare countUsers: () => Promise<number>;
 }
 
 Group.init(

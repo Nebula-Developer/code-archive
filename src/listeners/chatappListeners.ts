@@ -1,5 +1,5 @@
 import logger from "../logger";
-import { Namespace } from "./server";
+import { Namespace } from "../server/server";
 import Group from "../models/chat/Group";
 import Message from "../models/chat/Message";
 import hash from "../hashing";
@@ -29,7 +29,7 @@ chatappNamespace.addHandler({
       error(
         e.message.toLowerCase().includes("validation")
           ? "Group name already taken"
-          : e.message,
+          : e.message
       );
     }
   },
@@ -50,8 +50,8 @@ chatappNamespace.addHandler({
 
 chatappNamespace.addHandler({
   name: "joinGroup",
-  method: ({ data, user, success, error }) => {
-    Group.findOne({ where: { name: data.name } }).then(async (group) => {
+  method: ({ data, user, success, error, socket }) => {
+    Group.findOne({ where: { name: data.groupName } }).then(async (group) => {
       if (!group) return error("Group not found");
 
       if (
@@ -61,18 +61,32 @@ chatappNamespace.addHandler({
         return error("Incorrect password");
 
       await group.addUser(user!);
+      
+      if (data.focus) {
+        socket.join("group-" + group.id);
 
-      success({ group });
+        const messages = await Message.findAll({
+          where: { groupId: group.id },
+          order: [["id", "DESC"]],
+          limit: 10,
+        });
+
+        success({ group, messages });
+      } else success({ group });
     });
   },
   schema: {
-    name: {
+    groupName: {
       required: true,
       type: "string",
     },
     password: {
       required: false,
       type: "string",
+    },
+    focus: {
+      required: false,
+      type: "boolean",
     },
   },
   rules: {
@@ -83,16 +97,32 @@ chatappNamespace.addHandler({
 chatappNamespace.addHandler({
   name: "leaveGroup",
   method: ({ data, user, success, error }) => {
-    Group.findOne({ where: { name: data.name } }).then(async (group) => {
+    Group.findOne({ where: { name: data.groupName } }).then(async (group) => {
       if (!group) return error("Group not found");
+
+      if ((await group.countUsers()) === 1) {
+        await group.destroy();
+        logger.debug("Group deleted due to no users");
+        return success({ deleted: true });
+      }
+
+      if (group.ownerId === user!.id) {
+        const users = await group.getUsers();
+        const newOwner = users.find((u) => u.id !== user!.id);
+
+        if (!newOwner) return error("No other users in the group");
+
+        await group.setOwner(newOwner);
+        logger.debug("Group owner changed");
+      }
 
       await group.removeUser(user!);
 
-      success();
+      success({ deleted: false });
     });
   },
   schema: {
-    name: {
+    groupName: {
       required: true,
       type: "string",
     },
@@ -119,9 +149,7 @@ chatappNamespace.addHandler({
 
     (message as any) = await Message.findByPk(message.id);
 
-    chatappNamespace.io
-      .to("group-" + data.groupName)
-      .emit("message", { message });
+    chatappNamespace.io.to("group-" + group.id).emit("message", message);
     success({ message });
   },
   schema: {
@@ -140,15 +168,47 @@ chatappNamespace.addHandler({
 });
 
 chatappNamespace.addHandler({
-  name: "focusGroup",
+  name: "listenGroup",
   method: async ({ data, user, success, error, socket }) => {
-    const group = await Group.findOne({ where: { name: data.name } });
+    const group = await Group.findOne({ where: { name: data.groupName } });
     if (!group) return error("Group not found");
 
     if (!(await group.hasUser(user!)))
       return error("You are not in this group");
 
-    socket.join("group-" + data.name);
+    const messages = await Message.findAll({
+      where: { groupId: group.id },
+      order: [["id", "DESC"]],
+      limit: 10,
+    });
+
+    socket.join("group-" + group.id);
+    success({ messages });
+  },
+  schema: {
+    groupName: "string",
+  },
+  rules: {
+    auth: true,
+  },
+});
+
+chatappNamespace.addHandler({
+  name: "unlistenGroup",
+  method: async ({ data, user, success, error, socket }) => {
+    const group = await Group.findOne({ where: { groupName: data.name } });
+    if (!group) return error("Group not found");
+
+    if (!(await group.hasUser(user!)))
+      return error("You are not in this group");
+
+    socket.leave("group-" + group.id);
     success();
+  },
+  schema: {
+    groupName: "string",
+  },
+  rules: {
+    auth: true,
   },
 });

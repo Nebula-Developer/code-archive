@@ -10,6 +10,7 @@ class User extends Model {
   declare username: string;
   declare email: string;
   declare password: string;
+  declare color: string;
 
   /**
    * The roles assigned to this user.
@@ -53,6 +54,14 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    color: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [3, 30],
+      },
+      defaultValue: "#b4bbbf",
+    },
   },
   {
     sequelize: database,
@@ -79,6 +88,8 @@ export type SafeUser = {
   id: number;
   username: string;
   email: string;
+  roles: Role[];
+  color: string;
 };
 
 /**
@@ -92,6 +103,8 @@ export function safeUser(user: User): SafeUser {
     id: user.id,
     username: user.username,
     email: user.email,
+    roles: user.roles,
+    color: user.color,
   };
 }
 

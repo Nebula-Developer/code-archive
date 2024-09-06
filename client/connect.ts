@@ -3,6 +3,7 @@ import { configDotenv } from "dotenv";
 import logger, { attributeObject } from "../src/logger";
 import * as fs from "fs";
 import { chatappSocket, setAuth, socket } from "./ioSet";
+import env from "../src/env";
 
 configDotenv({ path: __dirname + "/../.env" });
 
@@ -26,24 +27,23 @@ socket.on("error", (err: any) => {
 });
 
 function register() {
-  logger.debug("Registering new account with server...");
+  logger.debug("Logging into admin account...");
   socket.emit(
-    "register",
+    "login",
     {
-      username: "test",
-      password: "test",
-      email: "time" + new Date().getTime() + "@test.com",
+      password: env("ADMIN_PASSWORD", "admin123"),
+      email: "admin@admin.com"
     },
     (res: any) => {
       if (res.success) {
         setAuth(res.data.jwt);
         fs.writeFileSync("jwt.txt", res.data.jwt);
       }
-    },
+    }
   );
 }
 
-async function awaitSocket(
+export async function awaitSocket(
   socket: Socket,
   event: string,
   ...args: any[]
@@ -60,11 +60,11 @@ async function awaitSocket(
 }
 
 let initLock = false;
-async function initiate() {
-  if (initLock) return;
+async function initiate(): Promise<boolean> {
+  if (initLock) return false;
   initLock = true;
 
-  logger.debug("Attempting to create group...");
+  logger.system("Starting initiation process...");
 
   try {
     const group = (
@@ -74,24 +74,54 @@ async function initiate() {
       })
     ).group;
 
-    logger.debug("Group created:", attributeObject(group, ["id", "name"]));
+    logger.info("Group created:", attributeObject(group, ["id", "name"]));
 
-    const listenGroup = await awaitSocket(chatappSocket, "listenGroup", {
-      groupName: group.name,
+    chatappSocket.on("message", (msg) => {
+      logger.debug(
+        "Message received:",
+        attributeObject(msg, ["id", "content"])
+      );
     });
 
-    logger.debug("Group listened:", listenGroup);
+    logger.info("Group listened:", await awaitSocket(chatappSocket, "listenGroup", {
+      groupName: group.name,
+    }));
 
-    const message = (
-      await awaitSocket(chatappSocket, "sendMessage", {
-        groupName: group.name,
-        content: "Hello, world!",
-      })
-    ).message;
-    logger.debug("Message sent:", attributeObject(message, ["id", "content"]));
+    logger.info("Message sent:", (await awaitSocket(chatappSocket, "sendMessage", {
+      groupName: group.name,
+      content: "Test message 1",
+    })).message);
+
+    logger.info("Rejoined group:", await awaitSocket(chatappSocket, "joinGroup", {
+      groupName: group.name,
+      password: "password",
+      focus: true
+    }));
+
+    const role = await awaitSocket(socket, "createRole", {
+      name: "Test Role",
+      stringId: "test-" + new Date().getTime(),
+      color: "#000000",
+    });
+
+    logger.info("Role created:", role);
+
+    logger.info("Role assigned:", await awaitSocket(socket, "assignRole", {
+      userId: 1,
+      roleId: role.role.stringId,
+    }));
+
+    const user = await awaitSocket(socket, "getUser", {
+      id: 1,
+    });
+
+    logger.info("User found:", user);
   } catch (error) {
     logger.error("Error: :error:", error);
+    return false;
   }
+
+  return true;
 }
 
 socket.on("auth", async (res: any) => {
@@ -99,6 +129,11 @@ socket.on("auth", async (res: any) => {
 
   logger.log(":key: Authenticated with server");
 
-  await initiate();
-  logger.info("Initiate method finished :rocket:");
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  if (await initiate()) {
+    logger.system("Initiate method finished :rocket:");
+  } else {
+    logger.error("Initiate method failed :bomb:");
+  }
 });

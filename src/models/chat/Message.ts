@@ -42,6 +42,7 @@ Message.addScope("defaultScope", {
       attributes: ["id", "username", "email"],
     },
   ],
+  attributes: { exclude: ["groupId", "userId"] },
 });
 
 export default Message;

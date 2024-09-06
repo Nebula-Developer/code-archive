@@ -12,6 +12,7 @@ import path from "path";
 import { AuthSocket, SocketCallback, SocketHandler } from "./socketTypes";
 
 import hashing from "../hashing";
+import Role from "../models/Role";
 
 /**
  * The result of an operation that is returned to the client or sender.
@@ -207,6 +208,11 @@ export class Namespace {
         continue;
       }
 
+      if (handler.rules?.admin && !socket.user?.roles?.find((r) => r.stringId === "admin")) {
+        socket.on(handler.name, this.unauthorized);
+        continue;
+      }
+
       this.appendHandler(socket, handler);
     }
   }
@@ -303,6 +309,125 @@ rootNamespace.addHandler({
     },
   },
 });
+
+rootNamespace.addHandler({
+  name: "createRole",
+  method: async ({ data, success, error }) => {
+    try {
+      const role = await Role.create({ name: data.name, stringId: data.stringId, color: data.color });
+      success({
+        role: {
+          name: role.name,
+          stringId: role.stringId,
+          color: role.color,
+        },
+      });
+    } catch (e: any) {
+      error(e.message);
+    }
+  },
+  schema: {
+    name: {
+      required: true,
+      type: "string",
+    },
+    stringId: {
+      required: true,
+      type: "string",
+    },
+    color: {
+      required: false,
+      type: "string",
+    },
+  },
+  rules: {
+    auth: true,
+    admin: true
+  },
+});
+
+rootNamespace.addHandler({
+  name: "assignRole",
+  method: async ({ data, success, error }) => {
+    const target = await User.findByPk(data.userId);
+    if (!target) {
+      error("User not found");
+      return;
+    }
+
+    const role = await Role.findOne({ where: { stringId: data.roleId } });
+    if (!role) {
+      error("Role not found");
+      return;
+    }
+
+    await target.addRole(role);
+    success();
+  },
+  schema: {
+    userId: {
+      required: true,
+      type: "number",
+    },
+    roleId: {
+      required: true,
+      type: "string",
+    },
+  },
+  rules: {
+    auth: true,
+    admin: true
+  },
+});
+
+rootNamespace.addHandler({
+  name: "getUser",
+  method: async ({ data, success, error }) => {
+    const user = await User.findByPk(data.id);
+    if (!user) {
+      error("User not found");
+      return;
+    }
+
+    success(safeUser(user));
+  },
+  schema: {
+    id: {
+      required: true,
+      type: "number",
+    },
+  },
+  rules: {
+    auth: true,
+  },
+});
+
+rootNamespace.addHandler({
+  name: "updateMe",
+  method: async ({ data, success, error, user }) => {
+    if (!user) {
+      error("Unauthorized");
+      return;
+    }
+
+    const updated = await user.update(data);
+    success(safeUser(updated));
+  },
+  schema: {
+    username: {
+      required: false,
+      type: "string",
+    },
+    email: {
+      required: false,
+      type: "string",
+    },
+    color: {
+      required: false,
+      type: "string",
+    },
+  },
+})
 
 /**
  * Closes the server and the HTTP server.

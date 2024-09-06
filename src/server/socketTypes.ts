@@ -27,6 +27,7 @@ export type DataTypeSchema = {
  */
 export type SocketHandlerRules = {
   auth?: boolean;
+  admin?: boolean;
 };
 
 /**
