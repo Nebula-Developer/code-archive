@@ -128,18 +128,30 @@ export function attributeObject(
 ): { [key: string]: any } | any[] {
   let newObj: { [key: string]: any } = Array.isArray(obj) ? [] : {};
 
-  const attributeObject = (obj: any, attributes: string[] | null): any => {
+  const attributeInlineObject = (obj: any, attributes: string[] | null): any => {
     if (Array.isArray(obj)) {
       const newArray = [];
       for (const item of obj) {
-        newArray.push(attributeObject(item, attributes));
+        newArray.push(attributeInlineObject(item, attributes));
       }
       return newArray;
     } else if (typeof obj === "object") {
       const newObj: { [key: string]: any } = {};
       for (const key in obj) {
-        if (attributes && !attributes.includes(key)) continue;
-        newObj[key] = attributeObject(obj[key], attributes);
+        if (!attributes) continue;
+
+        if (attributes.length === 0) {
+          newObj[key] = obj[key];
+          continue;
+        }
+        
+        if (!attributes.map((a) => a.split(".")[0]).includes(key)) continue;
+        
+        const attribNew = attributes!
+          .filter((a) => a.startsWith(key + "."))
+          .map((a) => a.slice(key.length + 1));
+
+        newObj[key] = attributeInlineObject(obj[key], attribNew);
       }
       return newObj;
     } else {
@@ -147,18 +159,18 @@ export function attributeObject(
     }
   }
 
-  const excludeObject = (obj: any, exclude: string[]): any => {
+  const excludeInlineObject = (obj: any, exclude: string[]): any => {
     if (Array.isArray(obj)) {
       const newArray = [];
       for (const item of obj) {
-        newArray.push(excludeObject(item, exclude));
+        newArray.push(excludeInlineObject(item, exclude));
       }
       return newArray;
     } else if (typeof obj === "object") {
       const newObj: { [key: string]: any } = {};
       for (const key in obj) {
         if (exclude.includes(key)) continue;
-        newObj[key] = excludeObject(obj[key], exclude);
+        newObj[key] = excludeInlineObject(obj[key], exclude);
       }
       return newObj;
     } else {
@@ -166,9 +178,9 @@ export function attributeObject(
     }
   }
 
-  if (attributes) newObj = attributeObject(obj, attributes);
+  if (attributes) newObj = attributeInlineObject(obj, attributes);
   else newObj = Object.assign(newObj, obj);
-  return exclude ? excludeObject(newObj, exclude) : newObj;
+  return exclude ? excludeInlineObject(newObj, exclude) : newObj;
 }
 
 /**
