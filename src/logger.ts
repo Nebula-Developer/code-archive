@@ -111,69 +111,64 @@ function joinArgs(args: any[], color: Color) {
 }
 
 /**
- * Refines an object to only contain the specified attributes.
- * @param obj The object to refine.
+ * Refines an object or array to only contain the specified attributes.
+ * @param obj The object or array to refine.
  * @param attributes The attributes to keep.
  * @param exclude The attributes to exclude.
- * @returns The refined object.
+ * @returns The refined object or array.
  * @example attributeObject({ hello: 123, world: 456 }, ["hello"]) => { hello: 123 }
  * @example attributeObject({ hello: { value: 123 }, world: ...}, ["hello.value"]) => { hello: { value: 123 } }
  * @example attributeObject({ hello: 123, world: 456 }, null, ["world"]) => { hello: 123 }
+ * @example attributeObject({ test: [{ hello: 123, world: 456 }] }, ["test.hello"]) => { test: [{ hello: 123 }] }
  */
 export function attributeObject(
-  obj: { [key: string]: any },
+  obj: { [key: string]: any } | any[],
   attributes?: string[] | null,
   exclude?: string[] | null,
-): { [key: string]: any } {
-  const newObj: { [key: string]: any } = {};
+): { [key: string]: any } | any[] {
+  let newObj: { [key: string]: any } = Array.isArray(obj) ? [] : {};
 
-  const setNestedValue = (target: any, path: string[], value: any) => {
-    let current = target;
-    for (let i = 0; i < path.length - 1; i++) {
-      const part = path[i];
-      current[part] = current[part] || {};
-      current = current[part];
-    }
-    current[path[path.length - 1]] = value;
-  };
-
-  const deleteNestedValue = (target: any, path: string[]) => {
-    let current = target;
-    for (let i = 0; i < path.length - 1; i++) {
-      const part = path[i];
-      if (!current[part]) return;
-      current = current[part];
-    }
-    delete current[path[path.length - 1]];
-  };
-
-  // If attributes are specified, only include those
-  if (attributes) {
-    for (const attribute of attributes) {
-      const parts = attribute.split(".");
-      let current = obj;
-      for (let i = 0; i < parts.length; i++) {
-        if (current[parts[i]] === undefined) break;
-        if (i === parts.length - 1) {
-          setNestedValue(newObj, parts, current[parts[i]]);
-        } else {
-          current = current[parts[i]];
-        }
+  const attributeObject = (obj: any, attributes: string[] | null): any => {
+    if (Array.isArray(obj)) {
+      const newArray = [];
+      for (const item of obj) {
+        newArray.push(attributeObject(item, attributes));
       }
+      return newArray;
+    } else if (typeof obj === "object") {
+      const newObj: { [key: string]: any } = {};
+      for (const key in obj) {
+        if (attributes && !attributes.includes(key)) continue;
+        newObj[key] = attributeObject(obj[key], attributes);
+      }
+      return newObj;
+    } else {
+      return obj;
     }
-  } else {
-    Object.assign(newObj, obj);
   }
 
-  // Exclude specified attributes
-  if (exclude) {
-    for (const key of exclude) {
-      const parts = key.split(".");
-      deleteNestedValue(newObj, parts);
+  const excludeObject = (obj: any, exclude: string[]): any => {
+    if (Array.isArray(obj)) {
+      const newArray = [];
+      for (const item of obj) {
+        newArray.push(excludeObject(item, exclude));
+      }
+      return newArray;
+    } else if (typeof obj === "object") {
+      const newObj: { [key: string]: any } = {};
+      for (const key in obj) {
+        if (exclude.includes(key)) continue;
+        newObj[key] = excludeObject(obj[key], exclude);
+      }
+      return newObj;
+    } else {
+      return obj;
     }
   }
 
-  return newObj;
+  if (attributes) newObj = attributeObject(obj, attributes);
+  else newObj = Object.assign(newObj, obj);
+  return exclude ? excludeObject(newObj, exclude) : newObj;
 }
 
 /**
