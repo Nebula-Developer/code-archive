@@ -280,17 +280,15 @@ rootNamespace.addHandler({
   name: "login",
   method: async ({ data, success, error }) => {
     const { email, password } = data;
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { email }, attributes: { include: ["password"] } });
 
     if (!user) {
       error("Could not find an account under the provided email");
       return;
     }
 
-    if (!hashing.compare(password, user.password)) {
-      error("Invalid password");
-      return;
-    }
+    if (!await hashing.compare(password, user.password))
+      return error("Invalid password");
 
     const su = safeUser(user);
     success({
