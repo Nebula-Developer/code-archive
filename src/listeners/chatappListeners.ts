@@ -51,7 +51,10 @@ chatappNamespace.addHandler({
 chatappNamespace.addHandler({
   name: "joinGroup",
   method: ({ data, user, success, error, socket }) => {
-    Group.findOne({ where: { name: data.groupName } }).then(async (group) => {
+    Group.findOne({
+      where: { name: data.groupName },
+      attributes: { include: ["password"] },
+    }).then(async (group) => {
       if (!group) return error("Group not found");
 
       if (
@@ -61,7 +64,7 @@ chatappNamespace.addHandler({
         return error("Incorrect password");
 
       await group.addUser(user!);
-      
+
       if (data.focus) {
         socket.join("group-" + group.id);
 

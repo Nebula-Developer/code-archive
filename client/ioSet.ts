@@ -1,6 +1,7 @@
 import { io } from "socket.io-client";
 import env from "../src/env";
 import fs from "fs";
+import logger from "../src/logger";
 
 let jwtToken = "";
 if (fs.existsSync("jwt.txt")) jwtToken = fs.readFileSync("jwt.txt").toString();
@@ -28,5 +29,5 @@ export function setAuth(newJwtToken: string) {
     s.disconnect().connect();
   }
 
-  console.log("JWT saved:", jwtToken.substring(0, 20) + "...");
+  logger.log("JWT saved:", jwtToken.substring(0, 20) + "...");
 }

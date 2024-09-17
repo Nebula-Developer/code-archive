@@ -87,16 +87,16 @@ async function initiate(): Promise<boolean> {
       groupName: group.name,
     }));
 
-    logger.info("Message sent:", (await awaitSocket(chatappSocket, "sendMessage", {
+    logger.info("Message sent:", attributeObject((await awaitSocket(chatappSocket, "sendMessage", {
       groupName: group.name,
       content: "Test message 1",
-    })).message);
+    })).message, ["id", "content", "group", "user.username"]));
 
-    logger.info("Rejoined group:", await awaitSocket(chatappSocket, "joinGroup", {
+    logger.info("Rejoined group:", attributeObject(await awaitSocket(chatappSocket, "joinGroup", {
       groupName: group.name,
       password: "password",
       focus: true
-    }));
+    }), ["group.id", "group.name", "messages.content"]));
 
     const role = await awaitSocket(socket, "createRole", {
       name: "Test Role",
@@ -115,7 +115,7 @@ async function initiate(): Promise<boolean> {
       id: 1,
     });
 
-    logger.info("User found:", user);
+    logger.info("User found:", attributeObject(user, ["id", "username"]));
   } catch (error) {
     logger.error("Error: :error:", error);
     return false;

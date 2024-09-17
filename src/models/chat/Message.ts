@@ -39,7 +39,7 @@ Message.addScope("defaultScope", {
     {
       model: User,
       as: "user",
-      attributes: ["id", "username", "email"],
+      attributes: ["id", "username", "email", "color"],
     },
   ],
   attributes: { exclude: ["groupId", "userId"] },
