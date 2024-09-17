@@ -48,6 +48,8 @@ User.init(
       unique: true,
       validate: {
         isEmail: true,
+        len: [3, 255],
+        isLowercase: true,
       },
     },
     password: {

@@ -24,10 +24,16 @@ Group.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
+      validate: {
+        len: [3, 255],
+      },
     },
     password: {
       type: DataTypes.STRING,
       allowNull: true,
+      validate: {
+        len: [1, 255],
+      },
     },
   },
   {
@@ -46,7 +52,27 @@ Group.belongsTo(User, { foreignKey: "ownerId", as: "owner" });
 User.hasMany(Group, { foreignKey: "ownerId", as: "ownedGroups" });
 
 Group.addScope("defaultScope", {
-  attributes: { exclude: ["password"] },
+  attributes: {
+    exclude: ["password"],
+  },
 });
+
+export type SafeGroup = {
+  id: number;
+  name: string;
+};
+
+/**
+ * All Group instances sent to the client are passed through this function,
+ * which only includes any non-sensitive information.
+ * @param group The Group instance to be sanitized.
+ * @returns A SafeGroup instance.
+ */
+export function safeGroup(group: Group): SafeGroup {
+  return {
+    id: group.id,
+    name: group.name,
+  };
+}
 
 export default Group;

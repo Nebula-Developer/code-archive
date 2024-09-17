@@ -22,7 +22,7 @@ export const loggerPino = pino({
 /**
  * RGB color type for use with true color terminal output.
  */
-type Color = [number, number, number];
+export type Color = [number, number, number];
 
 /**
  * Colors a string with an RGB color. (True color)
@@ -30,7 +30,7 @@ type Color = [number, number, number];
  * @param color The color to use.
  * @returns The colored string.
  */
-function colorString(str: string, color: Color) {
+export function colorString(str: string, color: Color) {
   return `\x1b[38;2;${color[0]};${color[1]};${color[2]}m${str}\x1b[0m`;
 }
 
@@ -70,7 +70,7 @@ function logFormatted(
  * @param color The color to use for string arguments.
  * @returns The joined string.
  */
-function joinArgs(args: any[], color: Color) {
+export function joinArgs(args: any[], color: Color) {
   return args
     .map((arg) => {
       const last = args.indexOf(arg) === args.length - 1;
@@ -98,12 +98,7 @@ function joinArgs(args: any[], color: Color) {
           return colorString("undefined", [150, 150, 200]) + lastSpace;
       }
 
-      arg = arg.replace(
-        /:([a-zA-Z0-9_]+):/g,
-        (match: string, emojiName: string) => {
-          return emoji[emojiName] || match;
-        },
-      );
+      arg = formatString(arg);
 
       return colorString(arg, color) + lastSpace;
     })
@@ -128,7 +123,10 @@ export function attributeObject(
 ): { [key: string]: any } | any[] {
   let newObj: { [key: string]: any } = Array.isArray(obj) ? [] : {};
 
-  const attributeInlineObject = (obj: any, attributes: string[] | null): any => {
+  const attributeInlineObject = (
+    obj: any,
+    attributes: string[] | null,
+  ): any => {
     if (Array.isArray(obj)) {
       const newArray = [];
       for (const item of obj) {
@@ -144,9 +142,9 @@ export function attributeObject(
           newObj[key] = obj[key];
           continue;
         }
-        
+
         if (!attributes.map((a) => a.split(".")[0]).includes(key)) continue;
-        
+
         const attribNew = attributes!
           .filter((a) => a.startsWith(key + "."))
           .map((a) => a.slice(key.length + 1));
@@ -157,7 +155,7 @@ export function attributeObject(
     } else {
       return obj;
     }
-  }
+  };
 
   const excludeInlineObject = (obj: any, exclude: string[]): any => {
     if (Array.isArray(obj)) {
@@ -176,11 +174,34 @@ export function attributeObject(
     } else {
       return obj;
     }
-  }
+  };
 
   if (attributes) newObj = attributeInlineObject(obj, attributes);
   else newObj = Object.assign(newObj, obj);
   return exclude ? excludeInlineObject(newObj, exclude) : newObj;
+}
+
+/**
+ * Formats a string with emoji.
+ * @param str The string to format.
+ * @returns The formatted string.
+ */
+export function formatString(str: string): string {
+  return str.replace(
+    /:([a-zA-Z0-9_]+):/g,
+    (match: string, emojiName: string) => {
+      return emoji[emojiName] || match;
+    },
+  );
+}
+
+/**
+ * Measures a string with emoji.
+ * @param str The string to measure.
+ * @returns The measured string.
+ */
+export function measureString(str: string): number {
+  return str.replace(/:[a-zA-Z0-9_]+:/g, "  ").length;
 }
 
 /**
@@ -229,6 +250,10 @@ export const logger = {
       joinArgs(args, [255, 130, 255]),
       [255, 200, 255],
     );
+  },
+  /** Clears the console. */
+  clear: () => {
+    console.clear();
   },
 };
 

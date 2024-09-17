@@ -1,6 +1,6 @@
 import logger from "../logger";
 import { Namespace } from "../server/server";
-import Group from "../models/chat/Group";
+import Group, { safeGroup } from "../models/chat/Group";
 import Message from "../models/chat/Message";
 import hash from "../hashing";
 
@@ -8,7 +8,7 @@ export const chatappNamespace = new Namespace("chatapp");
 
 chatappNamespace.addHandler({
   name: "createGroup",
-  method: async ({ data, user, success, error }) => {
+  method: async ({ data, user, success, error, socket }) => {
     try {
       const group = await Group.create({
         name: data.name,
@@ -19,17 +19,23 @@ chatappNamespace.addHandler({
       await group.addAdmin(user!);
       await group.setOwner(user!);
 
-      const json = group.toJSON();
+      if (data.listen) {
+        socket.join("group-" + group.id);
 
-      delete json.password;
+        const messages = await Message.findAll({
+          where: { groupId: group.id },
+          order: [["id", "DESC"]],
+          limit: 10,
+        });
 
-      success({ group: json });
+        success({ group: safeGroup(group), messages });
+      } else success({ group: safeGroup(group) });
     } catch (e: any) {
       logger.error("Error creating group:", e);
       error(
         e.message.toLowerCase().includes("validation")
           ? "Group name already taken"
-          : e.message
+          : e.message,
       );
     }
   },
@@ -41,6 +47,10 @@ chatappNamespace.addHandler({
     password: {
       required: false,
       type: "string",
+    },
+    listen: {
+      required: false,
+      type: "boolean",
     },
   },
   rules: {
@@ -65,7 +75,7 @@ chatappNamespace.addHandler({
 
       await group.addUser(user!);
 
-      if (data.focus) {
+      if (data.listen) {
         socket.join("group-" + group.id);
 
         const messages = await Message.findAll({
@@ -74,8 +84,8 @@ chatappNamespace.addHandler({
           limit: 10,
         });
 
-        success({ group, messages });
-      } else success({ group });
+        success({ group: safeGroup(group), messages });
+      } else success({ group: safeGroup(group) });
     });
   },
   schema: {
@@ -87,7 +97,7 @@ chatappNamespace.addHandler({
       required: false,
       type: "string",
     },
-    focus: {
+    listen: {
       required: false,
       type: "boolean",
     },

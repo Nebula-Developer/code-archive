@@ -1,6 +1,6 @@
 import { Socket } from "socket.io-client";
 import { configDotenv } from "dotenv";
-import logger, { attributeObject } from "../src/logger";
+import logger, { attributeObject, measureString } from "../src/logger";
 import * as fs from "fs";
 import { chatappSocket, setAuth, socket } from "./ioSet";
 import env from "../src/env";
@@ -8,7 +8,7 @@ import env from "../src/env";
 configDotenv({ path: __dirname + "/../.env" });
 
 const startString = "Global Server Connection Test";
-const startBar = String("―").repeat(startString.length);
+const startBar = String("―").repeat(measureString(startString));
 
 logger.system(startBar);
 logger.system(startString);
@@ -32,14 +32,14 @@ function register() {
     "login",
     {
       password: env("ADMIN_PASSWORD", "admin123"),
-      email: "admin@admin.com"
+      email: "admin@admin.com",
     },
     (res: any) => {
       if (res.success) {
         setAuth(res.data.jwt);
         fs.writeFileSync("jwt.txt", res.data.jwt);
       }
-    }
+    },
   );
 }
 
@@ -79,24 +79,41 @@ async function initiate(): Promise<boolean> {
     chatappSocket.on("message", (msg) => {
       logger.debug(
         "Message received:",
-        attributeObject(msg, ["id", "content"])
+        attributeObject(msg, ["id", "content"]),
       );
     });
 
-    logger.info("Group listened:", await awaitSocket(chatappSocket, "listenGroup", {
-      groupName: group.name,
-    }));
+    logger.info(
+      "Group listened:",
+      await awaitSocket(chatappSocket, "listenGroup", {
+        groupName: group.name,
+      }),
+    );
 
-    logger.info("Message sent:", attributeObject((await awaitSocket(chatappSocket, "sendMessage", {
-      groupName: group.name,
-      content: "Test message 1",
-    })).message, ["id", "content", "group", "user.username"]));
+    logger.info(
+      "Message sent:",
+      attributeObject(
+        (
+          await awaitSocket(chatappSocket, "sendMessage", {
+            groupName: group.name,
+            content: "Test message 1",
+          })
+        ).message,
+        ["id", "content", "group", "user.username"],
+      ),
+    );
 
-    logger.info("Rejoined group:", attributeObject(await awaitSocket(chatappSocket, "joinGroup", {
-      groupName: group.name,
-      password: "password",
-      focus: true
-    }), ["group.id", "group.name", "messages.content"]));
+    logger.info(
+      "Rejoined group:",
+      attributeObject(
+        await awaitSocket(chatappSocket, "joinGroup", {
+          groupName: group.name,
+          password: "password",
+          focus: true,
+        }),
+        ["group.id", "group.name", "messages.content"],
+      ),
+    );
 
     const role = await awaitSocket(socket, "createRole", {
       name: "Test Role",
@@ -106,10 +123,13 @@ async function initiate(): Promise<boolean> {
 
     logger.info("Role created:", role);
 
-    logger.info("Role assigned:", await awaitSocket(socket, "assignRole", {
-      userId: 1,
-      roleId: role.role.stringId,
-    }));
+    logger.info(
+      "Role assigned:",
+      await awaitSocket(socket, "assignRole", {
+        userId: 1,
+        roleId: role.role.stringId,
+      }),
+    );
 
     const user = await awaitSocket(socket, "getUser", {
       id: 1,

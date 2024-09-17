@@ -1,14 +1,14 @@
 import database from "./database";
 import User from "./models/User";
 import server, { rootNamespace } from "./server/server";
-import logger from "./logger";
+import logger, { measureString } from "./logger";
 import env from "./env";
 import hashing from "./hashing";
 import { chatappNamespace } from "./listeners/chatappListeners";
 import Role from "./models/Role";
 
 const startString = ":sparkle: NebulaDev Global Server :sparkle:";
-const startBar = String("―").repeat(startString.length - 14);
+const startBar = String("―").repeat(measureString(startString));
 
 logger.system(startBar);
 logger.system(startString);
@@ -47,7 +47,7 @@ database.sync({ force: FORCE }).then(async () => {
         color: "#ff0000",
       },
     });
-    
+
     await admin.addRole(role[0]);
   } else if (!(await hashing.compare(ADMIN_PASSWORD, admin.password))) {
     logger.debug("Admin password is incorrect, updating...");

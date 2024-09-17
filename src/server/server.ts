@@ -208,7 +208,10 @@ export class Namespace {
         continue;
       }
 
-      if (handler.rules?.admin && !socket.user?.roles?.find((r) => r.stringId === "admin")) {
+      if (
+        handler.rules?.admin &&
+        !socket.user?.roles?.find((r) => r.stringId === "admin")
+      ) {
         socket.on(handler.name, this.unauthorized);
         continue;
       }
@@ -235,7 +238,7 @@ rootNamespace.addHandler({
       const user = await User.create({
         username,
         password: passwordHash,
-        email,
+        email: email.toLowerCase(),
       });
       const su = safeUser(user);
 
@@ -280,14 +283,17 @@ rootNamespace.addHandler({
   name: "login",
   method: async ({ data, success, error }) => {
     const { email, password } = data;
-    const user = await User.findOne({ where: { email }, attributes: { include: ["password"] } });
+    const user = await User.findOne({
+      where: { email: email.toLowerCase() },
+      attributes: { include: ["password"] },
+    });
 
     if (!user) {
       error("Could not find an account under the provided email");
       return;
     }
 
-    if (!await hashing.compare(password, user.password))
+    if (!(await hashing.compare(password, user.password)))
       return error("Invalid password");
 
     const su = safeUser(user);
@@ -312,7 +318,11 @@ rootNamespace.addHandler({
   name: "createRole",
   method: async ({ data, success, error }) => {
     try {
-      const role = await Role.create({ name: data.name, stringId: data.stringId, color: data.color });
+      const role = await Role.create({
+        name: data.name,
+        stringId: data.stringId,
+        color: data.color,
+      });
       success({
         role: {
           name: role.name,
@@ -340,7 +350,7 @@ rootNamespace.addHandler({
   },
   rules: {
     auth: true,
-    admin: true
+    admin: true,
   },
 });
 
@@ -374,7 +384,7 @@ rootNamespace.addHandler({
   },
   rules: {
     auth: true,
-    admin: true
+    admin: true,
   },
 });
 
@@ -425,7 +435,7 @@ rootNamespace.addHandler({
       type: "string",
     },
   },
-})
+});
 
 /**
  * Closes the server and the HTTP server.
