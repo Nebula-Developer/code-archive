@@ -2,7 +2,7 @@ import {authentication, AuthenticationData, createDirectus, readItems, rest, Res
 import {cookies} from 'next/headers';
 
 export const ADMIN_ROLE = "9fa25a08-fb14-4706-bc80-6794987342f1";
-export const API_URL = process.env.API_URL ?? "https://api.nebuladev.net/";
+export const API_URL = process.env.API_URL ?? "https://api.otakaro.nz/";
 
 class DirectusStorage {
     data = {};

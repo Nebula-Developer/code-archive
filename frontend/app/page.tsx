@@ -29,7 +29,7 @@ export default Page(async () => {
                 <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"/>
 
                 <div className="absolute bottom-0 left-0 m-5 md:m-12">
-                    <h1 className="text-2xl md:text-4xl  text-white">Ōtākaro Ako</h1>
+                    <h1 className="text-2xl md:text-4xl  text-white">Ōtākaro Kahui Ako</h1>
                     <p className="text-sm md:text-lg  text-white">A platform for sharing educational resources between
                         local schools</p>
                 </div>

@@ -15,10 +15,10 @@ services:
       ADMIN_PASSWORD: "your-secure-password"
       DB_CLIENT: "sqlite3"
       DB_FILENAME: "/directus/database/data.db"
-      API_URL: "https://api.nebuladev.net/"
-      PUBLIC_URL: "https://api.nebuladev.net/"
+      API_URL: "https://api.otakaro.nz/"
+      PUBLIC_URL: "https://api.otakaro.nz/"
       CORS_ENABLED: "true"
-      CORS_ORIGIN: "nebuladev.net"
+      CORS_ORIGIN: "otakaro.nz"
     restart: unless-stopped
 
   nextjs:

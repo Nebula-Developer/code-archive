@@ -64,7 +64,7 @@ export default function Navbar({ user, admin }: { user: User | null, admin: bool
     <div className="fixed top-0 left-0 w-full flex-shrink-0 h-32 bg-white shadow-xl z-[1000] flex justify-center text-black">
       <div className="mx-5 h-full flex items-center justify-between w-full max-w-7xl">
         <Link className="flex flex-col justify-center items-center h-full px-5" href="/">
-          <h1 className="text-2xl ">Ōtākaro Ako</h1>
+          <h1 className="text-2xl ">Ōtākaro Kahui Ako</h1>
           {/* <div className="text-sm ">Kia whakatōmuri te haere whakamua</div> */}
         </Link>
 
