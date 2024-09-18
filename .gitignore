@@ -38,6 +38,4 @@ next-env.d.ts
 certificates
 
 # directus
-backend/database
-backend/extensions
-backend/uploads
+/backend/

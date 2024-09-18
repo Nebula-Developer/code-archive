@@ -6,9 +6,9 @@ services:
     ports:
       - 8055:8055
     volumes:
-      - ./backend/database:/directus/database
-      - ./backend/uploads:/directus/uploads
-      - ./backend/extensions:/directus/extensions
+      - ~/stores/otakaro/database:/directus/database
+      - ~/stores/otakaro/uploads:/directus/uploads
+      - ~/stores/otakaro/extensions:/directus/extensions
     environment:
       SECRET: "$$OtakaroW3bs1t3S3cr3t-013579$$"
       ADMIN_EMAIL: "admin@example.com"
