@@ -1,0 +1,12 @@
+/home/nebuladev/Documents/engine/engine.Framework/bin/Debug/net8.0/engine.Framework.deps.json
+/home/nebuladev/Documents/engine/engine.Framework/bin/Debug/net8.0/engine.Framework.dll
+/home/nebuladev/Documents/engine/engine.Framework/bin/Debug/net8.0/engine.Framework.pdb
+/home/nebuladev/Documents/engine/engine.Framework/obj/Debug/net8.0/engine.Framework.csproj.AssemblyReference.cache
+/home/nebuladev/Documents/engine/engine.Framework/obj/Debug/net8.0/engine.Framework.GeneratedMSBuildEditorConfig.editorconfig
+/home/nebuladev/Documents/engine/engine.Framework/obj/Debug/net8.0/engine.Framework.AssemblyInfoInputs.cache
+/home/nebuladev/Documents/engine/engine.Framework/obj/Debug/net8.0/engine.Framework.AssemblyInfo.cs
+/home/nebuladev/Documents/engine/engine.Framework/obj/Debug/net8.0/engine.Framework.csproj.CoreCompileInputs.cache
+/home/nebuladev/Documents/engine/engine.Framework/obj/Debug/net8.0/engine.Framework.dll
+/home/nebuladev/Documents/engine/engine.Framework/obj/Debug/net8.0/refint/engine.Framework.dll
+/home/nebuladev/Documents/engine/engine.Framework/obj/Debug/net8.0/engine.Framework.pdb
+/home/nebuladev/Documents/engine/engine.Framework/obj/Debug/net8.0/ref/engine.Framework.dll
