@@ -36,7 +36,7 @@ export default Page(async ({ searchParams }) => {
   let pages: any[] = [];
   let pageCount: number | any = 1;
   let curPage = 1;
-  const resultsPerPage = 3;
+  const resultsPerPage = 12;
 
   if (searchParams.page) {
     try {
