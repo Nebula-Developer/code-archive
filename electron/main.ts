@@ -25,6 +25,11 @@ import { Account, Client, OAuthProvider } from "appwrite";
 // │
 process.env.APP_ROOT = path.join(__dirname, "..");
 
+app.commandLine.appendSwitch('ignore-gpu-blacklist');
+app.commandLine.appendSwitch('enable-gpu-rasterization');
+app.commandLine.appendSwitch('enable-zero-copy');
+app.commandLine.appendSwitch('enable-native-gpu-memory-buffers');
+
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 export const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
 export const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
@@ -115,9 +120,9 @@ async function makeOAuthWindow(url: string) {
     });
 
     oauthWindow.webContents.once("did-fail-load", () => {
-      console.error("Failed to load OAuth URL.");
-      oauthWindow.close();
-      safeResolve(null);
+      // console.error("Failed to load OAuth URL.");
+      // oauthWindow.close();
+      // safeResolve(null);
     });
 
     try {
@@ -178,7 +183,10 @@ function createWindow() {
   Menu.setApplicationMenu(null);
   win.removeMenu();
 
-  app.dock.hide();
+  win.webContents.openDevTools();
+
+  if (process.platform === "darwin")
+    app.dock.hide();
 
   const client = new Client();
   client.setEndpoint("https://app.nebuladev.net/v1").setProject("nebula");
@@ -187,9 +195,12 @@ function createWindow() {
   let windowVisible = false;
   let allowOpening = true;
 
-  function setWindow(state: boolean, sendSignal = true) {
-    win!.setIgnoreMouseEvents(!state, { forward: !state });
-    state ? win!.focus() : win!.blur();
+  function setWindow(state: boolean, sendSignal = true, grabFocus = true) {
+    if (grabFocus) {
+      win!.setIgnoreMouseEvents(!state, { forward: !state });
+      state ? win!.focus() : win!.blur();
+    }
+
     windowVisible = state;
 
     if (sendSignal) {
@@ -210,6 +221,11 @@ function createWindow() {
   globalShortcut.register("CommandOrControl+Shift+D", () => {
     if (!allowOpening) return;
     setWindow(!windowVisible);
+  });
+
+  globalShortcut.register("CommandOrControl+Shift+G", () => {
+    if (!allowOpening) return;
+    setWindow(!windowVisible, true, false);
   });
 
   ipcMain.on("sidebar", (_, args) => {

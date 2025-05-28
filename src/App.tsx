@@ -5,7 +5,10 @@ import { account } from "./lib/appwrite";
 import { $sidebar } from "./state/sidebarStore";
 import { cn } from "./lib/utils";
 import { Sidebar } from "./components/Sidebar";
-import { BlurryCanvas } from "./components/BlurryCanvas";
+import { BlurryCanvas } from "./components/shaders/BlurryCanvas";
+import { BlurryCircles } from "./components/shaders/BlurryCircles";
+import { HexPatternBackground } from "./components/shaders/HexPatternBackground";
+import { FbmColormapShader } from "./components/shaders/ShaderPreview";
 
 const App = () => {
   const state = useStore($userState);
@@ -48,20 +51,26 @@ const App = () => {
   return (
     <div
       className={cn(
-        sidebar ? "bg-black/50" : "",
-        "select-none w-full h-full transition-colors duration-300 relative"
+        sidebar ? "bg-black/50 sidebar-active" : "sidebar-inactive",
+        "select-none w-full h-full transition-colors duration-300 relative",
       )}
+      id="content"
     >
-      <BlurryCanvas
+      <div
         className={cn(
-          "absolute top-0 left-0 w-full h-full transition-opacity duration-1000",
+          "absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ease-in-out",
           sidebar ? "opacity-100" : "opacity-0"
         )}
         onClick={() => {
           (window as any).ipcRenderer?.send("sidebar", false);
           $sidebar.set(false);
         }}
-      />
+      >
+        <FbmColormapShader className="opacity-20" />
+      </div>
+
+      <div className="fixed top-10 left-10 animate-spin bg-red-500 w-10 h-10"></div>
+
       <Sidebar open={sidebar} />
     </div>
   );

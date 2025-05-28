@@ -3,15 +3,33 @@ import { $user, logout } from "@/state/userStore";
 import { useStore } from "@nanostores/react";
 import SigninForm from "./SigninForm";
 import { Button } from "./ui/button";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export type Side = "top" | "bottom" | "left" | "right";
 
 export function Sidebar({ open }: { open: boolean }) {
   const user = useStore($user);
 
-  const [size, setSize] = useState(600);
+  const [size, setRawSize] = useState(0);
   const [panelSide, setPanelSide] = useState<Side>("right");
+
+  const limiter: () => number = () =>
+    panelSide === "left" || panelSide === "right"
+      ? document.documentElement.clientWidth
+      : document.documentElement.clientHeight;
+
+  function setSize(newSize: number) {
+    var lim = limiter();
+    var low = lim / 10;
+    var high = lim * 0.8;
+    if (newSize < low) newSize = low;
+    if (newSize > high) newSize = high;
+    setRawSize(newSize);
+  }
+
+  useEffect(() => {
+    setSize(limiter() / 3);
+  }, [panelSide]);
 
   let sizeAttribute =
     panelSide === "top" || panelSide === "bottom" ? "height" : "width";
@@ -107,11 +125,14 @@ export function Sidebar({ open }: { open: boolean }) {
 
         <div
           className={cn(
-            "absolute cursor-pointer transition-colors",
+            "absolute transition-colors",
             grabbing
               ? "bg-accent-foreground"
               : "bg-accent hover:bg-foreground/50",
-            grabber
+            grabber,
+            panelSide === "left" || panelSide === "right"
+              ? "cursor-ew-resize"
+              : "cursor-ns-resize"
           )}
           ref={grabberRef}
           onMouseDown={(e) => {
@@ -133,13 +154,34 @@ export function Sidebar({ open }: { open: boolean }) {
                 ? e.clientX
                 : e.clientY;
             document.addEventListener("mousemove", mouseMove);
+
+            const className =
+              panelSide === "left" || panelSide === "right"
+                ? "cursor-lock-ew"
+                : "cursor-lock-ns";
+
+            document.body.classList.add(className);
+
             document.addEventListener("mouseup", () => {
+              document.body.classList.remove("cursor-lock-ew");
+              document.body.classList.remove("cursor-lock-ns");
+
               document.removeEventListener("mousemove", mouseMove);
               setGrabbing(false);
             });
           }}
           onDragStart={(_) => false}
         ></div>
+
+        <div className="cursor-pointer absolute bottom-5 right-5 w-10 h-10 bg-muted hover:bg-accent shadow-xl rounded-sm flex items-center justify-center"
+          onClick={() => {
+            setSize(limiter() / 3);
+          }}
+        >
+          <div className="text-xs">
+            Reset
+          </div>
+        </div>
       </div>
     </div>
   );
