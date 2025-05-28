@@ -3,9 +3,11 @@ import { useRef, useEffect } from "react";
 export function BlurryCanvas({
   className,
   onClick,
+  range = [0.5, 1],
 }: {
   className?: string;
   onClick?: () => void;
+  range?: [number, number];
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -22,22 +24,30 @@ export function BlurryCanvas({
     canvas.height = height;
 
     const PARTICLE_COUNT = 10;
-    const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
-      x: Math.random(), // relative
-      y: Math.random(), // relative
-      vx: (Math.random() - 0.5) * 0.002, // relative per frame
-      vy: (Math.random() - 0.5) * 0.002,
-      color: `hsl(${Math.random() * 360}, 100%, 50%)`,
-      size: Math.random() * 0.4 + 0.1, // relative radius (0–0.15)
-    }));
+    const sqrt = Math.sqrt(PARTICLE_COUNT);
+    let i = 0;
+    const particles = Array.from({ length: PARTICLE_COUNT }, () => {
+      i++;
+
+      return {
+        x: ((i % sqrt) / sqrt) * range[0],
+        y: (Math.floor(i / sqrt) / sqrt) * range[1],
+        vx: Math.random() * 0.002 - 0.003,
+        vy: Math.random() * 0.002 - 0.003,
+        color: `hsl(${(i * 360) / PARTICLE_COUNT}, 100%, 50%)`,
+        size: Math.random() * 0.2 + 0.1,
+      };
+    });
 
     const updateParticlePosition = (p: any) => {
       p.x += p.vx;
       p.y += p.vy;
 
       // Efficient boundary check and correction
-      if (p.x > 1 || p.x < 0) p.vx *= -1;
-      if (p.y > 1 || p.y < 0) p.vy *= -1;
+      if (p.x > range[0] || p.x < 0)
+        p.vx = Math.abs(p.vx) * (p.x > range[0] ? -1 : 1);
+      if (p.y > range[1] || p.y < 0)
+        p.vy = Math.abs(p.vy) * (p.y > range[1] ? -1 : 1);
 
       p.x = Math.max(0, Math.min(1, p.x));
       p.y = Math.max(0, Math.min(1, p.y));
@@ -59,9 +69,6 @@ export function BlurryCanvas({
           Math.PI * 2
         );
         ctx.fill();
-
-        ctx.fillStyle = "rgb(255, 0, 0)";
-        ctx.fillRect(0, 0, 100, 100);
       }
 
       requestAnimationFrame(animate);

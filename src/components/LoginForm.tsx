@@ -2,7 +2,8 @@ import { useRef, useState } from "react";
 import { account } from "@/lib/appwrite";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { $user, $userState } from "@/state/userStore";
+import { $userState } from "@/state/userStore";
+import { OAuthProvider } from "appwrite";
 
 const LoginForm = ({ buttons }: { buttons: React.ReactNode }) => {
   const [email, setEmail] = useState("");
@@ -55,6 +56,15 @@ const LoginForm = ({ buttons }: { buttons: React.ReactNode }) => {
 
       <div className="flex gap-4">
         <Button onClick={handleLogin}>Login</Button>
+        <Button onClick={async () => {
+          (window as any).ipcRenderer?.send("oauth", OAuthProvider.Google);
+        }}>Google</Button>
+        <Button onClick={async () => {
+          (window as any).ipcRenderer?.send("oauth", OAuthProvider.Github);
+        }}>GitHub</Button>
+        <Button onClick={async () => {
+          (window as any).ipcRenderer?.send("oauth", OAuthProvider.Gitlab);
+        }}>Gitlab</Button>
         {buttons}
       </div>
     </div>

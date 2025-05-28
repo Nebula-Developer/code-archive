@@ -1,7 +1,15 @@
-import { app, BrowserWindow, globalShortcut, ipcMain, screen } from "electron";
+import {
+  app,
+  BrowserWindow,
+  globalShortcut,
+  ipcMain,
+  Menu,
+  screen,
+} from "electron";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+import { Account, Client, OAuthProvider } from "appwrite";
 
 // import { createRequire } from 'node:module'
 // const require = createRequire(import.meta.url)
@@ -27,6 +35,101 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
   : RENDERER_DIST;
 
 let win: BrowserWindow | null;
+
+function createIntervalLerp(duration: number, callback: (progress: number) => void) {
+  const start = Date.now();
+  let cancelled = false;
+
+  function tick() { 
+    if (cancelled) return;
+
+    const elapsed = Date.now() - start;
+    let progress = elapsed / duration;
+
+    if (progress >= 1 || cancelled) {
+      callback(1);
+      return;
+    }
+
+    callback(progress);
+    setTimeout(tick, 16);
+  }
+
+  tick();
+
+  return {
+    cancel: () => {
+      cancelled = true;
+    },
+    complete: () => {
+      cancelled = true;
+      callback(1);
+    }
+  };
+}
+
+async function makeOAuthWindow(url: string) {
+  return new Promise((resolve) => {
+    let resolved = false;
+
+    const oauthWindow = new BrowserWindow({
+      width: 800,
+      height: 600,
+      fullscreen: false,
+      fullscreenable: false,
+      x: 0,
+      y: 0,
+      webPreferences: {
+        preload: path.join(__dirname, "preload.mjs"),
+        contextIsolation: true,
+        nodeIntegration: false,
+      },
+    });
+
+    const safeResolve = (value: any) => {
+      if (!resolved) {
+        resolved = true;
+        resolve(value);
+      }
+    };
+
+    oauthWindow.once("closed", () => safeResolve(null));
+
+    oauthWindow.webContents.on("will-redirect", (_, newUrl) => {
+      console.log("Redirecting to:", newUrl);
+      if (newUrl.startsWith("https://localhost")) {
+        const urlParams = new URLSearchParams(new URL(newUrl).search);
+        const secret = urlParams.get("secret");
+        const userId = urlParams.get("userId");
+        console.log("OAuth redirect params:", { secret, userId });
+
+        if (secret && userId) {
+          safeResolve({ secret, userId });
+        } else {
+          console.error("Invalid OAuth redirect URL:", newUrl);
+          safeResolve(null);
+        }
+
+        oauthWindow.close();
+      }
+    });
+
+    oauthWindow.webContents.once("did-fail-load", () => {
+      console.error("Failed to load OAuth URL.");
+      oauthWindow.close();
+      safeResolve(null);
+    });
+
+    try {
+      console.log("Loading URL:", url);
+      oauthWindow.loadURL(url);
+    } catch (e) {
+      console.error("Error loading OAuth URL:", e);
+      oauthWindow.close();
+      safeResolve(null);
+    }
+  });
+}
 
 function createWindow() {
   const screenDimensions = screen.getPrimaryDisplay().bounds;
@@ -71,28 +174,84 @@ function createWindow() {
   win.setIgnoreMouseEvents(true, { forward: true });
   win.setAlwaysOnTop(true, "screen-saver", 1);
   win.setOpacity(1);
-  
-  function toggleWindow(toggle: boolean) {
-    win!.setIgnoreMouseEvents(!toggle, { forward: !toggle });
+  win.setMenu(null);
+  Menu.setApplicationMenu(null);
+  win.removeMenu();
 
-    if (toggle) {
-      win!.focus();
-    } else {
-      win!.blur();
+  app.dock.hide();
+
+  const client = new Client();
+  client.setEndpoint("https://app.nebuladev.net/v1").setProject("nebula");
+  const account = new Account(client);
+
+  let windowVisible = false;
+  let allowOpening = true;
+
+  function setWindow(state: boolean, sendSignal = true) {
+    win!.setIgnoreMouseEvents(!state, { forward: !state });
+    state ? win!.focus() : win!.blur();
+    windowVisible = state;
+
+    if (sendSignal) {
+      win!.webContents.send("sidebar", state);
     }
   }
 
-  var toggle = false;
-  globalShortcut.register("CommandOrControl+Alt+D", () => {
-    toggle = !toggle;
-    toggleWindow(toggle);
-    win!.webContents.send("sidebar", toggle);
+  function opacityTo(opacity: number, duration = 100) {
+    let currentOpacity = win?.getOpacity() ?? 1;
+    let opacityAnimation = createIntervalLerp(duration, (progress) => {
+      if (!win) return;
+      win.setOpacity(currentOpacity + (opacity - currentOpacity) * progress);
+    });
+
+    return opacityAnimation;
+  }
+
+  globalShortcut.register("CommandOrControl+Shift+D", () => {
+    if (!allowOpening) return;
+    setWindow(!windowVisible);
   });
 
   ipcMain.on("sidebar", (_, args) => {
-    if (typeof args == "undefined") return;
-    toggle = args;
-    toggleWindow(args);
+    if (typeof args === "boolean") {
+      setWindow(args);
+    }
+  });
+
+  ipcMain.on("oauth", async (_, args) => {
+    if (typeof args === "undefined") return;
+    const provider = args as OAuthProvider;
+
+    if (!provider || !Object.values(OAuthProvider).includes(provider)) {
+      console.error("Invalid OAuth provider:", provider);
+      return;
+    }
+
+    allowOpening = false;
+
+    let opacity = win?.getOpacity() ?? 1;
+    let opacityAnimation = opacityTo(0, 250);
+
+    setWindow(false, false);
+
+    try {
+      const url = account.createOAuth2Token(provider, "https://localhost");
+      console.log("OAuth URL:", url);
+
+      const result = await makeOAuthWindow(url as string);
+
+      opacityAnimation.cancel();
+      opacityAnimation = opacityTo(opacity, 250);
+
+      setWindow(true, false);
+
+      win?.webContents.send("oauth", result ?? null);
+      if (!result) console.error("OAuth window closed without redirect.");
+    } catch (error) {
+      console.error("Error creating OAuth session:", error);
+    } finally {
+      allowOpening = true;
+    }
   });
 
   win.webContents.on("did-finish-load", () => {

@@ -2,10 +2,10 @@ import { useState } from "react";
 import { account, ID } from "@/lib/appwrite";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { $user, $userState } from "@/state/userStore";
+import { $userState } from "@/state/userStore";
 import {
   Form,
   FormControl,
