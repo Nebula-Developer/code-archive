@@ -1,8 +1,8 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState } from 'react';
-import { account } from '../lib/appwrite';
 import { Models } from 'appwrite';
+import { getAccount } from './appwrite';
 
 type User = Models.User<Models.Preferences>;
 type UserUpdate = {
@@ -20,6 +20,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const account = getAccount();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 

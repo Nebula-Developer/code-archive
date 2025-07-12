@@ -5,13 +5,13 @@ import { useAuth } from "@/lib/AuthContext";
 import { redirect } from "next/navigation";
 
 export default function Login() {
-    const { user } = useAuth();
+  const { user, loading } = useAuth();
 
-    if (user) redirect("/");
-        
-    return (
-        <div className="flex justify-center mt-4 xs:mt-24">
-            <AuthCard />
-        </div>
-    );
+  if (!loading && user) redirect("/");
+
+  return (
+    <div className="flex justify-center mt-4 xs:mt-24">
+      <AuthCard />
+    </div>
+  );
 }

@@ -2,7 +2,6 @@
 
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { account } from "@/lib/appwrite";
 import { useState } from "react";
 import { ID } from "appwrite";
 
@@ -22,8 +21,11 @@ import {
   CardTitle,
 } from "./ui/card";
 import { useAuth } from "@/lib/AuthContext";
+import { getAccount } from "@/lib/appwrite";
 
 export function AuthCard() {
+  const account = getAccount();
+
   const [isLogin, setIsLogin] = useState(true);
   const [callLoading, setCallLoading] = useState(false);
   const [error, setError] = useState("");
