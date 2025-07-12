@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { account } from "@/lib/appwrite";
 import { useState } from "react";
 import { ID } from "appwrite";
-import { redirect } from "next/navigation";
 
 import {
   LoginForm,
@@ -23,12 +22,14 @@ import {
   CardTitle,
 } from "./ui/card";
 import { useAuth } from "@/lib/AuthContext";
+import { useRouter } from "next/navigation";
 
 export function AuthCard() {
   const [isLogin, setIsLogin] = useState(true);
   const [callLoading, setCallLoading] = useState(false);
   const [error, setError] = useState("");
   const { user, loading, logout, login } = useAuth();
+  const router = useRouter();
 
   const handleLogin = async (data: z.infer<typeof loginSchema>) => {
     setCallLoading(true);
@@ -37,6 +38,7 @@ export function AuthCard() {
       await login(data.email, data.password);
     } catch (err) {
       setError("Login failed. Please check your credentials.");
+      console.error(err);
     } finally {
       setCallLoading(false);
     }
@@ -48,7 +50,6 @@ export function AuthCard() {
     try {
       await account.create(ID.unique(), data.email, data.password, data.name);
       await login(data.email, data.password);
-      redirect("/");
     } catch (err) {
       const msg =
         err instanceof Error
@@ -57,6 +58,7 @@ export function AuthCard() {
       if (msg.includes("already exists"))
         setError("Email is already registered. Please login.");
       else setError(msg);
+      console.error(err);
     } finally {
       setCallLoading(false);
     }
