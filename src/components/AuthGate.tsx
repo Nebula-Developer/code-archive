@@ -1,7 +1,6 @@
 "use client";
 
 import { useAuth } from "@/lib/AuthContext";
-import { useEffect } from "react";
 
 export default function AuthGate({ children }: { children: React.ReactNode }) {
   const { loading } = useAuth();

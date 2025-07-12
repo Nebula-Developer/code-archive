@@ -3,7 +3,7 @@
 /**
  * Represents metadata for an uploaded profile picture.
  */
-type UploadMetadata = {
+export type UploadMetadata = {
     /** Unique file ID from storage */
     fileId: string;
 

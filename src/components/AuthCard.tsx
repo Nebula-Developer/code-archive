@@ -22,14 +22,12 @@ import {
   CardTitle,
 } from "./ui/card";
 import { useAuth } from "@/lib/AuthContext";
-import { useRouter } from "next/navigation";
 
 export function AuthCard() {
   const [isLogin, setIsLogin] = useState(true);
   const [callLoading, setCallLoading] = useState(false);
   const [error, setError] = useState("");
   const { user, loading, logout, login } = useAuth();
-  const router = useRouter();
 
   const handleLogin = async (data: z.infer<typeof loginSchema>) => {
     setCallLoading(true);
@@ -83,7 +81,7 @@ export function AuthCard() {
           <div className="absolute top-0 left-0 w-full h-full">
             <div className="absolute z-10 backdrop-blur-xs h-full w-full flex items-center justify-center flex-col">
               <p className="text-accent-foreground mb-2">
-                You're already logged in as {user.name}.
+                You&apos;re already logged in as {user.name}.
               </p>
               <Button variant="destructive" onClick={logout}>
                 Logout

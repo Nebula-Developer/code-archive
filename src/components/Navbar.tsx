@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/navigation-menu";
 import { useAuth } from "@/lib/AuthContext";
 import Link from "next/link";
-import { useEffect } from "react";
 
 export default function Navbar() {
   const { user } = useAuth();

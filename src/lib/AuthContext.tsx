@@ -51,7 +51,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const update = async (data: Partial<UserUpdate>) => {
     if (!user) throw new Error('User not authenticated');
-    let promises = [];
+    const promises = [];
     if (data.email && data.oldPassword && data.email !== user.email)
       promises.push(account.updateEmail(data.email, data.oldPassword));
     if (data.name && data.name !== user.name)
