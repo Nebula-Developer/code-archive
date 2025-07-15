@@ -33,26 +33,40 @@ export async function scaffold(
   const copyDir = (src: string, dest: string) => {
     if (!fs.existsSync(src)) return;
     fs.readdirSync(src).forEach((file) => {
-      let featureMatch = /^\[([^\]]+)\]/.exec(file);
+      let actualName = file;
+
+      let featureMatch = /^\(([^)]+)\)/.exec(file);
       if (featureMatch) {
-        const features = featureMatch[1]
-          ? featureMatch[1].split(",").map((f) => f.trim())
-          : [];
-        if (!features.every((f) => featureList.includes(f))) {
+        const rawFeatures = featureMatch[1] || "";
+        const features = rawFeatures.split(",").map((f) => f.trim());
+
+        const excluded = features
+          .filter((f) => f.startsWith("!"))
+          .map((f) => f.slice(1));
+        const required = features.filter((f) => !f.startsWith("!"));
+
+        if (excluded.some((f) => featureList.includes(f))) {
+          console.log(
+            chalk.yellow(
+              `Skipping ${file} as one of the excluded features is selected.`
+            )
+          );
+          return;
+        }
+
+        if (!required.every((f) => featureList.includes(f))) {
           console.log(
             chalk.yellow(`Skipping ${file} as not all features are selected.`)
           );
           return;
         }
+
+        actualName = actualName.replace(/^\([^)]+\)/, "").trim();
       }
+
+      if (/^_/.test(actualName)) actualName = "." + actualName.slice(1);
 
       const srcFile = path.join(src, file);
-
-      // 👇 handle _filename → .filename renaming
-      let actualName = file;
-      if (/^_/.test(actualName)) {
-        actualName = "." + actualName.slice(1);
-      }
 
       let destFile = path.join(dest, actualName);
 

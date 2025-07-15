@@ -4,7 +4,7 @@ import chalk from "chalk";
 import type { Template, TemplateConfig } from "./types";
 import { errorClose } from "./error";
 
-const baseDir = path.join(__dirname, "..", "..");
+const baseDir = path.join(__dirname, "..");
 
 export function getTemplates(): TemplateConfig[] {
   const templatesDir = path.join(baseDir, "templates");
