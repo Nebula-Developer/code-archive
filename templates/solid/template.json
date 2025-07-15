@@ -1,19 +1,12 @@
 {
     "name": "Fullstack SolidStart App",
-    "shortNames": ["fs", "fullstack", "solid"],
+    "shortNames": [
+        "fs",
+        "fullstack",
+        "solid"
+    ],
     "description": "A fullstack application using SolidJS + SolidStart",
-
     "features": {
-        "tailwind": {
-            "name": "Tailwind CSS",
-            "default": true,
-            "dependencies": [
-                "tailwindcss"
-            ],
-            "scripts": {
-                
-            }
-        },
         "trpc": {
             "name": "TRPC",
             "default": true

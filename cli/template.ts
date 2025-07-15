@@ -4,12 +4,22 @@ import chalk from "chalk";
 import type { Template, TemplateConfig } from "./types";
 import { errorClose } from "./error";
 
-const baseDir = path.join(__dirname, "..");
+function findTemplatesDir(maxLevels = 3): string | null {
+  let currentDir = __dirname;
+  for (let i = 0; i <= maxLevels; i++) {
+    const potential = path.join(currentDir, "templates");
+    if (fs.existsSync(potential)) return potential;
+    currentDir = path.resolve(currentDir, "..");
+  }
+  return null;
+}
 
 export function getTemplates(): TemplateConfig[] {
-  const templatesDir = path.join(baseDir, "templates");
-  if (!fs.existsSync(templatesDir))
-    errorClose(`Templates directory not found at ${templatesDir}`);
+  const templatesDir = findTemplatesDir();
+  if (!templatesDir)
+    errorClose(
+      "Templates directory not found in current or parent directories."
+    );
 
   const templateDirs = fs
     .readdirSync(templatesDir, { withFileTypes: true })

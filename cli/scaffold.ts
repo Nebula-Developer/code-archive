@@ -64,8 +64,6 @@ export async function scaffold(
         actualName = actualName.replace(/^\([^)]+\)/, "").trim();
       }
 
-      if (/^_/.test(actualName)) actualName = "." + actualName.slice(1);
-
       const srcFile = path.join(src, file);
 
       let destFile = path.join(dest, actualName);
