@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Stack Template Schema",
+  "description": "Schema for defining a customizable stack template",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The full name of the stack template."
+    },
+    "shortNames": {
+      "type": "array",
+      "description": "Alternative names or aliases for the template.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "A brief explanation of what the template does or includes."
+    },
+    "contentFolder": {
+      "type": "string",
+      "description": "The folder where the template content is located.",
+      "default": "content"
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Global dependencies for the template.",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "default": []
+    },
+    "scripts": {
+      "type": "object",
+      "description": "Global scripts for the template.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {}
+    },
+    "features": {
+      "type": "object",
+      "description": "A map of features available in this template. Keys are feature IDs (e.g., 'tailwind'), values define feature config.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The display name of the feature."
+          },
+          "default": {
+            "type": "boolean",
+            "description": "Whether this feature is enabled by default."
+          },
+          "dependencies": {
+            "type": "array",
+            "description": "Dependencies required by this feature.",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "default": []
+          },
+          "scripts": {
+            "type": "object",
+            "description": "Scripts specific to this feature.",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "default": {}
+          }
+        },
+        "required": [
+          "name",
+          "default"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "name",
+    "shortNames",
+    "description",
+    "features"
+  ],
+  "additionalProperties": false
+}

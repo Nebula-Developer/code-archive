@@ -1,0 +1,14 @@
+{
+    "material-icon-theme.files.associations": {
+        "template.json": "template",
+        "schema.json": "3d"
+    },
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "**/template.json"
+            ],
+            "url": "/schema.json"
+        }
+    ]
+}
