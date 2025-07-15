@@ -22,6 +22,5 @@
             "name": "Drizzle ORM",
             "default": false
         }
-    },
-    "contentFolder": "abc"
+    }
 }

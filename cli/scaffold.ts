@@ -4,14 +4,11 @@ import type { TemplateConfig } from "./types";
 import chalk from "chalk";
 import ejs from "ejs";
 import { errorClose } from "./error";
-import { syncPackage } from "./package";
 
 export async function scaffold(
   template: TemplateConfig,
   projectName: string,
-  featureList: string[],
-  dependencies: string[],
-  scripts: Record<string, string>
+  featureList: string[]
 ) {
   const templateRoot = path.dirname(template.path);
   const templateDir = path.join(
@@ -72,7 +69,9 @@ export async function scaffold(
               ...template,
               name: projectName,
               templateName: template.name,
-              ...Object.fromEntries(
+              // boolean object for features
+              // maps template.features to whether they are selected
+              features: Object.fromEntries(
                 Object.keys(template.features).map((key) => [
                   key,
                   featureList.includes(key),
@@ -99,14 +98,6 @@ export async function scaffold(
   copyDir(templateDir, projectDir);
 
   console.log(chalk.green("Template files copied successfully."));
-
-  console.log(chalk.green("Syncing package.json..."));
-  syncPackage(
-    path.join(projectDir, "package.json"),
-    projectName,
-    dependencies,
-    scripts
-  );
 
   console.log("-".repeat(40));
   console.log(chalk.green("Project scaffolded successfully!"));

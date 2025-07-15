@@ -11,6 +11,7 @@ export async function main() {
   const templateChoiceMap = templates.map((t, i) => ({
     name: t.name + (t.description ? ` - ${t.description}` : ""),
     value: i,
+    
   }));
 
   const projectName = await input({
@@ -48,6 +49,7 @@ export async function main() {
         id: name,
         ...feature,
       },
+      checked: feature.default,
     })
   );
 
@@ -62,29 +64,11 @@ export async function main() {
 
   console.log("-".repeat(40));
 
-  const dependencies = [
-    ...(template.dependencies ?? []),
-    ...selectedFeatures.flatMap((f) => f.dependencies ?? []),
-  ].map((dep) =>
-    typeof dep === "string" ? dep : `${dep.name}@${dep.version ?? "latest"}`
-  );
-
-  const scripts: Record<string, string> = {
-    ...(template.scripts ?? {}),
-    ...Object.fromEntries(
-      selectedFeatures.flatMap((f) =>
-        f.scripts ? Object.entries(f.scripts) : []
-      )
-    ),
-  };
-
   console.log(chalk.green(`Scaffolding project '${projectName}'...`));
 
   await scaffold(
     template,
     projectName,
-    selectedFeatures.map((f) => f.id),
-    dependencies,
-    scripts
+    selectedFeatures.map((f) => f.id)
   );
 }

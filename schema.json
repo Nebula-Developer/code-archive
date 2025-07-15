@@ -24,41 +24,6 @@
       "description": "The folder where the template content is located.",
       "default": "content"
     },
-    "dependencies": {
-      "type": "array",
-      "description": "Global dependencies for the template.",
-      "items": {
-        "oneOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "version": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "name"
-            ],
-            "additionalProperties": false
-          }
-        ]
-      },
-      "default": []
-    },
-    "scripts": {
-      "type": "object",
-      "description": "Global scripts for the template.",
-      "additionalProperties": {
-        "type": "string"
-      },
-      "default": {}
-    },
     "features": {
       "type": "object",
       "description": "A map of features available in this template. Keys are feature IDs (e.g., 'tailwind'), values define feature config.",
@@ -72,41 +37,6 @@
           "default": {
             "type": "boolean",
             "description": "Whether this feature is enabled by default."
-          },
-          "dependencies": {
-            "type": "array",
-            "description": "Dependencies required by this feature.",
-            "items": {
-              "oneOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string"
-                    },
-                    "version": {
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "name"
-                  ],
-                  "additionalProperties": false
-                }
-              ]
-            },
-            "default": []
-          },
-          "scripts": {
-            "type": "object",
-            "description": "Scripts specific to this feature.",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "default": {}
           }
         },
         "required": [
