@@ -1,0 +1,20 @@
+import type { createSolidAPIHandlerContext } from 'solid-start-trpc'
+// import { prisma } from '~/server/db/client'
+
+export const createContextInner = async (opts: createSolidAPIHandlerContext) => {
+  // const user = await authenticator.isAuthenticated(opts.req)
+  return {
+    ...opts,
+    // prisma,
+    // user,
+    user: {
+      id: 'aa'
+    }
+  }
+}
+
+export const createContext = async (opts: createSolidAPIHandlerContext) => {
+  return await createContextInner(opts)
+}
+
+export type Context = Awaited<ReturnType<typeof createContextInner>>

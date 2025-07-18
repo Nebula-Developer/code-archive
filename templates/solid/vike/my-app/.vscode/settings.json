@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "*.dbclient-js": "javascript",
+        "*.ejs": "html",
+        "*.css": "tailwindcss"
+    },
+    "emmet.includeLanguages": {
+        "ejs": "html",
+        "javascriptreact": "html",
+        "typescriptreact": "html"
+    },
+    "material-icon-theme.folders.associations": {
+        "trpc": "server"
+    },
+    "material-icon-theme.files.associations": {
+        "ssr.js": "controller",
+        "*.css": "tailwindcss"
+    }
+}
