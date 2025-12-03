@@ -8,9 +8,6 @@ Feel free to use the archive generator in `cli/` to make your own repo archive!
 
 ## 2025
 
-### October
-- [harley](2025-10/harley) - No description
-
 ### August
 - [modules](2025-08/modules) - No description
 
