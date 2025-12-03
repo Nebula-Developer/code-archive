@@ -1,0 +1,200 @@
+<%- include('header') %>
+
+<div class="flex-column">
+    <div class="home-text">
+        <span style="font-size: 45px;">Ōtākaro Histories</span> <br>
+        Aotearoa Histories in the Classroom
+    </div>
+
+    <div class="home-section-grid-title">Quick Links</div>
+
+    <div class="home-section-grid">
+        <a class="home-section-grid-item" style="background: #80daa5;" href="/posts">
+            <i class="fas fa-book"></i>
+            <div class="home-section-grid-item-title">
+                Browse All Posts
+            </div>
+        </a>
+
+        <a class="home-section-grid-item" style="background: #5ebfd7;" href="/pages/contact">
+            <i class="fas fa-envelope"></i>
+            <div class="home-section-grid-item-title">
+                Contact
+            </div>
+        </a>
+
+        <a class="home-section-grid-item" style="background: #64d7e9;" href="/pages/login">
+            <i class="fas fa-sign-in-alt"></i>
+            <div class="home-section-grid-item-title">
+                Login
+            </div>
+        </a>
+
+        <a class="home-section-grid-item" style="background: #63d8ff;" href="/user/logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <div class="home-section-grid-item-title">
+                Logout
+            </div>
+        </a>
+
+        <a class="home-section-grid-item" style="background: #56b0c7;" href="/pages/register">
+            <i class="fas fa-user-plus"></i>
+            <div class="home-section-grid-item-title">
+                Register
+            </div>
+        </a>
+
+        <a class="home-section-grid-item" style="background: #61e498;" href="/create">
+            <i class="fas fa-plus"></i>
+            <div class="home-section-grid-item-title">
+                Create Post
+            </div>
+        </a>
+    </div>
+
+    <div class="home-gallery flex-row" style="padding: 100px; flex-wrap: wrap">
+        <div class="home-gallery-index flex-column" style="flex-wrap: wrap">
+            <div class="home-gallery-title">Recent Items</div>
+
+            <% for (var i = 0; i < posts.length; i++) { %>
+                <div class="home-gallery-item">
+                    <div class="home-gallery-item-title"><%= posts[i].title %></div>
+                    <div class="home-gallery-item-date"><%= new Date(posts[i].date).toLocaleString() %></div>
+                    <a href="/post/<%= posts[i].id %>" class="home-gallery-item-link">View</a>
+                </div>
+            <% } %>
+        </div>
+
+        <div class="home-gallery-content">
+            <h1 style="margin: 0; font-weight: 400; font-size: 45px; color: rgb(92, 92, 92);">Ōtākaro Histories</h1>
+            <p>
+                This website is in heavy development.
+                <br>
+                Ōtākaro Histories is a website that provides teachers with resources to teach history in the classroom.
+                <br>
+                You can find more information about the project <a href="/pages/about">here</a>.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- <input type="text" class="test-bg">
+
+<script>
+    var test = $('.test-bg');
+    var home = $('.home-text');
+
+    test.on('input', function() {
+        home.css('background-image', 'url(' + test.val() + ')');
+    });
+</script> -->
+
+<style>
+    .test-bg {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 20px;
+        padding: 20px;
+        background: black;
+        color: white;
+        border: none;
+        outline: none;
+    }
+
+    .home-text {
+        padding: 120px 50px;
+        background: linear-gradient(70deg, #1e5799, #2989d8, #7db9e8);
+        font-size: 46px;
+        font-weight: 600;
+        color: white;
+        text-align: center;
+        line-height: 60px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .home-gallery-index {
+        min-width: 250px;
+        max-width: 250px;
+        padding-right: 50px;
+    }
+
+    .home-gallery-title {
+        font-size: 20px;
+        margin-bottom: 20px;
+        background: rgb(95, 156, 207);
+        padding: 10px;
+        color: white;
+    }
+
+    .home-gallery-item {
+        margin-bottom: 20px;
+        color: rgb(101, 101, 101);
+    }
+
+    .home-gallery-item-date {
+        font-size: 15px;
+        color: rgb(144, 144, 144);
+    }
+
+    .home-gallery-item-link {
+        font-size: 15px;
+        color: rgb(95, 156, 207);
+    }
+    
+    .home-section-grid-title {
+        padding: 0 100px;
+        padding-bottom: 30px;
+        margin: 0;
+        margin-top: 80px;
+        font-weight: 400;
+        font-size: 45px;
+        background: linear-gradient(45deg, #4187d7, #7de8b1, #4187d7);
+        background-size: 50%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .home-section-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 33%);
+        padding: 0 100px;
+    }
+
+    @media screen and (max-width: 900px) {
+        .home-section-grid {
+            grid-template-columns: repeat(auto-fit, 100%);
+        }
+    }
+
+    .home-section-grid-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        padding: 50px;
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+        height: 140px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .home-section-grid-item i {
+        margin-bottom: 20px;
+        font-size: 40px;
+    }
+
+    .home-section-grid-item:hover {
+        filter: brightness(1.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+</style>
+
+<%- include('footer') %>

@@ -1,0 +1,149 @@
+<%- include('../header') %>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"></script>
+
+<div class="full-page-wrapper">
+    <div class="full-page" style="padding: 100px; justify-content: center; display: flex;">
+        <div id="editor-wrapper" style="width: 100%;">
+            <h1 style="margin: 0; font-weight: 300; margin-bottom: 20px;">Create a new post</h1>
+
+
+            <div style="display: flex; align-items: end; width: 100%; margin-bottom: 30px;">
+                <div class="dropdown" id="post-group">
+                    <div class="dropdown-content">
+                        <% if (typeof editState !== 'undefined') { %>
+                            <div class="dropdown-item" data-value="<%- editState.group %>">
+                                <%
+                                    for (var i = 0; i < groups.length; i++)
+                                        if (groups[i].id == editState.group)
+                                            var n = (groups[i].name);
+                                %>
+                                <%= n %>
+                            </div>
+                        <% } %>
+
+                        <div class="dropdown-item" data-value="New">New Group</div>
+                        <% for (var i = 0; i < groups.length; i++) { %>
+                            <% if (typeof editState !== 'undefined' && groups[i].id == editState.group) { continue; } %>
+                            <div class="dropdown-item" data-value="<%= groups[i].id %>">
+                                <%= groups[i].name %>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+
+                <div class="styled-placeholder-alt" id="new-group-wrapper" style="margin-top: 0; margin-left: 20px;">
+                    <input type="text" class="styled-placeholder-input" id="new-group" placeholder=" ">
+                    <label for="new-group" class="styled-placeholder-label">New Group Name</label>
+                </div>
+
+                <div class="styled-placeholder-alt" style="margin-top: 0; margin-left: 20px;">
+                    <input type="text" class="styled-placeholder-input" id="post-title" placeholder=" ">
+                    <label for="post-title" class="styled-placeholder-label">Title</label>
+                </div>
+            </div>
+
+            <script>
+                function updateChangeView() {
+                    console.log($('#post-group').attr('data-value'))
+                    if ($('#post-group').attr('data-value') == 'New') {
+                        $('#new-group-wrapper').css('display', 'block');
+                    } else {
+                        $('#new-group-wrapper').css('display', 'none');
+                    }
+                }
+
+                $('#post-group').on('change', updateChangeView);
+            </script>
+        
+
+            <textarea id="editor"></textarea>
+        
+            <div style="margin-top: 20px;" class="flex-row align-center">
+                <% if (typeof editState !== 'undefined') { %>
+                    <button id="create-button" class="button-submit">Save</button>
+                <% } else { %>
+                    <button id="create-button" class="button-submit">Publish</button>
+                <% } %>
+
+                <p style="margin-left: 20px;">Stuck? Check <a href="https://www.markdownguide.org/basic-syntax/">here</a> for help.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script defer>
+var content = `
+## New Post
+
+Type **here** to add content to the post.
+`;
+
+<% if (typeof editState !== 'undefined') { %>
+content = `<%- editState.content.replaceAll('/script', '\\/script') %>`;
+document.getElementById('post-title').value = '<%- editState.title %>';
+document.getElementById('post-group').dataset.value = '<%- editState.group %>';
+<% } %>
+
+
+const easymde = new EasyMDE({
+    element: document.getElementById('editor')
+});
+
+easymde.value(content);
+
+document.getElementById('create-button').addEventListener('click', async () => {
+    var title = document.getElementById('post-title').value;
+    var content = easymde.value();
+    var group = document.getElementById('post-group').dataset.value;
+
+    if (!title || !content || !group) {
+        alert('Please fill out all fields.');
+        return;
+    }
+
+    if (group == "New") {
+        var newGroup = document.getElementById('new-group').value;
+        if (!newGroup) {
+            alert('Please fill out all fields.');
+            return;
+        }
+
+        var newGroupRes = await new Promise((resolve, reject) => {
+            socket.emit('createGroup', newGroup, (res) => {
+                resolve(res);
+            });
+        });
+
+        if (!newGroupRes.success) {
+            alert(newGroupRes.error);
+            return;
+        }
+        
+        console.log(newGroupRes);
+        group = newGroupRes.data.data;
+    } else {
+        group = parseInt(group);
+    }
+    <% if (typeof editState !== 'undefined') { %>
+    socket.emit('editPost', { title, content, group, id: <%- editState.id %> }, (res) => {
+        if (res.success) {
+            window.location.href = '/post/' + res.data;
+        } else {
+            alert(res.error);
+        }
+    });
+    <% } else { %>
+    socket.emit('createPost', { title, content, group }, (res) => {
+        if (res.success) {
+            window.location.href = '/post/' + res.data;
+        } else {
+            alert(res.error);
+        }
+    });
+    <% } %>
+});
+</script>
+
+
+<%- include('../footer') %>

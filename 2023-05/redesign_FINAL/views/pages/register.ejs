@@ -1,0 +1,39 @@
+<%- include('../header') %>
+
+<script src="/js/pages/register.js" defer></script>
+
+<div class="full-page-wrapper" style="margin-top: 50px;">
+    <div class="full-page" style="display: flex;">
+        <div style="padding: 30px; width: 100%;">
+            <h1 style="margin: 0; font-weight: 300;">Register for Ōtākaro Histories</h1>
+            <div id="register-error" style="font-size: 14px; color: red; margin-top: 8px;"></div>
+
+            <div style="margin-top: 20px;">
+                <div class="styled-placeholder">
+                    <input type="text" class="styled-placeholder-input" id="register-email" placeholder=" ">
+                    <label for="register-email" class="styled-placeholder-label">Email</label>
+                </div>
+
+                <div class="styled-placeholder">
+                    <input type="password" class="styled-placeholder-input" id="register-password" placeholder=" ">
+                    <label for="register-password" class="styled-placeholder-label">Password</label>
+                </div>
+
+                <div class="styled-placeholder">
+                    <input type="password" class="styled-placeholder-input" id="register-confirm-password" placeholder=" " onkeydown="if (event.keyCode == 13) document.getElementById('register-button').click()">
+                    <label for="register-password" class="styled-placeholder-label">Confirm Password</label>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <button id="register-button" class="button-submit">Register</button>
+                <a class="button-text" style="margin-left: 10px;" href="/pages/login">Already have an account? Login here</a>
+            </div>
+        </div>
+
+        <div class="colour-box" style="background: linear-gradient(90deg, rgb(255, 255, 255), rgba(116, 131, 247, 0.423), #809aee); min-width: calc(40%); height: 100%;"></div>
+    </div>
+</div>
+
+<%- include('../footer') %>
+ 

@@ -1,0 +1,158 @@
+<%- include('../header') %>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/5.1.0/marked.min.js" integrity="sha512-j5KAPeir0rGl+OSddiUeUtUlG+GK7acI/kNQqrpjSSB1IlDUbj3VnQOyoW3GWpPj7i8CSfb0T+Q4IRHxAPRxCA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.4/purify.min.js" integrity="sha512-Ppv1jKk0X8u28/MsfyW8gWQmfP2HDmCJd03tC4qrFoVZwUdjfkbX14wiBP5akSlM00EP8Kgt1UDZfvdFKLVNmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<link rel="stylesheet" href="/css/pages/posts.css">
+
+<div class="home-text">
+    <span style="font-size: 45px;">Posts</span> <br>
+    Browse all, search, or sort posts
+</div>
+
+<style>
+    .home-text {
+        padding: 80px 50px;
+        background: linear-gradient(70deg, #1e5799, #2989d8, #7db9e8);
+        font-size: 36px;
+        font-weight: 600;
+        color: white;
+        text-align: center;
+        line-height: 60px;
+        margin-bottom: 40px;
+    }
+</style>
+
+<div class="sort-wrapper" style="display: flex; align-items: end; justify-content: center; width: 100%; margin-bottom: 40px;">
+    <div>
+        <div style="margin-bottom: 5px; font-size: 12px; color: grey;">Sort By Group</div>
+        <div class="dropdown" id="sort-dropdown">
+            <div class="dropdown-content">
+                <%
+                    // If 'sort' != 'all', then put the right group first.
+                    if (sort != 'all') {
+                        for (var i = 0; i < groups.length; i++) {
+                            if (groups[i].id == sort) {
+                                var temp = groups[0];
+                                groups[0] = groups[i];
+                                groups[i] = temp;
+                                break;
+                            }
+                        }
+                    } else {
+                %>
+                    <div class="dropdown-item">All</div>
+                <% } %>
+
+                <% for (var i = 0; i < groups.length; i++) { %>
+                    <div class="dropdown-item" data-value="<%= groups[i].id %>">
+                        <%= groups[i].name %>
+                    </div>
+                <% } %>
+
+                <% if (sort != 'all') { %>
+                    <div class="dropdown-item">All</div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <button class="button-submit" style="margin-left: 20px; height: fit-content;" id="sort-btn">
+        Sort
+        <i class="fas fa-sort" style="margin-left: 10px;"></i>
+    </button>
+
+    <div style="display: flex; align-items: center;">
+        <div class="styled-placeholder-alt" id="new-group-wrapper" style="margin-top: 0; margin-left: 20px;">
+            <input type="text" class="styled-placeholder-input" id="search-input" placeholder=" ">
+            <label for="search-input" class="styled-placeholder-label">Search</label>
+        </div>
+    
+        <button class="button-submit" style="margin-left: 20px; height: fit-content;" id="search-btn">
+            Search
+            <i class="fas fa-search" style="margin-left: 10px;"></i>
+        </button>
+    </div>
+
+    <script>
+        document.getElementById('sort-btn').addEventListener('click', function() {
+            var group = document.getElementById('sort-dropdown').dataset.value;
+            group = group == 'All' ? '' : group;
+            window.location.href = '/posts/' + group;
+        });
+
+        document.getElementById('search-btn').addEventListener('click', function() {
+            var search = document.getElementById('search-input').value;
+            var group = document.getElementById('sort-dropdown').dataset.value.toLowerCase();
+            window.location.href = '/posts/' + group + '/' + encodeURIComponent(search);
+        });
+    </script>
+</div>
+
+<% if (posts && posts.length > 0) { %>
+
+<div id="post-content">
+    <% for (var i = 0; i < posts.length; i++) { %>
+        <div class="full-page-wrapper post-listing" id="post-<%= posts[i].id %>">
+            <div class="full-page" style="padding: 30px; cursor: pointer;" onmouseup="location.href='/post/<%= posts[i].id %>'">
+                <div class="post-title">
+                    <div><%= posts[i].title %></div>
+                    <div>
+                        <a href="/edit/<%= posts[i].id %>">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="post-content-wrapper" style="margin-top: 30px;">
+                    <div id="post-content-<%= posts[i].id %>" class="post-content"></div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+<div style="display: flex; justify-content: center; margin: 20px 0;">
+    <a class="create-post-button" href="/create">
+        <i class="fas fa-plus"></i>
+    </a>
+</div>
+
+<style>
+    .create-post-button {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(rgb(97, 231, 97), rgb(0, 255, 51));
+        color: white;
+        font-size: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    
+    .create-post-button:hover {
+        background: linear-gradient(rgb(87, 208, 87), rgb(56, 215, 88));
+    }
+</style>
+<script>
+    var pages = <%- JSON.stringify(posts, null, 2).replaceAll("</script", "<\\/script") %>
+    
+    $('.post-content').each(function() {
+        var id = $(this).attr('id').split('-')[2];
+        var content = pages.find(function(post) {
+            return post.id == id;
+        }).content;
+
+        content = new DOMParser().parseFromString(content, "text/html").documentElement.textContent;
+        $(this).html(DOMPurify.sanitize(marked.parse(content)));
+        $(this).data('content', null);
+    });
+</script>
+
+<% } else { %>
+    <h1 style="font-weight: 300; padding: 100px; padding-top: 20px;">No Posts Found</h1>
+<% } %>
+
+<%- include('../footer') %>
