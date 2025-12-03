@@ -1,0 +1,9 @@
+{
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
+    "files.associations": {
+        "stdio.h": "c",
+        "windows.h": "c",
+        "direct.h": "c"
+    }
+}
