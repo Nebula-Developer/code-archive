@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="tab-container">
+        <div class="tab">Tab 1</div>
+        <div class="tab">Tab 2</div>
+        <div class="tab">Tab 3</div>
+        <div class="tab">Tab 4</div>
+        <div class="tab">Tab 5</div>
+    </div>
+    
+    <style>
+        .tab-container {
+            display: flex;
+        }
+
+        .tab {
+            width: 100px;
+            background-color: #eee;
+            padding: 10px;
+        }
+
+        .tab-removed {
+            transition: transform 0.3s;
+        }
+
+        .tab:not(:last-child) {
+            margin-right: 10px;
+        }
+    </style>
+
+    <script>
+const tabs = document.querySelectorAll('.tab');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tab.classList.add('tab-removed');
+    setTimeout(() => {
+      const removedIndex = Array.from(tabs).indexOf(tab);
+      const tabsWidth = Array.from(tabs).reduce((total, tab) => total + tab.offsetWidth + 10, 0);
+      tabs.forEach((tab, index) => {
+        if (index > removedIndex) {
+          const translateX = tab.offsetWidth + 10;
+          tab.style.transform = `translateX(-${translateX}px)`;
+          tab.classList.add('tab-removed');
+        }
+      });
+      setTimeout(() => {
+        tab.remove();
+        tabs.forEach((tab, index) => {
+          if (index > removedIndex) {
+            tab.style.transform = '';
+            tab.classList.remove('tab-removed');
+          }
+        });
+      }, 300);
+    }, 0);
+  });
+});
+
+
+    </script>
+</body>
+</html>

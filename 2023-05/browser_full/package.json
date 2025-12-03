@@ -1,0 +1,34 @@
+{
+  "name": "browser_full",
+  "productName": "browser_full",
+  "version": "1.0.0",
+  "description": "My Electron application description",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron index.js",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "author": {
+    "name": "NebulaDev",
+    "email": "nebuladev.contact@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "color-name-list": "^10.8.0",
+    "color-namer": "^1.4.0",
+    "color-scheme": "^1.0.1",
+    "electron-squirrel-startup": "^1.0.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.1.1",
+    "@electron-forge/maker-deb": "^6.1.1",
+    "@electron-forge/maker-rpm": "^6.1.1",
+    "@electron-forge/maker-squirrel": "^6.1.1",
+    "@electron-forge/maker-zip": "^6.1.1",
+    "electron": "23.0.0"
+  }
+}
