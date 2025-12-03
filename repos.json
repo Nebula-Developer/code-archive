@@ -559,6 +559,13 @@
       "createdAt": "2025-01-18T10:20:22Z",
       "archivedPath": "2025-01/AI-UI",
       "originalUrl": "https://github.com/Nebula-Developer/AI-UI"
+    },
+    {
+      "name": "Mandelbrot",
+      "description": "Simple Mandelbrot viewer made with Natsu Framework and a bit of maths",
+      "createdAt": "2024-12-19T10:24:51Z",
+      "archivedPath": "2024-12/Mandelbrot",
+      "originalUrl": "https://github.com/Nebula-Developer/Mandelbrot"
     }
   ]
 }
