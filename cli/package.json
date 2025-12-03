@@ -1,0 +1,24 @@
+{
+  "name": "cli",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "^19.2.7"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@types/node": "^24.10.1",
+    "cli-table3": "^0.6.5",
+    "dayjs": "^1.11.19",
+    "ink": "^6.5.1",
+    "octokit": "^5.0.5",
+    "ora": "^9.0.0",
+    "p-limit": "^7.2.0",
+    "picocolors": "^1.1.1",
+    "prompts": "^2.4.2",
+    "react": "^19.2.0",
+    "simple-git": "^3.30.0"
+  }
+}
