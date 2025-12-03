@@ -1,0 +1,114 @@
+v0.0.1:
+    - Added changelog
+    - Created system config class
+    - Added logging system
+    - Added (unstable) GetFrame MethodBase to get the frame of the calling function
+    - Implemented function receiver inside logs (To avoid repetition in func calls)
+    - Bugfix: Renamed certain namespaces to avoid conflicts (NebulaOS.System -> NebulaOS.NSystem)
+    - Note: The main function will be edited later, and should be one of the smallest classes in the project.
+            It will initialize the public variables, and call a startup function.
+    - General cleanup
+
+v0.0.2:
+    - Added discord integration
+    - Added casted file reading (For config loading and saving)
+    - TODO: Add field checker to avoid unset values
+    - Replaced field checker with required fields.
+      This will return NULL, and will not crash the program - although will not supply the missing field.
+    - Added missing summaries (Almost all classes)
+    - Started work on boot
+    - Checked config for unknown values (Will improve later)
+    - Added warning for unknown values
+
+v0.0.3:
+    - Updated boot to use new classes
+    - Compacted boot code
+    - Removed boot logs
+    - Started work on JSON undefined checker (For catching / logging)
+    - Added undefined field/property error logging
+    - Implemented JSON undefined checker
+    - Bugfix: Fixed array children looping in the undefined and unknown checker
+    - General cleanup
+    - Made boot more efficient
+
+v0.0.4:
+    - Added dependency creation
+    - Moved from OSX to win
+    - Put main functions inside System/Deps.cs
+    - Remade boot sequence
+    - Added dependency loading
+    - Added logs during boot
+    - Created LogType.System for messages from the system
+    - Added JSON JObject undefined checker
+    - Updated old summaries
+
+v0.0.5:
+    - Created Storyboards directory (For graphical user interfaces)
+    - Created Graphics directory (For color and print handling)
+    - Added RGB color class
+    - Made safe color handler for RGB
+    - Added RGB escape sequence converter
+    - Added RGB brighten/darken operator
+    - Added gradient graphics test
+    - Created fade method
+    - Created fade in MS method
+    - Added OnFade event
+    - Bugfix: Fixed innacurate percantage calculations for fading
+    - TODO: Create custom terminal for NebulaOS
+    - Bug: Colors do not work on windows command lines (CMD, PS)
+           Please use the VSCode terminal for now. (Will fix later)
+
+v0.0.6:
+    - Cloned Windows Terminal and modified settings to fit NebulaOS
+    - Removed terminal title bar
+    - Bugfix: Fixed color issues
+    - Note: When running NebulaOS, please now use the Windows Terminal.
+            I recommend using F11. Feel free to modify the setting.
+    - Added gradient function
+    - Bugfix: Remade calculations for gradient
+
+v0.0.7:
+    - Started work on effects class
+    - Added easing class
+    - Created easing types such as exponential, linear, ease in, ease out, etc.
+    - Bugfix: Altered time calculation for easing
+    - Note: Tests for the easing can be found in Ease.log. The log file will be removed later.
+    - Added Graphic reader for loading ASCII assets
+    - Implemented graphic test
+    - Added window constructor
+    - Created window theming system (Will be expanded later)
+
+v0.0.8:
+    - Removed ease log
+    - General cleanup
+    - Preparation for release
+    - Added info class for version and readonly information storing
+    - Bugfix: Fixed whileloop crash in root
+    - Added test directory
+    - Create test class (for calling from main function in development)
+    - Note: You can create your own test class for testing NebulaOS features.
+            If it has the true boolean "CallOnBoot", it will be called from the dependency loader.
+            This may change later.
+
+v0.0.9:
+    - Started mouse driver implementation
+    - Started Game class implementation
+    - Implemented delta time
+    - Bugfix: Fixed incorrect delta time calculation (Wrong loop sleeping)
+    - Created function to fit Vector2i to bounds of the window
+    - Boot cleanup
+    - Added Tetris game test
+    - Added game class input system
+    - Changed Tetris theme (test)
+    - Removed autoboot for tetris test.
+    - Note: To use tetris, turn on the boot flag in the testing class.
+            The game will not autoboot.
+
+v0.1.0:
+    - Note: This is the first version of NebulaOS that will be released.
+            Please note that the project is not stable yet.
+    - Created boot menu
+    - Added DrawConfig class containing various ASCII characters and emojis
+    - Renamed dependency functions
+    - Added theme file loader
+    - Listed all dependencies in the dependency loader (may change later)
