@@ -1,0 +1,35 @@
+{
+    "manifest_version": 2,
+    "name": "Learnsharp",
+    "version": "1.0",
+  
+    "description": "Learnsharp Education Extension",
+  
+    "icons": {
+
+    },
+  
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["learnsharp.js"]
+      }
+    ],
+
+    "permissions": [
+      "tabs",
+      "storage",
+      "webRequest",
+      "contextMenus",
+      "cookies",
+      "notifications",
+      "unlimitedStorage",
+      "webNavigation",
+      "clipboardWrite",
+      "clipboardRead",
+      "http://*/*",
+      "https://*/*",
+      "http://localhost:8080/*"
+    ]
+  }
+  
