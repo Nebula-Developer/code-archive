@@ -8,7 +8,7 @@ import color from "picocolors";
 import { generateReadme } from "./generateReadme";
 import { DATA_PATH, ROOT_PATH } from "./paths";
 
-const DELETE_ENABLED = false; // toggle for testing
+const DELETE_ENABLED = true; // toggle for testing
 
 const asyncExec = (cmd: string) => {
   return new Promise<{ stdout: string; stderr: string }>((resolve, reject) => {
