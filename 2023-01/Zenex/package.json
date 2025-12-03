@@ -1,0 +1,39 @@
+{
+  "name": "zenex",
+  "version": "0.1.4",
+  "description": "Simple and blazing fast web framework for Node.js",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE.md",
+    "lib"
+  ],
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "node test/server.js",
+    "dev": "nodemon test/server.js"
+  },
+  "keywords": [
+    "zenex",
+    "framework",
+    "web",
+    "node",
+    "nodejs",
+    "express",
+    "rest",
+    "api",
+    "account"
+  ],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nebula-developer/zenex.git"
+  },
+  "dependencies": {
+    "ws": "^8.12.0"
+  }
+}

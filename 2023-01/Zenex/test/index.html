@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Zenex Test</title>
+</head>
+<body>
+    <h1>Hello from Zenex! - Node versions: {{node}}, running for: {{uptime}}s</h1>
+
+    <script>
+        // Get 'hello' event listener
+        var ws = new WebSocket('ws://localhost:3000');
+        ws.onmessage = function (event) {
+            var json = JSON.parse(event.data);
+            if (json.type == "fileChange") {
+                setTimeout(() => {
+                    location.reload();
+                }, 100);
+            }
+        };
+    </script>
+</body>
+</html>
