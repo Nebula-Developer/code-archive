@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/account.js" defer></script>
+    <title>User Registration and Login</title>
+</head>
+<body>
+    <h1>User Registration and Login</h1>
+
+    <!-- Registration Form -->
+    <h2>Register</h2>
+    <form id="registerForm">
+        <div>
+            <label for="regUsername">Username:</label>
+            <input type="text" id="regUsername" name="username" required value="testUser">
+        </div>
+
+        <div>
+            <label for="regEmail">Email:</label>
+            <input type="email" id="regEmail" name="email" required value="testUser@test.com">
+        </div>
+
+        <div>
+            <label for="regPassword">Password:</label>
+            <input type="password" id="regPassword" name="password" required value="testPassword">
+        </div>
+
+        <button type="button" onclick="registerUser()">Register</button>
+    </form>
+
+    <hr>
+
+    <!-- Login Form -->
+    <h2>Login</h2>
+    <form id="loginForm">
+        <div>
+            <label for="loginEmail">Email:</label>
+            <input type="text" id="loginEmail" name="email" required value="testUser@test.com">
+        </div>
+
+        <div>
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" name="password" required value="testPassword">
+        </div>
+
+        <button type="button" onclick="loginUser()">Login</button>
+        <button type="button" onclick="logoutUser()">Logout</button>
+    </form>
+
+    <hr>
+
+    <!-- Update Form -->
+    <h2>Update</h2>
+    <form id="updateForm">
+        <div>
+            <label for="updateUsername">Username:</label>
+            <input type="text" id="updateUsername" name="username" required>
+        </div>
+
+        <div>
+            <label for="updateEmail">Email:</label>
+            <input type="email" id="updateEmail" name="email" required>
+        </div>
+
+        <div>
+            <label for="updatePassword">Password:</label>
+            <input type="password" id="updatePassword" name="password" required>
+        </div>
+
+        <div>
+            <label for="updateBio">Bio:</label>
+            <input type="text" id="updateBio" name="bio" required>
+        </div>
+        
+        <div>
+            <label for="updateAvatar">Avatar:</label>
+            <input type="text" id="updateAvatar" name="avatar" required>
+        </div>
+
+        <button type="button" onclick="updateUser()">Update</button>
+    </form>
+
+    <hr>
+
+    <h2>Response</h2>
+    <!-- Display area for the responses -->
+    <div id="response" style="white-space: pre;"></div>
+
+    <script>
+        // Function to handle user registration
+        function registerUser() {
+            const formData = new FormData(document.getElementById('registerForm'));
+            console.log(formData)
+            sendRequest('/api/register', formData);
+        }
+
+        // Function to handle user login
+        function loginUser() {
+            const formData = new FormData(document.getElementById('loginForm'));
+            sendRequest('/api/login', formData);
+        }
+
+        // Function to handle user logout
+        function logoutUser() {
+            sendRequest('/api/logout', new FormData());
+        }
+
+        // Function to handle user update
+        function updateUser() {
+            const formData = new FormData(document.getElementById('updateForm'));
+            sendRequest('/api/update', formData);
+        }
+
+        // Function to send a POST request using Fetch API
+        function sendRequest(url, formData) {
+            fetch(`http://localhost:8080${url}`, {
+                method: 'POST',
+                body: JSON.stringify(Object.fromEntries(formData)),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the response in the browser
+                document.getElementById('response').innerText = JSON.stringify(data, null, 2);
+
+                if (data.id)
+                    replaceUpdateInputs(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function replaceUpdateInputs(user) {
+            document.getElementById('updateUsername').value = user.username;
+            document.getElementById('updateEmail').value = user.email;
+            document.getElementById('updatePassword').value = user.password;
+            document.getElementById('updateBio').value = user.bio;
+            document.getElementById('updateAvatar').value = user.avatar;
+        }
+
+        function getUser() {
+            fetch(`http://localhost:8080/api/user`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the response in the browser
+                document.getElementById('response').innerText = JSON.stringify(data, null, 2);
+
+                if (!data.error)
+                    replaceUpdateInputs(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        getUser();
+    </script>
+
+    <style>
+        /* make all the inputs aligned */
+        form {
+            width: fit-content;
+        }
+
+        form div {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        form div input {
+            margin-left: 20px;
+        }
+    </style>
+
+</body>
+</html>
