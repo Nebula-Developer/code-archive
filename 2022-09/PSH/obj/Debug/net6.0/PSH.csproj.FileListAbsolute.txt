@@ -1,0 +1,15 @@
+/Users/nicocook/Documents/PSH/bin/Debug/net6.0/PSH
+/Users/nicocook/Documents/PSH/bin/Debug/net6.0/PSH.deps.json
+/Users/nicocook/Documents/PSH/bin/Debug/net6.0/PSH.runtimeconfig.json
+/Users/nicocook/Documents/PSH/bin/Debug/net6.0/PSH.dll
+/Users/nicocook/Documents/PSH/bin/Debug/net6.0/ref/PSH.dll
+/Users/nicocook/Documents/PSH/bin/Debug/net6.0/PSH.pdb
+/Users/nicocook/Documents/PSH/obj/Debug/net6.0/PSH.csproj.AssemblyReference.cache
+/Users/nicocook/Documents/PSH/obj/Debug/net6.0/PSH.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nicocook/Documents/PSH/obj/Debug/net6.0/PSH.AssemblyInfoInputs.cache
+/Users/nicocook/Documents/PSH/obj/Debug/net6.0/PSH.AssemblyInfo.cs
+/Users/nicocook/Documents/PSH/obj/Debug/net6.0/PSH.csproj.CoreCompileInputs.cache
+/Users/nicocook/Documents/PSH/obj/Debug/net6.0/PSH.dll
+/Users/nicocook/Documents/PSH/obj/Debug/net6.0/ref/PSH.dll
+/Users/nicocook/Documents/PSH/obj/Debug/net6.0/PSH.pdb
+/Users/nicocook/Documents/PSH/obj/Debug/net6.0/PSH.genruntimeconfig.cache
