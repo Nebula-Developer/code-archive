@@ -1,0 +1,201 @@
+﻿using Natsu.Graphics;
+using Natsu.Core;
+using Natsu.Core.Elements;
+using Natsu.Mathematics;
+using Natsu.Extensions;
+using Natsu.Input;
+
+namespace Mania;
+
+public class ListenValue<T> {
+    public T Value = default!;
+    public event Action<T>? DoValueChanged;
+
+    public void SetValue(T value) {
+        if (!EqualityComparer<T>.Default.Equals(Value, value)) {
+            Value = value;
+            DoValueChanged?.Invoke(value);
+        }
+    }
+    
+    public ListenValue() {
+        Value = default!;
+    }
+
+    public ListenValue(T value) {
+        Value = value;
+    }
+}
+
+public struct Hitpoint {
+    /// <summary>
+    /// The time of the hitpoint in seconds.
+    /// </summary>
+    public float Time;
+
+    /// <summary>
+    /// The lane of the hitpoint.
+    /// </summary>
+    public int Lane;
+
+    /// <summary>
+    /// The length of the hitpoint in seconds.
+    /// <br />
+    /// If the length is 0, it is a single hitpoint.
+    /// </summary>
+    public float Length;
+}
+
+public class HitpointElement : Element {
+    public Hitpoint Hitpoint;
+    public Map Map;
+    public float Time => Hitpoint.Time;
+    public int Lane => Hitpoint.Lane;
+    public float Length => Hitpoint.Length;
+    public float MapTime => Map.Time;
+
+    public HitpointElement(Hitpoint hitpoint, Map map) {
+        Hitpoint = hitpoint;
+        Map = map;
+
+        void updateSize() {
+            Size = new(Map.LaneSize.Value, Hitpoint.Length * Map.Scale.Value);
+        }
+
+        Map.Scale.DoValueChanged += (value) => updateSize();
+        Map.LaneSize.DoValueChanged += (value) => updateSize();
+        updateSize();
+
+        IsAntialias = true;
+        FilterQuality = FilterQuality.Medium;
+    }
+
+    protected override void OnUpdate(double delta) {
+        // set position relative to the maps time.
+        Position = new Vector2(
+            Hitpoint.Lane * Map.LaneSize.Value,
+            Parent!.DrawSize.Y - DrawSize.Y - (Hitpoint.Time - MapTime) * Map.Scale.Value
+        );
+    }
+
+    protected override void OnRender(ICanvas canvas) {
+        canvas.DrawRect(new(0, 0, DrawSize.X, DrawSize.Y), Paint);
+        canvas.DrawRect(new(0, DrawSize.Y, DrawSize.X, 20), new() {
+            Color = Colors.Red,
+            IsAntialias = true
+        });
+    }
+}
+
+public class Map {
+    public List<Hitpoint> Hitpoints = new();
+    public float Time;
+
+    public ListenValue<int> Lanes = new(4);
+    public ListenValue<float> Scale = new(100);
+    public ListenValue<float> LaneSize = new(100);
+}
+
+public class Game : Element {
+    public Map Map;
+    public List<HitpointElement> HitpointElements = new();
+    public bool Paused = false;
+    public float TimeScale = 1f;
+
+    public Game(Map map) {
+        Map = map;
+        foreach (Hitpoint hitpoint in map.Hitpoints) {
+            HitpointElement element = new(hitpoint, map);
+            HitpointElements.Add(element);
+            Add(element);
+        }
+
+        RelativeSizeAxes = Axes.Y;
+        void updateSize() {
+            Size = new(map.Lanes.Value * map.LaneSize.Value, 1);
+        }
+
+        map.LaneSize.DoValueChanged += (value) => updateSize();
+        map.Lanes.DoValueChanged += (value) => updateSize();
+        updateSize();
+    }
+
+    protected override void OnUpdate(double delta) {
+        if (!Paused) Map.Time += (float)App.Time.DeltaTime * TimeScale;
+    }
+
+    protected override void OnRender(ICanvas canvas) => 
+        canvas.DrawRect(new(0, 0, DrawSize.X, DrawSize.Y), new() {
+            Color = Colors.Orange
+        });
+}
+
+public class MyApp : Application {
+    private Map _map = null!;
+    private Game _game = null!;
+    protected override void OnLoad() {
+        _map = new Map();
+        _map.Hitpoints.Add(new Hitpoint { Time = 1, Lane = 0, Length = 1 });
+        _map.Hitpoints.Add(new Hitpoint { Time = 1.1f, Lane = 1, Length = 0.9f });
+        _map.Hitpoints.Add(new Hitpoint { Time = 1.2f, Lane = 2, Length = 0.8f });
+        _map.Hitpoints.Add(new Hitpoint { Time = 1.3f, Lane = 3, Length = 0.7f });
+
+        _game = new Game(_map);
+        // _game.Pivot = new(0.5f);
+
+        ScalePreserveContainer container = new(new(1, 600)) {
+            RelativeSizeAxes = Axes.Both,
+            Parent = this,
+            Mode = RatioPreserveMode.Fit,
+            Pivot = new(0.5f)
+        };
+
+        container.AddContent(_game);
+
+        container.ContentWrapper.ChildRelativeSizeAxes = Axes.X;
+        container.ContentWrapper.Size = new(1f, 600);
+        Console.WriteLine(container.ContentWrapper.DrawSize);
+
+        _game.Paused = true;
+        _game.TimeScale = _timeScale;
+
+        _map.Scale.SetValue(300);
+    }
+
+    protected override void OnRender() {
+        Canvas.DrawText("Time: " + _map.Time.ToString("0.00"), new(10, 10), ResourceLoader.DefaultFont, new() {
+            Color = Colors.White,
+            TextSize = 20
+        });
+
+        Canvas.DrawText("Scale: " + _game.TimeScale, new(10, 40), ResourceLoader.DefaultFont, new() {
+            Color = Colors.White,
+            TextSize = 20
+        });
+    }
+
+    private bool _toggle;
+    private float _timeScale = 1f;
+    protected override void OnKeyDown(Key key, KeyMods mods) {
+        if (key == Key.Space)
+            _game.Paused = !_game.Paused;
+
+        if (key == Key.Escape)
+            _map.Time = 0;
+
+        if (key == Key.R) {
+            _game.TimeScale = _toggle ? _timeScale : -_timeScale;
+            _toggle = !_toggle;
+        }
+
+        if (key == Key.Up) {
+            _timeScale += 0.1f;
+            _game.TimeScale = _timeScale;
+        }
+
+        if (key == Key.Down) {
+            _timeScale -= 0.1f;
+            _game.TimeScale = _timeScale;
+        }
+    }
+}
