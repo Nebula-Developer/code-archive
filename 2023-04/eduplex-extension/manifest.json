@@ -1,0 +1,38 @@
+{
+    "$schema": "http://json.schemastore.org/chrome-manifest",
+    "manifest_version": 3,
+    "name": "EduPlex",
+    "version": "0.0.1",
+    "description": "Catalyze your education with EduPlex - a collection of incredible tools to improve your learning online.",
+    "content_scripts": [
+        // {
+        //     "matches": [
+        //         "<all_urls>"
+        //     ],
+        //     "js": [
+        //         "./lib/jquery.js",
+        //         "./lib/socket.io.js",
+        //         "./src/socket/socket.js",
+        //         "./src/socket/socketWrappers.js",
+        //         "content.js"
+        //     ]
+        // },
+        {
+            "matches": [
+                "https://*.educationperfect.com/**",
+                "https://*.instructure.com/**",
+                "https://outlook.office365.com/**",
+                "https://outlook.office.com/**"
+            ],
+            "js": [
+                "./lib/jquery.js",
+                "./lib/socket.io.js",
+                "./src/socket/socket.js",
+                "./src/socket/socketWrappers.js",
+                "content.js",
+
+                "./src/themer/themer.js"
+            ]
+        }
+    ]
+}
