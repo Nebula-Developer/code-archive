@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="main.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="login">
+        <div>
+            <h2>Login</h2>
+            <input type="text" placeholder="Email" id="login-email">
+            <input type="password" placeholder="Password" id="login-password">
+            <button id="login-button">Login</button>
+        </div>
+    
+        <div>
+            <h2>Register</h2>
+            <input type="text" placeholder="Username" id="register-username">
+            <input type="text" placeholder="Email" id="register-email">
+            <input type="password" placeholder="Password" id="register-password">
+            <button id="register-button">Register</button>
+        </div>
+    </div>
+
+    <div id="chat">
+        <div>
+            <h2>Select Chat</h2>
+            <input type="text" placeholder="New Chat Name" id="new-chat-name">
+            <button id="new-chat-button">New Chat</button>
+            <select id="chats"></select>
+        </div>
+
+        <div>
+            <h2>Chat</h2>
+            <input type="text" placeholder="Message" id="chat-message">
+            <div id="messages"></div>
+        </div>
+    </div>
+</body>
+</html>

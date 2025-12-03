@@ -1,0 +1,131 @@
+allResults:
+  get:
+    user:
+      id: 1
+      username: TestUser
+      password: TestPassword
+      email: TestEmail-1693909719555@test.com
+      token: zuzjsrezs4bf82j3f7yr7o
+      created_at: 2023-09-05T10:28:39.555Z
+    chat:
+      id: 1
+      name: TestChat-1693909719555
+      owner:
+        id: 1
+        username: TestUser
+        email: TestEmail-1693909719555@test.com
+        created_at: 2023-09-05T10:28:39.555Z
+      created_at: 2023-09-05T10:28:39.773Z
+    message:
+      id: 1
+      content: TestMessage
+      author:
+        id: 1
+        username: TestUser
+        email: TestEmail-1693909719555@test.com
+        created_at: 2023-09-05T10:28:39.555Z
+      chat:
+        id: 1
+        name: TestChat-1693909719555
+        owner:
+          id: 1
+          username: TestUser
+          email: TestEmail-1693909719555@test.com
+          created_at: 2023-09-05T10:28:39.555Z
+        created_at: 2023-09-05T10:28:39.773Z
+      created_at: 2023-09-05T10:28:39.974Z
+  getAllFrom:
+    user: 1
+    chat: 1
+    message: 0
+  search:
+    user:
+      - id: 2
+        username: TestUserUpdated
+        password: TestPassword
+        email: TestEmail-1693909720196@test.com
+        token: fjsh9e1v3f80xl6s0hu4
+        created_at: 2023-09-05T10:28:40.196Z
+    chat:
+      - id: 2
+        name: TestChatUpdated-1693909721090
+        owner:
+          id: 2
+          username: TestUserUpdated
+          email: TestEmail-1693909720196@test.com
+          created_at: 2023-09-05T10:28:40.196Z
+        created_at: 2023-09-05T10:28:40.402Z
+    message:
+      - id: 2
+        content: TestMessageUpdated
+        author:
+          id: 2
+          username: TestUserUpdated
+          email: TestEmail-1693909720196@test.com
+          created_at: 2023-09-05T10:28:40.196Z
+        chat:
+          id: 2
+          name: TestChatUpdated-1693909721090
+          owner:
+            id: 2
+            username: TestUserUpdated
+            email: TestEmail-1693909720196@test.com
+            created_at: 2023-09-05T10:28:40.196Z
+          created_at: 2023-09-05T10:28:40.402Z
+        created_at: 2023-09-05T10:28:40.679Z
+  update:
+    user:
+      id: 2
+      username: TestUserUpdated
+      password: TestPassword
+      email: TestEmail-1693909720196@test.com
+      token: fjsh9e1v3f80xl6s0hu4
+      created_at: 2023-09-05T10:28:40.196Z
+    chat:
+      id: 2
+      name: TestChatUpdated-1693909721090
+      owner: 2
+      created_at: 2023-09-05T10:28:40.402Z
+    message:
+      id: 2
+      content: TestMessageUpdated
+      author: 2
+      chat: 2
+      created_at: 2023-09-05T10:28:40.679Z
+  del: true
+  safe:
+    user:
+      id: 1
+      username: TestUser
+      email: TestEmail-1693909719555@test.com
+      created_at: 2023-09-05T10:28:39.555Z
+    users:
+      - id: 1
+        username: TestUser
+        email: TestEmail-1693909719555@test.com
+        created_at: 2023-09-05T10:28:39.555Z
+      - id: 2
+        username: TestUserUpdated
+        email: TestEmail-1693909720196@test.com
+        created_at: 2023-09-05T10:28:40.196Z
+    usersFrom:
+      - id: 1
+        username: TestUser
+        email: TestEmail-1693909719555@test.com
+        created_at: 2023-09-05T10:28:39.555Z
+      - id: 2
+        username: TestUserUpdated
+        email: TestEmail-1693909720196@test.com
+        created_at: 2023-09-05T10:28:40.196Z
+    userSearch:
+      - id: 2
+        username: TestUserUpdated
+        email: TestEmail-1693909720196@test.com
+        created_at: 2023-09-05T10:28:40.196Z
+searchResults:
+  users:
+    - TestUserUpdated
+  chats:
+    - TestChatUpdated-1693909721090
+  messages:
+    - TestMessageUpdated

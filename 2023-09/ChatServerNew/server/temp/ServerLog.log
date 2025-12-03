@@ -1,0 +1,937 @@
+[2023-09-02 08:03:38] [INFO]: Listening on *:3000
+[2023-09-02 08:03:38] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 08:03:38] [INFO]: Successfully made tables for database 'test' in 21ms
+[2023-09-02 08:03:38] [INFO]: Successfully ran tests in 53ms
+[2023-09-02 08:04:36] [INFO]: Listening on *:3000
+[2023-09-02 08:04:36] [INFO]: Successfully made tables for database 'main' in 21ms
+[2023-09-02 08:04:36] [INFO]: Successfully made tables for database 'test' in 35ms
+[2023-09-02 08:04:36] [INFO]: Successfully ran tests in 67ms
+[2023-09-02 08:04:43] [INFO]: Listening on *:3000
+[2023-09-02 08:04:43] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 08:04:43] [INFO]: Successfully made tables for database 'test' in 21ms
+[2023-09-02 08:04:43] [INFO]: Successfully ran tests in 60ms
+[2023-09-02 08:04:49] [INFO]: Listening on *:3000
+[2023-09-02 08:04:49] [INFO]: Successfully made tables for database 'main' in 12ms
+[2023-09-02 08:04:49] [INFO]: Successfully made tables for database 'test' in 22ms
+[2023-09-02 08:04:49] [INFO]: Successfully ran tests in 64ms
+[2023-09-02 08:05:46] [INFO]: Listening on *:3000
+[2023-09-02 08:05:46] [INFO]: Successfully made tables for database 'main' in 12ms
+[2023-09-02 08:05:46] [INFO]: Successfully made tables for database 'test' in 19ms
+[2023-09-02 08:05:46] [INFO]: Successfully ran tests in 51ms
+[2023-09-02 08:24:32] [INFO]: Listening on *:3000
+[2023-09-02 08:24:32] [INFO]: Successfully made tables for database 'main' in 16ms
+[2023-09-02 08:24:32] [INFO]: Successfully made tables for database 'test' in 24ms
+[2023-09-02 08:24:32] [INFO]: Successfully ran tests in 55ms
+[2023-09-02 08:28:14] [INFO]: Listening on *:3000
+[2023-09-02 08:28:14] [INFO]: Successfully made tables for database 'main' in 14ms
+[2023-09-02 08:28:14] [INFO]: Successfully made tables for database 'test' in 24ms
+[2023-09-02 08:28:14] [INFO]: Successfully ran tests in 67ms
+[2023-09-02 08:28:16] [INFO]: Listening on *:3000
+[2023-09-02 08:28:16] [INFO]: Successfully made tables for database 'main' in 14ms
+[2023-09-02 08:28:16] [INFO]: Successfully made tables for database 'test' in 24ms
+[2023-09-02 08:28:16] [INFO]: Successfully ran tests in 64ms
+[2023-09-02 08:28:34] [INFO]: Listening on *:3000
+[2023-09-02 08:28:34] [INFO]: Successfully made tables for database 'main' in 12ms
+[2023-09-02 08:28:34] [INFO]: Successfully made tables for database 'test' in 20ms
+[2023-09-02 08:28:34] [INFO]: Successfully ran tests in 53ms
+[2023-09-02 08:29:28] [INFO]: Listening on *:3000
+[2023-09-02 08:29:28] [INFO]: Successfully made tables for database 'main' in 12ms
+[2023-09-02 08:29:28] [INFO]: Successfully made tables for database 'test' in 21ms
+[2023-09-02 08:29:28] [INFO]: Successfully ran tests in 52ms
+[2023-09-02 08:29:32] [INFO]: Listening on *:3000
+[2023-09-02 08:29:32] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 08:29:32] [INFO]: Successfully made tables for database 'test' in 20ms
+[2023-09-02 08:29:32] [INFO]: Successfully ran tests in 49ms
+[2023-09-02 08:29:51] [INFO]: Listening on *:3000
+[2023-09-02 08:29:51] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 08:29:51] [INFO]: Successfully made tables for database 'test' in 23ms
+[2023-09-02 08:29:51] [INFO]: Successfully ran tests in 54ms
+[2023-09-02 08:30:05] [INFO]: Listening on *:3000
+[2023-09-02 08:30:05] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 08:30:05] [INFO]: Successfully made tables for database 'test' in 19ms
+[2023-09-02 08:30:05] [INFO]: Successfully ran tests in 48ms
+[2023-09-02 08:30:21] [INFO]: Listening on *:3000
+[2023-09-02 08:30:21] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 08:30:21] [INFO]: Successfully made tables for database 'test' in 19ms
+[2023-09-02 08:30:21] [INFO]: Successfully ran tests in 54ms
+[2023-09-02 08:30:37] [INFO]: Listening on *:3000
+[2023-09-02 08:30:37] [INFO]: Successfully made tables for database 'main' in 17ms
+[2023-09-02 08:30:37] [INFO]: Successfully made tables for database 'test' in 33ms
+[2023-09-02 08:30:37] [INFO]: Successfully ran tests in 73ms
+[2023-09-02 08:30:51] [INFO]: Listening on *:3000
+[2023-09-02 08:30:51] [INFO]: Successfully made tables for database 'main' in 13ms
+[2023-09-02 08:30:51] [INFO]: Successfully made tables for database 'test' in 22ms
+[2023-09-02 08:30:51] [INFO]: Successfully ran tests in 76ms
+[2023-09-02 08:30:59] [INFO]: Listening on *:3000
+[2023-09-02 08:30:59] [INFO]: Successfully made tables for database 'main' in 13ms
+[2023-09-02 08:30:59] [INFO]: Successfully made tables for database 'test' in 22ms
+[2023-09-02 08:30:59] [INFO]: Successfully ran tests in 59ms
+[2023-09-02 08:31:14] [INFO]: Listening on *:3000
+[2023-09-02 08:31:14] [INFO]: Successfully made tables for database 'main' in 21ms
+[2023-09-02 08:31:14] [INFO]: Successfully made tables for database 'test' in 35ms
+[2023-09-02 08:31:15] [INFO]: Successfully ran tests in 102ms
+[2023-09-02 08:31:23] [INFO]: Listening on *:3000
+[2023-09-02 08:31:23] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 08:31:23] [INFO]: Successfully made tables for database 'test' in 20ms
+[2023-09-02 08:31:23] [INFO]: Successfully ran tests in 54ms
+[2023-09-02 08:31:36] [INFO]: Listening on *:3000
+[2023-09-02 08:31:36] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 08:31:36] [INFO]: Successfully made tables for database 'test' in 19ms
+[2023-09-02 08:31:36] [INFO]: Successfully ran tests in 52ms
+[2023-09-02 08:32:17] [INFO]: Listening on *:3000
+[2023-09-02 08:32:17] [INFO]: Successfully made tables for database 'main' in 9ms
+[2023-09-02 08:32:17] [INFO]: Successfully made tables for database 'test' in 18ms
+[2023-09-02 08:32:17] [INFO]: Successfully ran tests in 48ms
+[2023-09-02 08:32:26] [INFO]: Listening on *:3000
+[2023-09-02 08:32:26] [INFO]: Successfully made tables for database 'main' in 12ms
+[2023-09-02 08:32:26] [INFO]: Successfully made tables for database 'test' in 21ms
+[2023-09-02 08:32:26] [INFO]: Successfully ran tests in 54ms
+[2023-09-02 08:32:37] [INFO]: Listening on *:3000
+[2023-09-02 08:32:37] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 08:32:37] [INFO]: Successfully made tables for database 'test' in 18ms
+[2023-09-02 08:32:37] [INFO]: Successfully ran tests in 47ms
+[2023-09-02 08:32:42] [INFO]: Listening on *:3000
+[2023-09-02 08:32:42] [INFO]: Successfully made tables for database 'main' in 20ms
+[2023-09-02 08:32:42] [INFO]: Successfully made tables for database 'test' in 40ms
+[2023-09-02 08:32:42] [INFO]: Successfully ran tests in 81ms
+[2023-09-02 08:33:46] [INFO]: Listening on *:3000
+[2023-09-02 08:33:46] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 08:33:46] [INFO]: Successfully made tables for database 'test' in 20ms
+[2023-09-02 08:33:46] [INFO]: Successfully ran tests in 50ms
+[2023-09-02 08:33:54] [INFO]: Listening on *:3000
+[2023-09-02 08:33:54] [INFO]: Successfully made tables for database 'main' in 9ms
+[2023-09-02 08:33:54] [INFO]: Successfully made tables for database 'test' in 19ms
+[2023-09-02 08:33:54] [INFO]: Successfully ran tests in 48ms
+[2023-09-02 08:33:58] [INFO]: Listening on *:3000
+[2023-09-02 08:33:58] [INFO]: Successfully made tables for database 'main' in 15ms
+[2023-09-02 08:33:58] [INFO]: Successfully made tables for database 'test' in 19ms
+[2023-09-02 08:33:58] [INFO]: Successfully ran tests in 49ms
+[2023-09-02 08:36:08] [INFO]: Listening on *:3000
+[2023-09-02 08:36:08] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 08:36:08] [INFO]: Successfully made tables for database 'test' in 18ms
+[2023-09-02 08:36:08] [INFO]: Successfully ran tests in 50ms
+[2023-09-02 08:36:12] [INFO]: Listening on *:3000
+[2023-09-02 08:36:12] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 08:36:12] [INFO]: Successfully made tables for database 'test' in 18ms
+[2023-09-02 08:36:12] [INFO]: Successfully ran tests in 48ms
+[2023-09-02 08:36:28] [INFO]: Listening on *:3000
+[2023-09-02 08:36:28] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 08:36:28] [INFO]: Successfully made tables for database 'test' in 17ms
+[2023-09-02 08:36:28] [INFO]: Successfully ran tests in 49ms
+[2023-09-02 08:36:48] [INFO]: Listening on *:3000
+[2023-09-02 08:36:48] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 08:36:48] [INFO]: Successfully made tables for database 'test' in 20ms
+[2023-09-02 08:36:48] [INFO]: Successfully ran tests in 58ms
+[2023-09-02 08:37:06] [INFO]: Listening on *:3000
+[2023-09-02 08:37:06] [INFO]: Successfully made tables for database 'main' in 15ms
+[2023-09-02 08:37:06] [INFO]: Successfully made tables for database 'test' in 27ms
+[2023-09-02 08:37:06] [INFO]: Listening on *:3000
+[2023-09-02 08:37:06] [INFO]: Successfully made tables for database 'main' in 20ms
+[2023-09-02 08:37:06] [INFO]: Successfully made tables for database 'test' in 37ms
+[2023-09-02 08:37:06] [INFO]: Successfully ran tests in 89ms
+[2023-09-02 08:37:17] [INFO]: Listening on *:3000
+[2023-09-02 08:37:17] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 08:37:17] [INFO]: Successfully made tables for database 'test' in 17ms
+[2023-09-02 08:37:17] [INFO]: Successfully ran tests in 47ms
+[2023-09-02 08:37:34] [INFO]: Listening on *:3000
+[2023-09-02 08:37:34] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 08:37:34] [INFO]: Successfully made tables for database 'test' in 18ms
+[2023-09-02 08:37:34] [INFO]: Successfully ran tests in 47ms
+[2023-09-02 08:37:55] [INFO]: Listening on *:3000
+[2023-09-02 08:37:55] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 08:37:55] [INFO]: Successfully made tables for database 'test' in 18ms
+[2023-09-02 08:37:55] [INFO]: Successfully ran tests in 53ms
+[2023-09-02 08:37:59] [INFO]: Listening on *:3000
+[2023-09-02 08:37:59] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 08:37:59] [INFO]: Successfully made tables for database 'test' in 20ms
+[2023-09-02 08:37:59] [INFO]: Successfully ran tests in 79ms
+[2023-09-02 08:40:23] [INFO]: Listening on *:3000
+[2023-09-02 08:40:23] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 08:40:23] [INFO]: Successfully made tables for database 'test' in 18ms
+[2023-09-02 08:40:23] [INFO]: Successfully ran tests in 49ms
+[2023-09-02 08:40:49] [INFO]: Listening on *:3000
+[2023-09-02 08:40:49] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 08:40:49] [INFO]: Successfully made tables for database 'test' in 19ms
+[2023-09-02 08:40:49] [INFO]: Successfully ran tests in 55ms
+[2023-09-02 08:41:30] [INFO]: Listening on *:3000
+[2023-09-02 08:41:30] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 08:41:30] [INFO]: Successfully made tables for database 'test' in 19ms
+[2023-09-02 08:41:30] [INFO]: Successfully ran tests in 48ms
+[2023-09-02 08:44:47] [INFO]: Listening on *:3000
+[2023-09-02 08:44:47] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 08:44:47] [INFO]: Successfully made tables for database 'test' in 19ms
+[2023-09-02 08:44:47] [INFO]: Successfully ran tests in 53ms
+[2023-09-02 08:45:54] [INFO]: Listening on *:3000
+[2023-09-02 08:45:54] [INFO]: Successfully made tables for database 'main' in 12ms
+[2023-09-02 08:45:54] [INFO]: Successfully made tables for database 'test' in 21ms
+[2023-09-02 08:45:54] [INFO]: Successfully ran tests in 55ms
+[2023-09-02 08:58:44] [INFO]: Listening on *:3000
+[2023-09-02 08:58:44] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 08:58:44] [INFO]: Successfully made tables for database 'test' in 17ms
+[2023-09-02 08:58:44] [INFO]: Successfully ran tests in 47ms
+[2023-09-02 09:00:35] [INFO]: Listening on *:3000
+[2023-09-02 09:00:35] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 09:00:35] [INFO]: Successfully made tables for database 'test' in 18ms
+[2023-09-02 09:00:35] [INFO]: Successfully ran tests in 49ms
+[2023-09-02 09:00:39] [INFO]: Listening on *:3000
+[2023-09-02 09:00:39] [INFO]: Successfully made tables for database 'main' in 12ms
+[2023-09-02 09:00:39] [INFO]: Successfully made tables for database 'test' in 21ms
+[2023-09-02 09:00:39] [INFO]: Successfully ran tests in 61ms
+[2023-09-02 09:00:42] [INFO]: Listening on *:3000
+[2023-09-02 09:00:42] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 09:00:42] [INFO]: Successfully made tables for database 'test' in 19ms
+[2023-09-02 09:00:42] [INFO]: Successfully ran tests in 48ms
+[2023-09-02 09:01:16] [INFO]: Listening on *:3000
+[2023-09-02 09:01:16] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 09:01:16] [INFO]: Successfully made tables for database 'test' in 19ms
+[2023-09-02 09:01:16] [INFO]: Successfully ran tests in 49ms
+[2023-09-02 09:01:28] [INFO]: Listening on *:3000
+[2023-09-02 09:01:28] [INFO]: Successfully made tables for database 'main' in 9ms
+[2023-09-02 09:01:28] [INFO]: Successfully made tables for database 'test' in 18ms
+[2023-09-02 09:01:28] [INFO]: Successfully ran tests in 67ms
+[2023-09-02 09:01:28] [INFO]: Listening on *:3000
+[2023-09-02 09:01:28] [INFO]: Successfully made tables for database 'main' in 12ms
+[2023-09-02 09:01:28] [INFO]: Successfully made tables for database 'test' in 22ms
+[2023-09-02 09:01:28] [INFO]: Successfully ran tests in 57ms
+[2023-09-02 09:01:41] [INFO]: Listening on *:3000
+[2023-09-02 09:01:41] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 09:01:41] [INFO]: Successfully made tables for database 'test' in 16ms
+[2023-09-02 09:01:41] [INFO]: Successfully ran tests in 45ms
+[2023-09-02 09:02:34] [INFO]: Listening on *:3000
+[2023-09-02 09:02:34] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 09:02:34] [INFO]: Successfully made tables for database 'test' in 19ms
+[2023-09-02 09:02:36] [INFO]: Listening on *:3000
+[2023-09-02 09:02:36] [INFO]: Successfully made tables for database 'main' in 29ms
+[2023-09-02 09:02:36] [INFO]: Successfully made tables for database 'test' in 56ms
+[2023-09-02 09:03:51] [INFO]: Listening on *:3000
+[2023-09-02 09:03:51] [INFO]: Successfully made tables for database 'main' in 13ms
+[2023-09-02 09:03:51] [INFO]: Successfully made tables for database 'test' in 22ms
+[2023-09-02 09:04:11] [INFO]: Listening on *:3000
+[2023-09-02 09:04:11] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 09:04:11] [INFO]: Successfully made tables for database 'test' in 35ms
+[2023-09-02 09:04:16] [INFO]: Listening on *:3000
+[2023-09-02 09:04:16] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 09:04:16] [INFO]: Successfully made tables for database 'test' in 21ms
+[2023-09-02 09:04:47] [INFO]: Listening on *:3000
+[2023-09-02 09:04:47] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 09:04:47] [INFO]: Successfully made tables for database 'test' in 20ms
+[2023-09-02 09:04:47] [INFO]: Error running tests: handleMessages is not defined
+[2023-09-02 09:04:53] [INFO]: Listening on *:3000
+[2023-09-02 09:04:53] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 09:04:53] [INFO]: Successfully made tables for database 'test' in 21ms
+[2023-09-02 09:04:53] [INFO]: Error running tests: handleMessages is not defined
+[2023-09-02 09:05:12] [INFO]: Listening on *:3000
+[2023-09-02 09:05:12] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 09:05:12] [INFO]: Successfully made tables for database 'test' in 21ms
+[2023-09-02 09:05:12] [INFO]: Error running tests: handleMessages is not defined
+[2023-09-02 09:05:26] [INFO]: Listening on *:3000
+[2023-09-02 09:05:26] [INFO]: Successfully made tables for database 'main' in 12ms
+[2023-09-02 09:05:26] [INFO]: Successfully made tables for database 'test' in 23ms
+[2023-09-02 09:05:26] [INFO]: Error running tests: handleMessages is not defined
+[2023-09-02 09:05:30] [INFO]: Listening on *:3000
+[2023-09-02 09:05:30] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 09:05:30] [INFO]: Successfully made tables for database 'test' in 18ms
+[2023-09-02 09:05:30] [INFO]: Error running tests: handleMessages is not defined
+[2023-09-02 09:05:49] [INFO]: Listening on *:3000
+[2023-09-02 09:05:49] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 09:05:49] [INFO]: Successfully made tables for database 'test' in 19ms
+[2023-09-02 09:05:49] [INFO]: Error running tests: handleMessages is not defined
+[2023-09-02 09:05:54] [INFO]: Listening on *:3000
+[2023-09-02 09:05:54] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 09:05:54] [INFO]: Successfully made tables for database 'test' in 17ms
+[2023-09-02 09:05:54] [INFO]: Error running tests: handleMessages is not defined
+[2023-09-02 09:08:01] [INFO]: Listening on *:3000
+[2023-09-02 09:08:01] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 09:08:01] [INFO]: Successfully made tables for database 'test' in 16ms
+[2023-09-02 09:08:01] [INFO]: Error running tests: handleMessages is not defined
+[2023-09-02 09:08:27] [INFO]: Listening on *:3000
+[2023-09-02 09:08:27] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 09:08:27] [INFO]: Successfully made tables for database 'test' in 17ms
+[2023-09-02 09:08:27] [INFO]: Successfully ran tests in 47ms
+[2023-09-02 09:09:06] [INFO]: Listening on *:3000
+[2023-09-02 09:09:06] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 09:09:06] [INFO]: Successfully made tables for database 'test' in 20ms
+[2023-09-02 09:09:06] [INFO]: Successfully ran tests in 54ms
+[2023-09-02 09:09:46] [INFO]: Listening on *:3000
+[2023-09-02 09:09:46] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 09:09:46] [INFO]: Successfully made tables for database 'test' in 18ms
+[2023-09-02 09:09:46] [INFO]: Successfully ran tests in 51ms
+[2023-09-02 09:10:06] [INFO]: Listening on *:3000
+[2023-09-02 09:10:06] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 09:10:06] [INFO]: Successfully made tables for database 'test' in 21ms
+[2023-09-02 09:10:06] [INFO]: Successfully ran tests in 55ms
+[2023-09-02 09:11:35] [INFO]: Listening on *:3000
+[2023-09-02 09:11:35] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 09:11:35] [INFO]: Successfully made tables for database 'test' in 18ms
+[2023-09-02 09:11:35] [INFO]: Successfully ran tests in 52ms
+[2023-09-02 09:11:49] [INFO]: Listening on *:3000
+[2023-09-02 09:11:49] [INFO]: Successfully made tables for database 'main' in 12ms
+[2023-09-02 09:11:49] [INFO]: Successfully made tables for database 'test' in 22ms
+[2023-09-02 09:11:49] [INFO]: Successfully ran tests in 169ms
+[2023-09-02 09:11:59] [INFO]: Listening on *:3000
+[2023-09-02 09:11:59] [INFO]: Successfully made tables for database 'main' in 12ms
+[2023-09-02 09:11:59] [INFO]: Successfully made tables for database 'test' in 20ms
+[2023-09-02 09:11:59] [INFO]: Successfully ran tests in 53ms
+[2023-09-02 09:12:42] [INFO]: Listening on *:3000
+[2023-09-02 09:12:42] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 09:12:42] [INFO]: Successfully made tables for database 'test' in 18ms
+[2023-09-02 09:12:42] [INFO]: Successfully ran tests in 50ms
+[2023-09-02 09:13:10] [INFO]: Listening on *:3000
+[2023-09-02 09:13:10] [INFO]: Successfully made tables for database 'main' in 10ms
+[2023-09-02 09:13:10] [INFO]: Successfully made tables for database 'test' in 19ms
+[2023-09-02 09:13:10] [INFO]: Successfully ran tests in 51ms
+[2023-09-02 09:13:24] [INFO]: Listening on *:3000
+[2023-09-02 09:13:24] [INFO]: Successfully made tables for database 'main' in 11ms
+[2023-09-02 09:13:24] [INFO]: Successfully made tables for database 'test' in 19ms
+[2023-09-02 09:13:24] [INFO]: Successfully ran tests in 53ms
+[32m[2023-09-02 09:13:26] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:13:26] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:13:26] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:13:26] [INFO]: Successfully ran tests in 53ms[39m
+[32m[2023-09-02 09:13:40] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:13:40] [INFO]: Successfully made tables for database 'main' in 14ms[39m
+[32m[2023-09-02 09:13:40] [INFO]: Successfully made tables for database 'test' in 24ms[39m
+[32m[2023-09-02 09:13:40] [INFO]: Successfully ran tests in 89ms[39m
+[32m[2023-09-02 09:13:44] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:13:44] [INFO]: Successfully made tables for database 'main' in 12ms[39m
+[32m[2023-09-02 09:13:44] [INFO]: Successfully made tables for database 'test' in 23ms[39m
+[32m[2023-09-02 09:13:44] [INFO]: Successfully ran tests in 75ms[39m
+[32m[2023-09-02 09:13:51] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:13:51] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:13:51] [INFO]: Successfully made tables for database 'test' in 30ms[39m
+[32m[2023-09-02 09:13:51] [INFO]: Successfully ran tests in 82ms[39m
+[32m[2023-09-02 09:13:56] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:13:56] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:13:56] [INFO]: Successfully made tables for database 'test' in 26ms[39m
+[32m[2023-09-02 09:13:56] [INFO]: Successfully ran tests in 69ms[39m
+[32m[2023-09-02 09:14:00] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:14:00] [INFO]: Successfully made tables for database 'main' in 19ms[39m
+[32m[2023-09-02 09:14:00] [INFO]: Successfully made tables for database 'test' in 29ms[39m
+[32m[2023-09-02 09:14:00] [INFO]: Successfully ran tests in 72ms[39m
+[32m[2023-09-02 09:15:50] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:15:50] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-02 09:15:50] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 09:15:50] [INFO]: Successfully ran tests in 49ms[39m
+[32m[2023-09-02 09:16:27] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:16:27] [INFO]: Successfully made tables for database 'main' in 12ms[39m
+[32m[2023-09-02 09:16:27] [INFO]: Successfully made tables for database 'test' in 27ms[39m
+[32m[2023-09-02 09:16:27] [INFO]: Successfully ran tests in 77ms[39m
+[32m[2023-09-02 09:17:21] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:17:21] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:17:21] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:17:21] [INFO]: Successfully ran tests in 48ms[39m
+[32m[2023-09-02 09:20:32] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:20:32] [INFO]: Successfully made tables for database 'main' in 16ms[39m
+[32m[2023-09-02 09:20:33] [INFO]: Successfully made tables for database 'test' in 24ms[39m
+[32m[2023-09-02 09:20:33] [INFO]: Successfully ran tests in 61ms[39m
+[32m[2023-09-02 09:20:50] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:20:50] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:20:50] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 09:20:50] [INFO]: Successfully ran tests in 55ms[39m
+[32m[2023-09-02 09:21:17] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:21:17] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:21:17] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:21:17] [INFO]: Successfully ran tests in 49ms[39m
+[32m[2023-09-02 09:21:31] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:21:31] [INFO]: Successfully made tables for database 'main' in 13ms[39m
+[32m[2023-09-02 09:21:31] [INFO]: Successfully made tables for database 'test' in 26ms[39m
+[32m[2023-09-02 09:21:31] [INFO]: Successfully ran tests in 74ms[39m
+[32m[2023-09-02 09:21:45] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:21:45] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:21:45] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 09:21:45] [INFO]: Successfully ran tests in 48ms[39m
+[32m[2023-09-02 09:21:50] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:21:50] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:21:50] [INFO]: Successfully made tables for database 'test' in 20ms[39m
+[32m[2023-09-02 09:21:50] [INFO]: Successfully ran tests in 53ms[39m
+[32m[2023-09-02 09:21:53] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:21:53] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:21:53] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 09:21:53] [INFO]: Successfully ran tests in 51ms[39m
+[32m[2023-09-02 09:25:36] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:25:36] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:25:36] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:25:36] [INFO]: Successfully ran tests in 51ms[39m
+[32m[2023-09-02 09:33:06] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:33:06] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:33:06] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:33:06] [INFO]: Successfully ran tests in 53ms[39m
+[32m[2023-09-02 09:38:33] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:38:33] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:38:33] [INFO]: Successfully made tables for database 'test' in 17ms[39m
+[32m[2023-09-02 09:38:33] [INFO]: Successfully ran tests in 48ms[39m
+[32m[2023-09-02 09:38:37] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:38:37] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:38:37] [INFO]: Successfully made tables for database 'test' in 20ms[39m
+[32m[2023-09-02 09:38:37] [INFO]: Successfully ran tests in 55ms[39m
+[32m[2023-09-02 09:38:45] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:38:45] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:38:45] [INFO]: Successfully made tables for database 'test' in 20ms[39m
+[32m[2023-09-02 09:38:45] [INFO]: Successfully ran tests in 51ms[39m
+[32m[2023-09-02 09:38:48] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:38:48] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:38:48] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 09:38:48] [INFO]: Successfully ran tests in 49ms[39m
+[32m[2023-09-02 09:38:50] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:38:50] [INFO]: Successfully made tables for database 'main' in 12ms[39m
+[32m[2023-09-02 09:38:50] [INFO]: Successfully made tables for database 'test' in 20ms[39m
+[32m[2023-09-02 09:38:50] [INFO]: Successfully ran tests in 58ms[39m
+[32m[2023-09-02 09:39:06] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:39:06] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:39:06] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:39:06] [INFO]: Successfully ran tests in 50ms[39m
+[32m[2023-09-02 09:39:21] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:39:21] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:39:21] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 09:39:21] [INFO]: Successfully ran tests in 49ms[39m
+[32m[2023-09-02 09:39:30] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:39:30] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:39:30] [INFO]: Successfully made tables for database 'test' in 17ms[39m
+[32m[2023-09-02 09:39:30] [INFO]: Successfully ran tests in 48ms[39m
+[32m[2023-09-02 09:39:46] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:39:46] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:39:46] [INFO]: Successfully made tables for database 'test' in 17ms[39m
+[32m[2023-09-02 09:39:47] [INFO]: Successfully ran tests in 52ms[39m
+[32m[2023-09-02 09:40:01] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:40:01] [INFO]: Successfully made tables for database 'main' in 16ms[39m
+[32m[2023-09-02 09:40:01] [INFO]: Successfully made tables for database 'test' in 34ms[39m
+[32m[2023-09-02 09:40:01] [INFO]: Successfully ran tests in 90ms[39m
+[32m[2023-09-02 09:43:20] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:43:20] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:43:20] [INFO]: Successfully made tables for database 'test' in 20ms[39m
+[32m[2023-09-02 09:43:20] [INFO]: Error running tests: db.getMessagesFrom is not a function[39m
+[32m[2023-09-02 09:43:46] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:43:46] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:43:46] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:43:46] [INFO]: Error running tests: this.getAllDataFromWhere is not a function[39m
+[32m[2023-09-02 09:44:26] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:44:26] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:44:26] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 09:44:26] [INFO]: Error running tests: this.getAllDataFromWhere is not a function[39m
+[32m[2023-09-02 09:44:36] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:44:36] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:44:36] [INFO]: Successfully made tables for database 'test' in 17ms[39m
+[32m[2023-09-02 09:44:36] [INFO]: Error running tests: this.getAllDataFromWhere is not a function[39m
+[32m[2023-09-02 09:44:48] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:44:48] [INFO]: Successfully made tables for database 'main' in 13ms[39m
+[32m[2023-09-02 09:44:48] [INFO]: Successfully made tables for database 'test' in 20ms[39m
+[32m[2023-09-02 09:44:48] [INFO]: Successfully ran tests in 60ms[39m
+[32m[2023-09-02 09:45:29] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:45:29] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:45:29] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:45:29] [INFO]: Successfully ran tests in 54ms[39m
+[32m[2023-09-02 09:45:48] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:45:48] [INFO]: Successfully made tables for database 'main' in 12ms[39m
+[32m[2023-09-02 09:45:48] [INFO]: Successfully made tables for database 'test' in 20ms[39m
+[32m[2023-09-02 09:45:48] [INFO]: Successfully ran tests in 54ms[39m
+[32m[2023-09-02 09:46:10] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:46:10] [INFO]: Successfully made tables for database 'main' in 12ms[39m
+[32m[2023-09-02 09:46:10] [INFO]: Successfully made tables for database 'test' in 22ms[39m
+[32m[2023-09-02 09:46:10] [INFO]: Successfully ran tests in 75ms[39m
+[32m[2023-09-02 09:46:14] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:46:14] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:46:14] [INFO]: Successfully made tables for database 'test' in 16ms[39m
+[32m[2023-09-02 09:46:14] [INFO]: Successfully ran tests in 54ms[39m
+[32m[2023-09-02 09:46:20] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:46:20] [INFO]: Successfully made tables for database 'main' in 13ms[39m
+[32m[2023-09-02 09:46:20] [INFO]: Successfully made tables for database 'test' in 23ms[39m
+[32m[2023-09-02 09:46:20] [INFO]: Successfully ran tests in 69ms[39m
+[32m[2023-09-02 09:46:42] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:46:42] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:46:42] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:46:42] [INFO]: Successfully ran tests in 50ms[39m
+[32m[2023-09-02 09:47:21] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:47:21] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:47:21] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 09:47:21] [INFO]: Successfully ran tests in 50ms[39m
+[32m[2023-09-02 09:47:41] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:47:41] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:47:41] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 09:47:41] [INFO]: Successfully ran tests in 55ms[39m
+[32m[2023-09-02 09:47:59] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:47:59] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:47:59] [INFO]: Successfully made tables for database 'test' in 22ms[39m
+[32m[2023-09-02 09:47:59] [INFO]: Successfully ran tests in 67ms[39m
+[32m[2023-09-02 09:48:11] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:48:11] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:48:11] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:48:11] [INFO]: Successfully ran tests in 60ms[39m
+[32m[2023-09-02 09:48:31] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:48:31] [INFO]: Successfully made tables for database 'main' in 14ms[39m
+[32m[2023-09-02 09:48:31] [INFO]: Successfully made tables for database 'test' in 23ms[39m
+[32m[2023-09-02 09:48:31] [INFO]: Successfully ran tests in 65ms[39m
+[32m[2023-09-02 09:48:42] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:48:42] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:48:42] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:48:42] [INFO]: Successfully ran tests in 56ms[39m
+[32m[2023-09-02 09:48:51] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:48:51] [INFO]: Successfully made tables for database 'main' in 39ms[39m
+[32m[2023-09-02 09:48:51] [INFO]: Successfully made tables for database 'test' in 62ms[39m
+[32m[2023-09-02 09:48:51] [INFO]: Successfully ran tests in 136ms[39m
+[32m[2023-09-02 09:49:04] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:49:04] [INFO]: Successfully made tables for database 'main' in 12ms[39m
+[32m[2023-09-02 09:49:04] [INFO]: Successfully made tables for database 'test' in 24ms[39m
+[32m[2023-09-02 09:49:04] [INFO]: Successfully ran tests in 71ms[39m
+[32m[2023-09-02 09:49:13] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:49:13] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:49:13] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 09:49:13] [INFO]: Successfully ran tests in 49ms[39m
+[32m[2023-09-02 09:49:18] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:49:18] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:49:18] [INFO]: Successfully made tables for database 'test' in 17ms[39m
+[32m[2023-09-02 09:49:18] [INFO]: Successfully ran tests in 50ms[39m
+[32m[2023-09-02 09:49:43] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:49:43] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-02 09:49:43] [INFO]: Successfully made tables for database 'test' in 17ms[39m
+[32m[2023-09-02 09:49:43] [INFO]: Successfully ran tests in 53ms[39m
+[32m[2023-09-02 09:49:48] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:49:48] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:49:48] [INFO]: Successfully made tables for database 'test' in 23ms[39m
+[32m[2023-09-02 09:49:48] [INFO]: Successfully ran tests in 118ms[39m
+[32m[2023-09-02 09:50:16] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:50:16] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:50:16] [INFO]: Successfully made tables for database 'test' in 20ms[39m
+[32m[2023-09-02 09:50:16] [INFO]: Successfully ran tests in 65ms[39m
+[32m[2023-09-02 09:50:44] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:50:44] [INFO]: Successfully made tables for database 'main' in 12ms[39m
+[32m[2023-09-02 09:50:44] [INFO]: Successfully made tables for database 'test' in 23ms[39m
+[32m[2023-09-02 09:50:44] [INFO]: Error running tests: SQLITE_ERROR: near "-": syntax error[39m
+[32m[2023-09-02 09:50:45] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:50:45] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:50:45] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:50:45] [INFO]: Error running tests: SQLITE_ERROR: near "-": syntax error[39m
+[32m[2023-09-02 09:50:53] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:50:53] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:50:53] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:50:53] [INFO]: Error running tests: SQLITE_ERROR: near "-": syntax error[39m
+[32m[2023-09-02 09:51:27] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:51:27] [INFO]: Successfully made tables for database 'main' in 12ms[39m
+[32m[2023-09-02 09:51:27] [INFO]: Successfully made tables for database 'test' in 21ms[39m
+[32m[2023-09-02 09:51:27] [INFO]: Successfully ran tests in 61ms[39m
+[32m[2023-09-02 09:52:28] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:52:28] [INFO]: Successfully made tables for database 'main' in 13ms[39m
+[32m[2023-09-02 09:52:28] [INFO]: Successfully made tables for database 'test' in 25ms[39m
+[32m[2023-09-02 09:52:28] [INFO]: Successfully ran tests in 69ms[39m
+[32m[2023-09-02 09:52:37] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:52:37] [INFO]: Successfully made tables for database 'main' in 13ms[39m
+[32m[2023-09-02 09:52:38] [INFO]: Successfully made tables for database 'test' in 26ms[39m
+[32m[2023-09-02 09:52:38] [INFO]: Successfully ran tests in 83ms[39m
+[32m[2023-09-02 09:52:47] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:52:47] [INFO]: Successfully made tables for database 'main' in 14ms[39m
+[32m[2023-09-02 09:52:47] [INFO]: Successfully made tables for database 'test' in 29ms[39m
+[32m[2023-09-02 09:52:47] [INFO]: Successfully ran tests in 118ms[39m
+[32m[2023-09-02 09:53:30] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:53:30] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:53:30] [INFO]: Successfully made tables for database 'test' in 22ms[39m
+[32m[2023-09-02 09:53:30] [INFO]: Successfully ran tests in 86ms[39m
+[32m[2023-09-02 09:54:47] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:54:47] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:54:47] [INFO]: Successfully made tables for database 'test' in 17ms[39m
+[32m[2023-09-02 09:54:47] [INFO]: Successfully ran tests in 53ms[39m
+[32m[2023-09-02 09:54:53] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:54:53] [INFO]: Successfully made tables for database 'main' in 14ms[39m
+[32m[2023-09-02 09:54:53] [INFO]: Successfully made tables for database 'test' in 26ms[39m
+[32m[2023-09-02 09:54:53] [INFO]: Successfully ran tests in 93ms[39m
+[32m[2023-09-02 09:55:08] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:55:08] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:55:08] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:55:22] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:55:22] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:55:22] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:55:27] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:55:27] [INFO]: Successfully made tables for database 'main' in 13ms[39m
+[32m[2023-09-02 09:55:27] [INFO]: Successfully made tables for database 'test' in 26ms[39m
+[32m[2023-09-02 09:55:59] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:55:59] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:55:59] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:56:00] [INFO]: Successfully ran tests in 55ms[39m
+[32m[2023-09-02 09:56:13] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:56:13] [INFO]: Successfully made tables for database 'main' in 12ms[39m
+[32m[2023-09-02 09:56:13] [INFO]: Successfully made tables for database 'test' in 26ms[39m
+[32m[2023-09-02 09:56:13] [INFO]: Successfully ran tests in 88ms[39m
+[32m[2023-09-02 09:56:24] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:56:24] [INFO]: Successfully made tables for database 'main' in 12ms[39m
+[32m[2023-09-02 09:56:24] [INFO]: Successfully made tables for database 'test' in 22ms[39m
+[32m[2023-09-02 09:56:24] [INFO]: Successfully ran tests in 67ms[39m
+[32m[2023-09-02 09:56:50] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:56:50] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:56:50] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:56:50] [INFO]: Error running tests: SQLITE_ERROR: no such column: NaN[39m
+[32m[2023-09-02 09:56:53] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:56:53] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:56:53] [INFO]: Successfully made tables for database 'test' in 26ms[39m
+[32m[2023-09-02 09:56:53] [INFO]: Error running tests: SQLITE_ERROR: no such column: NaN[39m
+[32m[2023-09-02 09:57:03] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:57:03] [INFO]: Successfully made tables for database 'main' in 14ms[39m
+[32m[2023-09-02 09:57:03] [INFO]: Successfully made tables for database 'test' in 30ms[39m
+[32m[2023-09-02 09:57:03] [INFO]: Error running tests: SQLITE_ERROR: no such column: NaN[39m
+[32m[2023-09-02 09:57:15] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:57:15] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:57:15] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:57:15] [INFO]: Error running tests: SQLITE_ERROR: no such column: NaN[39m
+[32m[2023-09-02 09:57:19] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:57:19] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 09:57:19] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 09:57:19] [INFO]: Error running tests: SQLITE_ERROR: no such column: NaN[39m
+[32m[2023-09-02 09:57:30] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:57:30] [INFO]: Successfully made tables for database 'main' in 20ms[39m
+[32m[2023-09-02 09:57:30] [INFO]: Successfully made tables for database 'test' in 39ms[39m
+[32m[2023-09-02 09:57:30] [INFO]: Error running tests: SQLITE_ERROR: no such column: NaN[39m
+[32m[2023-09-02 09:57:33] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:57:33] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:57:33] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:57:33] [INFO]: Error running tests: SQLITE_ERROR: no such column: NaN[39m
+[32m[2023-09-02 09:57:39] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:57:39] [INFO]: Successfully made tables for database 'main' in 16ms[39m
+[32m[2023-09-02 09:57:39] [INFO]: Successfully made tables for database 'test' in 22ms[39m
+[32m[2023-09-02 09:57:39] [INFO]: Error running tests: SQLITE_ERROR: no such column: NaN[39m
+[32m[2023-09-02 09:57:44] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:57:44] [INFO]: Successfully made tables for database 'main' in 12ms[39m
+[32m[2023-09-02 09:57:44] [INFO]: Successfully made tables for database 'test' in 21ms[39m
+[32m[2023-09-02 09:57:44] [INFO]: Error running tests: SQLITE_ERROR: no such column: NaN[39m
+[32m[2023-09-02 09:57:51] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:57:51] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:57:51] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:57:52] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:57:52] [INFO]: Successfully made tables for database 'main' in 12ms[39m
+[32m[2023-09-02 09:57:52] [INFO]: Successfully made tables for database 'test' in 37ms[39m
+[32m[2023-09-02 09:57:52] [INFO]: Error running tests: SQLITE_ERROR: no such column: NaN[39m
+[32m[2023-09-02 09:58:18] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:58:18] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:58:18] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 09:58:18] [INFO]: Error running tests: SQLITE_ERROR: no such column: NaN[39m
+[32m[2023-09-02 09:58:23] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:58:23] [INFO]: Successfully made tables for database 'main' in 16ms[39m
+[32m[2023-09-02 09:58:23] [INFO]: Successfully made tables for database 'test' in 26ms[39m
+[32m[2023-09-02 09:58:23] [INFO]: Error running tests: SQLITE_ERROR: no such column: NaN[39m
+[32m[2023-09-02 09:59:46] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:59:46] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:59:46] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:59:54] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:59:54] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:59:54] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 09:59:54] [INFO]: Error running tests: SQLITE_ERROR: no such column: NaN[39m
+[32m[2023-09-02 09:59:58] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 09:59:58] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 09:59:58] [INFO]: Successfully made tables for database 'test' in 20ms[39m
+[32m[2023-09-02 09:59:58] [INFO]: Error running tests: SQLITE_ERROR: no such column: NaN[39m
+[32m[2023-09-02 10:00:19] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:00:19] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 10:00:19] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 10:00:19] [INFO]: Error running tests: SQLITE_ERROR: no such column: NaN[39m
+[32m[2023-09-02 10:00:23] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:00:23] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 10:00:23] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 10:00:23] [INFO]: Error running tests: SQLITE_ERROR: no such column: NaN[39m
+[32m[2023-09-02 10:00:31] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:00:31] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 10:00:31] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 10:00:31] [INFO]: Successfully ran tests in 54ms[39m
+[32m[2023-09-02 10:12:35] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:12:35] [INFO]: Successfully made tables for database 'main' in 15ms[39m
+[32m[2023-09-02 10:12:35] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 10:12:35] [INFO]: Successfully ran tests in 58ms[39m
+[32m[2023-09-02 10:17:54] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:17:54] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 10:17:54] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 10:17:54] [INFO]: Successfully ran tests in 51ms[39m
+[32m[2023-09-02 10:17:55] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:17:55] [INFO]: Successfully made tables for database 'main' in 39ms[39m
+[32m[2023-09-02 10:17:55] [INFO]: Successfully made tables for database 'test' in 73ms[39m
+[32m[2023-09-02 10:17:55] [INFO]: Successfully ran tests in 130ms[39m
+[32m[2023-09-02 10:18:01] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:18:01] [INFO]: Successfully made tables for database 'main' in 23ms[39m
+[32m[2023-09-02 10:18:01] [INFO]: Successfully made tables for database 'test' in 34ms[39m
+[32m[2023-09-02 10:18:01] [INFO]: Successfully ran tests in 92ms[39m
+[32m[2023-09-02 10:19:07] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:19:07] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 10:19:07] [INFO]: Successfully made tables for database 'test' in 21ms[39m
+[32m[2023-09-02 10:19:07] [INFO]: Error running tests: Cannot read properties of undefined (reading 'then')[39m
+[32m[2023-09-02 10:19:21] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:19:21] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 10:19:21] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 10:19:21] [INFO]: Successfully ran tests in 60ms[39m
+[32m[2023-09-02 10:19:22] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:19:22] [INFO]: Successfully made tables for database 'main' in 13ms[39m
+[32m[2023-09-02 10:19:22] [INFO]: Successfully made tables for database 'test' in 22ms[39m
+[32m[2023-09-02 10:19:22] [INFO]: Successfully ran tests in 61ms[39m
+[32m[2023-09-02 10:19:31] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:19:31] [INFO]: Successfully made tables for database 'main' in 12ms[39m
+[32m[2023-09-02 10:19:31] [INFO]: Successfully made tables for database 'test' in 23ms[39m
+[32m[2023-09-02 10:19:31] [INFO]: Successfully ran tests in 67ms[39m
+[32m[2023-09-02 10:20:08] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:20:08] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 10:20:08] [INFO]: Successfully made tables for database 'test' in 20ms[39m
+[32m[2023-09-02 10:20:08] [INFO]: Successfully ran tests in 58ms[39m
+[32m[2023-09-02 10:20:09] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:20:09] [INFO]: Successfully made tables for database 'main' in 15ms[39m
+[32m[2023-09-02 10:20:09] [INFO]: Successfully made tables for database 'test' in 28ms[39m
+[32m[2023-09-02 10:20:09] [INFO]: Successfully ran tests in 83ms[39m
+[32m[2023-09-02 10:20:30] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:20:30] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 10:20:30] [INFO]: Successfully made tables for database 'test' in 19ms[39m
+[32m[2023-09-02 10:20:30] [INFO]: Successfully ran tests in 53ms[39m
+[32m[2023-09-02 10:20:43] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:20:43] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 10:20:43] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 10:20:43] [INFO]: Successfully ran tests in 51ms[39m
+[32m[2023-09-02 10:20:57] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:20:57] [INFO]: Successfully made tables for database 'main' in 13ms[39m
+[32m[2023-09-02 10:20:57] [INFO]: Successfully made tables for database 'test' in 23ms[39m
+[32m[2023-09-02 10:20:57] [INFO]: Successfully ran tests in 69ms[39m
+[32m[2023-09-02 10:21:06] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:21:06] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 10:21:06] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 10:21:06] [INFO]: Successfully ran tests in 54ms[39m
+[32m[2023-09-02 10:21:11] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:21:11] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 10:21:11] [INFO]: Successfully made tables for database 'test' in 20ms[39m
+[32m[2023-09-02 10:21:11] [INFO]: Successfully ran tests in 72ms[39m
+[32m[2023-09-02 10:22:26] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:22:26] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 10:22:26] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 10:22:26] [INFO]: Successfully ran tests in 52ms[39m
+[32m[2023-09-02 10:32:29] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:32:29] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 10:32:29] [INFO]: Successfully made tables for database 'test' in 17ms[39m
+[32m[2023-09-02 10:32:29] [INFO]: Successfully ran tests in 55ms[39m
+[32m[2023-09-02 10:32:47] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:32:47] [INFO]: Successfully made tables for database 'main' in 12ms[39m
+[32m[2023-09-02 10:32:47] [INFO]: Successfully made tables for database 'test' in 20ms[39m
+[32m[2023-09-02 10:32:47] [INFO]: Successfully ran tests in 64ms[39m
+[32m[2023-09-02 10:32:51] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:32:51] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-02 10:32:51] [INFO]: Successfully made tables for database 'test' in 20ms[39m
+[32m[2023-09-02 10:32:51] [INFO]: Successfully ran tests in 54ms[39m
+[32m[2023-09-02 10:32:54] [INFO]: Listening on *:3000[39m
+[32m[2023-09-02 10:32:54] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-02 10:32:54] [INFO]: Successfully made tables for database 'test' in 18ms[39m
+[32m[2023-09-02 10:32:54] [INFO]: Successfully ran tests in 50ms[39m
+[32m[2023-09-03 04:48:32] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:48:32] [INFO]: Successfully made tables for database 'main' in 18ms[39m
+[32m[2023-09-03 04:48:33] [INFO]: Successfully made tables for database 'test' in 1173ms[39m
+[32m[2023-09-03 04:48:37] [INFO]: Successfully ran tests in 4540ms[39m
+[32m[2023-09-03 04:52:35] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:52:35] [INFO]: Successfully made tables for database 'main' in 8ms[39m
+[32m[2023-09-03 04:52:37] [INFO]: Successfully made tables for database 'test' in 1514ms[39m
+[32m[2023-09-03 04:52:40] [INFO]: Successfully ran tests in 4747ms[39m
+[32m[2023-09-03 04:53:01] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:53:01] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-03 04:53:03] [INFO]: Successfully made tables for database 'test' in 1179ms[39m
+[32m[2023-09-03 04:53:06] [INFO]: Successfully ran tests in 5084ms[39m
+[32m[2023-09-03 04:53:22] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:53:22] [INFO]: Successfully made tables for database 'main' in 8ms[39m
+[32m[2023-09-03 04:53:23] [INFO]: Successfully made tables for database 'test' in 1212ms[39m
+[32m[2023-09-03 04:53:27] [INFO]: Successfully ran tests in 4313ms[39m
+[32m[2023-09-03 04:53:39] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:53:39] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-03 04:53:40] [INFO]: Successfully made tables for database 'test' in 1305ms[39m
+[32m[2023-09-03 04:53:43] [INFO]: Successfully ran tests in 4523ms[39m
+[32m[2023-09-03 04:54:11] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:54:11] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-03 04:54:12] [INFO]: Successfully made tables for database 'test' in 1407ms[39m
+[32m[2023-09-03 04:54:15] [INFO]: Successfully ran tests in 4601ms[39m
+[32m[2023-09-03 04:54:23] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:54:23] [INFO]: Successfully made tables for database 'main' in 7ms[39m
+[32m[2023-09-03 04:54:25] [INFO]: Successfully made tables for database 'test' in 1242ms[39m
+[32m[2023-09-03 04:54:28] [INFO]: Successfully ran tests in 4520ms[39m
+[32m[2023-09-03 04:54:32] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:54:32] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-03 04:54:33] [INFO]: Successfully made tables for database 'test' in 1474ms[39m
+[32m[2023-09-03 04:54:36] [INFO]: Successfully ran tests in 4604ms[39m
+[32m[2023-09-03 04:54:53] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:54:53] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-03 04:54:54] [INFO]: Successfully made tables for database 'test' in 1165ms[39m
+[32m[2023-09-03 04:54:55] [INFO]: Error running tests: Cannot read properties of undefined (reading 'id')[39m
+[32m[2023-09-03 04:55:00] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:55:00] [INFO]: Successfully made tables for database 'main' in 8ms[39m
+[32m[2023-09-03 04:55:02] [INFO]: Successfully made tables for database 'test' in 1319ms[39m
+[32m[2023-09-03 04:55:05] [INFO]: Successfully ran tests in 4638ms[39m
+[32m[2023-09-03 04:55:36] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:55:36] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-03 04:55:37] [INFO]: Successfully made tables for database 'test' in 1197ms[39m
+[32m[2023-09-03 04:55:40] [INFO]: Successfully ran tests in 4396ms[39m
+[32m[2023-09-03 04:56:13] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:56:13] [INFO]: Successfully made tables for database 'main' in 8ms[39m
+[32m[2023-09-03 04:56:14] [INFO]: Successfully made tables for database 'test' in 1244ms[39m
+[32m[2023-09-03 04:56:17] [INFO]: Successfully ran tests in 4303ms[39m
+[32m[2023-09-03 04:57:09] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:57:09] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-03 04:57:10] [INFO]: Successfully made tables for database 'test' in 1138ms[39m
+[32m[2023-09-03 04:57:12] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:57:12] [INFO]: Successfully made tables for database 'main' in 8ms[39m
+[32m[2023-09-03 04:57:13] [INFO]: Successfully made tables for database 'test' in 1236ms[39m
+[32m[2023-09-03 04:57:16] [INFO]: Successfully ran tests in 4486ms[39m
+[32m[2023-09-03 04:58:33] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:58:33] [INFO]: Successfully made tables for database 'main' in 13ms[39m
+[32m[2023-09-03 04:58:34] [INFO]: Successfully made tables for database 'test' in 1181ms[39m
+[32m[2023-09-03 04:58:37] [INFO]: Successfully ran tests in 4481ms[39m
+[32m[2023-09-03 04:58:57] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:58:57] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-03 04:58:58] [INFO]: Successfully made tables for database 'test' in 1164ms[39m
+[32m[2023-09-03 04:59:01] [INFO]: Successfully ran tests in 4315ms[39m
+[32m[2023-09-03 04:59:12] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:59:12] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-03 04:59:14] [INFO]: Successfully made tables for database 'test' in 1494ms[39m
+[32m[2023-09-03 04:59:17] [INFO]: Successfully ran tests in 4680ms[39m
+[32m[2023-09-03 04:59:39] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 04:59:39] [INFO]: Successfully made tables for database 'main' in 8ms[39m
+[32m[2023-09-03 04:59:40] [INFO]: Successfully made tables for database 'test' in 1084ms[39m
+[32m[2023-09-03 04:59:43] [INFO]: Successfully ran tests in 4085ms[39m
+[32m[2023-09-03 05:06:45] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:06:52] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:07:20] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:07:22] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:07:32] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:07:46] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:08:48] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:08:58] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:09:12] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:09:23] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:10:46] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:11:39] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:11:45] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:11:58] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:12:01] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:13:28] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:18:47] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:19:59] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:21:21] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:21:41] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:21:44] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:21:53] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:24:04] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:24:40] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:25:25] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:41:19] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:41:37] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:41:39] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:42:00] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:42:07] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:42:14] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:42:16] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:42:23] [INFO]: Listening on *:3000[39m
+[31m[2023-09-03 05:42:33] [ERROR]: Error connecting to database 'test': SqlError: (conn=-1, no: 45028, SQLState: HY000) retrieve connection from pool timeout after 10001ms[39m
+[31m    (pool connections: active=0 idle=0 limit=10)[39m
+[32m[2023-09-03 05:42:56] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:42:56] [INFO]: Successfully connected to database 'main'[39m
+[32m[2023-09-03 05:43:27] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:43:27] [INFO]: Successfully connected to database 'main'[39m
+[32m[2023-09-03 05:43:38] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:43:38] [INFO]: Successfully connected to database 'main'[39m
+[32m[2023-09-03 05:43:51] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:43:51] [INFO]: Successfully connected to database 'main'[39m
+[32m[2023-09-03 05:44:28] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:44:28] [INFO]: Successfully connected to database 'main'[39m
+[31m[2023-09-03 05:44:38] [ERROR]: Error connecting to database 'test': SqlError: (conn=-1, no: 45028, SQLState: HY000) retrieve connection from pool timeout after 10000ms[39m
+[31m    (pool connections: active=0 idle=0 limit=10)[39m
+[32m[2023-09-03 05:44:42] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:44:42] [INFO]: Successfully connected to database 'test'[39m
+[32m[2023-09-03 05:44:42] [INFO]: Successfully connected to database 'main'[39m
+[32m[2023-09-03 05:45:56] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:45:56] [INFO]: Successfully connected to database 'test'[39m
+[32m[2023-09-03 05:45:56] [INFO]: Successfully connected to database 'main'[39m
+[32m[2023-09-03 05:45:58] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:45:58] [INFO]: Successfully connected to database 'test'[39m
+[32m[2023-09-03 05:45:58] [INFO]: Successfully connected to database 'main'[39m
+[32m[2023-09-03 05:47:06] [INFO]: Listening on *:3000[39m
+[32m[2023-09-03 05:47:06] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-03 05:47:07] [INFO]: Successfully made tables for database 'test' in 1255ms[39m
+[32m[2023-09-03 05:47:10] [INFO]: Successfully ran tests in 4601ms[39m
+[32m[2023-09-05 08:29:41] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:29:41] [INFO]: Successfully made tables for database 'main' in 34ms[39m
+[32m[2023-09-05 08:29:43] [INFO]: Successfully made tables for database 'test' in 1154ms[39m
+[32m[2023-09-05 08:29:47] [INFO]: Successfully ran tests in 5292ms[39m
+[32m[2023-09-05 08:31:48] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:31:48] [INFO]: Successfully made tables for database 'main' in 24ms[39m
+[32m[2023-09-05 08:31:49] [INFO]: Successfully made tables for database 'test' in 1398ms[39m
+[32m[2023-09-05 08:31:52] [INFO]: Successfully ran tests in 4499ms[39m
+[32m[2023-09-05 08:32:09] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:32:09] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-05 08:32:11] [INFO]: Successfully made tables for database 'test' in 1248ms[39m
+[32m[2023-09-05 08:32:14] [INFO]: Successfully ran tests in 4348ms[39m
+[32m[2023-09-05 08:35:02] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:35:02] [INFO]: Successfully made tables for database 'main' in 13ms[39m
+[32m[2023-09-05 08:35:04] [INFO]: Successfully made tables for database 'test' in 1180ms[39m
+[32m[2023-09-05 08:35:07] [INFO]: Successfully ran tests in 4514ms[39m
+[32m[2023-09-05 08:35:09] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:35:09] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-05 08:35:10] [INFO]: Successfully made tables for database 'test' in 1113ms[39m
+[32m[2023-09-05 08:35:13] [INFO]: Successfully ran tests in 4187ms[39m
+[32m[2023-09-05 08:35:29] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:35:29] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-05 08:35:30] [INFO]: Successfully made tables for database 'test' in 1172ms[39m
+[32m[2023-09-05 08:35:34] [INFO]: Successfully ran tests in 4620ms[39m
+[32m[2023-09-05 08:36:01] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:36:01] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-05 08:36:03] [INFO]: Successfully made tables for database 'test' in 1135ms[39m
+[32m[2023-09-05 08:36:06] [INFO]: Successfully ran tests in 4329ms[39m
+[32m[2023-09-05 08:36:08] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:36:08] [INFO]: Successfully made tables for database 'main' in 13ms[39m
+[32m[2023-09-05 08:36:09] [INFO]: Successfully made tables for database 'test' in 1175ms[39m
+[32m[2023-09-05 08:36:12] [INFO]: Successfully ran tests in 4522ms[39m
+[32m[2023-09-05 08:36:15] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:36:15] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-05 08:36:16] [INFO]: Successfully made tables for database 'test' in 1205ms[39m
+[32m[2023-09-05 08:36:20] [INFO]: Successfully ran tests in 4673ms[39m
+[32m[2023-09-05 08:36:27] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:36:27] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-05 08:36:28] [INFO]: Successfully made tables for database 'test' in 1488ms[39m
+[32m[2023-09-05 08:36:32] [INFO]: Successfully ran tests in 5355ms[39m
+[32m[2023-09-05 08:48:18] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:48:18] [INFO]: Successfully made tables for database 'main' in 14ms[39m
+[32m[2023-09-05 08:48:19] [INFO]: Successfully made tables for database 'test' in 1153ms[39m
+[32m[2023-09-05 08:48:21] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:48:21] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-05 08:48:22] [INFO]: Successfully made tables for database 'test' in 1169ms[39m
+[32m[2023-09-05 08:48:25] [INFO]: Successfully ran tests in 4472ms[39m
+[32m[2023-09-05 08:48:57] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:48:57] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-05 08:48:58] [INFO]: Successfully made tables for database 'test' in 1328ms[39m
+[32m[2023-09-05 08:49:01] [INFO]: Successfully ran tests in 4437ms[39m
+[32m[2023-09-05 08:49:13] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:49:13] [INFO]: Successfully made tables for database 'main' in 13ms[39m
+[32m[2023-09-05 08:49:15] [INFO]: Successfully made tables for database 'test' in 1307ms[39m
+[32m[2023-09-05 08:49:18] [INFO]: Successfully ran tests in 4643ms[39m
+[32m[2023-09-05 08:50:22] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:50:22] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-05 08:50:23] [INFO]: Successfully made tables for database 'test' in 1230ms[39m
+[32m[2023-09-05 08:50:24] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:50:24] [INFO]: Successfully made tables for database 'main' in 8ms[39m
+[32m[2023-09-05 08:50:26] [INFO]: Successfully made tables for database 'test' in 1325ms[39m
+[32m[2023-09-05 08:50:27] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:50:27] [INFO]: Successfully made tables for database 'main' in 8ms[39m
+[32m[2023-09-05 08:50:29] [INFO]: Successfully made tables for database 'test' in 1589ms[39m
+[32m[2023-09-05 08:50:32] [INFO]: Successfully ran tests in 4867ms[39m
+[32m[2023-09-05 08:50:36] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:50:36] [INFO]: Successfully made tables for database 'main' in 10ms[39m
+[32m[2023-09-05 08:50:37] [INFO]: Successfully made tables for database 'test' in 1132ms[39m
+[32m[2023-09-05 08:50:41] [INFO]: Successfully ran tests in 4593ms[39m
+[32m[2023-09-05 08:50:50] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:50:50] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-05 08:50:52] [INFO]: Successfully made tables for database 'test' in 1230ms[39m
+[32m[2023-09-05 08:50:55] [INFO]: Successfully ran tests in 4507ms[39m
+[32m[2023-09-05 08:51:23] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:51:23] [INFO]: Successfully made tables for database 'main' in 20ms[39m
+[32m[2023-09-05 08:51:24] [INFO]: Successfully made tables for database 'test' in 1269ms[39m
+[32m[2023-09-05 08:51:28] [INFO]: Successfully ran tests in 4880ms[39m
+[32m[2023-09-05 08:51:34] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:51:34] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-05 08:51:35] [INFO]: Successfully made tables for database 'test' in 1273ms[39m
+[32m[2023-09-05 08:51:38] [INFO]: Successfully ran tests in 4415ms[39m
+[32m[2023-09-05 08:51:43] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 08:51:43] [INFO]: Successfully made tables for database 'main' in 11ms[39m
+[32m[2023-09-05 08:51:44] [INFO]: Successfully made tables for database 'test' in 1185ms[39m
+[32m[2023-09-05 08:51:48] [INFO]: Successfully ran tests in 4413ms[39m
+[32m[2023-09-05 09:45:37] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 09:45:37] [INFO]: Successfully made tables for database 'main' in 29ms[39m
+[32m[2023-09-05 09:45:39] [INFO]: Successfully made tables for database 'test' in 1119ms[39m
+[32m[2023-09-05 09:45:42] [INFO]: Successfully ran tests in 4155ms[39m
+[32m[2023-09-05 09:46:16] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 09:46:16] [INFO]: Successfully made tables for database 'main' in 8ms[39m
+[32m[2023-09-05 09:46:17] [INFO]: Successfully made tables for database 'test' in 1203ms[39m
+[32m[2023-09-05 09:46:20] [INFO]: Successfully ran tests in 4865ms[39m
+[32m[2023-09-05 10:28:38] [INFO]: Listening on *:3000[39m
+[32m[2023-09-05 10:28:38] [INFO]: Successfully made tables for database 'main' in 9ms[39m
+[32m[2023-09-05 10:28:39] [INFO]: Successfully made tables for database 'test' in 1384ms[39m
+[32m[2023-09-05 10:28:42] [INFO]: Successfully ran tests in 4665ms[39m
