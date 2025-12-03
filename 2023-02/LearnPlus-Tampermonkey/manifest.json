@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json.schemastore.org/chrome-manifest",
+    "manifest_version": 2,
+    "name": "LearnPlus",
+    "version": "0.0.1",
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*.educationperfect.com/*"
+            ],
+            "js": ["content.js"],
+            "run_at": "document_end"
+        }
+    ]
+}
