@@ -1,0 +1,242 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "iolite",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#precompile"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#various"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#types"
+		},
+		{
+			"include": "#functions"
+		},
+		{
+			"include": "#rest"
+		}
+	],
+	"repository": {
+		"comments": {
+			"patterns": [
+				{
+					"begin": "/\\*",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.begin.iolite"
+						}
+					},
+					"end": "\\*/",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.end.iolite"
+						}
+					},
+					"name": "comment.block.iolite"
+				},
+				{
+					"begin": "//",
+					"end": "$",
+					"name": "comment.line.double-slash.iolite"
+				},
+				{
+					"begin": "(/)(f)(/)",
+					"end": "$",
+					"beginCaptures": {
+						"1": {
+							"name": "entity.other.inherited-class.iolite"
+						},
+						"2": {
+							"name": "keyword.other.iolite"
+						},
+						"3": {
+							"name": "entity.other.inherited-class.iolite"
+						}
+					},
+					"patterns": [
+						{
+							"match": ".+",
+							"name": "keyword.forceful-comment.iolite"
+						}
+					]
+				}
+			]
+		},
+		"precompile": {
+			"patterns": [
+				{
+					"begin": "/pc/",
+					"end": "/pcend/",
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#precompile_keywords"
+						},
+						{
+							"include": "#strings"
+						}
+					],
+					"name": "entity.other.inherited-class.iolite"
+				}
+			]
+		},
+		"precompile_keywords": {
+			"patterns": [
+				{
+					"name": "entity.name.function.preprocessor.iolite",
+					"match": "(?<!\\w)(entry|warn|error|main)(?!\\w)"
+				},
+				{
+					"name": "variable.other.preprocessor.iolite",
+					"match": "(?<!\\w)(=|\\+=)(?!\\w)"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.iolite",
+				"match": "\\b(if|while|for|return|switch|continue|break|case|default|else|elif)\\b"
+			}]
+		},
+		"various": {
+			"patterns": [
+				{
+					"name": "keyword.control.import.iolite",
+					"match": "\\b(import|cimport|climport)\\b"
+				},
+				{
+					"name": "keyword.control.function.iolite",
+					"match": "\\b(entry|func)\\b"
+				},
+				{
+					"name": "keyword.control.struct.iolite",
+					"match": "\\b(struct|enum|union)\\b"
+				},
+				{
+					"match": "(?<!\\w)(s==|s!=)(?!\\w)",
+					"name": "support.function.iolite"
+				},
+				{
+					"name": "keyword.control.preprocessor.iolite",
+					"begin": "#",
+					"end": "$",
+					"patterns": [
+						{
+							"name": "constant.numeric.iolite",
+							"match": "\\b(0x[0-9a-fA-F]+|\\d+)\\b"
+						},
+						{
+							"name": "constant.character.escape.iolite",
+							"match": "\\\\."
+						},
+						{
+							"name": "string.quoted.double.iolite",
+							"begin": "\"",
+							"end": "\"",
+							"patterns": [
+								{
+									"name": "constant.character.escape.iolite",
+									"match": "\\\\."
+								}
+							]
+						},
+						{
+							"name": "string.quoted.single.iolite",
+							"begin": "'",
+							"end": "'",
+							"patterns": [
+								{
+									"name": "constant.character.escape.iolite",
+									"match": "\\\\."
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.iolite",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.il",
+					"match": "\\\\."
+				}
+			]
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"name": "constant.numeric.iolite",
+					"match": "\\b(0x[0-9a-fA-F]+|0b[01]+|0o[0-7]+|[0-9]+)\\b"
+				}
+			]
+		},
+		"types": {
+			"patterns": [
+				{
+					"name": "storage.type.iolite",
+					"match": "\\b(int|float|bool|string|void)\\b"
+				}
+			]
+		},
+		"functions": {
+			"patterns": [
+				{
+					"name": "entity.name.function.iolite",
+					"match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\("
+				},
+				{
+					"match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\.([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\(",
+					"captures": {
+						"1": {
+							"name": "entity.name.class.iolite"
+						},
+						"2": {
+							"name": "entity.name.function.iolite"
+						}
+					}
+				}
+			]
+		},
+		"rest": {
+			"patterns": [
+				{
+					"name": "variable.other.iolite",
+					"match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b"
+				},
+				{
+					"name": "variable.other.iolite",
+					"match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\.([a-zA-Z_][a-zA-Z0-9_]*)\\b",
+					"captures": {
+						"1": {
+							"name": "entity.name.class.iolite"
+						},
+						"2": {
+							"name": "variable.other.iolite"
+						}
+					}
+				}
+			]
+		}
+	},
+	"scopeName": "source.iolite"
+}
