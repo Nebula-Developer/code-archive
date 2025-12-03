@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "visual_aspect/1.0.0": {
+        "runtime": {
+          "visual_aspect.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "visual_aspect/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

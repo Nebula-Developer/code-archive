@@ -1,0 +1,15 @@
+/Users/nicocook/Documents/visual_aspect/bin/Debug/net7.0/visual_aspect
+/Users/nicocook/Documents/visual_aspect/bin/Debug/net7.0/visual_aspect.deps.json
+/Users/nicocook/Documents/visual_aspect/bin/Debug/net7.0/visual_aspect.runtimeconfig.json
+/Users/nicocook/Documents/visual_aspect/bin/Debug/net7.0/visual_aspect.dll
+/Users/nicocook/Documents/visual_aspect/bin/Debug/net7.0/visual_aspect.pdb
+/Users/nicocook/Documents/visual_aspect/obj/Debug/net7.0/visual_aspect.csproj.AssemblyReference.cache
+/Users/nicocook/Documents/visual_aspect/obj/Debug/net7.0/visual_aspect.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nicocook/Documents/visual_aspect/obj/Debug/net7.0/visual_aspect.AssemblyInfoInputs.cache
+/Users/nicocook/Documents/visual_aspect/obj/Debug/net7.0/visual_aspect.AssemblyInfo.cs
+/Users/nicocook/Documents/visual_aspect/obj/Debug/net7.0/visual_aspect.csproj.CoreCompileInputs.cache
+/Users/nicocook/Documents/visual_aspect/obj/Debug/net7.0/visual_aspect.dll
+/Users/nicocook/Documents/visual_aspect/obj/Debug/net7.0/refint/visual_aspect.dll
+/Users/nicocook/Documents/visual_aspect/obj/Debug/net7.0/visual_aspect.pdb
+/Users/nicocook/Documents/visual_aspect/obj/Debug/net7.0/visual_aspect.genruntimeconfig.cache
+/Users/nicocook/Documents/visual_aspect/obj/Debug/net7.0/ref/visual_aspect.dll
