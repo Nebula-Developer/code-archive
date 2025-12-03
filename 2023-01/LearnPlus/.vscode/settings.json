@@ -1,0 +1,6 @@
+{
+    // Set language of ./extensionV3/manifest.json to JSON with comments
+    "files.associations": {
+        "manifest.json": "jsonc"
+    }
+}

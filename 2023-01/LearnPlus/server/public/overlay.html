@@ -1,0 +1,95 @@
+<div id="learnplus-toolbar" class="lp-z-index-1 lp-full-width lp-flex-horizontal lp-flex-space-between">
+    <div class="lp-flex-horizontal">
+        <div class="learnplus-toolbar-icon" data-opens="learnplus-channel-browser">
+            <i class="fa fa-message"></i>
+            <div class="learnplus-toolbar-icon-popup">Show browser</div>
+        </div>
+
+        <div class="learnplus-toolbar-icon" data-opens="lp-create-channel-form">
+            <i class="fa fa-plus"></i>
+            <div class="learnplus-toolbar-icon-popup">Create channel</div>
+        </div>
+
+        <div class="learnplus-toolbar-icon lp-toolbar-ignore-default">
+            <i class="fa fa-question"></i>
+            <div class="learnplus-toolbar-icon-popup">Help</div>
+        </div>
+    </div>
+
+    <div class="lp-flex-horizontal">
+        <div class="learnplus-toolbar-icon" data-opens="learnplus-account-panel" id="learnplus-login-btn">
+            <i class="fa fa-user"></i>
+            <div class="learnplus-toolbar-icon-popup">Account</div>
+        </div>
+
+        <div class="learnplus-toolbar-icon lp-toolbar-ignore-default" id="learnplus-logout-btn">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <div class="learnplus-toolbar-icon-popup">Logout</div>
+        </div>
+
+        <!-- <div class="learnplus-toolbar-icon" data-opens="learnplus-settings-panel">
+            <i class="fa-solid fa-gear"></i>
+            <div class="learnplus-toolbar-icon-popup">Settings</div>
+        </div> -->
+
+        <div class="learnplus-toolbar-icon lp-toolbar-ignore-default" id="lock-toolbar-btn">
+            <i class="fa-solid fa-unlock"></i>
+            <div class="learnplus-toolbar-icon-popup">Lock toolbar</div>
+        </div>
+    </div>
+</div>
+
+<div id="learnplus-called-panels-wrapper">
+    <div class="learnplus-toolbar-panel lp-fixed-r lp-mr-5" id="learnplus-settings-panel">
+                
+    </div>
+
+    <div class="learnplus-toolbar-panel lp-fixed-r lp-mr-30" id="learnplus-account-panel">
+        <form onsubmit="return false" id="learnplus-login-form" class="lp-align-items lp-flex-horizontal">
+            <div class="lp-form-contents">
+                <input type="text" placeholder="Username or Email" id="learnplus-login-username" class="learnplus-input">
+                <input type="password" placeholder="Password" id="learnplus-login-password" class="learnplus-input">
+
+                <br />
+                <input type="submit" class="lp-button" id="learnplus-login-btn" value="Login">
+
+                <br />
+                <button onclick="return false" class="lp-text-button lp-mt-20" id="learnplus-show-register">Don't have an account? Register here</button>
+            </div>
+        </form>
+
+        <form onsubmit="return false" id="learnplus-register-form" class="lp-align-items lp-flex-horizontal">
+            <div class="lp-form-contents">
+                <input type="text" placeholder="Username" id="learnplus-register-username" class="learnplus-input">
+                <input type="text" placeholder="Email" id="learnplus-register-email" class="learnplus-input">
+                <input type="password" placeholder="Password" id="learnplus-register-password" class="learnplus-input">
+                <input type="password" placeholder="Confirm Password" id="learnplus-register-password-confirm" class="learnplus-input">
+
+                <br />
+                <input type="submit" class="lp-button" id="learnplus-register-btn" value="Register">
+
+                <br />
+                <button onclick="return false" class="lp-text-button" id="learnplus-show-login">Already have an account? Login here</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="learnplus-msgpanel-wrapper" class="lp-z-index-2 lp-raise-for-toolbar lp-fixed-bl">
+    <div class="channel-list-wrapper lp-msg-panel lp-flex-vertical" id="learnplus-channel-browser">
+        <div class="lp-text-title-border">Channel List:</div>
+        <div id="channel-list" class="lp-flex-vertical">
+            <div class="large-text lp-mt-50">
+                Please sign in to view channels.
+                <i class="fa fa-user"></i>
+            </div>
+        </div>
+    </div>
+
+    <form class="lp-msg-panel" onsubmit="return false" id="lp-create-channel-form">
+        <input type="text" placeholder="Channel name" id="lp-create-channel-name" class="learnplus-input">
+        <input type="submit" class="lp-button" id="lp-create-channel-btn" value="Create">
+    </form>
+</div>
+
+<div id="learnplus-hover-hint" class="lp-fixed-br lp-z-index-5 lp-flex-center"></div>
