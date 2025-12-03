@@ -1,0 +1,15 @@
+/Users/nebuladev/Documents/PrysmShell/src/obj/Debug/net6.0/PrysmShell.csproj.AssemblyReference.cache
+/Users/nebuladev/Documents/PrysmShell/src/obj/Debug/net6.0/PrysmShell.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nebuladev/Documents/PrysmShell/src/obj/Debug/net6.0/PrysmShell.AssemblyInfoInputs.cache
+/Users/nebuladev/Documents/PrysmShell/src/obj/Debug/net6.0/PrysmShell.AssemblyInfo.cs
+/Users/nebuladev/Documents/PrysmShell/src/obj/Debug/net6.0/PrysmShell.csproj.CoreCompileInputs.cache
+/Users/nebuladev/Documents/PrysmShell/src/bin/Debug/net6.0/PrysmShell
+/Users/nebuladev/Documents/PrysmShell/src/bin/Debug/net6.0/PrysmShell.deps.json
+/Users/nebuladev/Documents/PrysmShell/src/bin/Debug/net6.0/PrysmShell.runtimeconfig.json
+/Users/nebuladev/Documents/PrysmShell/src/bin/Debug/net6.0/PrysmShell.dll
+/Users/nebuladev/Documents/PrysmShell/src/bin/Debug/net6.0/PrysmShell.pdb
+/Users/nebuladev/Documents/PrysmShell/src/obj/Debug/net6.0/PrysmShell.dll
+/Users/nebuladev/Documents/PrysmShell/src/obj/Debug/net6.0/refint/PrysmShell.dll
+/Users/nebuladev/Documents/PrysmShell/src/obj/Debug/net6.0/PrysmShell.pdb
+/Users/nebuladev/Documents/PrysmShell/src/obj/Debug/net6.0/PrysmShell.genruntimeconfig.cache
+/Users/nebuladev/Documents/PrysmShell/src/obj/Debug/net6.0/ref/PrysmShell.dll
