@@ -216,7 +216,11 @@ function App() {
       const year = created.getFullYear();
       const month = String(created.getMonth() + 1).padStart(2, "0");
       const folder = path.join(ROOT_PATH, `${year}-${month}`);
-      const prefix = path.join(folder, repo.name);
+      if (!fs.existsSync(folder)) fs.mkdirSync(folder, { recursive: true });
+
+      // Make prefix relative to archive repo root
+      const relFolder = path.relative(ROOT_PATH, folder);
+      const prefix = path.join(relFolder, repo.name);
 
       if (!fs.existsSync(folder)) fs.mkdirSync(folder, { recursive: true });
 
