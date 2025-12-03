@@ -1,0 +1,16 @@
+﻿using System;
+using NSH.Shell;
+using NSH.Signals;
+
+namespace NSH {
+    public static class Root {
+        public static void Main(string[] args) {
+            ShellSignals.HandleIgnoredSignals();
+            Autocomplete.GetEnvPath();
+            Autocomplete.SortAutocomplete();
+
+            NShell shell = new NShell();
+            shell.Init();
+        }
+    }
+}
