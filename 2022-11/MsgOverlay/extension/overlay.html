@@ -1,0 +1,91 @@
+<div class="expand-button">
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-prefix="fas" data-icon="expand" role="img" viewBox="0 0 448 512" class="svg-inline--fa fa-expand fa-w-14 fa-7x"><path fill="currentColor" d="M0 180V56c0-13.3 10.7-24 24-24h124c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H64v84c0 6.6-5.4 12-12 12H12c-6.6 0-12-5.4-12-12zM288 44v40c0 6.6 5.4 12 12 12h84v84c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12V56c0-13.3-10.7-24-24-24H300c-6.6 0-12 5.4-12 12zm148 276h-40c-6.6 0-12 5.4-12 12v84h-84c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h124c13.3 0 24-10.7 24-24V332c0-6.6-5.4-12-12-12zM160 468v-40c0-6.6-5.4-12-12-12H64v-84c0-6.6-5.4-12-12-12H12c-6.6 0-12 5.4-12 12v124c0 13.3 10.7 24 24 24h124c6.6 0 12-5.4 12-12z" class=""/></svg>
+</div>
+
+<div class="messenger-content messenger-inactive">
+    <div class="messenger-header">
+        <h1>Shirley Chat</h1>
+    </div>
+
+    <div id="messenger-messages-wrapper" class="mesenger-messages-wrapper">
+        <div id="messenger-messages">
+            <div class="messenger-message">
+                <div class="messenger-profile-wrapper">
+                    <img src="http://localhost:3000/profile.jpg" alt="profile image" class="messenger-profile-img">
+                </div>
+
+                <div class="messenger-message-content">
+                    <div class="messenger-message-username">NebulaDev</div>
+                    <div class="messenger-message-text">Hello world</div>
+                </div>
+            </div>
+            
+            <!-- Reply to the message: -->
+            <div class="messenger-message messenger-replying-msg">
+                <div class="messenger-profile-wrapper">
+                    <div class="messenger-reply-glyph"></div>
+                    <img src="http://localhost:3000/profile.jpg" alt="profile image" class="messenger-profile-img">
+                </div>
+
+                <div class="messenger-message-content">
+                    <div class="messenger-message-reply">NebulaDev: Hello world</div>
+                    <div class="messenger-message-username">World</div>
+                    <div class="messenger-message-text">Hello!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="messenger-input-wrapper">
+        <div class="message-reply-to inactive">
+            <div class="message-reply-to-who">Repying to Noone</div>
+            <div class="message-reply-to-close">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" data-prefix="fas" data-icon="times" role="img" viewBox="0 0 352 512" class="svg-inline--fa fa-times fa-w-11 fa-7x"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z" class=""/></svg>
+            </div>
+        </div>
+        <input class="messenger-input" id="messenger-input" placeholder="Type a message..." spellcheck="true" autocomplete="off" type="text">
+
+        <div class="gradient-top"></div>
+        <div class="gradient-bottom"></div>
+    </div>
+</div>
+
+<div class="messenger-panel messenger-login">
+    <div class="messenger-login-header">
+        <h1>Login</h1>
+    </div>
+
+    <div class="messenger-login-form" id="messenger-login-form">
+        <input type="text" class="messenger-login-input" id="messenger-login-email" placeholder="Email" spellcheck="false" aria-autocomplete="list">
+        <input type="password" class="messenger-login-input" id="messenger-login-password" placeholder="Password" spellcheck="false" aria-autocomplete="list">
+    </div>
+
+    <div class="messenger-login-submit-wrapper">
+        <button class="messenger-login-submit" id="messenger-login-submit">Login</button>
+    </div>
+
+    <div class="messenger-login-swap-button">
+        I don't have an account
+    </div>
+</div>
+
+<div class="messenger-panel messenger-register messenger-inactive">
+    <div class="messenger-login-header">
+        <h1>Register</h1>
+    </div>
+
+    <div class="messenger-login-form" id="messenger-register-form">
+        <input type="text" class="messenger-login-input" id="messenger-register-username" placeholder="Username" spellcheck="false" aria-autocomplete="list">
+        <input type="text" class="messenger-login-input" id="messenger-register-email" placeholder="Email" spellcheck="false" aria-autocomplete="list">
+        <input type="password" class="messenger-login-input" id="messenger-register-password" placeholder="Password" spellcheck="false" aria-autocomplete="list">
+        <input type="password" class="messenger-login-input" id="messenger-register-password-confirm" placeholder="Confirm Password" spellcheck="false" aria-autocomplete="list">
+    </div>
+
+    <div class="messenger-login-submit-wrapper">
+        <button class="messenger-login-submit" id="messenger-register-submit">Register</button>
+    </div>
+
+    <div class="messenger-login-swap-button">
+        I already have an account
+    </div>
+</div>
