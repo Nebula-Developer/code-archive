@@ -1,0 +1,131 @@
+
+{
+    "name": "canvas",
+    "bindings": {
+        "primary-background-1": [
+            {
+                "type": "variable",
+                "name": "--ic-brand-global-nav-bgd"
+            },
+            {
+                "type": "element",
+                "name": ".ic-app-header__logomark-container",
+                "css": ["background"],
+                "custom_css": {
+                    "transform": "translateX(5px)",
+                    "width": "calc(100% - 5px)"
+                }
+            },
+            {
+                "type": "element",
+                "name": [
+                    "#immersive_reader_mount_point button span",
+                    ".ic-app-header__menu-list-item",
+                    ".ic-app-header__menu-list-link"
+                ],
+                "css": ["background"]
+            }
+        ],
+        "primary-background-2": [
+            {
+                "type": "element",
+                "name": [
+                    "body",
+                    ".ic-Dashboard-header__layout",
+                    ".header-bar",
+                    "#breadcrumbs",
+                    "#context_modules_sortable_container, #context_modules_sortable_container div",
+                    ".collectionViewItems div, #ag-list",
+                    ".ic-Input, .ui-tabs-anchor, #search_field",
+                    ".tab-panel, .StudentEnrollment, .date, #syllabusTableBody td",
+                    ".item-group-container div, .item-group-container p, .item-group-container",
+                    "#calendar-app *, #calendar-list-holder, #minical",
+                    ".header-bar button",
+                    "#create_new_event_link",
+                    ".panel, .panel input, .panel input div, .btn",
+                    "#conversation_filter_select",
+                    ".messages li",
+                    ".ac-input-box",
+                    "table"
+                ],
+                "css": ["background"]
+            }
+        ],
+        "primary-text-1": [
+            {
+                "type": "element",
+                "name": [
+                    "#content span, #content input",
+                    ".hidden-phone",
+                    ".Sidebar__TodoListContainer *",
+                    ".events_list *:not(.event-details__title)",
+                    ".ic-DashboardCard__action svg",
+                    ".ic-DashboardCard__header_content *",
+                    "body h2, body div",
+                    "#immersive_reader_mount_point button span",
+                    "#DashboardOptionsMenu_Container span",
+                    "#context_modules_sortable_container span, .element_toggler, .ic-Input",
+                    "#calendar-app *",
+                    ".header-bar button",
+                    "#create_new_event_link",
+                    ".btn, #conversation_filter_select",
+                    ".messages li, .messages li .subject",
+                    ".ac-input-box"
+                ],
+                "css": ["color"],
+                "custom_css": {
+                    "text-decoration": "none !important"
+                }
+            }
+        ],
+        "primary-text-2": [
+            {
+                "type": "element",
+                "name": [
+                    ".menu-item-icon-container svg path"
+                ],
+                "css": ["fill"]
+            }
+        ],
+        "link-text": [
+            {
+                "type": "element",
+                "name": [
+                    "a",
+                    ".navigation-tray-container button span"
+                ],
+                "css": ["color"]
+            }
+        ],
+        "primary-background-3": [
+            {
+                "type": "element",
+                "name": [
+                    ".ic-DashboardCard",
+                    ".ic-DashboardCard__header_content",
+                    ".navigation-tray-container, .tray-with-space-for-global-nav",
+                    ".button-sidebar-wide",
+                    ".ic-DashboardCard__header-title *"
+                ],
+                "css": ["background"]
+            }
+        ],
+        "primary-background-4": [
+            {
+                "type": "element",
+                "name": [
+                    ".ic-app-header__menu-list-item--active"
+                ],
+                "css": ["background"]
+            }
+        ]
+    },
+    "css": {
+        "body *:not(a), .ic-app-header__menu-list-link, #DashboardCard_Container *": {
+            "text-decoration": "none !important"
+        },
+        ".event-details::after": {
+            "display": "none"
+        }
+    }
+}

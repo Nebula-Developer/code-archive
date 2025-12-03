@@ -1,0 +1,4 @@
+node_modules
+private
+# to clean the newly ignored files from the repo, use:
+# git rm -r --cached .
