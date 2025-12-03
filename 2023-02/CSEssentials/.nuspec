@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <metadata>
+        <id>CSEssentials</id>
+        <version>0.0.1</version>
+        <title>CSEssentials</title>
+        <authors>NebulaDev</authors>
+        <owners>NebulaDev</owners>
+        <licenseUrl>https://raw.githubusercontent.com/NebulaDev/CSEssentials/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/nebula-developer/CSEssentials</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A large collection of useful C# extensions and helpers</description>
+        <dependencies>
+
+        </dependencies>
+        <tags>math vectors graphics colors easing tools extensions helpers .NET</tags>
+    </metadata>
+</package>

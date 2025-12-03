@@ -1,0 +1,5 @@
+/home/nebuladev/Desktop/CSEssentials/CSEssentials.Tests/obj/Debug/net7.0/CSEssentials.Tests.csproj.AssemblyReference.cache
+/home/nebuladev/Desktop/CSEssentials/CSEssentials.Tests/obj/Debug/net7.0/CSEssentials.Tests.GeneratedMSBuildEditorConfig.editorconfig
+/home/nebuladev/Desktop/CSEssentials/CSEssentials.Tests/obj/Debug/net7.0/CSEssentials.Tests.AssemblyInfoInputs.cache
+/home/nebuladev/Desktop/CSEssentials/CSEssentials.Tests/obj/Debug/net7.0/CSEssentials.Tests.AssemblyInfo.cs
+/home/nebuladev/Desktop/CSEssentials/CSEssentials.Tests/obj/Debug/net7.0/CSEssentials.Tests.csproj.CoreCompileInputs.cache

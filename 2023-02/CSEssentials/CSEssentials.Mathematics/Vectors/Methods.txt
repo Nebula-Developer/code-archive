@@ -1,0 +1,19 @@
+List of methods for each Vector class:
+
+    Magnitude
+    Normalize
+    Dot Product
+    Distance
+    Angle
+    Angle between two vectors
+    Reflect
+    Rotate
+    Lerp
+    Min
+    Max
+    Clamp
+    SqrMagnitude
+    Equals
+    ToString
+    operator +, -, *, /
+    operator ==, !=
