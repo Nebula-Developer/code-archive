@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+button {
+  @apply cursor-pointer transition-all;
+}
+
+button.pressed {
+  @apply text-blue-500 font-bold;
+}

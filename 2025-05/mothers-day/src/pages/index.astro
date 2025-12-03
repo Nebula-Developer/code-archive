@@ -1,0 +1,68 @@
+---
+import "../styles/global.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Mothers Day</title>
+  </head>
+  <body class="bg-slate-950 text-white flex flex-col gap-4">
+    <div class="py-12 flex flex-col items-center gap-2">
+      <div class="text-4xl">Happy Mothers Day</div>
+      <div class="text-2xl">Scroll to reveal a poem</div>
+    </div>
+
+    <div class="flex flex-col items-center gap-96 py-24 mt-96 text-center">
+      <div>
+        <button>Never</button> met someone so bad at games
+      </div>
+      <div>
+        <button>Gonna</button> eat all the chips
+      </div>
+      <div>
+        <button>Give</button> Pepsi more food, he's already finished
+      </div>
+      <div>
+        <button>You</button> laugh until you have to take Lulu to the vet
+      </div>
+      <div>
+        <button>Up</button> at noon, watching your stupid shows
+      </div>
+    </div>
+
+    <div
+      id="cover"
+      class="fixed top-0 left-0 w-full h-full bg-black pointer-events-none hidden"
+    >
+      <img src="/rickroll-roll.gif" class="h-full w-full object-contain" />
+    </div>
+  </body>
+</html>
+
+<script defer>
+  let buttonCount = 0;
+  let buttonIndex = {};
+  var button = document.querySelectorAll("button");
+
+  button.forEach((bold, index) => {
+    bold.addEventListener("click", (e) => {
+      if (e.target.classList.contains("pressed")) return;
+      if (index > 0 && !buttonIndex[index - 1]) return;
+
+      buttonIndex[index] = true;
+      bold.classList.add("pressed");
+      buttonCount++;
+      checkButtons();
+    });
+  });
+
+  function checkButtons() {
+    if (buttonCount < button.length) return;
+    document.getElementById("cover").classList.remove("hidden");
+    document.getElementById("cover").classList.remove("pointer-events-none");
+  }
+</script>
