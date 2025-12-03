@@ -1,0 +1,27 @@
+
+channel (1) {
+    loop (100) {
+        play(hihat, C4, 1);
+        play(hihat, C4, 1);
+        play(hihat, C4, 1);
+        play(hihat, C4, 1);
+    }
+}
+
+channel (2) {
+    wait(1);
+    loop (100) {
+        play(snare, C4, 1.25);
+        play(snare, C4, 2);
+        play(snare, C4, 3/4);
+    }
+}
+
+channel (3) {
+    loop (100) {
+        play(kick, C4, 1/2);
+        play(kick, C4, 2);
+
+        play(kick, C4, 1.5);
+    }
+}
