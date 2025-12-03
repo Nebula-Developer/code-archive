@@ -538,6 +538,13 @@
       "createdAt": "2022-01-01T09:05:19Z",
       "archivedPath": "2022-01/Fan",
       "originalUrl": "https://github.com/Nebula-Developer/Fan"
+    },
+    {
+      "name": "Compassion",
+      "description": "A simple library for C# to speed up, and simplify code.",
+      "createdAt": "2021-12-15T22:14:28Z",
+      "archivedPath": "2021-12/Compassion",
+      "originalUrl": "https://github.com/Nebula-Developer/Compassion"
     }
   ]
 }
