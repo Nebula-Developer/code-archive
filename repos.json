@@ -370,6 +370,13 @@
       "createdAt": "2023-01-26T10:24:38Z",
       "archivedPath": "2023-01/PrysmScript",
       "originalUrl": "https://github.com/Nebula-Developer/PrysmScript"
+    },
+    {
+      "name": "Zenex",
+      "description": "Simple and blazing fast web framework for Node.js",
+      "createdAt": "2023-01-08T23:16:44Z",
+      "archivedPath": "2023-01/Zenex",
+      "originalUrl": "https://github.com/Nebula-Developer/Zenex"
     }
   ]
 }
