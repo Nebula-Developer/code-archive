@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "iXwA6bSmXKHsuzyEgygMctfWll1rV28Lw7oq2sSyNMwBZ7lOn5rTiKe7v+DJuty/AxS5ENAQ1NPboAUH9nhWig==",
+  "success": true,
+  "projectFilePath": "/Users/nebuladev/Documents/prisms/Prisms.csproj",
+  "expectedPackageFiles": [
+    "/Users/nebuladev/.nuget/packages/csfml/2.5.0/csfml.2.5.0.nupkg.sha512",
+    "/Users/nebuladev/.nuget/packages/sfml.audio/2.5.0/sfml.audio.2.5.0.nupkg.sha512",
+    "/Users/nebuladev/.nuget/packages/sfml.graphics/2.5.0/sfml.graphics.2.5.0.nupkg.sha512",
+    "/Users/nebuladev/.nuget/packages/sfml.net/2.5.0/sfml.net.2.5.0.nupkg.sha512",
+    "/Users/nebuladev/.nuget/packages/sfml.system/2.5.0/sfml.system.2.5.0.nupkg.sha512",
+    "/Users/nebuladev/.nuget/packages/sfml.window/2.5.0/sfml.window.2.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
