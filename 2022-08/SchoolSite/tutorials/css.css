@@ -1,0 +1,80 @@
+/* CSS is pretty difficult to learn, and is even hard for experienced people. */
+/* The hardest part is getting everything organized, and the colors are difficult too. */
+
+/* Basic cheatsheet: */
+/* 
+. = class
+# = id
+:hover = on hover
+:focus = on focus
+h1, p, div, etc.. = tag
+*/
+
+/* To change the background of the page, we can use the body tag: */
+body {
+    background: red;
+}
+
+/* Here are the most common CSS rules: */
+/* They are all pretty self explanatory. */
+.class {
+    color: red;
+    background: blue;
+    border: 1px solid black;
+    outline: 1px solid black;
+
+    padding: 10px; /* Padding expands the area of the element */
+    margin: 10px; /* Margin pushes the element away from the edges of other elements */
+
+    width: 100px;
+    height: 100px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial;
+    font-style: italic;
+    text-align: center;
+    text-decoration: underline;
+
+    position: relative; /* Positioning elements relative to other elements */
+    position: absolute; /* Positioning elements absolutely */
+    position: fixed; /* Positioning elements absolutely, but fixed to the page */
+    position: inherit; /* Positioning elements relatively to their parent */
+
+    display: block; /* Default display type */
+    display: flex; /* Display elements as flex elements */
+    display: grid; /* Display children as grid elements */
+    display: none; /* Hide the element */
+
+    visibility: visible; /* Default visibility */
+    visibility: hidden; /* Hide the element */
+
+    opacity: 1;
+    overflow: hidden; /* Whether to hide children that go outside of the element's bounds */
+
+    transform: rotate(45deg);
+    transform: scale(2); /* Scale 2x */
+    transform: translate(10px, 10px); /* Translate 10px horizontally and 10px vertically */
+
+    transition: 1s; /* If a css value changes, add a transition / animation */
+
+    /* Transitions have easing types, as shown: */
+    transition: 1s ease;
+    transition: 1s ease-in-out;
+    transition: 1s cubic-bezier(0.25, 0.1, 0.25, 1); /* Bezier curve */
+
+    /* Transitions can also target a spesific value */
+    transition: transform 1s;
+
+    cursor: pointer; /* Change the cursor when hovering over the element */
+}
+
+/* We can also use media queries to change the style of the page depending on the screen size */
+@media (max-width: 600px) {
+    .class {
+        /* If the width is under 600px, set the width of .class to 500px. */
+        width: 500px;
+    }
+}
+
+/* Hopefully this is enough to get you started. */
+/* Have fun! */

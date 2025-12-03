@@ -1,0 +1,75 @@
+<!-- HTML is a very basic markup language. -->
+<!-- It is essentially the layout and structure of a web page. -->
+
+<!-- Paragraphs are represented as the following: -->
+<p>This is a paragraph.</p>
+
+<!-- Headings are represented as the following: -->
+<h1>This is a heading.</h1>
+<!-- Heading sizes range from 1-6, I recommend sticking with 1 and restyling it with css. -->
+<h6>This is a small heading.</h6>
+
+<!-- Links are represented as the following (and can be put in other text): -->
+<a href="http://www.google.com">This is a link.</a>
+
+<!-- Images: -->
+<img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Google Logo">
+
+<!--
+B = Bold
+I = Italic
+U = Underline
+S = Strikethrough
+-->
+<b>Bold</b>
+<i>Italic</i>
+<u>Underline</u>
+<s>Strikethrough</s>
+
+<!-- To link a css file, use the following: -->
+<link rel="stylesheet" href="[path to css file]">
+<!-- To link a javascript file, use the following: -->
+<script src="[path to javascript file]"></script>
+
+<!-- To add a class or ID to an element, use the following: -->
+<p class="my-class">This is a paragraph with a class.</p>
+<p id="my-id">This is a paragraph with an ID.</p>
+
+<!-- Now, we can style everything with css: -->
+<style>
+    .my-class {
+        color: red;
+    }
+
+    #my-id {
+        color: blue;
+    }
+
+    /*
+        # = id
+        . = class
+        p, h1, a, etc.. = tag
+    */
+
+    img {
+        width: 100px;
+        height: auto;
+    }
+
+    /* We can assign display types: */
+    body {
+        display: flex;
+        flex-direction: column;
+        /* Now everything will be on a new line. */
+    }
+</style>
+
+<!-- To write javascript in the html file, use the script tag: -->
+<script>
+    console.log("Hello, world!");
+</script>
+
+<!--
+    There is many other things you can do with html,
+    but those are basically all you need to know.
+-->
