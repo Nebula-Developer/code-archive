@@ -1,4 +1,0 @@
-# pack-refs with: peeled fully-peeled sorted 
-6aaa6afe47ae1ee27c2be0d4a7638d01242e940f refs/heads/main
-782327c90a846fd2e89d19346fa6766fad55815f refs/heads/version/old
-a0fda3365c98ee7b6ba45607256d3ecd07908e81 refs/heads/wip/valtio
