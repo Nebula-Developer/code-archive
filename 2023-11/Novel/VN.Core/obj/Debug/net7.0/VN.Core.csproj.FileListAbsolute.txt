@@ -1,0 +1,12 @@
+/Users/nebuladev/Documents/Programming/Novel/VN.Core/bin/Debug/net7.0/VN.Core.deps.json
+/Users/nebuladev/Documents/Programming/Novel/VN.Core/bin/Debug/net7.0/VN.Core.dll
+/Users/nebuladev/Documents/Programming/Novel/VN.Core/bin/Debug/net7.0/VN.Core.pdb
+/Users/nebuladev/Documents/Programming/Novel/VN.Core/obj/Debug/net7.0/VN.Core.csproj.AssemblyReference.cache
+/Users/nebuladev/Documents/Programming/Novel/VN.Core/obj/Debug/net7.0/VN.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/nebuladev/Documents/Programming/Novel/VN.Core/obj/Debug/net7.0/VN.Core.AssemblyInfoInputs.cache
+/Users/nebuladev/Documents/Programming/Novel/VN.Core/obj/Debug/net7.0/VN.Core.AssemblyInfo.cs
+/Users/nebuladev/Documents/Programming/Novel/VN.Core/obj/Debug/net7.0/VN.Core.csproj.CoreCompileInputs.cache
+/Users/nebuladev/Documents/Programming/Novel/VN.Core/obj/Debug/net7.0/VN.Core.dll
+/Users/nebuladev/Documents/Programming/Novel/VN.Core/obj/Debug/net7.0/refint/VN.Core.dll
+/Users/nebuladev/Documents/Programming/Novel/VN.Core/obj/Debug/net7.0/VN.Core.pdb
+/Users/nebuladev/Documents/Programming/Novel/VN.Core/obj/Debug/net7.0/ref/VN.Core.dll
