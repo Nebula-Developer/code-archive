@@ -1,0 +1,47 @@
+{
+  "name": "karami",
+  "version": "1.1.4",
+  "description": "Simple library for creating powerful socket.io servers",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "doc": "typedoc --out docs src",
+    "dev": "tsc -w",
+    "build": "tsc",
+    "lint": "eslint",
+    "format": "prettier --write src/**/*.ts",
+    "prepublish": "pnpm run build || npm run build"
+  },
+  "keywords": [
+    "socket.io",
+    "server",
+    "typescript",
+    "auth",
+    "middleware"
+  ],
+  "author": "NebulaDev",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^22.7.3",
+    "@types/socket.io": "^3.0.2",
+    "@typescript-eslint/eslint-plugin": "^8.7.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "socket.io": "^4.8.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.11.1",
+    "@stylistic/eslint-plugin-ts": "^2.8.0",
+    "@types/eslint__js": "^8.42.3",
+    "@types/socket.io-client": "^3.0.0",
+    "@types/ws": "^8.5.12",
+    "eslint": "^9.11.1",
+    "eslint-typescript": "^1.1.0",
+    "socket.io-client": "^4.8.0",
+    "typedoc": "^0.26.7",
+    "typescript": "^4.7.4",
+    "typescript-eslint": "^8.7.0"
+  }
+}

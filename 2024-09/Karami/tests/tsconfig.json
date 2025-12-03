@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noEmit": true,
+    "paths": {
+      "@/*": ["../src/*"]
+    },
+    "baseUrl": "."
+  },
+  "types": ["node"]
+}
