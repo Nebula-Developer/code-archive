@@ -272,6 +272,13 @@
       "createdAt": "2023-04-02T04:39:32Z",
       "archivedPath": "2023-04/eduplex-server",
       "originalUrl": "https://github.com/Nebula-Developer/eduplex-server"
+    },
+    {
+      "name": "eduplex-extension",
+      "description": "Catalyze your education with EduPlex - a collection of incredible tools to improve your learning online.",
+      "createdAt": "2023-04-02T04:39:04Z",
+      "archivedPath": "2023-04/eduplex-extension",
+      "originalUrl": "https://github.com/Nebula-Developer/eduplex-extension"
     }
   ]
 }
