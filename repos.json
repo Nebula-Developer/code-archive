@@ -132,6 +132,13 @@
       "createdAt": "2023-12-02T05:32:25Z",
       "archivedPath": "2023-12/chatService",
       "originalUrl": "https://github.com/Nebula-Developer/chatService"
+    },
+    {
+      "name": "chatVisuals",
+      "description": "",
+      "createdAt": "2023-11-26T09:22:58Z",
+      "archivedPath": "2023-11/chatVisuals",
+      "originalUrl": "https://github.com/Nebula-Developer/chatVisuals"
     }
   ]
 }
