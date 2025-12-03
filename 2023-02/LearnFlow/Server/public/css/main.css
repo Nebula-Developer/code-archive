@@ -1,0 +1,436 @@
+
+.flex-center { display: flex; justify-content: center; align-items: center; }
+
+#learnflow-wrapper * {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+:root {
+    --lf-login-panel-border-radius: 15px;
+    --lf-login-panel-background-gap: 3px;
+    --lf-login-panel-background-rotate: 10deg;
+    --lf-login-panel-background-scale: 1.5;
+    --lf-login-panel-background-blur: 5px;
+    --lf-login-panel-background-duration: 0.5s;
+}
+
+#lf-login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    animation: boxShadowsLight 5s ease-in-out infinite;
+    transition: opacity 0.5s ease;
+}
+
+.lf-login-panel-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--lf-login-panel-border-radius);
+    padding: 200px;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.486);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: calc(100vh - 450px); /* Dont know why this works */
+    overflow: hidden;
+}
+
+.lf-login-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+
+.lf-login-background-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    --bg-1: #772986;
+    --bg-2: #dfd6a6;
+    background: linear-gradient(to right, var(--bg-1), var(--bg-2), var(--bg-1), var(--bg-2), var(--bg-1));
+    transform: scale(2) translateX(25%);
+    background-repeat: repeat-x;
+    animation: backgroundMove 3s linear infinite;
+}
+
+.lf-login-background-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - var(--lf-login-panel-background-gap));
+    height: calc(100% - var(--lf-login-panel-background-gap));
+    margin: calc(var(--lf-login-panel-background-gap) / 2);
+    z-index: 1;
+    filter: blur(calc(var(--lf-login-panel-background-blur)));
+    transform: rotate(var(--lf-login-panel-background-rotate)) scale(var(--lf-login-panel-background-scale));
+    transition: height var(--lf-login-panel-background-duration) ease, width var(--lf-login-panel-background-duration) ease, margin var(--lf-login-panel-background-duration) ease, filter 0.8s ease, transform 0.8s ease;
+}
+
+.lf-fill-background-grid-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.lf-fill-background-grid-item::before {
+    content: "";
+    position: absolute;
+    top: var(--lf-login-panel-background-gap);
+    left: var(--lf-login-panel-background-gap);
+    bottom: var(--lf-login-panel-background-gap);
+    right: var(--lf-login-panel-background-gap);
+    background: rgb(28, 28, 34);
+    /* Make top/left/etc have the same transition */
+    transition: top var(--lf-login-panel-background-duration) ease, left var(--lf-login-panel-background-duration) ease, bottom var(--lf-login-panel-background-duration) ease, right var(--lf-login-panel-background-duration) ease;
+}
+
+.lf-grid-tl-br::before { border-radius: var(--lf-login-panel-border-radius) 0 0 0; }
+.lf-grid-tr-bl::before { border-radius: 0 var(--lf-login-panel-border-radius) 0 0; }
+.lf-grid-bl-tr::before { border-radius: 0 0 0 var(--lf-login-panel-border-radius); }
+.lf-grid-br-tl::before { border-radius: 0 0 var(--lf-login-panel-border-radius) 0; }
+
+@keyframes backgroundMove {
+    0% {
+        transform: scaleX(2) translateX(25%);
+    }
+    100% {
+        transform: scaleX(2) translateX(-25%);
+    }
+}
+
+@keyframes loginContentBG {
+    0% {
+        filter: drop-shadow(0 0 20px rgba(128, 0, 128, 0.493)) drop-shadow(0 0 100px rgba(188, 209, 71, 0.712)) drop-shadow(0 0 5px rgba(2, 0, 128, 0.705)) drop-shadow(10px 0 5px rgba(208, 137, 255, 0.445));
+    }
+    50% {
+        filter: drop-shadow(-40px -30px 60px rgb(2, 0, 128)) drop-shadow(50px 0 40px rgb(188, 209, 71) ) drop-shadow(0 -20px 20px purple) drop-shadow(-10px 0 10px rgb(208, 137, 255));
+    }
+    100% {
+        filter: drop-shadow(0 0 20px rgba(128, 0, 128, 0.493)) drop-shadow(0 0 100px rgba(188, 209, 71, 0.712)) drop-shadow(0 0 5px rgba(2, 0, 128, 0.705)) drop-shadow(10px 0 5px rgba(208, 137, 255, 0.445));
+    }
+}
+
+@keyframes boxShadowsLight {
+    0% {
+        filter: drop-shadow(0 0 20px rgba(128, 0, 128, 0.493)) drop-shadow(0 0 100px rgba(188, 209, 71, 0.712)) drop-shadow(0 0 5px rgba(2, 0, 128, 0.705)) drop-shadow(10px 0 5px rgba(208, 137, 255, 0.445));
+    }
+    50% {
+        filter: drop-shadow(-40px -30px 60px rgba(2, 0, 128, 0.342)) drop-shadow(50px 0 40px rgba(71, 209, 191, 0.658) ) drop-shadow(0 -20px 20px rgba(128, 0, 128, 0.521)) drop-shadow(-10px 0 10px rgb(208, 137, 255));
+    }
+    100% {
+        filter: drop-shadow(0 0 20px rgba(128, 0, 128, 0.493)) drop-shadow(0 0 100px rgba(188, 209, 71, 0.712)) drop-shadow(0 0 5px rgba(2, 0, 128, 0.705)) drop-shadow(10px 0 5px rgba(208, 137, 255, 0.445));
+    }
+}
+
+@keyframes boxShadowsSmall {
+    0% {
+        filter: drop-shadow(0 0 20px rgba(128, 0, 128, 0.493)) drop-shadow(0 0 40px rgba(188, 209, 71, 0.712)) drop-shadow(0 0 5px rgba(2, 0, 128, 0.705)) drop-shadow(10px 0 5px rgba(208, 137, 255, 0.445));
+    }
+    50% {
+        filter: drop-shadow(-40px -30px 40px rgba(2, 0, 128, 0.342)) drop-shadow(50px 0 20px rgba(71, 209, 191, 0.658) ) drop-shadow(0 -20px 20px rgba(128, 0, 128, 0.521)) drop-shadow(-10px 0 10px rgb(208, 137, 255));
+    }
+    100% {
+        filter: drop-shadow(0 0 20px rgba(128, 0, 128, 0.493)) drop-shadow(0 0 40px rgba(188, 209, 71, 0.712)) drop-shadow(0 0 5px rgba(2, 0, 128, 0.705)) drop-shadow(10px 0 5px rgba(208, 137, 255, 0.445));
+    }
+}
+
+.lf-login-panel {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    animation: loginContentBG 10s ease-in-out infinite;
+}
+
+.lf-login-panel-header {
+    margin-bottom: 10px;
+}
+
+.lf-login-panel-header-title {
+    font-size: 30px;
+    font-weight: 300;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #dfd6a6;
+    background: linear-gradient(83deg, #ff97de, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 20px #1b10188a;
+    text-align: center;
+}
+
+.lf-login-input {
+    padding: 0 10px !important;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    color: #271450;
+    background: linear-gradient(35deg, #f1a6ff, #8b56cf);
+    box-shadow: none;
+    filter: none;
+    margin: 5px 0;
+    width: 250px !important;
+    height: 43px !important;
+    transition: filter 0.2s, background 0.3s ease;
+}
+
+.lf-login-input::placeholder {
+    color: #3b1f77;
+}
+
+.lf-login-input:focus {
+    filter: brightness(1.1);
+    background: linear-gradient(85deg, #f1a6ff, #8b56cf);
+}
+
+.lf-login-button {
+    outline: 1px solid #f55cff;
+    border: none;
+    padding: 9px 30px;
+    border-radius: 5px;
+    background: linear-gradient(40deg, #b181ff, #f238ff);
+    color: white;
+    margin-top: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: filter 0.2s, transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.lf-login-button:hover {
+    filter: brightness(1.1) drop-shadow(-5px 5px 5px #f55cff);
+    transform: rotateX(10deg) rotateY(20deg) translate(5px, -5px);
+    box-shadow: -10px 10px 10px #f55cff;
+}
+
+.lf-login-button:active {
+    filter: brightness(0.9) drop-shadow(-5px 5px 2px #f45cffbd);;
+    transition: filter 0.1s, transform 0.2s ease, box-shadow 0.2s ease;
+    transform: rotateX(10deg) rotateY(20deg) translate(-5px, 5px);
+    box-shadow: 0px 0px 10px #f55cff;
+}
+
+.lf-login-panel-button-wrapper {
+    margin-top: 10px;
+}
+
+.lf-login-panel-error {
+    height: 40px;
+    color: #ff7979;
+    max-width: 200px;
+    text-shadow: 0 0 15px #ff5858;
+    user-select: none;
+    transition: opacity 0.5s;
+}
+
+.lf-opacity-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+#lf-notification-wrapper {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    animation: boxShadowsSmall 10s ease-in-out infinite;
+}
+
+.lf-notification {
+    margin-top: 10px;
+    background: rgb(28, 28, 34);
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+    overflow: hidden;
+    min-width: 200px;
+    transition: transform 0.5s ease;
+    position: relative;
+}
+
+.lf-notification-header {
+    position: relative;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    user-select: none;
+    border-bottom: 1px solid rgb(148, 99, 226);
+}
+
+.lf-notification-header::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #f55cff;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+}
+
+.lf-notification:hover .lf-notification-header::after {
+    transform: scaleX(1);
+}
+
+.lf-notification-header-title {
+    text-align: left;
+    color: white;
+    font-size: 16px;
+}
+
+.lf-notification-body {
+    margin: 5px;
+    width: calc(100% - 10px);
+}
+
+.lf-notification-body-content {
+    width: 100%;
+}
+
+.lf-notification-body-content-button-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.lf-notification-button {
+    border: 1px solid rgb(48, 48, 77);
+    outline: none;
+    background: rgb(19, 19, 24);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: border 0.3s ease, background 0.2s ease;
+}
+
+.lf-notification-button:hover {
+    border: 1px solid rgb(93, 93, 146);
+}
+
+.lf-notification-button:active {
+    border: 1px solid rgb(89, 54, 129);
+    background: rgb(42, 41, 58);
+    transition: border 0.1s ease;
+}
+
+.lf-notification-appear {
+    transform: translateX(calc(100% + 50px));
+}
+
+.lf-notification-disappear {
+    transform: translateX(calc(100% + 50px));
+    transition: transform 0.4s ease;
+}
+
+.lf-no-glow {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+}
+
+#lf-disable-glow-popup {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 999999;
+}
+
+.lf-disable-glow-switch {
+    width: 80px;
+    height: 30px;
+    background: white;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    animation: boxShadowsSmall 10s ease-in-out infinite;
+}
+
+.lf-disable-glow-switch-ball {
+    position: absolute;
+    height: 100%;
+    width: 30px;
+    left: 0;
+    top: 0;
+    background: rgb(180, 134, 255);
+    transition: 0.25s ease;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.lf-disable-glow-switch:hover .lf-disable-glow-switch-ball {
+    left: 10px;
+}
+
+.lf-disable-glow-switch.lf-switch-active:hover .lf-disable-glow-switch-ball {
+    left: calc(100% - 40px);
+}
+
+.lf-disable-glow-switch:active .lf-disable-glow-switch-ball {
+    left: 20px;
+    transition: 0.1s ease;
+}
+
+.lf-disable-glow-switch.lf-switch-active:active .lf-disable-glow-switch-ball {
+    left: calc(100% - 50px);
+    transition: 0.1s ease;
+}
+
+.lf-disable-glow-switch.lf-switch-active .lf-disable-glow-switch-ball {
+    left: calc(100% - 30px);
+}
+
+.lf-hidden {
+    display: none !important;
+}
+
+.lf-swap-panel-button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    background: none;
+    width: 100%;
+    margin-top: 30px;
+    text-shadow: 0 0 10px #8b56cf, 0 0 38px #bbcf56, 0 0 10px #8b56cf;
+    transition: text-shadow 0.5s ease;
+}
+
+.lf-swap-panel-button:hover {
+    text-shadow: -10px 0 10px #56cf58, -10px 5px 38px #bbcf56, 0 -5px 10px #cf9056;
+}
+
+.lf-swap-panel-button:active {
+    text-shadow: -10px 0 10px #8b56cf, -10px 5px 38px #bbcf56, 0 -5px 10px #8b56cf;
+    transition: text-shadow 0s;
+}
+
+.lf-login-panel-body-content-form-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#lf-register-panel-error {
+    margin-bottom: 10px;
+}
