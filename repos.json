@@ -293,6 +293,13 @@
       "createdAt": "2023-03-22T04:19:03Z",
       "archivedPath": "2023-03/learnplus_server",
       "originalUrl": "https://github.com/Nebula-Developer/learnplus_server"
+    },
+    {
+      "name": "learnplus_chrome",
+      "description": "Learnplus Chrome Extension (Primary)",
+      "createdAt": "2023-03-21T05:43:52Z",
+      "archivedPath": "2023-03/learnplus_chrome",
+      "originalUrl": "https://github.com/Nebula-Developer/learnplus_chrome"
     }
   ]
 }
