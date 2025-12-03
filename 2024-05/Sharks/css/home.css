@@ -1,0 +1,193 @@
+/* Only for /index.html */
+
+.home-about {
+	position: relative;
+	border-top: 2px solid;
+	border-bottom: 2px solid;
+	/* Uses an alternate border colour to whats used on different pages.
+	   Makes it feel more 'important' in a way. */
+	border-color: white;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.home-about-background-color {
+	position: absolute;
+	top: 0;
+	left: 0;
+	/* We position the z-index of the background elements
+	   to place them behind the content. -2 < -1, therefore
+	   this is behind everything. */
+	z-index: -2;
+	width: 100%;
+	height: 100%;
+	/* Give a gradient effect to the wave-background image */
+	background: linear-gradient(#0c2844, black);
+}
+
+.home-about-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	/* 1 layer above .home-about-background-color */
+	z-index: -1;
+	width: 100%;
+	height: 100%;
+	/* background-repeat: repeat; */
+
+	/* Scale the image to fit the parent container */
+	background-size: 100%;
+	background-image: url('../images/wave-background.avif');
+	opacity: 0.1;
+	/* Prevents the image from overloading the page visually */
+	filter: blur(10px);
+}
+
+.home-about .section-content {
+	width: calc(100% - 60px);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	padding: 50px 30px;
+}
+
+.home-about .section-header {
+	padding-top: 50px;
+}
+
+.home-about-content {
+	font-size: calc(max(30px, 2vw));
+	max-width: 1000px;
+	width: calc(100% - 50px);
+}
+
+.home-about .section-content-image {
+	/* Places the image to the right of the content,
+	   spacing the text around it to the left. */
+	float: right;
+	border-radius: 50%;
+	width: 20vw;
+	min-width: 200px;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	/* Just some nice effects to make the image
+	   better shaped for the layout of the page. */
+	transform: rotateY(180deg) rotateZ(-10deg);
+}
+
+.home-scared {
+	background: linear-gradient(black, rgb(25, 68, 81));
+}
+
+.scary-text {
+	padding: 50px;
+	width: calc(100% - 100px);
+	max-width: 1000px;
+	font-size: 30px;
+	letter-spacing: 1px;
+	/* Changing fonts can help seperate different sections of the page. */
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.scary-content {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+/* The bouncing scroll button at the bottom of the page header section. */
+.content-scroll {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	/* Using constant size values helps keep it consistent
+	   for different devices (and fonts) */
+	width: 60px;
+	height: 60px;
+	background: rgba(0, 0, 0, 0.1);
+	z-index: 30;
+	/* Rounded (circular) */
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation: bounce 5s infinite ease;
+	/* Contrasts from the background */
+	box-shadow: 0px 0px 10px 1px rgb(72, 87, 87);
+	transition: background 0.3s;
+}
+
+.content-scroll:hover {
+	background: rgba(0, 0, 0, 0.4);
+	/* Makes it so when the mouse enters, it instantly changes background colour,
+	   but when the mouse leaves, it smoothly fades back to its original colour. */
+	transition: background 0s;
+}
+
+.home-map {
+	border-top: 2px solid #4b93b3;
+	background: radial-gradient(circle, #0c2844, black);
+}
+
+body {
+	background: black;
+}
+
+.image-wrapper {
+	position: relative;
+	background: radial-gradient(silver, transparent 70%);
+}
+
+.interactive-wrapper {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: 80px;
+}
+
+#imageMap {
+	/* The image map is a bit hacky because it uses normalised
+	   values that are mapped with javascript. The visuals use
+	   similar layout styles to all the page headers (absolute) */
+	position: absolute;
+	/* Fits the image rather than overflowing or stretching */
+	object-fit: cover;
+	top: 0;
+	border: none;
+	outline: none;
+	width: calc(100vw - 100px);
+	max-width: 1000px;
+	height: auto;
+}
+
+#svg {
+	z-index: 1;
+	pointer-events: none;
+	filter: blur(10px);
+	transition: opacity 0.15s ease;
+	opacity: 0;
+}
+
+/* This is a simple bounce animation that appears on the home page
+   (you will notice it in on the arrow at the bottom of the front page) */
+@keyframes bounce {
+	0% {
+		/* translateX -50% because $1/2p - 1/2c = center$ and we aren't using flexbox.
+		   (Although I probably should have) */
+		transform: translateY(0) translateX(-50%);
+	}
+
+	50% {
+		transform: translateY(-10px) translateX(-50%);
+		box-shadow: 0px 0px 10px 2px rgb(72, 76, 87);
+	}
+
+	100% {
+		transform: translateY(0) translateX(-50%);
+	}
+}

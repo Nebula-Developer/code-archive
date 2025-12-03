@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- This is a small script I wrote to help with producing image maps. It is not utilised
+         as a content page. -->
+
+    <!-- 
+
+        Stored data:
+        
+        Jawbone: <area href="#" shape="poly" coords="44,109,123,117,142,110,178,173,173,191,114,221,87,228,70,214,86,212,87,197,97,195,102,198,107,192,112,192,116,186,120,189,122,182,126,180,128,175,114,153,106,146,105,140,103,139,95,140,92,132,85,128,77,132,77,126,69,123,67,130,63,130,60,122,52,127,48,125,44,126,45,117">
+        Gills: <area href="#" shape="poly" coords="202,122,209,160,202,195,195,212,202,220,221,224,271,232,288,213,296,181,301,129,290,128,265,116,233,112,214,114">
+        Stomach: <area href="#" shape="poly" coords="332,197,350,193,374,198,381,196,401,205,468,214,478,219,469,233,439,248,414,251,379,249,346,242,320,233,323,214">
+        Uterus: <area href="#" shape="poly" coords="393,172,520,185,591,203,612,219,617,231,608,233,599,217,564,209,532,212,494,211,444,212,402,207,387,194,386,181">
+        Spiral valve intestine: <area href="#" shape="poly" coords="479,227,518,216,567,210,597,219,606,226,607,233,599,234,591,225,581,229,551,235,511,241,485,243,472,238,467,235">
+        Cranium: <area href="#" shape="poly" coords="32,39,77,55,127,62,174,77,192,93,190,127,181,126,180,108,168,116,107,94,80,90,54,87,43,68,30,54,26,46">
+        Dorsal fin: <area href="#" shape="poly" coords="475,24,401,103,481,112,485,25">
+        Vertebral column: <area href="#" shape="poly" coords="194,111,343,142,425,143,600,177,846,225,874,299,885,295,885,256,917,187,945,146,945,133,933,130,914,147,860,191,851,202,782,197,581,161,468,139,395,127,340,124,247,102,194,90">
+        Base: <area href="#" shape="poly" coords="214,385,726,388,810,454,807,474,802,475,147,475,141,469,143,453,205,399,212,390">
+     -->
+
+    <div class="image-wrapper" id="wrapper">
+        <img id="image" src="images/AnatomyShark.png" usemap="#map">
+        <canvas id="canvas"></canvas>
+        <map name="map">
+            <area href="#" shape="poly" coords="214,385,726,388,810,454,807,474,802,475,147,475,141,469,143,453,205,399,212,390">
+            <area href="#" shape="poly" coords="194,111,343,142,425,143,600,177,846,225,874,299,885,295,885,256,917,187,945,146,945,133,933,130,914,147,860,191,851,202,782,197,581,161,468,139,395,127,340,124,247,102,194,90">
+            <area href="#" shape="poly" coords="475,24,401,103,481,112,485,25">
+            <area href="#" shape="poly" coords="32,39,77,55,127,62,174,77,192,93,190,127,181,126,180,108,168,116,107,94,80,90,54,87,43,68,30,54,26,46">
+            <area href="#" shape="poly" coords="479,227,518,216,567,210,597,219,606,226,607,233,599,234,591,225,581,229,551,235,511,241,485,243,472,238,467,235">
+            <area href="#" shape="poly" coords="393,172,520,185,591,203,612,219,617,231,608,233,599,217,564,209,532,212,494,211,444,212,402,207,387,194,386,181">
+            <area href="#" shape="poly" coords="332,197,350,193,374,198,381,196,401,205,468,214,478,219,469,233,439,248,414,251,379,249,346,242,320,233,323,214">
+            <area href="#" shape="poly" coords="202,122,209,160,202,195,195,212,202,220,221,224,271,232,288,213,296,181,301,129,290,128,265,116,233,112,214,114">
+            <area href="#" shape="poly" coords="44,109,123,117,142,110,178,173,173,191,114,221,87,228,70,214,86,212,87,197,97,195,102,198,107,192,112,192,116,186,120,189,122,182,126,180,128,175,114,153,106,146,105,140,103,139,95,140,92,132,85,128,77,132,77,126,69,123,67,130,63,130,60,122,52,127,48,125,44,126,45,117">
+        </map>
+
+        <svg id="svg" width="100%" height="100%" style="position: absolute; top: 0; left: 0; z-index: 1;">
+            <polygon id="polygon" fill="rgba(0, 0, 0, 0.5)" stroke="none" stroke-width="2" />
+        </svg>
+    </div>
+
+    <style>
+        body {
+            background: black;
+        }
+
+        .image-wrapper {
+            position: relative;
+            background: radial-gradient(silver, black 70%);
+        }
+
+        #image,
+        #canvas {
+            position: absolute;
+            top: 0;
+            object-fit: cover;
+            border: none;
+            outline: none;
+        }
+        
+        #canvas {
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+
+        #svg {
+            z-index: 1;
+            pointer-events: none;
+            filter: blur(10px);
+        }
+    </style>
+
+    <script>
+        var canvas = document.getElementById('canvas');
+        var map = document.querySelector('map');
+        var image = document.getElementById('image');
+        var wrapper = document.getElementById('wrapper');
+        var svg = document.getElementById('svg');
+        var polygon = document.getElementById('polygon');
+
+        image.onload = function () {
+            var size = {
+                width: image.width / 4,
+                height: image.height / 4
+            }
+
+            wrapper.style.width = size.width + 'px';
+            wrapper.style.height = size.height + 'px';
+
+            canvas.width = size.width;
+            canvas.height = size.height;
+
+            image.width = size.width;
+            image.height = size.height;
+        }
+
+        var points = [];
+
+        canvas.addEventListener('mousedown', function (e) {
+            if (e.button === 0) {
+                points.push({
+                    x: e.offsetX,
+                    y: e.offsetY
+                });
+            } else if (e.button === 2) {
+                points.pop();
+            }
+        });
+
+        canvas.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                // append as area elements, then clear.
+                var area = document.createElement('area');
+                area.href = '#';
+                area.setAttribute('shape', 'poly');
+                area.setAttribute('coords', points.map(function (point) {
+                    return point.x + ',' + point.y;
+                }).join(','));
+                map.appendChild(area);
+
+                points = [];
+                console.log(area.outerHTML);
+                navigator.clipboard.writeText(area.outerHTML);
+            }
+
+            if (e.key === 'Backspace') {
+                canvas.style.display = canvas.style.display === 'none' ? 'block' : 'none';
+            }
+        });
+
+        var ctx = canvas.getContext('2d');
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (points.length === 0) return;
+
+            ctx.strokeStyle = 'white';
+
+            if (points.length === 1) {
+                ctx.beginPath();
+                ctx.arc(points[0].x, points[0].y, 5, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.stroke();
+                return;
+            }
+
+            ctx.beginPath();
+            ctx.moveTo(points[0].x, points[0].y);
+            for (var i = 1; i < points.length; i++) {
+                ctx.lineTo(points[i].x, points[i].y);
+            }
+            ctx.closePath();
+            ctx.stroke();
+
+            for (var i = 0; i < points.length; i++) {
+                ctx.beginPath();
+                ctx.arc(points[i].x, points[i].y, 5, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.stroke();
+            }
+        }
+
+        function animate() {
+            draw();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+        $("body").on("contextmenu", "area", function(e) {
+            return false;
+        });
+
+        // make polygon
+        $("body").on("mouseover", "area", function(e) {
+            svg.style.display = 'block';
+
+            var coords = e.target.getAttribute('coords').split(',').map(function (coord) {
+                return parseInt(coord);
+            });
+
+            var points = [];
+            for (var i = 0; i < coords.length; i += 2) {
+                points.push(coords.slice(i, i + 2));
+            }
+
+            var path = points.map(function (point) {
+                return point.join(',');
+            }).join(' ');
+
+            polygon.setAttribute('points', path);
+        });
+
+        $("body").on("mouseout", "area", function(e) {
+            svg.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

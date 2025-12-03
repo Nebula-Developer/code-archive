@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="author" content="Nico Cook" />
+		<meta
+			name="keywords"
+			content="sharks, great white shark, species, facts"
+		/>
+		<meta
+			name="description"
+			content="Learn about the Great White Shark, the largest predator fish in the world."
+		/>
+		<link
+			rel="icon"
+			type="image/xicon"
+			href="../favicon.ico"
+			sizes="96x96"
+		/>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+			integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script src="../js/main.js" defer></script>
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/sharks.css" />
+		<title>
+			Great White Shark | The Great and Dangerous World of Sharks
+		</title>
+	</head>
+
+	<body>
+		<!-- Duplicated elements, see /index.html -->
+		<div class="hover-text-container hide">
+			<div class="hover-text-name"></div>
+			<div class="hover-text-definition"></div>
+		</div>
+		<div id="navbar" class="flex-center">
+			<div class="navbar-content">
+				<a href="../index.html" class="navbar-header">
+					<div class="navbar-header-top">Sharks</div>
+					<div class="navbar-header-bottom">
+						The great and dangerous world of
+					</div>
+				</a>
+
+				<div class="navbar-links">
+					<a href="../index.html" class="navbar-link">Home</a>
+					<a href="../index.html#about" class="navbar-link">About</a>
+					<a href="../species.html" class="navbar-link">Species</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="content">
+			<div class="content-header">
+				<img
+					src="../images/GreatWhiteShark3.webp"
+					alt="Great White Shark"
+					class="content-header-background"
+				/>
+				<div class="content-header-background-cover"></div>
+				<div class="content-header-text-wrapper flex-center">
+					<div class="content-header-text">
+						<!-- In this instance, I spaced the text and made it a more
+						     bright colour to entice the idea of 'greatness' and 'danger'. -->
+						<div
+							class="content-header-title"
+							style="
+								background: white;
+								background-clip: text;
+								letter-spacing: 2vw;
+							"
+						>
+							Great White
+						</div>
+						<div class="content-header-subtitle">
+							The largest
+							<!-- Also spices it up. Makes it unique, with a defintion right as you load onto this page. -->
+							<span
+								class="hover-word"
+								data-define="An animal that naturally preys (hunts and eats) on other animals."
+							>
+								predator
+							</span>
+							fish in the world
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="shark-bio">
+				<div class="shark-bio-section">
+					<div class="shark-bio-header">The Great White Shark</div>
+					<div class="shark-bio-text">
+						The great white shark is the largest predator fish in
+						the world. It is known for its
+						<span
+							class="hover-word"
+							data-define="The Great White Shark can grow up to 20 feet long and weigh up to 5,000 pounds."
+						>
+							size,
+						</span>
+						<span
+							class="hover-word"
+							data-define="The Great White Shark can swim up to 35 miles per hour."
+						>
+							speed,
+						</span>
+						and
+						<span
+							class="hover-word"
+							data-define="The Great White Shark can bite with a force of over 4,000 pounds per square inch."
+						>
+							strength.
+						</span>
+						The great white shark is a fierce predator that feeds on
+						a variety of marine animals, including fish, seals, and
+						other sharks. It is found in coastal waters around the
+						world and is known for its distinctive appearance and
+						aggressive behavior. Additionally, the great white shark
+						has the strongest jaws of any shark species, capable of
+						exerting a bite force of over 4,000 pounds per square
+						inch.
+
+						<br />
+						<br />
+
+						<a href="jawbone.html" style="font-size: inherit">
+							Learn more about a shark's jawbone here!
+						</a>
+					</div>
+				</div>
+
+				<div class="shark-bio-section">
+					<!-- These inline styles are used to flip the image and rotate it slightly.
+					     It compliments the layout and makes the shark feel like it fits the page. -->
+					<img
+						src="../images/GreatWhiteShark.webp"
+						alt="Great White Shark"
+						class="shark-bio-image-right"
+						style="transform: scaleX(-1) rotate(-10deg)"
+					/>
+					<div class="shark-bio-text">
+						The Great White Shark has a large, torpedo-shaped body
+						with a pointed snout and a crescent-shaped tail. It has
+						a gray back and a white underside, which helps it blend
+						in with the ocean's surface when viewed from above or
+						below. The Great White Shark has several rows of sharp,
+						serrated teeth that are used for catching and eating
+						prey. It is an apex predator, meaning that it is at the
+						top of the food chain and has no natural predators.
+					</div>
+				</div>
+			</div>
+
+			<div class="shark-stats" id="stats">
+				<table class="shark-stats-table">
+					<tr>
+						<th colspan="2" class="shark-stats-header">
+							Great White Shark Stats
+						</th>
+					</tr>
+					<tr>
+						<td class="shark-stats-label">Scientific Name</td>
+						<td class="shark-stats-value">
+							Carcharodon carcharias
+						</td>
+					</tr>
+					<tr>
+						<td class="shark-stats-label">Average Length</td>
+						<td class="shark-stats-value">15-20 feet</td>
+					</tr>
+					<tr>
+						<td class="shark-stats-label">Average Weight</td>
+						<td class="shark-stats-value">2,200-5,000 pounds</td>
+					</tr>
+					<tr>
+						<td class="shark-stats-label">Average Lifespan</td>
+						<td class="shark-stats-value">30-40 years</td>
+					</tr>
+					<tr>
+						<td class="shark-stats-label">Habitat</td>
+						<td class="shark-stats-value">
+							Coastal waters worldwide
+						</td>
+					</tr>
+					<tr>
+						<td class="shark-stats-label">Diet</td>
+						<td class="shark-stats-value">
+							Fish, seals, other sharks
+						</td>
+					</tr>
+					<tr>
+						<td class="shark-stats-label">Conservation Status</td>
+						<td class="shark-stats-value">Vulnerable</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="shark-page-references">
+				<div class="shark-page-references-header">
+					Content references
+				</div>
+				<div class="shark-page-references-list">
+					<a
+						href="https://en.wikipedia.org/wiki/Great_white_shark"
+						class="shark-page-reference"
+					>
+						Great White Shark - Wikipedia
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Duplicated element, see /index.html -->
+		<div class="footer">
+			<div class="footer-content">
+				<a class="footer-header" href="../index.html">Sharks</a>
+
+				<div class="footer-links">
+					<a href="../index.html" class="footer-link">Home</a>
+					<a href="../index.html#about" class="footer-link">About</a>
+					<a href="../species.html" class="footer-link">Species</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

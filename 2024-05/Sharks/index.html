@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="author" content="Nico Cook" />
+		<meta name="keywords" content="sharks, species, facts" />
+		<meta
+			name="description"
+			content="Learn all about the great and dangerous world of sharks."
+		/>
+		<link rel="icon" type="image/xicon" href="favicon.ico" sizes="96x96" />
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+			integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script src="js/main.js" defer></script>
+		<script src="js/coords.js"></script>
+		<script src="js/home.js" defer></script>
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/home.css" />
+		<title>Home | The Great and Dangerous World of Sharks</title>
+	</head>
+
+	<body>
+		<!-- This container is manually copied to all pages.
+		     It is referenced in /js/main.js for the definition
+			 hover elements. -->
+		<div class="hover-text-container hide">
+			<div class="hover-text-name"></div>
+			<div class="hover-text-definition"></div>
+		</div>
+
+		<!-- This navbar is also manually copied to all pages.
+		     Web frameworks often do this for us. -->
+		<div id="navbar" class="flex-center">
+			<div class="navbar-content">
+				<a href="index.html" class="navbar-header">
+					<div class="navbar-header-top">Sharks</div>
+					<div class="navbar-header-bottom">
+						The great and dangerous world of
+					</div>
+				</a>
+
+				<div class="navbar-links">
+					<a href="index.html" class="navbar-link">Home</a>
+					<a href="index.html#about" class="navbar-link">About</a>
+					<a href="species.html" class="navbar-link">Species</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="content">
+			<div class="content-header">
+				<img
+					src="images/GrayReefShark.jpg"
+					alt="Gray Reef Shark"
+					class="content-header-background"
+				/>
+				<div class="content-header-background-cover"></div>
+				<div class="content-header-text-wrapper flex-center">
+					<div class="content-header-text">
+						<div class="content-header-title">Sharks</div>
+						<div class="content-header-subtitle">
+							The most feared predator in the ocean
+						</div>
+					</div>
+				</div>
+
+				<a class="content-scroll" href="#about">
+					<img
+						src="images/ScrollArrow.svg"
+						width="25"
+						style="filter: invert(1)"
+						alt="Scroll down button arrow"
+					/>
+				</a>
+			</div>
+
+			<div class="home-about section" id="about">
+				<div class="section-header">All about Sharks</div>
+
+				<div
+					alt="Repeating wave background"
+					class="home-about-background"
+				></div>
+				<div class="home-about-background-color"></div>
+
+				<div class="section-content">
+					<div class="section-content-text">
+						<img
+							src="images/GreatWhiteShark.webp"
+							alt="Great White Shark"
+							class="section-content-image"
+						/>
+						<div class="home-about-content">
+							<small style="font-size: 18px">
+								Hint: &nbsp; Try hovering over text that looks
+								like
+								<!-- data-define is an attribute that doesn't exist,
+								     but I am using it to store the definition of a word
+									 so that it can be accessed by the hover-text-container
+									 in /js/main.js. -->
+								<span
+									class="hover-word"
+									data-define="You can hover over words like this to see their definitions. Try it out!"
+								>
+									this!
+								</span>
+							</small>
+							<div style="height: 20px"></div>
+							Sharks, often known as the apex predators of the
+							oceans, are a diverse group of
+							<!-- Because it is setting the inner html of the hover container,
+							     we can embed html right in the data-define attribute, as shown here. -->
+							<span
+								class="hover-word"
+								data-define="Made of <a target='blank' href='https://www.merriam-webster.com/dictionary/cartilage'>cartilage</a>, a tough, elastic tissue that is lighter and more flexible than bone. Other fish like rays and skates are also made of cartilage, and are named 'elasmobranchs'."
+							>
+								cartilaginous
+							</span>
+							fish known for their streamlined bodies, multiple
+							rows of sharp teeth, and amazing hunting abilities.
+							<br />
+							<br />
+							With over 500 species found in oceans around the
+							world, sharks come in various shapes, sizes, and
+							colors, ranging from the massive whale shark - the
+							largest fish in the sea, to the tiny dwarf lantern
+							shark - a species that glows in the dark. Sharks can
+							be found in all types of marine environments, from
+							the deep sea to shallow coastal waters, and even in
+							freshwater rivers and lakes.
+							<br />
+							<br />
+							Despite their fearsome reputation, sharks play a
+							major role in maintaining the health and balance of
+							marine
+							<span
+								class="hover-word"
+								data-define="A biological community of interacting organisms and their physical environment."
+							>
+								ecosystems
+							</span>
+							by keeping populations of prey species in check and
+							improving
+							<span
+								class="hover-word"
+								data-define="The variety of life in the world or in a particular habitat or ecosystem."
+							>
+								biodiversity
+							</span>
+							. From ancient species that have been around for
+							millions of years, to newly discovered deep-sea
+							divers, sharks are fascinating creatures that have
+							shocked and awed humans for centuries.
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="home-scared section">
+				<div class="section-header">Are Sharks Scary?</div>
+
+				<div class="scary-content">
+					<div class="scary-text">
+						<img
+							src="images/BullShark.webp"
+							alt="Bull Shark"
+							class="bullshark-image"
+							style="
+								float: right;
+								min-width: 400px;
+								max-width: 700px;
+								width: 10vw;
+								object-fit: contain;
+							"
+						/>
+
+						Sharks are often thought of as dangerous killers that
+						attack humans, but this is
+						<span
+							class="hover-word"
+							data-define="Each year, there are around 80 unprovoked shark attacks worldwide, with only a few being fatal. Usually, sharks only attack humans when they mistake them for prey, like seals, or when they are curious."
+						>
+							usually not the case.
+						</span>
+						Most sharks are not interested in attacking humans, and
+						will only do so if they are confused or curious.
+						<br />
+						<br />
+						Sometimes, a shark may mistake a human for a seal, or
+						may be curious about what that human is. But,
+						<b>this is not to say that sharks are not dangerous!</b>
+						Some species of sharks are more aggressive than others,
+						and some are more likely to attack humans. This includes
+						the
+						<a href="sharks/great-white.html">great white shark</a>
+						,
+						<a href="sharks/tiger.html">the tiger shark</a>
+						, and the
+						<a href="sharks/bull-shark.html">bull shark</a>
+						. However, these sharks are not the mindless killers
+						that they are often made out to be.
+						<br />
+						<br />
+						<a
+							href="species.html"
+							style="font-size: 25px; letter-spacing: -2px"
+						>
+							Click here to learn more about different species of
+							sharks!
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="home-map section">
+				<div class="section-header">Interactive Shark Anatomy</div>
+				<div style="text-align: center; display: flex; justify-content: center; width: 100%; margin-top: 20px; color: grey; font-size: 20px;">Warning:&nbsp;All links are external, and may contain graphic images.</div>
+
+				<!-- This is all controlled by the CSS and JS.
+					 All children are absolutely positioned to this wrapper (which is relative),
+					 then the javascript places the calculated positions from the normal values in the map. -->
+				<div class="interactive-wrapper">
+					<div class="image-wrapper" id="wrapper">
+						<img
+							id="imageMap"
+							src="images/AnatomyShark.png"
+							usemap="#map"
+							alt="Shark Anatomy image with clickable areas for different body parts"
+						/>
+						
+						<map name="map"></map>
+						
+						<!-- This svg helps the user understand what they are hovering over.
+						     It is also controlled by the JS. -->
+						<svg
+							id="svg"
+							width="100%"
+							height="100%"
+							style="position: absolute; top: 0; left: 0; z-index: 1"
+						>
+							<polygon
+								id="polygon"
+								fill="rgba(0, 0, 0, 0.5)"
+								stroke="none"
+								stroke-width="2"
+							/>
+						</svg>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- This footer element is copied to all pages. It is farily basic. -->
+		<div class="footer">
+			<div class="footer-content">
+				<a class="footer-header" href="index.html">Sharks</a>
+
+				<div class="footer-links">
+					<a href="index.html" class="footer-link">Home</a>
+					<a href="index.html#about" class="footer-link">About</a>
+					<a href="species.html" class="footer-link">Species</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

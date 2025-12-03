@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="author" content="Nico Cook" />
+		<meta name="keywords" content="sharks, species, facts" />
+		<meta
+			name="description"
+			content="Learn all about the different species of sharks."
+		/>
+		<link rel="icon" type="image/xicon" href="favicon.ico" sizes="96x96" />
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+			integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script src="js/main.js" defer></script>
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/species.css" />
+		<title>Species | The Great and Dangerous World of Sharks</title>
+	</head>
+
+	<body>
+		<!-- Duplicated elements, see /index.html -->
+		<div class="hover-text-container hide">
+			<div class="hover-text-name"></div>
+			<div class="hover-text-definition"></div>
+		</div>
+		<div id="navbar" class="flex-center">
+			<div class="navbar-content">
+				<a href="index.html" class="navbar-header">
+					<div class="navbar-header-top">Sharks</div>
+					<div class="navbar-header-bottom">
+						The great and dangerous world of
+					</div>
+				</a>
+
+				<div class="navbar-links">
+					<a href="index.html" class="navbar-link">Home</a>
+					<a href="index.html#about" class="navbar-link">About</a>
+					<a href="species.html" class="navbar-link">Species</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="content">
+			<div class="content-header">
+				<!-- The inline styles are used to flip the image horizontally
+				     and apply a filter to make the image have a better contrast. -->
+				<img
+					src="images/SharkSpecies.jpg"
+					alt="Different Shark Underwater, ref: https://blog.padi.com/5-sharks-from-the-deep/"
+					class="content-header-background"
+					style="
+						transform: scaleX(-1);
+						filter: contrast(1.1) saturate(2); /* this just seemed to look nice */
+					"
+				/>
+				<div class="content-header-background-cover"></div>
+				<div class="content-header-text-wrapper flex-center">
+					<div class="content-header-text">
+						<div class="content-header-title">Species</div>
+						<div class="content-header-subtitle">
+							Find out more about the different species of sharks
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="shark-species-grid-section">
+				<div class="shark-grid-header">Featured Species</div>
+				<div class="shark-species-grid">
+					<!-- These are the grid elements that feature an image, title, and a short description. -->
+					<a
+						href="sharks/great-white.html"
+						class="shark-species-card"
+					>
+						<img
+							src="images/GreatWhiteShark3.webp"
+							alt="Great White Shark"
+							class="shark-species-card-image"
+						/>
+						<div class="shark-species-name">Great White</div>
+						<div class="shark-species-desc">
+							The largest predator fish in the world
+						</div>
+					</a>
+
+					<a href="sharks/hammerhead.html" class="shark-species-card">
+						<img
+							src="images/Hammerhead.webp"
+							alt="Hammerhead Shark"
+							class="shark-species-card-image"
+						/>
+						<div class="shark-species-name">Hammerhead Shark</div>
+						<div class="shark-species-desc">
+							A shark with a hammer-shaped head
+						</div>
+					</a>
+
+					<a href="sharks/tiger.html" class="shark-species-card">
+						<img
+							src="images/TigerShark.jpg"
+							alt="Tiger Shark"
+							class="shark-species-card-image"
+						/>
+						<div class="shark-species-name">Tiger Shark</div>
+						<div class="shark-species-desc">
+							A shark that can eat just about anything
+						</div>
+					</a>
+
+					<a href="sharks/bull-shark.html" class="shark-species-card">
+						<img
+							src="images/BullSharkBG.webp"
+							alt="Bull Shark"
+							class="shark-species-card-image"
+						/>
+						<div class="shark-species-name">Bull Shark</div>
+						<div class="shark-species-desc">
+							A dangerous shark that can live in both salt and
+							fresh water
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Duplicated element, see /index.html -->
+		<div class="footer">
+			<div class="footer-content">
+				<a class="footer-header" href="index.html">Sharks</a>
+
+				<div class="footer-links">
+					<a href="index.html" class="footer-link">Home</a>
+					<a href="index.html#about" class="footer-link">About</a>
+					<a href="species.html" class="footer-link">Species</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

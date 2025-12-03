@@ -1,0 +1,354 @@
+/* All pages reference this stylesheet. */
+
+/* Root CSS variables for global referencing */
+:root {
+	--navbar-height: 100px;
+}
+
+* {
+	/* Makes <a href="#..."> smoothly scroll (when linking to an ID element) */
+	scroll-behavior: smooth;
+}
+
+body {
+	/* Global body styling, just so we don't have to target every element on the page to override browser defaults. */
+	background: black;
+	color: white;
+	/* This primary font is overriden when we target elements at a lower level,
+	   because CSS prioritizes the most specific selector. */
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+		sans-serif;
+    /* Overrides the browser's default margin and padding */
+	margin: 0;
+	padding: 0;
+}
+
+#navbar {
+	/* Stays at the top of the page */
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: var(--navbar-height);
+	background: linear-gradient(-5deg, rgb(3 84 121), #182b41);
+	border-bottom: 2px solid #9df9d6;
+	text-align: center;
+	user-select: none;
+	/* Puts it above all elements */
+	z-index: 99999;
+}
+
+.navbar-content {
+	/* Container for the actual navbar content, that isn't always going to scale to 100%-100px of the parent (#navbar), but can only be a max of 1300px. */
+	width: calc(100% - 100px);
+	max-width: 1300px;
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.navbar-header {
+	/* This is the main button on the navbar (located to the left). */
+	cursor: pointer;
+	/* Because its height 100%, we need a way of centering the text vertically. Flex is easy. */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.1);
+	color: white;
+	text-decoration: none;
+	padding: 0 10px;
+	/* Makes the text in the element uppercase. Saves me from having to keep spamming caps lock. */
+	text-transform: uppercase;
+	/* Smoothly transitions back when the mouse leaves */
+	transition: background 0.3s;
+}
+
+.navbar-header:hover {
+	/* Darkens the bg immediately on hover */
+	background: rgba(0, 0, 0, 0.3);
+	transition: background 0s;
+	text-decoration: none;
+}
+
+.navbar-header-top {
+	font-size: 40px;
+}
+
+.navbar-header-bottom {
+	font-size: 10px;
+}
+
+.navbar-links {
+	/* Flex (auto. row) removes the default horizontal text margining to my understanding. */
+	display: flex;
+	height: 100%;
+}
+
+.navbar-link {
+	color: white;
+	height: 100%;
+	/* Same issue as .navbar-header */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 15px;
+	font-size: 20px;
+	text-decoration: none;
+	text-transform: uppercase;
+	/* This font appeared to look nicer on the navbar links */
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	transition: background 0.3s;
+}
+
+.navbar-link:hover {
+	/* Same effect as .navbar-header */
+	background: rgba(0, 0, 0, 0.2);
+	transition: background 0s;
+	text-decoration: none;
+}
+
+.content {
+	/* So it doesn't overlap behind the navbar */
+	margin-top: var(--navbar-height);
+}
+
+.content-header {
+	position: relative;
+	width: 100%;
+	/* max-height: calc(100vh - var(--navbar-height)); */
+	/* This also pushes the footer to the bottom of the page.
+	   Although, I could have also made the body a flex, and made the .content have flex: 1, but this is fine. */
+	height: calc(100vh - var(--navbar-height));
+	overflow: hidden;
+	background: black;
+}
+
+.content-header-background,
+.content-header-background-cover,
+.content-header-text-wrapper {
+	/* This will make these three elements be positioned relatively to the parent (parent has position: relative)
+	   and on top of each other (modified with z-index in the next few css selectors) */
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	/* Doesn't stretch the image, but rather, makes it fully cover the size of the element. */
+	object-fit: cover;
+	user-select: none;
+}
+
+.content-header-background {
+	z-index: 1;
+	opacity: 0.5;
+}
+
+.content-header-background-cover {
+	z-index: 2;
+	/* Makes the background fade out to a darker color at the bottom. There are a few ways to do this but this is easiest. */
+	background: linear-gradient(transparent, rgb(24, 43, 65));
+}
+
+.content-header-text-wrapper {
+	z-index: 3;
+}
+
+.content-header-text {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	/* I believe that is set to 'none' somewhere else. This just fixes that.. */
+	user-select: text;
+}
+
+.flex-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.content-header-title,
+.content-header-subtitle {
+	text-transform: uppercase;
+}
+
+.content-header-title {
+	font-size: 7vw;
+
+	/* Gives the text the gradient color that is modified by the background attribute.
+	   I'm using -webkit-* for compatibility on certain browsers (https://developer.mozilla.org/en-US/docs/Web/CSS/WebKit_Extensions) */
+	background: linear-gradient(to right, #99ffd1, #bbc0ff);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	filter: drop-shadow(5px 5px 0px rgb(8, 164, 156));
+	cursor: default;
+}
+
+.content-header-subtitle {
+	font-size: 2vw;
+	color: #7b9bab;
+}
+
+.section {
+	min-height: 500px;
+	width: 100%;
+	padding: 50px 0;
+}
+
+.section-header {
+	text-align: center;
+	width: 100%;
+	position: relative;
+	padding: 10px 0;
+	font-size: 60px;
+	text-transform: uppercase;
+	user-select: none;
+	/* Similar idea - changing the font helps separate the header from the rest of the content.
+	   It helps it stand out slightly. Also, this font was nicer to use in this instance. */
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.section-header::after {
+	/* Simple border pseudo element that is just a relatively positioned box at the bottom of the header with a background to make it look like a border. */
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%); /* 1/2p-1/2c = middle as explained before */
+	width: 50%;
+	height: 2px;
+	background: white;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: #384353;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #4f829f;
+}
+
+.hover-word {
+	/* These are the words you can hover over. */
+	position: relative;
+	z-index: 10;
+	font-weight: 600;
+	/* text-shadow: 0 0 2px white; */
+	/* This was the best looking cursor to make it look informative */
+	cursor: alias;
+	color: rgb(114, 255, 213);
+	transition: text-shadow 0.5s ease;
+	/* This is to prevent the text from wrapping to the next line, because that messes with the position calculations in the JS. */
+	white-space: nowrap;
+}
+
+.hover-word:hover {
+	text-shadow: 0 0 0 transparent;
+}
+
+.hover-text-container {
+	/* This is the box that appears (and gets positioned to the bounds of the .hover-text the mouse is over)
+		and has some simple styling to make it look nice (primarily:)
+		- A gradient background
+		- A border
+		- A border-radius (curved corners)
+		- Some padding
+		- A box-shadow
+		Just commented this because its a bit longer than the rest of the styles.
+		*/
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 300px;
+	height: fit-content;
+	background: linear-gradient(-90deg, #0c2844, black);
+	color: rgb(174, 255, 252);
+	text-shadow: none;
+	box-shadow: 0 0 30px 30px rgba(0, 0, 0, 0.5);
+	border: 2px solid white;
+	border-radius: 10px;
+	padding: 10px;
+	z-index: 11;
+	font-family: monospace;
+	font-size: 15px;
+	transition: opacity 0.3s;
+}
+
+.hover-text-name {
+	font-weight: bold;
+	font-size: 18px;
+	margin-bottom: 3px;
+	color: #9df9d6;
+}
+
+a {
+	/* Colors all <a> links because the default colors / already-visted colors are a bit unappealing and not to the theme. */
+	color: cyan;
+	font-family: monospace;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.hover-text-container.hide {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.flex-wrap {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.footer {
+	/* The footer is always at the bottom of the page, because the .content-header has a height of 100vh
+	   (subtract nav height, because its already affected by .content's margin-top), and the footer is
+	   always at the bottom of the page. */
+	height: 200px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(-5deg, rgb(3 84 121), #182b41);
+	border-top: 2px solid #4b93b3;
+}
+
+.footer-content {
+	/* Same deal as .navbar-content */
+	height: 100%;
+	width: calc(100% - 100px);
+	max-height: 100px;
+	max-width: 1000px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.footer-header {
+	font-size: 40px;
+}
+
+.footer-links {
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+	flex-wrap: wrap;
+}
+
+.footer-link {
+	font-size: 20px;
+}

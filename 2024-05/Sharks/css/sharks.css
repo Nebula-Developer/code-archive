@@ -1,0 +1,149 @@
+/* Referenced by all pages in /sharks/ */
+
+.shark-bio {
+	padding: 150px 40px;
+	width: calc(100% - 80px);
+
+	/* Here, we overlay the background color with a noise texture
+	   to give it a more textured and less-flat look.
+	   Source:
+	   https://stock.adobe.com/images/horizontal-black-and-white-noise-texture-background/155145910 */
+	background-image: url('../images/Noise.png');
+	background-size: 20%;
+	background-repeat: repeat;
+	background-blend-mode: overlay;
+	background-color: #0c2844;
+
+	/* I probably should have put a class on all sections to prevent
+	   having to put a border-top on each individual section type. */
+	border-top: 2px solid cyan;
+	display: flex;
+	justify-content: space-between;
+	align-items: start;
+	max-width: calc(100% - 80px);
+	overflow-x: hidden;
+}
+
+/* Responsiveness, makes the bio content vertical on smaller screens. */
+@media only screen and (max-width: 1400px) {
+	.shark-bio {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		max-width: 100vw;
+	}
+
+	.shark-bio-header {
+		margin-bottom: 30px;
+	}
+
+	.shark-bio-section:not(:first-child) {
+		margin-top: 40px;
+	}
+}
+
+.shark-bio-header {
+	font-size: 40px;
+	padding-bottom: 10px;
+}
+
+.shark-bio-text {
+	font-size: 30px;
+	word-wrap: normal;
+	max-width: 50vw;
+}
+
+.shark-bio-image-right {
+	float: right;
+	padding: 30px;
+	max-height: 200px;
+	height: 30vh;
+	max-width: max(20vw, 250px);
+	object-fit: contain;
+}
+
+.shark-bio-section {
+	margin: 0 40px;
+}
+
+/* All content on the page follows the same structure, and this is the statistic contents
+   at the bottom of each shark page. */
+.shark-stats {
+	padding: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(black, #0c2844);
+	border-top: 2px solid cyan;
+}
+
+.shark-stats-table {
+	border-collapse: collapse;
+}
+
+.shark-stats-header {
+	font-size: 40px;
+	text-align: center;
+	color: white;
+	padding-bottom: 30px;
+}
+
+.shark-stats-label {
+	font-size: 20px;
+	/* Gives it space to breathe */
+	padding: 10px;
+	color: rgb(95 153 167);
+	position: relative;
+}
+
+/* This is the small, transparent vertical line that separates the label and the value. */
+.shark-stats-label::after {
+	content: '';
+	/* Because the .shark-stats-label is relative, we can absolutely position
+	   this pseudo element to the right, which will be the right of the parent
+	   rather than the whole document. */
+	position: absolute;
+	right: 0;
+	height: 50%;
+	/* This is a trick to center the line vertically which we have used many times now. */
+	top: 50%;
+	transform: translateY(-50%);
+	width: 1px;
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.shark-stats-value {
+	font-size: 20px;
+	padding: 10px;
+	color: rgb(126, 255, 255);
+}
+
+/* The :not(:first-child) selector is used to prevent the first row from (title) having a border.
+   Its literally just saying, all tr elements, but not the first one. */
+.shark-stats-table tr:not(:first-child) {
+	border: 1px solid rgb(78 151 165 / 50%);
+}
+
+/* Reference list at the bottom of the page */
+.shark-page-references {
+	display: flex;
+	flex-direction: column;
+	padding: 30px;
+	border-top: 2px solid cyan;
+	/* I utilise linear gradients for most of the backgrounds rather
+	   than using heaps of background images. It keeps it from being
+	   too overloaded, but also from being too flat / plain. */
+	background: linear-gradient(-50deg, rgb(17, 64, 84), #23476b);
+}
+
+.shark-page-references-list {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+
+	/* Gap is handy in flexboxes because it helps to space out the elements
+	   without having to use margins or padding, although it comes with
+	   a few downsides, one being that margins and padding won't work
+	   on the first-depth children. */
+	gap: 20px;
+}

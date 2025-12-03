@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="author" content="Nico Cook" />
+		<meta name="keywords" content="sharks, tiger shark, species, facts" />
+		<meta
+			name="description"
+			content="Learn about the Tiger Shark, a large species of shark known for its large appetite and distinctive stripes."
+		/>
+		<link
+			rel="icon"
+			type="image/xicon"
+			href="../favicon.ico"
+			sizes="96x96"
+		/>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+			integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script src="../js/main.js" defer></script>
+		<link rel="stylesheet" href="../css/style.css" />
+		<link rel="stylesheet" href="../css/sharks.css" />
+		<title>Tiger Shark | The Great and Dangerous World of Sharks</title>
+	</head>
+
+	<body>
+		<!-- Duplicated elements, see /index.html -->
+		<div class="hover-text-container hide">
+			<div class="hover-text-name"></div>
+			<div class="hover-text-definition"></div>
+		</div>
+		<div id="navbar" class="flex-center">
+			<div class="navbar-content">
+				<a href="../index.html" class="navbar-header">
+					<div class="navbar-header-top">Sharks</div>
+					<div class="navbar-header-bottom">
+						The great and dangerous world of
+					</div>
+				</a>
+
+				<div class="navbar-links">
+					<a href="../index.html" class="navbar-link">Home</a>
+					<a href="../index.html#about" class="navbar-link">About</a>
+					<a href="../species.html" class="navbar-link">Species</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="content">
+			<div class="content-header">
+				<img
+					src="../images/TigerShark.jpg"
+					alt="Tiger Shark"
+					class="content-header-background"
+				/>
+				<div class="content-header-background-cover"></div>
+				<div class="content-header-text-wrapper flex-center">
+					<div class="content-header-text">
+						<!-- These colours make the header more unique. See bull-shark.html -->
+						<div
+							class="content-header-title"
+							style="
+								background: linear-gradient(
+									cyan,
+									rgb(196, 255, 244)
+								);
+								background-clip: text;
+							"
+						>
+							Tiger Shark
+						</div>
+						<div class="content-header-subtitle">
+							The shark that can eat almost anything
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="shark-bio">
+				<div class="shark-bio-section">
+					<div class="shark-bio-header">The Tiger Shark</div>
+					<div class="shark-bio-text">
+						The Tiger Shark is a large species of shark that is
+						known for its voracious appetite. It is one of the few
+						shark species that is known to eat almost anything. A
+						few things they are known to eat include:
+						<!-- This list was used to follow the design requirements. It also uses
+						     some fancy CSS styles to use triangles instead of circles. -->
+						<ul class="tiger-list">
+							<li>Fish</li>
+							<li>Birds</li>
+							<li>Turtles</li>
+							<li>Rays</li>
+							<li>Crustaceans</li>
+							<li>Garbage</li>
+						</ul>
+						The Tiger Shark is a solitary predator that is found in
+						warm coastal waters around the world, and it is known
+						for its distinctive stripes that give it its name.
+					</div>
+				</div>
+
+				<div class="shark-bio-section">
+					<img
+						src="../images/TigerSharkTransparent.webp"
+						alt="Tiger Shark"
+						class="shark-bio-image-right"
+					/>
+					<div class="shark-bio-text">
+						Populations of Tiger Sharks are declining due to
+						<span
+							class="hover-word"
+							data-define="The practice of catching fish faster than they can reproduce, leading to a decline in fish populations."
+						>
+							overfishing
+						</span>
+						and
+						<span
+							class="hover-word"
+							data-define="The destruction of an animals habitat (home)."
+						>
+							habitat loss,
+						</span>
+						and they are listed as a near-threatened species by the
+						International Union for Conservation of Nature (IUCN).
+					</div>
+				</div>
+			</div>
+
+			<div class="shark-stats" id="stats">
+				<table class="shark-stats-table">
+					<tr>
+						<th colspan="2" class="shark-stats-header">
+							Tiger Shark Stats
+						</th>
+					</tr>
+					<tr>
+						<td class="shark-stats-label">Scientific Name</td>
+						<td class="shark-stats-value">Galeocerdo cuvier</td>
+					</tr>
+					<tr>
+						<td class="shark-stats-label">Average Length</td>
+						<td class="shark-stats-value">10-14 feet</td>
+					</tr>
+					<tr>
+						<td class="shark-stats-label">Average Weight</td>
+						<td class="shark-stats-value">850-1,400 pounds</td>
+					</tr>
+					<tr>
+						<td class="shark-stats-label">Average Lifespan</td>
+						<td class="shark-stats-value">20-50 years</td>
+					</tr>
+					<tr>
+						<td class="shark-stats-label">Habitat</td>
+						<td class="shark-stats-value">
+							Warm coastal waters, tropical and subtropical seas
+						</td>
+					</tr>
+					<tr>
+						<td class="shark-stats-label">Diet</td>
+						<td class="shark-stats-value">
+							Fish, birds, turtles, rays, crustaceans, garbage
+						</td>
+					</tr>
+					<tr>
+						<td class="shark-stats-label">Conservation Status</td>
+						<td class="shark-stats-value">Near Threatened</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="shark-page-references">
+				<div class="shark-page-references-header">Content references</div>
+				<div class="shark-page-references-list">
+					<a href="https://en.wikipedia.org/wiki/Tiger_shark" class="shark-page-reference">Tiger Shark - Wikipedia</a>
+					<a href="https://www.nationalgeographic.com/animals/fish/facts/tiger-shark" class="shark-page-reference">Tiger Shark Facts - National Geographic</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Duplicated element, see /index.html -->
+		<div class="footer">
+			<div class="footer-content">
+				<a class="footer-header" href="../index.html">Sharks</a>
+
+				<div class="footer-links">
+					<a href="../index.html" class="footer-link">Home</a>
+					<a href="../index.html#about" class="footer-link">About</a>
+					<a href="../species.html" class="footer-link">Species</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- I use internal CSS as it is only used on this page, and I wanted to keep it minimal. -->
+		<style>
+			.tiger-list {
+				list-style-type: none;
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+			}
+
+			.tiger-list li {
+				line-height: 1;
+				/* So the ::before pseudo is positioned relative to the li, not the ul/parent */
+				position: relative;
+			}
+
+			.tiger-list li::before {
+				/* All pseudo elements require a 'content' property */
+				content: '';
+				position: absolute;
+				left: -20px;
+
+				/* Center on the Y, as stated in css/style.css (1/2p-1/2c = center) */
+				top: 50%;
+				transform: translateY(-50%);
+
+				width: 0;
+				height: 0;
+
+				/* Fancy little trick to make a triangle.
+				   It works by making the top and bottom borders transparent,
+				   and the left border a solid color which will cause the
+				   left border to be clipped from the top and bottom. */
+				border-top: 10px solid transparent;
+				border-bottom: 10px solid transparent;
+				border-left: 10px solid rgba(0, 123, 255, 0.2);
+				transition: border-left 0.3s;
+			}
+
+			.tiger-list li:hover::before {
+				border-left: 10px solid rgba(0, 123, 255, 0.5);
+			}
+		</style>
+	</body>
+</html>
