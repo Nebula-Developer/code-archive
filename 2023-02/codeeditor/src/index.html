@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Code Editor</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <div class="left-panel fixed-h-top-bottom flex-row">
+      <div class="left-panel-grid">
+        <div class="flex-column">
+          <div class="icon-button">
+            <i class="fas fa-file"></i>
+          </div>
+
+          <div class="icon-button">
+            <i class="fas fa-folder"></i>
+          </div>
+
+          <div class="icon-button">
+            <i class="fas fa-save"></i>
+          </div>
+        </div>
+
+        <div class="flex-column">
+          <div class="icon-button">
+            <i class="fas fa-user"></i>
+          </div>
+
+          <div class="icon-button">
+            <i class="fas fa-cog"></i>
+          </div>
+        </div>
+      </div>
+
+      <div id="file-browser">
+        <div id="file-browser-title"></div>
+        <div id="file-browser-content">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="center-panel fixed-h-top-bottom">
+      <div id="code-editor">
+        <div class="editor-line-numbers flex-column" id="editor-line-numbers">
+          <div class="editor-line-number">1</div>
+          <div class="editor-line-number">20</div>
+        </div>
+
+        <div class="editor-lines flex-column" id="editor-lines">
+          <div class="editor-line">
+            <div class="editor-line-content">
+              Test
+            </div>
+          </div>
+
+          <div class="editor-line">
+            <div class="editor-line-content">
+              Test two!
+            </div>
+          </div>
+        </div>
+
+        <div id="editor-carret"></div>
+      </div>
+    </div>
+
+    <div class="right-panel fixed-h-top-bottom"></div>
+
+    <div class="top-bar">
+      <div class="flex-row">
+        <div class="icon-button">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-bar"></div>
+  </body>
+</html>
