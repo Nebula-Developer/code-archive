@@ -1,0 +1,23 @@
+{
+    "$schema": "https://json.schemastore.org/chrome-manifest",
+    "manifest_version": 3,
+    "version": "0.0.1",
+    "name": "ExtPrimary",
+    "description": "ExtPrimary",
+    "permissions": ["automation", "<all_urls>"],
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": [
+                "./lib/socket.io.js",
+                "./lib/jquery.js",
+                "./src/main.js",
+                "./src/gui.js",
+                "./src/ai.js"
+            ],
+            "css": [
+                "./css/gui.css"
+            ]
+        }
+    ]
+}
