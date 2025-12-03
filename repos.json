@@ -237,6 +237,13 @@
       "createdAt": "2023-05-03T06:39:37Z",
       "archivedPath": "2023-05/Prisms",
       "originalUrl": "https://github.com/Nebula-Developer/Prisms"
+    },
+    {
+      "name": "shell-new",
+      "description": "shell",
+      "createdAt": "2023-04-28T08:26:22Z",
+      "archivedPath": "2023-04/shell-new",
+      "originalUrl": "https://github.com/Nebula-Developer/shell-new"
     }
   ]
 }
