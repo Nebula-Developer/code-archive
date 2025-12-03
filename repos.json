@@ -167,6 +167,13 @@
       "createdAt": "2023-08-06T09:58:46Z",
       "archivedPath": "2023-08/Extension_New",
       "originalUrl": "https://github.com/Nebula-Developer/Extension_New"
+    },
+    {
+      "name": "schoolExtension",
+      "description": "",
+      "createdAt": "2023-07-16T09:45:37Z",
+      "archivedPath": "2023-07/schoolExtension",
+      "originalUrl": "https://github.com/Nebula-Developer/schoolExtension"
     }
   ]
 }
