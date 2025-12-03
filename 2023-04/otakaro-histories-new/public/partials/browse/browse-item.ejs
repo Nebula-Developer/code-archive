@@ -1,0 +1,76 @@
+<<%- item.isDir ? "div" : "a" %> class="browse-item <%- item.isDir ? "browse-item-dir" : "browse-item-file" %>" href="/browse<%= item.path %>">
+    <p class="browse-item-name <% if (item.isDir) { %>browse-item-name-dir<% } %>">
+        <% if (item.isDir) { %>
+            <%- item.name %>
+        <% } else { %>
+            <%- include(baseDir + '/partials/browse/file-view.ejs', { item: item }) %>
+        <% } %>
+        
+        <% if (item.isDir) { %>
+            <i class="fas fa-chevron-right browse-item-chevron"></i>
+        <% } %>
+    </p>
+
+    <% if (item.isDir && item.children && item.children.length > 0) { %>
+        <!-- Tab inline of 2 -->
+        <ul class="browse-item-children" style="display: inline-block; margin-left: 10px;">
+            <% for (var i = 0; i < item.children.length; i++) { %>
+                <%- include(baseDir + '/partials/browse/browse-item.ejs', { item: item.children[i] }) %>
+            <% } %>
+        </ul>
+    <% } %>
+</<%- item.isDir ? "div" : "a" %>>
+
+<style>
+    .browse-item {
+        margin: 5px 0;
+        text-decoration: none;
+    }
+
+    .browse-item-name i {
+        margin-left: 5px;
+    }
+
+    .browse-item-name {
+        display: block;
+        font-size: 16px;
+        font-weight: 300;
+        cursor: pointer;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        text-decoration: none;
+        color: rgb(31, 29, 39);
+    }
+
+    .browse-item-chevron {
+        transition: transform 0.1s;
+    }
+</style>
+
+<script>
+    var browseItemName = $('.browse-item-dir').find('.browse-item-name');
+
+    browseItemName.off('click');
+    browseItemName.on('click', function(e) {
+        if (e.ctrlKey || e.metaKey) {
+            location.href = $(this).parent().attr('href');
+            return;
+        }
+
+        var browseItemChevron = $(this).find('.browse-item-chevron');
+        var browseItemChildren = $($(this).parent().find('.browse-item-children')[0]);
+        browseItemChildren.slideToggle(100);
+        
+        console.log(browseItemChildren);
+        if (browseItemChevron.css('transform') == 'none') {
+            browseItemChevron.css('transform', 'rotate(90deg)');
+        } else {
+            browseItemChevron.css('transform', 'none');
+        }
+    });
+
+    $('.browse-item-children').css('display', 'none');
+</script>

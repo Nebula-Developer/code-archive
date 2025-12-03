@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/resources/js/jquery.js"></script>
+    <link rel="stylesheet/less" type="text/css" href="/resources/css/style.less" />
+    <meta name="description" content="<%= description %>">
+    <script src="https://cdn.jsdelivr.net/npm/less"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title><%= title %> - Ōtākaro Histories | Te hitori o Aotearoa i roto i te akomanga</title>
+</head>
+<body>
+    <div id="navbar" class="flex flex-column align-center w-100 fixed tl">
+        <div id="navbar-top" class="flex flex-row justify-between">
+            <div class="navbar-top-left">
+                <a href="/" class="flex align-center" style="text-decoration: none; user-select: none;">
+                    <img src="/resources/images/Logo.png" alt="Ōtākaro Histories" height="100" width="100">
+                    <div class="flex flex-column h-100">
+                        <div class="navbar-header">Ōtākaro Histories</div>
+                        <div class="navbar-sub-header">New Zealand history in the classroom</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="navbar-top-right flex">
+                <input type="text" placeholder="Search" class="navbar-search-input">
+                <button class="navbar-search-button"><i class="fas fa-search"></i></button>
+
+                <script>
+                    $(".navbar-search-input").on("keyup", function (e) {
+                        if (e.key === "Enter") {
+                            window.location.href = "/search/" + encodeURI($(this).val());
+                        }
+                    });
+
+                    $(".navbar-search-button").on("click", function () {
+                        window.location.href = "/search/" + encodeURI($(".navbar-search-input").val());
+                    });
+                </script>
+
+                <div class="navbar-account ml-20 flex flex-center">
+                    <% if (user) { %>
+                        <a href="/account"><%= user.username %></a>
+                        <a href="/logout">Logout</a>
+                    <% } else { %>
+                        <a href="/login">Login</a>
+                        <a href="/register">Register</a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+
+        <div id="navbar-bottom">
+            <% for (var i = 0; i < files.length; i++) { %>
+                <a class="navbar-browse-section" href="/browse/<%= files[i] %>"><%= files[i] %></a>
+            <% } %>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            function handleResize() {
+                var isOverflowing = $("#navbar-bottom")[0].scrollWidth > $("#navbar-bottom")[0].clientWidth;
+
+                if (isOverflowing) {
+                    $("#navbar-bottom").css("justify-content", "flex-start");
+                } else {
+                    $("#navbar-bottom").css("justify-content", "center");
+                }
+            }
+            
+            $(window).resize(function() {
+                handleResize();
+            });
+            
+            handleResize();
+        });
+    </script>
+
+    <div style="height: 168px;"></div>

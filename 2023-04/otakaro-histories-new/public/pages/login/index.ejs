@@ -1,0 +1,156 @@
+<%- include(baseDir + '/partials/header.ejs', { title: 'Login', description: 'Login to your account on Ōtākaro Histories.' }) %>
+
+<div class="login-form-wrapper">
+    <div class="login-form flex flex-column">
+        <div class="login-header">Login to Ōtākaro Histories</div>
+
+        <div class="login-form-inputs flex flex-column">
+            <div class="login-form-input">
+                <input type="text" id="login-form-username">
+                <label for="login-form-username">Username</label>
+            </div>
+            
+            <div class="login-form-input">
+                <input type="password" id="login-form-password">
+                <label for="login-form-password">Password</label>
+            </div>
+        </div>
+
+        <div class="login-form-submit-wrapper">
+            <div class="login-form-submit-btn" id="login-form-submit">Submit</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#login-form-username").on('keydown   ', function(e) {
+        if (e.keyCode == 13)
+            $("#login-form-password").focus()
+    });
+
+    $("#login-form-password").on('keydown', function(e) {
+        if (e.keyCode == 13)
+            $("#login-form-submit").click()
+    });
+
+    $("#login-form-submit").on('click', function() {
+        let username = $("#login-form-username").val()
+        let password = $("#login-form-password").val()
+
+        if (username.length == 0 || password.length == 0) {
+            alert("Please enter a username and password.")
+            return
+        }
+
+        alert("Test");
+    });
+
+    $(".login-form-input input").on('blur', function() {
+        $(this).parent().toggleClass('empty', $(this).val().length == 0);
+    });
+
+    $(".login-form-input input").each(function() {
+        $(this).parent().toggleClass('empty', $(this).val().length == 0);
+    });
+</script>
+
+<style>
+    body {
+        background: rgb(137, 163, 255);
+    }
+    
+    .login-header {
+        margin-bottom: 20px;
+        font-size: 25px;
+    }
+
+    .login-form-input {
+        padding: 5px 10px;
+        position: relative;
+        margin-bottom: 10px;
+    }
+
+    .login-form-input input {
+        width: 200px;
+        height: 30px;
+        background: #3f5c95;
+        color: white;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        font-size: 15px;
+        padding: 5px 10px;
+        font-family: 'Roboto', sans-serif;
+        filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+    }
+
+    .login-form-input label {
+        position: absolute;
+        top: 16px;
+        left: 20px;
+        font-size: 15px;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+        pointer-events: none;
+        user-select: none;
+        padding: 2px 5px;
+        border-radius: 5px;
+        transition: 0.2s ease;
+    }
+
+    .login-form-input input:focus + label, .login-form-input:not(.empty) label {
+        top: -6px;
+        left: 20px;
+        font-size: 12px;
+        background: #4f589e;
+    }
+
+    .login-form-wrapper {
+        width: 100vw;
+        height: calc(100vh - 200px);
+        min-height: 500px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .login-form {
+        min-width: 500px;
+        min-height: 350px;
+        border-radius: 10px;
+        background: #4f78c1;
+        color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        align-items: center;
+        justify-content: center;
+    }
+
+    .login-form-submit-wrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .login-form-submit-btn {
+        width: 100px;
+        height: 30px;
+        background: #404f7b;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        cursor: pointer;
+        user-select: none;
+        padding: 5px 10px;
+    }
+
+    .login-form-submit-btn:hover {
+        background: #374366;
+    }
+</style>
+
+<%- include('../../partials/footer.ejs') %>

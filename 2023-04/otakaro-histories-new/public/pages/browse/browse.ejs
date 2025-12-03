@@ -1,0 +1,70 @@
+<%- include(baseDir + '/partials/header.ejs', { title: 'Browsing: ' + browse.name, description: 'Browsing folder \'' + browse.title + '\' on Ōtākaro Histories' }) %>
+
+<div class="browse-content">
+    <h1>
+        <%= browse.name %>
+    </h1>
+    <small style="font-size: 15px; margin-top: 8px;">Hold Control or ⌘ when clicking a folder to open it fully.</small>
+    
+    <p id="go-back-browse-button" class="mt-20">
+        <i class="ml-5 mr-5 fas fa-folder-open"></i>
+        Go back
+    </p>
+
+    <div class="browse-panel mt-50">
+        <% if (browse.children.length == 0) { %>
+            <p>( Directory is empty. )</p>
+        <% } else { %>
+            <% for (var i = 0; i < browse.children.length; i++) { %>
+                <%- include(baseDir + '/partials/browse/browse-item.ejs', { item: browse.children[i] }) %>
+            <% } %>
+        <% } %>
+    </div>
+</div>
+
+<script>
+    $('#go-back-browse-button').on('click', function() {
+        var path = window.location.pathname;
+        var pathParts = path.split('/');
+        pathParts.pop();
+        path = pathParts.join('/');
+        location.href = path;
+    });
+
+    if (window.location.pathname == '/browse') {
+        $('#go-back-browse-button').hide();
+    }
+</script>
+
+<style>
+    .browse-content {
+        min-height: 300px;
+        padding: 100px;
+        min-width: 700px;
+    }
+
+    body {
+        background: linear-gradient(30deg, #f6f0ff, #e3deff);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #go-back-browse-button {
+        cursor: pointer;
+        margin-bottom: 10px;
+        font-size: 15px;
+        padding: 5px 10px;
+        width: fit-content;
+        border-radius: 5px;
+        border: 1px solid rgb(126, 126, 126);
+        transition: background 0.2s;
+    }
+
+    #go-back-browse-button:hover {
+        background: rgba(255, 255, 255, 0.5);
+    }
+</style>
+
+
+<%- include(baseDir + '/partials/footer.ejs') %>

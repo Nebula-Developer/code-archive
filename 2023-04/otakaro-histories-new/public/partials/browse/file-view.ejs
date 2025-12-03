@@ -1,0 +1,28 @@
+<%- item.name.replaceAll(".post", "").replaceAll(".md", "").replaceAll(".html", "") %>
+
+<% 
+if (!item.isDir) {
+    const fileExtension = item.name.split(".").pop();
+    if (fileExtension === "md") { %>
+        <i class="fas fa-file-alt"></i>
+    <% } else if (fileExtension === "html" || fileExtension === "ejs") { %>
+        <i class="fas fa-file-code"></i>
+    <% } else if (fileExtension === "pdf" || fileExtension === "doc" || fileExtension === "docx" || fileExtension === "xls" || fileExtension === "xlsx" || fileExtension === "ppt" || fileExtension === "pptx") { %>
+        <i class="fas fa-file-word"></i>
+    <% } else if (fileExtension === "jpg" || fileExtension === "jpeg" || fileExtension === "png" || fileExtension === "gif" || fileExtension === "svg") { %>
+        <i class="fas fa-file-image"></i>
+    <% } else if (fileExtension === "mp4" || fileExtension === "mov" || fileExtension === "avi" || fileExtension === "mpg" || fileExtension === "mpeg") { %>
+        <i class="fas fa-file-video"></i>
+    <% } else if (fileExtension === "mp3" || fileExtension === "wav" || fileExtension === "ogg") { %>
+        <i class="fas fa-file-audio"></i>
+    <% } else if (fileExtension === "zip" || fileExtension === "rar" || fileExtension === "7z" || fileExtension === "tar" || fileExtension === "gz" || fileExtension === "bz2") { %>
+        <i class="fas fa-file-archive"></i>
+    <% } else { %>
+        <i class="fas fa-file"></i>
+    <% }
+} else {
+    %>
+    <i class="fas fa-folder"></i>
+    <%
+}
+%>
