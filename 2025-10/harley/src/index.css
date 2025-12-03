@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/* Disable overscroll bounce on iOS and other platforms */
+:root,
+html,
+body,
+#root {
+  overscroll-behavior: contain; /* modern */
+  -ms-touch-action: none;
+  /* touch-action: manipulation; */
+  overflow: hidden; /* prevent scrollbars from showing */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: none;
+}
+
+/* Prevent iOS image long-press popover and dragging */
+img,
+button,
+a {
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none; /* disable callout, e.g. copy/save image */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Import /LuckiestGuy.ttf */
+@font-face {
+  font-family: "Luckiest Guy";
+  src: url("/LuckiestGuy.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* make the background /assets/images/floor.jpg, tiled horizontally (not vertically - fill heigth of screen) */
+body {
+  background: url("/assets/images/floor.jpg") repeat-x center bottom;
+  background-size: auto 100%;
+  /* darken */
+  background-color: #0000007a;
+  background-blend-mode: multiply;
+
+  font-family: "Luckiest Guy", cursive;
+  color: white;
+}
