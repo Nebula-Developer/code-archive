@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  directus:
+    image: directus/directus:11.0.2
+    ports:
+      - 8055:8055
+    volumes:
+      - ~/stores/otakaro/database:/directus/database
+      - ~/stores/otakaro/uploads:/directus/uploads
+      - ~/stores/otakaro/extensions:/directus/extensions
+    environment:
+      SECRET: "$$OtakaroW3bs1t3S3cr3t-013579$$"
+      ADMIN_EMAIL: "admin@example.com"
+      ADMIN_PASSWORD: "your-secure-password"
+      DB_CLIENT: "sqlite3"
+      DB_FILENAME: "/directus/database/data.db"
+      API_URL: "https://api.otakaro.nz/"
+      PUBLIC_URL: "https://api.otakaro.nz/"
+      CORS_ENABLED: "true"
+      CORS_ORIGIN: "otakaro.nz"
+    restart: unless-stopped
+
+  nextjs:
+    build:
+      context: ./frontend
+    ports:
+      - 3000:3000
+    depends_on:
+      - directus
+    restart: unless-stopped

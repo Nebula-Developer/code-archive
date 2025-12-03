@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  directus:
+    image: directus/directus:11.0.2
+    ports:
+      - 8055:8055
+    volumes:
+      - ./backend/database:/directus/database
+      - ./backend/uploads:/directus/uploads
+      - ./backend/extensions:/directus/extensions
+    environment:
+      SECRET: "$$OtakaroW3bs1t3S3cr3t-013579$$"
+      ADMIN_EMAIL: "admin@example.com"
+      ADMIN_PASSWORD: "your-secure-password"
+      DB_CLIENT: "sqlite3"
+      DB_FILENAME: "/directus/database/data.db"
+      API_URL: "http://localhost:8055"
+    restart: unless-stopped
+
+  nextjs:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - directus
+    restart: unless-stopped
