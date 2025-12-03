@@ -1,0 +1,15 @@
+C:\Users\nebul\Documents\Programming\C#\PrysmScript\bin\Debug\net7.0\PrysmScript.exe
+C:\Users\nebul\Documents\Programming\C#\PrysmScript\bin\Debug\net7.0\PrysmScript.deps.json
+C:\Users\nebul\Documents\Programming\C#\PrysmScript\bin\Debug\net7.0\PrysmScript.runtimeconfig.json
+C:\Users\nebul\Documents\Programming\C#\PrysmScript\bin\Debug\net7.0\PrysmScript.dll
+C:\Users\nebul\Documents\Programming\C#\PrysmScript\bin\Debug\net7.0\PrysmScript.pdb
+C:\Users\nebul\Documents\Programming\C#\PrysmScript\obj\Debug\net7.0\PrysmScript.csproj.AssemblyReference.cache
+C:\Users\nebul\Documents\Programming\C#\PrysmScript\obj\Debug\net7.0\PrysmScript.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nebul\Documents\Programming\C#\PrysmScript\obj\Debug\net7.0\PrysmScript.AssemblyInfoInputs.cache
+C:\Users\nebul\Documents\Programming\C#\PrysmScript\obj\Debug\net7.0\PrysmScript.AssemblyInfo.cs
+C:\Users\nebul\Documents\Programming\C#\PrysmScript\obj\Debug\net7.0\PrysmScript.csproj.CoreCompileInputs.cache
+C:\Users\nebul\Documents\Programming\C#\PrysmScript\obj\Debug\net7.0\PrysmScript.dll
+C:\Users\nebul\Documents\Programming\C#\PrysmScript\obj\Debug\net7.0\refint\PrysmScript.dll
+C:\Users\nebul\Documents\Programming\C#\PrysmScript\obj\Debug\net7.0\PrysmScript.pdb
+C:\Users\nebul\Documents\Programming\C#\PrysmScript\obj\Debug\net7.0\PrysmScript.genruntimeconfig.cache
+C:\Users\nebul\Documents\Programming\C#\PrysmScript\obj\Debug\net7.0\ref\PrysmScript.dll
