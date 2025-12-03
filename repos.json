@@ -510,6 +510,13 @@
       "createdAt": "2022-08-16T04:07:56Z",
       "archivedPath": "2022-08/HyperType",
       "originalUrl": "https://github.com/Nebula-Developer/HyperType"
+    },
+    {
+      "name": "NebulaOS",
+      "description": "COSMOS-Based Operating System",
+      "createdAt": "2022-08-04T07:19:01Z",
+      "archivedPath": "2022-08/NebulaOS",
+      "originalUrl": "https://github.com/Nebula-Developer/NebulaOS"
     }
   ]
 }
