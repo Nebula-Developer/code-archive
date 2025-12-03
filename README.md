@@ -8,6 +8,9 @@ Feel free to use the archive generator in `cli/` to make your own repo archive!
 
 ## 2025
 
+### October
+- [harley](2025-10/harley) - No description
+
 ### August
 - [modules](2025-08/modules) - No description
 
@@ -20,11 +23,18 @@ Feel free to use the archive generator in `cli/` to make your own repo archive!
 ### May
 - [primary-overlay](2025-05/primary-overlay) - No description
 - [mothers-day](2025-05/mothers-day) - No description
+- [osuSkinMaker](2025-05/osuSkinMaker) - No description
 
 ### March
 - [mania](2025-03/mania) - No description
 
+### January
+- [AI-UI](2025-01/AI-UI) - A web-ui for talking to ollama models.
+
 ## 2024
+
+### December
+- [Mandelbrot](2024-12/Mandelbrot) - Simple Mandelbrot viewer made with Natsu Framework and a bit of maths
 
 ### October
 - [Nebula-Modpack](2024-10/Nebula-Modpack) - NebulaDev Modpack
@@ -43,6 +53,9 @@ Feel free to use the archive generator in `cli/` to make your own repo archive!
 ### May
 - [Sharks](2024-05/Sharks) - Sharks
 
+### March
+- [clean-overlay-new](2024-03/clean-overlay-new) - No description
+
 ### January
 - [otakaro-website](2024-01/otakaro-website) - No description
 
@@ -55,6 +68,7 @@ Feel free to use the archive generator in `cli/` to make your own repo archive!
 ### November
 - [chatVisuals](2023-11/chatVisuals) - No description
 - [Novel](2023-11/Novel) - No description
+- [mathsNoiseProject](2023-11/mathsNoiseProject) - No description
 
 ### September
 - [ChatServerNew](2023-09/ChatServerNew) - ChatServer
@@ -66,6 +80,7 @@ Feel free to use the archive generator in `cli/` to make your own repo archive!
 ### July
 - [schoolExtension](2023-07/schoolExtension) - No description
 - [NexusPort](2023-07/NexusPort) - No description
+- [VN](2023-07/VN) - No description
 
 ### June
 - [radio](2023-06/radio) - radio
