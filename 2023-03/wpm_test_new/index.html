@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="jquery.js"></script>
+    <script src="words.js"></script>
+    <script src="test.js"></script>
+    <script src="logic.js"></script>
+    <script src="handlers.js"></script>
+    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>WPM Test</title>
+</head>
+<body>
+    <div class="top-bar"></div>
+
+    <div class="mid-content flex-center">
+        <button id="wpm-test-restart" class="flex-center" tabindex="0">
+            <i class="fas fa-redo"></i>
+        </button>
+
+        <div id="words-view"></div>
+        <div class="wpm-test" id="wpm-test" active="true" tabindex="0" autofocus>
+            <div id="cursor"></div>
+            <div id="cursor-sim"></div>
+        </div>
+
+        <div id="wpm-test-result" class="flex-center hidden wpm-test-result">
+            <div class="wpm-test-result-text">
+                <span id="wpm-test-result-text"></span>
+            </div>
+            <div class="wpm-test-num-results flex-center">
+                <span><span id="wpm-test-result-wpm"></span> WPM</span>
+                <span><span id="wpm-test-result-cpm"></span> CPM</span>
+                <span><span id="wpm-test-result-acc"></span>% ACC</span>
+            </div>
+            <button id="nav-results-restart-button" class="flex-center" tabindex="0">
+                <i class="fas fa-redo"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="bottom-bar"></div>
+</body>
+</html>

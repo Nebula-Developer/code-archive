@@ -1,0 +1,178 @@
+:root {
+    --top-bar-height: 120px;
+    --top-bar-background-color: #2a2f3f;
+    --bottom-bar-height: 100px;
+    --bottom-bar-background-color: #232838;
+    --mid-content-background-color: #1d212e;
+}
+
+body {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: var(--top-bar-height);
+    background-color: var(--top-bar-background-color);
+}
+
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: var(--bottom-bar-height);
+    background-color: var(--bottom-bar-background-color);
+}
+
+.mid-content {
+    position: fixed;
+    left: 0;
+    top: var(--top-bar-height);
+    width: 100vw;
+    height: calc(100vh - var(--top-bar-height) - var(--bottom-bar-height));
+    background-color: var(--mid-content-background-color);
+    flex-direction: column;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wpm-test {
+    max-width: 1000px;
+    width: calc(100% - 50px);
+    height: fit-content;
+    min-height: 10px;
+    display: flex;
+    position: relative;
+    transition: filter 0.2s ease-out;
+    border: none;
+    outline: none;
+    flex-wrap: wrap;
+    user-select: none;
+}
+
+.wpm-test:not(:focus) {
+    filter: blur(5px);
+}
+
+.wpm-test .word {
+    display: flex;
+    height: 30px;
+    position: relative;
+}
+
+.wpm-test .word .letter {
+    width: fit-content;
+    font-size: 23px;
+    font-family: monospace;
+    color: white;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.wpm-test .word .letter::after,
+.space::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: rgb(255, 114, 114);
+    content: '';
+    transition: width 0.1s ease;
+}
+
+/* .bold-letter {
+    font-weight: bold;
+} */
+
+.wpm-test .space {
+    width: 12px;
+    position: relative;
+}
+
+.wpm-test .word .letter.correct {
+    color: rgb(89, 255, 133);
+}
+
+.wpm-test .word .letter.incorrect {
+    color: rgb(255, 193, 193);
+    position: relative;
+}
+
+.wpm-test .word .letter.incorrect::after,
+.space.incorrect::after {
+    width: 100%;
+}
+
+#cursor,
+#cursor-sim {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30px;
+    width: 2px;
+    background: white;
+    transition: all 0.1s ease-out;
+}
+
+#cursor-sim {
+    background: rgba(255, 255, 255, 0.5);
+    display: none;
+}
+
+#nav-results-restart-button,
+#wpm-test-restart {
+    color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    background: none;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+#nav-results-restart-button:hover,
+#wpm-test-restart:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+#nav-results-restart-button:focus,
+#wpm-test-restart:focus {
+    background-color: white;
+    color: black;
+}
+
+.hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+#wpm-test-result {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--mid-content-background-color);
+    flex-direction: column;
+    transition: opacity 0.25s ease;
+}
+
+#wpm-test-result .wpm-test-num-results {
+    font-size: 45px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    flex-direction: column;
+}
