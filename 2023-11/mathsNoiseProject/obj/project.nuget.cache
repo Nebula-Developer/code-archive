@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "Cx+7CW438dO4720DwD6OOJ2uai31RnswXtQ/pdZCVAo1tygZlTqDq7RfU/h2MMcZYBuWTnrKpMZolNXsR1w4oQ==",
+  "success": true,
+  "projectFilePath": "/home/nebuladev/Documents/noiseProject/noiseProject.csproj",
+  "expectedPackageFiles": [
+    "/home/nebuladev/.nuget/packages/csfml/2.5.2/csfml.2.5.2.nupkg.sha512",
+    "/home/nebuladev/.nuget/packages/sfml.audio/2.5.1/sfml.audio.2.5.1.nupkg.sha512",
+    "/home/nebuladev/.nuget/packages/sfml.graphics/2.5.1/sfml.graphics.2.5.1.nupkg.sha512",
+    "/home/nebuladev/.nuget/packages/sfml.net/2.5.1/sfml.net.2.5.1.nupkg.sha512",
+    "/home/nebuladev/.nuget/packages/sfml.system/2.5.1/sfml.system.2.5.1.nupkg.sha512",
+    "/home/nebuladev/.nuget/packages/sfml.window/2.5.1/sfml.window.2.5.1.nupkg.sha512"
+  ],
+  "logs": []
+}
