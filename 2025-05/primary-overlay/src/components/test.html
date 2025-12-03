@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>WebGL Blurry Blobs</title>
+    <style>
+      html,
+      body,
+      canvas {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        background: black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="glcanvas"></canvas>
+    <script type="module">
+      const vertexShaderSource = `#version 300 es
+        in vec4 a_position;
+        void main() {
+            gl_Position = a_position;
+        }
+`;
+
+      const fragmentShaderSource = `#version 300 es
+        precision highp float;
+        out vec4 outColor;
+
+        #define N 10
+        uniform vec2 u_resolution;
+        uniform float u_time;
+        uniform vec2 u_centers[N];
+        uniform float u_radii[N];
+        uniform vec3 u_colors[N];
+
+        void main() {
+            vec2 uv = gl_FragCoord.xy; // already in pixel space
+
+            float field = 0.0;
+            vec3 color = vec3(0.0);
+
+            for (int i = 0; i < N; i++) {
+            vec2 p = u_centers[i] * u_resolution; // convert to pixel space
+            float r = u_radii[i]; // already in pixels now
+            float d = distance(uv, p);
+            float strength = (r * r) / (d * d);
+            field += strength;
+            color += u_colors[i] * strength;
+        }
+
+        float threshold = 1.0;
+        float alpha = smoothstep(threshold - 0.1, threshold + 0.1, field);
+        outColor = vec4(color * alpha, alpha);
+    }`;
+
+      function createShader(gl, type, source) {
+        const shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+          console.error("Shader compile failed", gl.getShaderInfoLog(shader));
+          gl.deleteShader(shader);
+          return null;
+        }
+        return shader;
+      }
+
+      function createProgram(gl, vsSource, fsSource) {
+        const vs = createShader(gl, gl.VERTEX_SHADER, vsSource);
+        const fs = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
+        const program = gl.createProgram();
+        gl.attachShader(program, vs);
+        gl.attachShader(program, fs);
+        gl.linkProgram(program);
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+          console.error("Program link failed", gl.getProgramInfoLog(program));
+          gl.deleteProgram(program);
+          return null;
+        }
+        return program;
+      }
+
+      const canvas = document.getElementById("glcanvas");
+      const gl = canvas.getContext("webgl2");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const program = createProgram(
+        gl,
+        vertexShaderSource,
+        fragmentShaderSource
+      );
+      gl.useProgram(program);
+
+      // Quad covering full screen
+      const positionBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]),
+        gl.STATIC_DRAW
+      );
+      const positionLoc = gl.getAttribLocation(program, "a_position");
+      gl.enableVertexAttribArray(positionLoc);
+      gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
+
+      // Uniform locations
+      const uResolution = gl.getUniformLocation(program, "u_resolution");
+      const uTime = gl.getUniformLocation(program, "u_time");
+      const uCenters = gl.getUniformLocation(program, "u_centers");
+      const uRadii = gl.getUniformLocation(program, "u_radii");
+      const uColors = gl.getUniformLocation(program, "u_colors");
+
+      // Blob initialization
+      const N = 10;
+      const centers = new Float32Array(N * 2);
+      const velocities = new Float32Array(N * 2);
+      const radii = new Float32Array(N);
+      const colors = new Float32Array(N * 3);
+
+      for (let i = 0; i < N; i++) {
+        centers[i * 2] = Math.random();
+        centers[i * 2 + 1] = Math.random();
+        velocities[i * 2] = (Math.random() - 0.5) * 0.2;
+        velocities[i * 2 + 1] = (Math.random() - 0.5) * 0.2;
+        radii[i] = 100 + Math.random() * 50;
+        colors[i * 3 + 0] = Math.random();
+        colors[i * 3 + 1] = Math.random();
+        colors[i * 3 + 2] = Math.random();
+      }
+
+      let lastTime = performance.now();
+      function render(now) {
+        const dt = (now - lastTime) / 1000;
+        lastTime = now;
+
+        // Update positions
+        for (let i = 0; i < N; i++) {
+          centers[i * 2] += velocities[i * 2] * dt;
+          centers[i * 2 + 1] += velocities[i * 2 + 1] * dt;
+
+          if (centers[i * 2] < 0 || centers[i * 2] > 1) velocities[i * 2] *= -1;
+          if (centers[i * 2 + 1] < 0 || centers[i * 2 + 1] > 1)
+            velocities[i * 2 + 1] *= -1;
+          centers[i * 2] = Math.min(1, Math.max(0, centers[i * 2]));
+          centers[i * 2 + 1] = Math.min(1, Math.max(0, centers[i * 2 + 1]));
+        }
+
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
+        gl.useProgram(program);
+        gl.uniform2f(uResolution, canvas.width, canvas.height);
+        gl.uniform1f(uTime, now / 1000);
+        gl.uniform2fv(uCenters, centers);
+        gl.uniform1fv(uRadii, radii);
+        gl.uniform3fv(uColors, colors);
+
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+        requestAnimationFrame(render);
+      }
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+
+      window.addEventListener("resize", resize);
+      resize(); // Initial call
+
+      requestAnimationFrame(render);
+    </script>
+  </body>
+</html>
