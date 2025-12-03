@@ -125,6 +125,13 @@
       "createdAt": "2023-12-18T22:21:01Z",
       "archivedPath": "2023-12/Otakaro-Histories-Page",
       "originalUrl": "https://github.com/Nebula-Developer/Otakaro-Histories-Page"
+    },
+    {
+      "name": "chatService",
+      "description": "",
+      "createdAt": "2023-12-02T05:32:25Z",
+      "archivedPath": "2023-12/chatService",
+      "originalUrl": "https://github.com/Nebula-Developer/chatService"
     }
   ]
 }
