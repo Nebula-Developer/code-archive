@@ -5,4 +5,4 @@
 	ignorecase = true
 	precomposeunicode = true
 [remote "origin"]
-	url = https://github.com/Nebula-Developer/NebulaStack
+	url = https://github.com/Nebula-Developer/profilebrowser
