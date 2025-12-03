@@ -363,6 +363,13 @@
       "createdAt": "2023-01-31T06:46:39Z",
       "archivedPath": "2023-01/LearnPlus",
       "originalUrl": "https://github.com/Nebula-Developer/LearnPlus"
+    },
+    {
+      "name": "PrysmScript",
+      "description": "PrysmScript",
+      "createdAt": "2023-01-26T10:24:38Z",
+      "archivedPath": "2023-01/PrysmScript",
+      "originalUrl": "https://github.com/Nebula-Developer/PrysmScript"
     }
   ]
 }
