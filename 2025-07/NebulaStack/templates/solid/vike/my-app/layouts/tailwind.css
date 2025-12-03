@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+button,
+a {
+  @apply cursor-pointer;
+}
+
+#page-content {
+  @apply opacity-100 transition-opacity duration-300 ease-in-out;
+}
+
+body.page-is-transitioning #page-content {
+  @apply opacity-0;
+}

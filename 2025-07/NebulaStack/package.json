@@ -1,0 +1,24 @@
+{
+  "name": "nebulastack",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "nebula": "./dist/index.js"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^7.6.0",
+    "@types/ejs": "^3.1.5",
+    "chalk": "^5.4.1",
+    "detect-package-manager": "^3.0.2",
+    "ejs": "^3.1.10",
+    "execa": "^9.6.0",
+    "x": "^0.1.2"
+  }
+}

@@ -1,0 +1,29 @@
+import "dotenv/config";
+import { authjsHandler, authjsSessionMiddleware } from "../authjs-handler";
+import { vikeHandler } from "../vike-handler";
+import { Hono } from "hono";
+import { createHandler, createMiddleware } from "@universal-middleware/hono";
+import { dbMiddleware } from "../db-middleware";
+import { trpcHandler } from "../trpc-handler";
+
+const app = new Hono();
+
+app.use(createMiddleware(dbMiddleware)());
+app.use(createMiddleware(authjsSessionMiddleware)());
+
+/**
+ * Auth.js route
+ * @link {@see https://authjs.dev/getting-started/installation}
+ **/
+app.use("/api/auth/**", createHandler(authjsHandler)());
+
+app.use("/api/trpc/*", createHandler(trpcHandler)("/api/trpc"));
+
+/**
+ * Vike route
+ *
+ * @link {@see https://vike.dev}
+ **/
+app.all("*", createHandler(vikeHandler)());
+
+export default app;

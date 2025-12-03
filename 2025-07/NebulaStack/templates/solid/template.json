@@ -1,0 +1,19 @@
+{
+    "name": "Fullstack SolidStart App",
+    "shortNames": [
+        "fs",
+        "fullstack",
+        "solid"
+    ],
+    "description": "A fullstack application using SolidJS + SolidStart",
+    "features": {
+        "trpc": {
+            "name": "TRPC",
+            "default": true
+        },
+        "drizzle": {
+            "name": "Drizzle ORM",
+            "default": false
+        }
+    }
+}
