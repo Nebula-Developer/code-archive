@@ -265,6 +265,13 @@
       "createdAt": "2023-04-09T10:53:21Z",
       "archivedPath": "2023-04/Frostbyte",
       "originalUrl": "https://github.com/Nebula-Developer/Frostbyte"
+    },
+    {
+      "name": "eduplex-server",
+      "description": "EduPlex Server",
+      "createdAt": "2023-04-02T04:39:32Z",
+      "archivedPath": "2023-04/eduplex-server",
+      "originalUrl": "https://github.com/Nebula-Developer/eduplex-server"
     }
   ]
 }
