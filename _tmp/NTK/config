@@ -5,4 +5,4 @@
 	ignorecase = true
 	precomposeunicode = true
 [remote "origin"]
-	url = https://github.com/Nebula-Developer/iolite-language-support
+	url = https://github.com/Nebula-Developer/NTK
