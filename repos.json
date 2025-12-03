@@ -517,6 +517,13 @@
       "createdAt": "2022-08-04T07:19:01Z",
       "archivedPath": "2022-08/NebulaOS",
       "originalUrl": "https://github.com/Nebula-Developer/NebulaOS"
+    },
+    {
+      "name": "ubuild",
+      "description": "Simple Makefile clone, that is fast and easy.",
+      "createdAt": "2022-04-07T09:35:27Z",
+      "archivedPath": "2022-04/ubuild",
+      "originalUrl": "https://github.com/Nebula-Developer/ubuild"
     }
   ]
 }
