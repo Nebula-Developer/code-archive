@@ -412,6 +412,13 @@
       "createdAt": "2022-12-09T12:43:41Z",
       "archivedPath": "2022-12/Webpitch",
       "originalUrl": "https://github.com/Nebula-Developer/Webpitch"
+    },
+    {
+      "name": "nlogin",
+      "description": "Easy and efficient login system for nodeJS",
+      "createdAt": "2022-12-09T02:22:56Z",
+      "archivedPath": "2022-12/nlogin",
+      "originalUrl": "https://github.com/Nebula-Developer/nlogin"
     }
   ]
 }
