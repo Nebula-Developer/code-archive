@@ -426,6 +426,13 @@
       "createdAt": "2022-11-18T10:20:07Z",
       "archivedPath": "2022-11/MsgOverlay",
       "originalUrl": "https://github.com/Nebula-Developer/MsgOverlay"
+    },
+    {
+      "name": "NInput",
+      "description": "Brilliant C# input system",
+      "createdAt": "2022-11-09T09:42:11Z",
+      "archivedPath": "2022-11/NInput",
+      "originalUrl": "https://github.com/Nebula-Developer/NInput"
     }
   ]
 }
