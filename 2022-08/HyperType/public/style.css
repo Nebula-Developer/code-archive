@@ -1,0 +1,237 @@
+@font-face {
+  font-family: 'Consolas';
+  src: url(fonts/Consolas.TTF) format('truetype');
+}
+
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url(fonts/Myriad\ Pro\ Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url(fonts/Myriad\ Pro\ Bold.ttf) format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url(fonts/Myriad\ Pro\ Light.otf) format('opentype');
+  font-weight: light;
+}
+
+@font-face {
+  font-family: 'Lexend Deca';
+  src: url(fonts/LexendDecaRegular.ttf) format('truetype');
+}
+
+body {
+  background: var(--primary-background);
+  color: var(--primary-text);
+  user-select: none;
+  font-family: 'Myriad Pro', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body * {
+  /* transition: var(--primary-transition-time) ease; */
+  /* transition-delay: 0s; */
+}
+
+a {
+  color: var(--alt-text);
+  cursor: pointer;
+  text-decoration: none;
+  font-style: italic;
+}
+
+a:hover {
+  color: var(--primary-text);
+}
+
+.correct {
+  color: var(--correct);
+}
+
+.error {
+  color: var(--error);
+}
+
+.space-error {
+  background: var(--error);
+  opacity: 0.6; 
+}
+
+.navbar {
+  width: 100%;
+  height: 130px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-logo {
+  margin: 0;
+  font-size: 2rem;
+  margin-right: 25px;
+  font-family: 'Lexend Deca', sans-serif;
+  transform: translateY(-3px);
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  position: relative;
+}
+
+.navbar-logo-top {
+  margin: 0;
+  font-size: 16px;
+  position: absolute;
+  top: -13px;
+  left: 2.5px;
+  color: var(--dim-text);
+}
+
+.navbar-logo a {
+  font-style: normal;
+  margin: 0;
+}
+
+.nav-icons {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+}
+
+.nav-icons a {
+  padding: 10px;
+  color: var(--dim-button);
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--primary-border-radius);
+}
+
+.nav-icons a:hover {
+  color: var(--primary-text);
+  background: var(--dim-background);
+}
+
+.restart-button {
+  width: 80px;
+  height: 55px;
+  border-radius: var(--primary-border-radius);
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.restart-button i {
+  font-weight: 900;
+  font-size: 1rem;
+  color: var(--dim-text);
+}
+
+.restart-button:focus i {
+  color: var(--primary-background) !important;
+}
+
+.restart-button:focus {
+  background: var(--primary-text);
+}
+
+.restart-button:hover i {
+  color: var(--primary-text);
+}
+
+.nav-icons a:hover {
+  color: var(--primary-text);
+  background: var(--dim-background);
+}
+
+.main-content {
+  align-items: center;
+  display: grid;
+
+  grid-auto-flow: row;
+  grid-template-rows: auto 1fr auto;
+
+  min-height: 100vh;
+  width: 100%;
+}
+
+.top {
+  height: 130px;
+  margin: 20px;
+}
+
+.middle {
+  height: 500px;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom {
+  height: fit-content;
+  margin: 20px;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.typing-wrapper {
+  max-width: 600px;
+  height: 75px;
+  background: var(--dim-background);
+  width: 80vw;
+  padding: 20px;
+  border-radius: var(--input-border-radius);
+}
+
+.input-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+#input {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: flex-start;
+  position: relative;
+  flex-wrap: wrap;
+  height: 100%;
+  width: 100%;
+  transition: 0s;
+}
+
+#input::-webkit-scrollbar {
+  width: 0;
+}
+
+#caret {
+  height: 2rem;
+  width: 2px;
+  background: var(--alt-text);
+  position: absolute;
+  transform: translateY(2px);
+  transition: left var(--caret-move-time) ease, top var(--caret-move-time) ease;
+}
+
+letter {
+  font-size: 2rem;
+  transition: color var(--primary-transition-time), background var(--primary-transition-time);
+}
